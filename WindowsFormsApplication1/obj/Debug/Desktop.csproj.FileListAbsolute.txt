@@ -6,3 +6,6 @@ C:\Users\jonymartinez\Source\Repos\MESSI_MAS3\WindowsFormsApplication1\obj\Debug
 C:\Users\jonymartinez\Source\Repos\MESSI_MAS3\WindowsFormsApplication1\obj\Debug\Desktop.csproj.GenerateResource.Cache
 C:\Users\jonymartinez\Source\Repos\MESSI_MAS3\WindowsFormsApplication1\obj\Debug\WindowsFormsApplication1.exe
 C:\Users\jonymartinez\Source\Repos\MESSI_MAS3\WindowsFormsApplication1\obj\Debug\WindowsFormsApplication1.pdb
+C:\Users\jonymartinez\Documents\VSRepos\MESSI_MAS3\WindowsFormsApplication1\bin\Debug\WindowsFormsApplication1.exe.config
+C:\Users\jonymartinez\Documents\VSRepos\MESSI_MAS3\WindowsFormsApplication1\obj\Debug\WindowsFormsApplication1.exe
+C:\Users\jonymartinez\Documents\VSRepos\MESSI_MAS3\WindowsFormsApplication1\obj\Debug\WindowsFormsApplication1.pdb
