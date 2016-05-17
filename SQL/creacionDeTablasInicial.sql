@@ -20,7 +20,7 @@ CREATE TABLE MESSI_MAS3.Usuario (
   usuario_id INT PRIMARY KEY NOT NULL IDENTITY,
   usuario_nombreUsuario NVARCHAR(255) NOT NULL,  --AGREGAR UNIQUE!!!
   usuario_contrasenia NVARCHAR(30) NULL,				--Cambiado de NOT NULL a NULL y el nombre a 'contrasenia'
-  usuario_mail NVARCHAR(50) NOT NULL UNIQUE,	--LINEA PELIGROSA VIGILAR!!
+  usuario_mail NVARCHAR(50) NULL,	--LINEA PELIGROSA VIGILAR!! AGREGAR UNIQUE SAQUE EL NOT NULL
   usuario_deleted INT DEFAULT 0,
   usuario_intentos INT DEFAULT 0, )
  
@@ -76,7 +76,7 @@ CREATE TABLE MESSI_MAS3.Persona (
   persona_idDomicilio INT REFERENCES MESSI_MAS3.Domicilio(domicilio_idDomicilio),
   persona_id INT PRIMARY KEY REFERENCES MESSI_MAS3.Usuario(usuario_id),
   persona_tel NUMERIC(15,0) DEFAULT 0,
-  persona_mail NVARCHAR(255) NOT NULL,
+  persona_mail NVARCHAR(255) NULL,			--cambie a NULL 
   )
 
 
@@ -103,7 +103,7 @@ CREATE TABLE MESSI_MAS3.Empresa (
   empresa_calificacionPromedio INT NULL,						--Cambio de Not null a NULL
   empresa_fechaCreacion DATETIME NOT NULL,
   empresa_idDomicilio INT REFERENCES MESSI_MAS3.Domicilio (domicilio_idDomicilio),
-  empresa_telefono VARCHAR(10) NOT NULL,
+  empresa_telefono VARCHAR(10) NULL,													--Cambie de NOT NULL a NULL
   empresa_rubro INT REFERENCES MESSI_MAS3.Rubro (rubro_id),)
  
 -- -----------------------------------------------------
@@ -134,6 +134,7 @@ CREATE TABLE MESSI_MAS3.Visibilidad (
 -- -----------------------------------------------------
 CREATE TABLE MESSI_MAS3.Publicacion (
   publicacion_id INT PRIMARY KEY NOT NULL IDENTITY,
+  publicacion_codigo INT,
   publicacion_idEstado INT REFERENCES MESSI_MAS3.Estado (estado_id),
   publicacion_idVisibilidad INT REFERENCES MESSI_MAS3.Visibilidad (visibilidad_id),
   publicacion_idUsuario INT REFERENCES MESSI_MAS3.Usuario (usuario_id),
@@ -142,7 +143,7 @@ CREATE TABLE MESSI_MAS3.Publicacion (
   publicacion_descripcion VARCHAR(255) NULL,
   publicacion_admitePreguntas INT DEFAULT 0 NOT NULL,
   publicacion_tipo NVARCHAR(255) NOT NULL,
-  publicacion_minimoSubasta NUMERIC(10,2) DEFAULT 0.00,			--DUDA MIRAR KOIFFO EL TIPO DE LA VARIABLE
+  publicacion_minimoSubasta NUMERIC(10,2) NULL,			--DUDA MIRAR KOIFFO EL TIPO DE LA VARIABLE
   publicacion_precio NUMERIC(18,2),
   publicacion_idRubro INT NOT NULL,
   publiacion_tieneEnvio INT NOT NULL,
@@ -281,6 +282,18 @@ CREATE TABLE MESSI_MAS3.Factura_detalle (
 -- -----------------------------------------------------
 
 --CREO DATOS INICIALES
+
+
+
+
+
+
+
+--Faltaria meter un procedure que valide que no esta repetido el dni, ni el cuit ni MAIL
+--Dejarlo como UNIQUE el CUIT, DNI y Mail
+
+
+
 CREATE PROCEDURE [MESSI_MAS3].[meterDatosFijos]
 AS BEGIN
 	
@@ -301,6 +314,15 @@ AS BEGIN
 	INSERT INTO MESSI_MAS3.Estado(estado_nombre) VALUES ('Activa')
 	INSERT INTO MESSI_MAS3.Estado(estado_nombre) VALUES ('Pausada')
 	INSERT INTO MESSI_MAS3.Estado(estado_nombre) VALUES ('Finalizada')
+	
+	-- VISIBILIDADES
+	INSERT INTO MESSI_MAS3.Visibilidad(visibilidad_codigo,visibilidad_descripcion,visibilidad_porcentaje,visibilidad_precio) VALUES('10002','Platino','0.10','180.00')
+	INSERT INTO MESSI_MAS3.Visibilidad(visibilidad_codigo,visibilidad_descripcion,visibilidad_porcentaje,visibilidad_precio) VALUES('10003','Oro','0.15','140.00')
+	INSERT INTO MESSI_MAS3.Visibilidad(visibilidad_codigo,visibilidad_descripcion,visibilidad_porcentaje,visibilidad_precio) VALUES('10004','Plata','0.20','100.00')
+	INSERT INTO MESSI_MAS3.Visibilidad(visibilidad_codigo,visibilidad_descripcion,visibilidad_porcentaje,visibilidad_precio) VALUES('10005','Bronce','0.30','60.00')
+	INSERT INTO MESSI_MAS3.Visibilidad(visibilidad_codigo,visibilidad_descripcion,visibilidad_porcentaje,visibilidad_precio) VALUES('10006','Gratis','0.00','0.00')
+
+	
 
 END
 GO
@@ -387,7 +409,7 @@ AS BEGIN
 	FROM 
 		gd_esquema.Maestra
 	WHERE
-		Cli_Dni IS NOT NULL
+		Cli_Dni IS NOT NULL AND Cli_Mail IS NOT NULL
 
 	OPEN cur
 	FETCH NEXT FROM cur
@@ -405,7 +427,7 @@ AS BEGIN
 
 	WHILE(@@FETCH_STATUS = 0)
 		BEGIN
-			EXECUTE MESSI_MAS3.generarUsuario @documento,'123',@mail,@ultimoIdInsertado = @idUsuario OUTPUT; --esta bien esta linea?? por el documento pasado como param
+			EXECUTE MESSI_MAS3.generarUsuario @documento,NULL,@mail,@ultimoIdInsertado = @idUsuario OUTPUT; --esta bien esta linea?? por el documento pasado como param
 			DECLARE @idRol int;
 			SET @idRol = (select rol_id from MESSI_MAS3.Rol where rol_nombre = 'Cliente')
 			INSERT INTO MESSI_MAS3.Rol_Usuario(Rol_id,Usuario_id)
@@ -480,7 +502,7 @@ AS BEGIN
 	FROM 
 		gd_esquema.Maestra
 	WHERE
-		Publ_Empresa_Cuit IS NOT NULL
+		Publ_Empresa_Cuit IS NOT NULL AND Publ_Empresa_Mail IS NOT NULL;
 	OPEN cur
 	FETCH NEXT FROM cur
 	INTO 
@@ -516,6 +538,7 @@ AS BEGIN
 				@razonSocial,
 				@telefono,
 				@idDomicilio,
+				@cuit,
 				@idUsuario,
 				@fechaCreacion)
 			
@@ -570,102 +593,263 @@ AS BEGIN
 END
 GO
 
---migrar todas las visibilidades
-CREATE PROCEDURE [MESSI_MAS3].[migrarVisibilidades]
+
+--migro publicaciones de Clientes
+CREATE PROCEDURE [MESSI_MAS3].[migrarPublicacionesClientes]
 AS BEGIN
 	set nocount on;
 	set xact_abort on;
 	DECLARE 
-			@codigo INT,
-			@descripcion NVARCHAR(255),
-			@precio numeric(18,2),
-			@porcentaje numeric(18,2)
+			@codigoPubli INT,
+			@estadoPubli NVARCHAR(255),
+			@codigoVisibilidadPublicacion INT,
+			@fechaInicio DATETIME,
+			@fechaFin DATETIME,
+			@descripcion NVARCHAR(255),	
+			@tipoPublicacion NVARCHAR(255),
+			@tienePreguntas INT,
+			@descripcionRubro NVARCHAR(255),
+			@dni NUMERIC(18,0)
 	DECLARE cur CURSOR FOR
 	
 	SELECT DISTINCT
-		Publicacion_Visibilidad_Cod, 
-		Publicacion_Visibilidad_Desc, 
-		Publicacion_Visibilidad_Precio,
-		Publicacion_Visibilidad_Porcentaje
-	FROM gd_esquema.Maestra	
-	
+		Publicacion_Cod,
+		Publicacion_Estado,
+		Publicacion_Visibilidad_Cod,
+		Publicacion_Fecha,
+		Publicacion_Fecha_Venc,
+		Publicacion_Descripcion,
+		Publicacion_Tipo
+		Publicacion_Rubro_Descripcion,
+		Publ_Cli_Dni
+	FROM gd_esquema.Maestra
+	WHERE (Publicacion_Fecha_Venc is NOT NULL) AND (Publicacion_Fecha is NOT NULL) AND (Publ_Cli_Dni IS NOT NULL ) 	
+
+
 	OPEN cur
 	FETCH NEXT FROM cur
 	INTO 
-		@codigo,
+		@codigoPubli,
+		@estadoPubli,
+		@codigoVisibilidadPublicacion,
+		@fechaInicio,
+		@fechaFin,
 		@descripcion,
-		@precio,
-		@porcentaje
+		@tipoPublicacion,
+		@descripcionRubro,
+		@dni
+		
+		
 	WHILE(@@FETCH_STATUS = 0)
 	BEGIN
-		INSERT INTO MESSI_MAS3.Visibilidad(visibilidad_codigo, visibilidad_descripcion, visibilidad_precio, visibilidad_porcentaje)
-		VALUES (@codigo, @descripcion, @precio, @porcentaje)
+		DECLARE @idRubro INT,@idUserPublicador INT, @idEstado INT, @idVisibilidad INT
+		SET @idRubro = (SELECT rubro_id FROM MESSI_MAS3.Rubro WHERE (rubro_descripcionCorta = @descripcionRubro))
+		SET @idUserPublicador = (SELECT usuario_id FROM MESSI_MAS3.Usuario WHERE (usuario_nombreUsuario = @dni))
+		SET @idEstado = (SELECT estado_id FROM MESSI_MAS3.Estado WHERE (estado_nombre = @estadoPubli))
+		SET @idVisibilidad = (SELECT visibilidad_id FROM MESSI_MAS3.Visibilidad WHERE ( @codigoVisibilidadPublicacion = visibilidad_codigo))
+		INSERT INTO MESSI_MAS3.Publicacion(
+		publicacion_idUsuario,
+		publicacion_fechaInicio,
+		publicacion_fechaFin,
+		publicacion_descripcion,
+		publicacion_tipo,
+		publicacion_idVisibilidad,
+		publicacion_idRubro,
+		publicacion_idEstado,
+		publicacion_codigo)
+		VALUES (@idUserPublicador,
+		@fechaInicio,
+		@fechaFin,
+		@descripcion,
+		@tipoPublicacion,
+		@idVisibilidad,
+		@idRubro,
+		@idEstado,
+		@codigoPubli)
 
 		FETCH NEXT FROM cur
 		INTO 
-			@codigo,
+			@codigoPubli,
+			@estadoPubli,
+			@codigoVisibilidadPublicacion,
+			@fechaInicio,
+			@fechaFin,
 			@descripcion,
-			@precio,
-			@porcentaje
+			@tipoPublicacion,
+			@descripcionRubro,
+			@dni
 	END
 	CLOSE cur 
 	DEALLOCATE cur
 END
 GO
 
---CONTINUAR CON ESTO
+--migro publicaciones de Empresas
+CREATE PROCEDURE [MESSI_MAS3].[migrarPublicacionesEmpresa]
+AS BEGIN
+	set nocount on;
+	set xact_abort on;
+	DECLARE 
+			@codigoPubli INT,
+			@estadoPubli NVARCHAR(255),
+			@codigoVisibilidadPublicacion INT,
+			@fechaInicio DATETIME,
+			@fechaFin DATETIME,
+			@descripcion NVARCHAR(255),	
+			@tipoPublicacion NVARCHAR(255),
+			@tienePreguntas INT,
+			@descripcionRubro NVARCHAR(255),
+			@cuit NUMERIC(18,0)
+	DECLARE cur CURSOR FOR
+	
+	SELECT DISTINCT
+		Publicacion_Cod,
+		Publicacion_Estado,
+		Publicacion_Visibilidad_Cod,
+		Publicacion_Fecha,
+		Publicacion_Fecha_Venc,
+		Publicacion_Descripcion,
+		Publicacion_Tipo
+		Publicacion_Rubro_Descripcion,
+		Publ_Empresa_Cuit
+	FROM gd_esquema.Maestra
+	WHERE (Publicacion_Fecha_Venc is NOT NULL) AND (Publicacion_Fecha is NOT NULL) AND (Publ_Empresa_Cuit IS NOT NULL ) 	
+
+
+	OPEN cur
+	FETCH NEXT FROM cur
+	INTO 
+		@codigoPubli,
+		@estadoPubli,
+		@codigoVisibilidadPublicacion,
+		@fechaInicio,
+		@fechaFin,
+		@descripcion,
+		@tipoPublicacion,
+		@descripcionRubro,
+		@cuit
+		
+	WHILE(@@FETCH_STATUS = 0)
+	BEGIN
+		DECLARE @idRubro INT,@idUserPublicador INT, @idEstado INT, @idVisibilidad INT
+		SET @idRubro = (SELECT rubro_id FROM MESSI_MAS3.Rubro WHERE (rubro_descripcionCorta = @descripcionRubro))
+		SET @idUserPublicador = (SELECT usuario_id FROM MESSI_MAS3.Usuario WHERE (usuario_nombreUsuario = @cuit))				--O habria que hacerlo desde la tabla de Empresa
+		SET @idEstado = (SELECT estado_id FROM MESSI_MAS3.Estado WHERE (estado_nombre = @estadoPubli))
+		SET @idVisibilidad = (SELECT visibilidad_id FROM MESSI_MAS3.Visibilidad WHERE ( @codigoVisibilidadPublicacion = visibilidad_codigo))
+		INSERT INTO MESSI_MAS3.Publicacion(
+		publicacion_idUsuario,
+		publicacion_fechaInicio,
+		publicacion_fechaFin,
+		publicacion_descripcion,
+		publicacion_tipo,
+		publicacion_idVisibilidad,
+		publicacion_idRubro,
+		publicacion_idEstado,
+		publicacion_codigo)
+		VALUES (@idUserPublicador,
+		@fechaInicio,
+		@fechaFin,
+		@descripcion,
+		@tipoPublicacion,
+		@idVisibilidad,
+		@idRubro,
+		@idEstado,
+		@codigoPubli)
+
+		FETCH NEXT FROM cur
+		INTO 
+			@codigoPubli,
+			@estadoPubli,
+			@codigoVisibilidadPublicacion,
+			@fechaInicio,
+			@fechaFin,
+			@descripcion,
+			@tipoPublicacion,
+			@descripcionRubro,
+			@dni
+	END
+	CLOSE cur 
+	DEALLOCATE cur
+END
+GO
+
+CREATE PROCEDURE [MESSI_MAS3].[ConvertirCalificacion](@calificacion INT,@ultimoIdInsertado INT OUTPUT)
+AS BEGIN
+set nocount on;
+set xact_abort on;
+
+SELECT @ultimoIdInsertado = @calificacion /2 
+
+RETURN 
+END
+GO
+
+
+
+--PRIMERO HACER LA MIGRACION DE LAS COMPRAS, LUEGO CALIFICACIONES
+
+
+
 CREATE PROCEDURE [MESSI_MAS3].[migrarCalificaciones]
 AS BEGIN
 	set nocount on;
 	set xact_abort on;
 	DECLARE 
-		@id	INT,
-		@idUsuarioCalificador INT,
-		@idPublicacion INT,
-		@fecha DATETIME,
-		@valor INT,
-		@detalle NVARCHAR(45),
-		@pendiente INT
+			@codCalif	INT,
+			@idUsuarioCalificador INT,
+			@idCompra INT,
+			@fechaVenc DATETIME,
+			@cantidadEstrellas INT,
+			@CodPublicacion INT,
+			@detalle NVARCHAR(45),
+			@pendiente INT,
+			@dni NUMERIC(18,0)
 	DECLARE cur CURSOR FOR
 	
 	SELECT DISTINCT
 		Calificacion_Codigo,	
 		Publicacion_Fecha_Venc,
+		Publicacion_Cod,
 		Calificacion_Cant_Estrellas,
-		Calificacion_Descripcion
+		Calificacion_Descripcion,
+		Publ_Cli_Dni
 	FROM gd_esquema.Maestra	
-	
+		WHERE Publ_Cli_Dni IS NOT NULL AND Calificacion_Cant_Estrellas IS NOT NULL
 	OPEN cur
 	FETCH NEXT FROM cur
 	INTO 
-			@id,
-			@fecha,
-			@valor,
-			@detalle
+			@codCalif,
+			@fechaVenc,
+			@CodPublicacion,
+			@cantidadEstrellas,
+			@detalle,
+			@dni
 	WHILE(@@FETCH_STATUS = 0)
-	BEGIN
-		-- SET @id 
-		SET @idUsuarioCalificador = (SELECT id FROM MESSI_MAS3.Usuario WHERE (SELECT Publ_Cli_Dni from gd_esquema.Maestra) = usuario or (SELECT Publ_Empresa_Cuit from gd_esquema.Maestra) = usuario )
+	BEGIN 
+		SET @idUsuarioCalificador = (SELECT usuario_id FROM MESSI_MAS3.Usuario WHERE( @dni = usuario_nombreUsuario))
+		SET @idCompra = (SELECT compra_id FROM MESSI_MAS3.Compra WHERE (@CodPublicacion = compras_publicacion_id))
 		SET @pendiente = 1
 		
 		INSERT INTO 
-		MESSI_MAS3.Calificacion(idPublicacion,	
+		MESSI_MAS3.Calificacion(calificacion_compraId,	
 		fecha,
 		valor,
 		detalle)
 		VALUES (@idPublicacion,
 		 @fecha, 
-		 @valor,
+		 @cantidadEstrellas,
 		 @detalle)
 
 		FETCH NEXT FROM cur
-		INTO @idPublicacion,
-		 @fecha, 
-		 @valor,
-		 @detalle
+		INTO @codCalif,
+			@fechaVenc,
+			@cantidadEstrellas,
+			@detalle,
+			@dni
 	END
 	CLOSE cur 
 	DEALLOCATE cur
 END
 GO
 
+--PROXIMA MIGRACION DE OFERTAS
