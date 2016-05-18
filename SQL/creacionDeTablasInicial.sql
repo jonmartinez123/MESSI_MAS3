@@ -1,7 +1,100 @@
 USE[GD1C2016]
 GO
 
---CREATE SCHEMA [MESSI_MAS3] AUTHORIZATION [gd]
+
+
+IF (NOT EXISTS ( SELECT  1 FROM sys.schemas WHERE name = 'MESSI_MAS3' )) 
+	BEGIN 
+    EXEC('CREATE SCHEMA [MESSI_MAS3] AUTHORIZATION [gd]')
+	END
+GO
+
+/*---------------------------DROP DE LAS TABLAS---------------------------*/
+
+IF EXISTS(SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'MESSI_MAS3' AND  TABLE_NAME = 'Calificacion')
+	DROP TABLE MESSI_MAS3.Calificacion
+
+IF EXISTS(SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'MESSI_MAS3' AND  TABLE_NAME = 'Factura_detalle')
+	DROP TABLE MESSI_MAS3.Factura_detalle
+
+IF EXISTS(SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'MESSI_MAS3' AND  TABLE_NAME = 'Factura')
+	DROP TABLE MESSI_MAS3.Factura
+
+IF EXISTS(SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'MESSI_MAS3' AND  TABLE_NAME = 'FormaDePago')
+	DROP TABLE MESSI_MAS3.FormaDePago
+
+IF EXISTS(SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'MESSI_MAS3' AND  TABLE_NAME = 'Compra')
+	DROP TABLE MESSI_MAS3.Compra
+	
+IF EXISTS(SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'MESSI_MAS3' AND  TABLE_NAME = 'Oferta')
+	DROP TABLE MESSI_MAS3.Oferta
+
+IF EXISTS(SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'MESSI_MAS3' AND  TABLE_NAME = 'Respuesta')
+	DROP TABLE MESSI_MAS3.Respuesta
+
+IF EXISTS(SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'MESSI_MAS3' AND  TABLE_NAME = 'Rubro_x_Publicacion')
+	DROP TABLE MESSI_MAS3.Rubro_x_Publicacion
+
+IF EXISTS(SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'MESSI_MAS3' AND  TABLE_NAME = 'Funcionalidad_Rol')
+	DROP TABLE MESSI_MAS3.Funcionalidad_Rol
+
+IF EXISTS(SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'MESSI_MAS3' AND  TABLE_NAME = 'Funcionalidad')
+	DROP TABLE MESSI_MAS3.Funcionalidad
+
+IF EXISTS(SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'MESSI_MAS3' AND  TABLE_NAME = 'Rol_Usuario')
+	DROP TABLE MESSI_MAS3.Rol_Usuario
+
+IF EXISTS(SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'MESSI_MAS3' AND  TABLE_NAME = 'Rol')
+	DROP TABLE MESSI_MAS3.Rol
+
+IF EXISTS(SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'MESSI_MAS3' AND  TABLE_NAME = 'Pregunta')
+	DROP TABLE MESSI_MAS3.Pregunta
+
+IF EXISTS(SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'MESSI_MAS3' AND  TABLE_NAME = 'Empresa')
+	DROP TABLE MESSI_MAS3.Empresa
+
+IF EXISTS(SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'MESSI_MAS3' AND  TABLE_NAME = 'Rubro')
+	DROP TABLE MESSI_MAS3.Rubro
+
+IF EXISTS(SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'MESSI_MAS3' AND  TABLE_NAME = 'Persona')
+	DROP TABLE MESSI_MAS3.Persona
+
+IF EXISTS(SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'MESSI_MAS3' AND  TABLE_NAME = 'Publicacion')
+	DROP TABLE MESSI_MAS3.Publicacion
+
+IF EXISTS(SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'MESSI_MAS3' AND  TABLE_NAME = 'Estado')
+	DROP TABLE MESSI_MAS3.Estado
+
+IF EXISTS(SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'MESSI_MAS3' AND  TABLE_NAME = 'Usuario')
+	DROP TABLE MESSI_MAS3.Usuario
+
+IF EXISTS(SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'MESSI_MAS3' AND  TABLE_NAME = 'Visibilidad')
+	DROP TABLE MESSI_MAS3.Visibilidad
+
+IF EXISTS(SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'MESSI_MAS3' AND  TABLE_NAME = 'Domicilio')
+	DROP TABLE MESSI_MAS3.Domicilio
+
+IF EXISTS(SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'MESSI_MAS3' AND  TABLE_NAME = 'Localidad')
+	DROP TABLE MESSI_MAS3.Localidad
+
+GO
+
+------------------- DROP PROCEDURES ---------------------------
+DECLARE @name VARCHAR(128)
+DECLARE @SQL VARCHAR(254)
+
+SELECT @name = (SELECT TOP 1 [name] FROM sysobjects WHERE [type] = 'P' AND category = 0 ORDER BY [name])
+
+WHILE @name is not null
+BEGIN
+    SELECT @SQL = 'DROP PROCEDURE [MESSI_MAS3].[' + RTRIM(@name) +']'
+    EXEC (@SQL)
+    PRINT 'Dropped Procedure: ' + @name
+    SELECT @name = (SELECT TOP 1 [name] FROM sysobjects WHERE [type] = 'P' AND category = 0 AND [name] > @name ORDER BY [name])
+END
+GO
+
+
 
 -- -----------------------------------------------------
 -- Table MESSI_MAS3.Funcionalidad
@@ -146,7 +239,7 @@ CREATE TABLE MESSI_MAS3.Publicacion (
   publicacion_minimoSubasta NUMERIC(10,2) NULL,			--DUDA MIRAR KOIFFO EL TIPO DE LA VARIABLE
   publicacion_precio NUMERIC(18,2),
   publicacion_idRubro INT NOT NULL,
-  publiacion_tieneEnvio INT NOT NULL,
+  publicacion_tieneEnvio INT DEFAULT 0 NULL,
   
    )
 
@@ -433,7 +526,7 @@ AS BEGIN
 			INSERT INTO MESSI_MAS3.Rol_Usuario(Rol_id,Usuario_id)
 			VALUES(@idRol, @idUsuario)
 			DECLARE @idDomicilio int;
-			EXECUTE MESSI_MAS3.generarDomicilio @calle,@numero,@piso,@dpto,NULL,@codigoPostal,@ultimoIdInsertado = @idDomicilio;
+			EXECUTE MESSI_MAS3.generarDomicilio @calle,@numero,@piso,@dpto,NULL,@codigoPostal,@ultimoIdInsertado = @idDomicilio OUTPUT;
 			
 			INSERT INTO MESSI_MAS3.Persona(
 				persona_nombre,
@@ -521,7 +614,7 @@ AS BEGIN
 			EXECUTE MESSI_MAS3.generarUsuario @cuit, NULL, @mail, @ultimoIdInsertado = @idUsuario OUTPUT;
 			DECLARE @idRol int;
 			DECLARE @idDomicilio int;
-			EXECUTE MESSI_MAS3.generarDomicilio @calle,@numero,@piso,@dpto,NULL,@codigoPostal,@ultimoIdInsertado = @idDomicilio;
+			EXECUTE MESSI_MAS3.generarDomicilio @calle,@numero,@piso,@dpto,NULL,@codigoPostal,@ultimoIdInsertado = @idDomicilio OUTPUT;
 			SET @idRol = (select rol_id from MESSI_MAS3.Rol where rol_nombre = 'Empresa')
 			INSERT INTO MESSI_MAS3.Rol_Usuario(Rol_id,Usuario_id)
 			VALUES(@idRol,@idUsuario)
@@ -609,7 +702,9 @@ AS BEGIN
 			@tipoPublicacion NVARCHAR(255),
 			@tienePreguntas INT,
 			@descripcionRubro NVARCHAR(255),
-			@dni NUMERIC(18,0)
+			@dni NVARCHAR(255),
+			@publiPrecio NUMERIC(18,0)
+
 	DECLARE cur CURSOR FOR
 	
 	SELECT DISTINCT
@@ -619,9 +714,10 @@ AS BEGIN
 		Publicacion_Fecha,
 		Publicacion_Fecha_Venc,
 		Publicacion_Descripcion,
-		Publicacion_Tipo
+		Publicacion_Tipo,
 		Publicacion_Rubro_Descripcion,
-		Publ_Cli_Dni
+		Publ_Cli_Dni,
+		Publicacion_Precio
 	FROM gd_esquema.Maestra
 	WHERE (Publicacion_Fecha_Venc is NOT NULL) AND (Publicacion_Fecha is NOT NULL) AND (Publ_Cli_Dni IS NOT NULL ) 	
 
@@ -637,15 +733,15 @@ AS BEGIN
 		@descripcion,
 		@tipoPublicacion,
 		@descripcionRubro,
-		@dni
-		
-		
+		@dni,
+		@publiPrecio	
 	WHILE(@@FETCH_STATUS = 0)
 	BEGIN
 		DECLARE @idRubro INT,@idUserPublicador INT, @idEstado INT, @idVisibilidad INT
 		SET @idRubro = (SELECT rubro_id FROM MESSI_MAS3.Rubro WHERE (rubro_descripcionCorta = @descripcionRubro))
 		SET @idUserPublicador = (SELECT usuario_id FROM MESSI_MAS3.Usuario WHERE (usuario_nombreUsuario = @dni))
-		SET @idEstado = (SELECT estado_id FROM MESSI_MAS3.Estado WHERE (estado_nombre = @estadoPubli))
+		--SET @idEstado = (SELECT estado_id FROM MESSI_MAS3.Estado WHERE (estado_nombre = @estadoPubli))
+		SET @idEstado = 4
 		SET @idVisibilidad = (SELECT visibilidad_id FROM MESSI_MAS3.Visibilidad WHERE ( @codigoVisibilidadPublicacion = visibilidad_codigo))
 		INSERT INTO MESSI_MAS3.Publicacion(
 		publicacion_idUsuario,
@@ -656,7 +752,9 @@ AS BEGIN
 		publicacion_idVisibilidad,
 		publicacion_idRubro,
 		publicacion_idEstado,
-		publicacion_codigo)
+		publicacion_codigo,
+		publicacion_tieneEnvio,
+		publicacion_precio)
 		VALUES (@idUserPublicador,
 		@fechaInicio,
 		@fechaFin,
@@ -665,7 +763,9 @@ AS BEGIN
 		@idVisibilidad,
 		@idRubro,
 		@idEstado,
-		@codigoPubli)
+		@codigoPubli,
+		0,
+		@publiPrecio)
 
 		FETCH NEXT FROM cur
 		INTO 
@@ -677,7 +777,8 @@ AS BEGIN
 			@descripcion,
 			@tipoPublicacion,
 			@descripcionRubro,
-			@dni
+			@dni,
+			@publiPrecio
 	END
 	CLOSE cur 
 	DEALLOCATE cur
@@ -699,7 +800,8 @@ AS BEGIN
 			@tipoPublicacion NVARCHAR(255),
 			@tienePreguntas INT,
 			@descripcionRubro NVARCHAR(255),
-			@cuit NUMERIC(18,0)
+			@cuit NVARCHAR(255),
+			@publiPrecio NUMERIC(18,0)
 	DECLARE cur CURSOR FOR
 	
 	SELECT DISTINCT
@@ -709,9 +811,10 @@ AS BEGIN
 		Publicacion_Fecha,
 		Publicacion_Fecha_Venc,
 		Publicacion_Descripcion,
-		Publicacion_Tipo
+		Publicacion_Tipo,
 		Publicacion_Rubro_Descripcion,
-		Publ_Empresa_Cuit
+		Publ_Empresa_Cuit,
+		Publicacion_Precio
 	FROM gd_esquema.Maestra
 	WHERE (Publicacion_Fecha_Venc is NOT NULL) AND (Publicacion_Fecha is NOT NULL) AND (Publ_Empresa_Cuit IS NOT NULL ) 	
 
@@ -727,14 +830,16 @@ AS BEGIN
 		@descripcion,
 		@tipoPublicacion,
 		@descripcionRubro,
-		@cuit
+		@cuit,
+		@publiPrecio
 		
 	WHILE(@@FETCH_STATUS = 0)
 	BEGIN
 		DECLARE @idRubro INT,@idUserPublicador INT, @idEstado INT, @idVisibilidad INT
 		SET @idRubro = (SELECT rubro_id FROM MESSI_MAS3.Rubro WHERE (rubro_descripcionCorta = @descripcionRubro))
 		SET @idUserPublicador = (SELECT usuario_id FROM MESSI_MAS3.Usuario WHERE (usuario_nombreUsuario = @cuit))				--O habria que hacerlo desde la tabla de Empresa
-		SET @idEstado = (SELECT estado_id FROM MESSI_MAS3.Estado WHERE (estado_nombre = @estadoPubli))
+		--SET @idEstado = (SELECT estado_id FROM MESSI_MAS3.Estado WHERE (estado_nombre = @estadoPubli))
+		SET @idEstado = 4
 		SET @idVisibilidad = (SELECT visibilidad_id FROM MESSI_MAS3.Visibilidad WHERE ( @codigoVisibilidadPublicacion = visibilidad_codigo))
 		INSERT INTO MESSI_MAS3.Publicacion(
 		publicacion_idUsuario,
@@ -745,7 +850,8 @@ AS BEGIN
 		publicacion_idVisibilidad,
 		publicacion_idRubro,
 		publicacion_idEstado,
-		publicacion_codigo)
+		publicacion_codigo,
+		publicacion_precio)
 		VALUES (@idUserPublicador,
 		@fechaInicio,
 		@fechaFin,
@@ -754,19 +860,22 @@ AS BEGIN
 		@idVisibilidad,
 		@idRubro,
 		@idEstado,
-		@codigoPubli)
+		@codigoPubli,
+		@publiPrecio
+		)
 
 		FETCH NEXT FROM cur
 		INTO 
 			@codigoPubli,
-			@estadoPubli,
-			@codigoVisibilidadPublicacion,
-			@fechaInicio,
-			@fechaFin,
-			@descripcion,
-			@tipoPublicacion,
-			@descripcionRubro,
-			@dni
+		@estadoPubli,
+		@codigoVisibilidadPublicacion,
+		@fechaInicio,
+		@fechaFin,
+		@descripcion,
+		@tipoPublicacion,
+		@descripcionRubro,
+		@cuit,
+		@publiPrecio
 	END
 	CLOSE cur 
 	DEALLOCATE cur
@@ -787,6 +896,61 @@ GO
 
 
 --PRIMERO HACER LA MIGRACION DE LAS COMPRAS, LUEGO CALIFICACIONES
+CREATE PROCEDURE [MESSI_MAS3].[migrarCompras]
+AS BEGIN
+	set nocount on;
+	set xact_abort on;
+	DECLARE 
+			@dni NVARCHAR(255),
+			@fechaCompra DATETIME,
+			@compraCant INT,
+			@codPublicacion INT
+	DECLARE cur CURSOR FOR
+	
+	SELECT DISTINCT
+		Publ_Cli_Dni,
+		Compra_Fecha,
+		Compra_Cantidad,
+		Publicacion_Cod
+
+	FROM gd_esquema.Maestra	
+		WHERE Publ_Cli_Dni IS NOT NULL AND Compra_Fecha IS NOT NULL AND Compra_Cantidad IS NOT NULL AND Publicacion_Cod IS NOT NULL
+	OPEN cur
+	FETCH NEXT FROM cur
+	INTO 
+			@dni,
+			@fechaCompra,
+			@compraCant,
+			@codPublicacion
+	WHILE(@@FETCH_STATUS = 0)
+	BEGIN 
+		DECLARE @idUser INT, @idPubli INT
+		SET @idUser = (SELECT usuario_id FROM MESSI_MAS3.Usuario WHERE( @dni = usuario_nombreUsuario))
+		SET @idPubli = (SELECT publicacion_id FROM MESSI_MAS3.Publicacion WHERE (@codPublicacion = publicacion_codigo))
+		
+		
+		INSERT INTO 
+		MESSI_MAS3.Compra(compras_personaComprador_id,	
+		compras_fecha,
+		compras_publicacion_id,
+		compras_cantidad)
+		VALUES (@idUser,
+		 @fechaCompra, 
+		 @idPubli,
+		 @compraCant)
+
+		FETCH NEXT FROM cur
+		INTO @dni,
+			@fechaCompra,
+			@compraCant,
+			@codPublicacion
+	END
+	CLOSE cur 
+	DEALLOCATE cur
+END
+GO
+
+
 
 
 
