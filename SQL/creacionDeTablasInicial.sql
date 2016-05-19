@@ -301,7 +301,7 @@ CREATE TABLE MESSI_MAS3.Calificacion (
   calificacion_fecha DATETIME NULL,
   calificacion_cantidadEstrellas NUMERIC(18,0) NULL,
   calificacion_detalle NVARCHAR(255) NULL,
-  calificacion_pendiente INT DEFAULT 1 NOT NULL,					--ACA!!!
+  calificacion_pendiente INT DEFAULT 1 NULL,					--ACA!!!
   calificacion_idusuarioCalificado INT REFERENCES MESSI_MAS3.Usuario(usuario_id),
   calificacion_codigo NUMERIC (18,0),
 )
@@ -371,6 +371,7 @@ CREATE TABLE MESSI_MAS3.Factura_detalle (
 
  GO
  
+ 
 /*--------------------------MIGRACIONES---------------------------*/
 
 --Faltaria meter un procedure que valide que no esta repetido el dni, ni el cuit ni MAIL
@@ -419,6 +420,7 @@ AS BEGIN
 	INSERT INTO MESSI_MAS3.Usuario(usuario_nombreUsuario,usuario_contrasenia, usuario_mail) 
 	VALUES (@usuario,@password,@mail)
 	SELECT @ultimoIdInsertado = SCOPE_IDENTITY();
+	
 	
 	RETURN
 	
@@ -552,7 +554,8 @@ AS BEGIN
 		END
 	CLOSE cur 
 	DEALLOCATE cur
-		
+	
+	
 END
 GO
 
@@ -641,6 +644,7 @@ AS BEGIN
 		END
 	CLOSE cur 
 DEALLOCATE cur
+	
 		
 END
 GO
@@ -674,6 +678,8 @@ AS BEGIN
 	END
 	CLOSE cur 
 	DEALLOCATE cur
+
+	
 END
 GO
 
@@ -773,6 +779,8 @@ AS BEGIN
 	END
 	CLOSE cur 
 	DEALLOCATE cur
+
+	
 END
 GO
 
@@ -870,12 +878,9 @@ AS BEGIN
 	END
 	CLOSE cur 
 	DEALLOCATE cur
+	
 END
 GO
-
-
-
-
 
 --PRIMERO HACER LA MIGRACION DE LAS COMPRAS, LUEGO CALIFICACIONES
 CREATE PROCEDURE [MESSI_MAS3].[migrarCompras]
@@ -890,13 +895,12 @@ AS BEGIN
 	DECLARE cur CURSOR FOR
 	
 	SELECT DISTINCT
-		Publ_Cli_Dni,
+		Cli_Dni,
 		Compra_Fecha,
 		Compra_Cantidad,
 		Publicacion_Cod
-
 	FROM gd_esquema.Maestra	
-		WHERE Publ_Cli_Dni IS NOT NULL AND Compra_Fecha IS NOT NULL AND Compra_Cantidad IS NOT NULL AND Publicacion_Cod IS NOT NULL
+		WHERE Compra_Fecha IS NOT NULL AND Compra_Cantidad IS NOT NULL AND Publicacion_Cod IS NOT NULL AND Oferta_Fecha IS NULL AND Cli_Dni IS NOT NULL
 	OPEN cur
 	FETCH NEXT FROM cur
 	INTO 
@@ -908,7 +912,7 @@ AS BEGIN
 	BEGIN 
 		DECLARE @idUser INT, @idPubli INT
 		SET @idUser = (SELECT usuario_id FROM MESSI_MAS3.Usuario WHERE( @dni = usuario_nombreUsuario))
-		SET @idPubli = (SELECT publicacion_id FROM MESSI_MAS3.Publicacion WHERE (@codPublicacion = publicacion_codigo))
+		SET @idPubli = (SELECT publicacion_id FROM MESSI_MAS3.Publicacion WHERE (publicacion_codigo = @codPublicacion))
 		
 		
 		INSERT INTO 
@@ -929,6 +933,7 @@ AS BEGIN
 	END
 	CLOSE cur 
 	DEALLOCATE cur
+	
 END
 GO
 
@@ -938,14 +943,105 @@ CREATE PROCEDURE [MESSI_MAS3].[ConvertirCalificacion](@calificacion INT,@calific
 AS BEGIN
 set nocount on;
 set xact_abort on;
+DECLARE @califOrig INT, @califConver INT
+SET @califOrig = @calificacion
+SET @califConver = @califOrig/2
 
-SELECT @calificacionConvertida = @calificacion /2 
-IF( @calificacionConvertida = 0 )
+--SELECT @calificacionConvertida = @calificacion /2 
+IF( @califConver = 0 )
 	BEGIN
-		SET @calificacionConvertida = 1
+		SET @califConver = 1
 	END
 
-RETURN @calificacionConvertida
+RETURN @califConver
+END
+GO
+
+
+CREATE PROCEDURE [MESSI_MAS3].[migrarCalificaciones_ComprasInmediatas_Personas]
+AS BEGIN
+	set nocount on;
+	set xact_abort on;
+	DECLARE 
+			@codCalif	INT,
+			@idUsuarioCalificador INT,
+			@idCompra INT,
+			@fechaVenc DATETIME,
+			@cantidadEstrellas INT,
+			@CodPublicacion INT,
+			@detalle NVARCHAR(45),
+			@pendiente INT,
+			@dniVendedor NUMERIC(18,0),
+			@dniComprador NUMERIC(18,0),
+			@idPersonaCalificado INT,
+			@cantidadCompra NUMERIC(18,0),
+			@fechaCompra DATETIME,
+			@idPubli INT
+	DECLARE cur CURSOR FOR
+	
+	SELECT DISTINCT
+		compra_id,
+		compras_cantidad,
+		compras_fecha,
+		compras_personaComprador_id,
+		compras_publicacion_id
+	FROM [MESSI_MAS3].Compra
+	
+	OPEN cur
+	FETCH NEXT FROM cur
+	INTO 
+			@idCompra,
+			@cantidadCompra,
+			@fechaCompra,
+			@idUsuarioCalificador,
+			@idPubli
+	WHILE(@@FETCH_STATUS = 0)
+	BEGIN 
+		--SET @idUsuarioCalificador = (SELECT persona_id FROM MESSI_MAS3.Persona WHERE( @dniComprador = persona_DNI))
+		DECLARE @califNeto INT
+		SET @CodPublicacion = (SELECT publicacion_codigo FROM MESSI_MAS3.Publicacion WHERE (publicacion_id = @idPubli))
+		SET @dniComprador = (SELECT TOP 1 Cli_Dni FROM gd_esquema.Maestra WHERE (Publicacion_Cod = @CodPublicacion AND Cli_Dni IS NOT NULL))
+		SET @dniVendedor = (SELECT TOP 1 Publ_Cli_Dni FROM gd_esquema.Maestra WHERE (Publicacion_Cod = @CodPublicacion ))
+		SET @idUsuarioCalificador = (SELECT persona_id FROM MESSI_MAS3.Persona WHERE (persona_DNI = CAST(@dniComprador as NVARCHAR))) --linea peligrosa
+		SET @idPersonaCalificado = (SELECT usuario_id FROM MESSI_MAS3.Usuario WHERE (usuario_nombreUsuario = CAST(@dniVendedor as NVARCHAR))) --linea peligrosa
+		SET @fechaVenc = @fechaCompra
+		SET @cantidadEstrellas = (SELECT Calificacion_Cant_Estrellas FROM gd_esquema.Maestra WHERE (Publicacion_Cod = @CodPublicacion AND Publ_Cli_Dni = @dniVendedor AND Cli_Dni = @dniComprador AND Calificacion_Cant_Estrellas IS NOT NULL ))
+		SET @codCalif = (SELECT Calificacion_Codigo FROM gd_esquema.Maestra WHERE (Publicacion_Cod = @CodPublicacion AND Publ_Cli_Dni = @dniVendedor AND Cli_Dni = @dniComprador AND Calificacion_Codigo IS NOT NULL ))
+		SET @detalle = NULL
+		DECLARE @cantEstrellasNull INT
+		SET @cantEstrellasNull = @cantidadEstrellas
+		EXECUTE MESSI_MAS3.ConvertirCalificacion @cantidadEstrellas, @calificacionConvertida = @califNeto OUTPUT;
+					
+			INSERT INTO 
+			MESSI_MAS3.Calificacion(calificacion_compraId,	
+			calificacion_cantidadEstrellas,
+			calificacion_detalle,
+			calificacion_fecha,
+			calificacion_idPersonaCalificador,
+			calificacion_pendiente,
+			calificacion_idusuarioCalificado,
+			calificacion_codigo)
+			VALUES (@idCompra,
+			@califNeto, 
+			@detalle,
+			@fechaVenc,
+			@idUsuarioCalificador,
+			@pendiente,
+			@idPersonaCalificado,
+			@codCalif
+			)
+		
+			FETCH NEXT FROM cur
+			INTO @idCompra,
+			@cantidadCompra,
+			@fechaCompra,
+			@idUsuarioCalificador,
+			@idPubli
+	END
+	CLOSE cur 
+	DEALLOCATE cur
+
+	
 END
 GO
 
@@ -1028,8 +1124,14 @@ AS BEGIN
 	END
 	CLOSE cur 
 	DEALLOCATE cur
+
+	
 END
 GO
+
+
+--MIRAR EN @IDCOMPRA DEVUELVE MAS DE 1 RESULTADO
+
 
 CREATE PROCEDURE [MESSI_MAS3].[migrarCalificacionesEmpresa]
 AS BEGIN
@@ -1058,7 +1160,7 @@ AS BEGIN
 		Publ_Empresa_Cuit, --cuit del vendedor
 		Cli_Dni --dni del comprador
 	FROM gd_esquema.Maestra	
-		WHERE Publ_Empresa_Cuit IS NOT NULL AND Calificacion_Cant_Estrellas IS NOT NULL AND Cli_Dni IS NOT NULL
+		WHERE Publ_Empresa_Cuit IS NOT NULL AND Calificacion_Cant_Estrellas IS NOT NULL AND Cli_Dni IS NOT NULL AND Publicacion_Cod IS NOT NULL
 	OPEN cur
 	FETCH NEXT FROM cur
 	INTO 
@@ -1074,31 +1176,31 @@ AS BEGIN
 		SET @idUsuarioCalificador = (SELECT persona_id FROM MESSI_MAS3.Persona WHERE( @dniComprador = persona_DNI))
 		SET @idEmpresaCalificada = (SELECT empresa_id FROM MESSI_MAS3.Empresa WHERE( @cuitVendedor = empresa_cuit))
 		DECLARE @idPubli INT, @califNeto INT
-		SET @idPubli = (SELECT publicacion_id FROM MESSI_MAS3.Publicacion WHERE (@CodPublicacion = publicacion_codigo))
-		SET @idCompra = (SELECT compra_id FROM MESSI_MAS3.Compra WHERE (@idPubli = compras_publicacion_id))
+		SET @idPubli = (SELECT publicacion_id FROM MESSI_MAS3.Publicacion WHERE (publicacion_codigo = @CodPublicacion))
+		SET @idCompra = (SELECT compra_id FROM MESSI_MAS3.Compra WHERE (@idPubli = compras_publicacion_id))									--DEVUELVE MAS DE 1!! MITIGAR PARA QUE SEA EL CORRECTO
 		
-		EXECUTE MESSI_MAS3.ConvertirCalificacion @cantidadEstrellas, @calificacionConvertida = @califNeto OUTPUT;
-		SET @pendiente = 0 -- 
+			EXECUTE MESSI_MAS3.ConvertirCalificacion @cantidadEstrellas, @calificacionConvertida = @califNeto OUTPUT;
+			SET @pendiente = 0  
 		
-		INSERT INTO 
-		MESSI_MAS3.Calificacion(calificacion_compraId,	
-		calificacion_cantidadEstrellas,
-		calificacion_detalle,
-		calificacion_fecha,
-		calificacion_idPersonaCalificador,
-		calificacion_pendiente,
-		calificacion_idusuarioCalificado,
-		calificacion_codigo)
-		VALUES (@idCompra,
-		 @califNeto, 
-		 @detalle,
-		 @fechaVenc,
-		 @idUsuarioCalificador,
-		 @pendiente,
-		 @idEmpresaCalificada,
-		 @codCalif
-		 )
-
+			INSERT INTO 
+			MESSI_MAS3.Calificacion(calificacion_compraId,	
+			calificacion_cantidadEstrellas,
+			calificacion_detalle,
+			calificacion_fecha,
+			calificacion_idPersonaCalificador,
+			calificacion_pendiente,
+			calificacion_idusuarioCalificado,
+			calificacion_codigo)
+			VALUES (@idCompra,
+			@califNeto, 
+			@detalle,
+			@fechaVenc,
+			@idUsuarioCalificador,
+			@pendiente,
+			@idEmpresaCalificada,
+			@codCalif
+					)
+		
 		FETCH NEXT FROM cur
 		INTO @codCalif,
 			@fechaVenc,
@@ -1110,22 +1212,29 @@ AS BEGIN
 	END
 	CLOSE cur 
 	DEALLOCATE cur
+
+	
 END
 GO
-
---PROXIMA MIGRACION DE OFERTAS
-
-
 
 /*---------------------------EXEC DE PARA MIGRAR---------------------------*/
 
 EXEC MESSI_MAS3.meterDatosFijos
+PRINT 'DATOS INICIALES MIGRADOS';
 EXEC MESSI_MAS3.migrarRubros
+PRINT 'RUBROS MIGRADOS';
 EXEC MESSI_MAS3.migrarPersonas
+PRINT 'PERSONAS MIGRADAS';
 EXEC MESSI_MAS3.migrarEmpresas
+PRINT 'EMPRESAS MIGRADAS';
 EXEC MESSI_MAS3.migrarPublicacionesEmpresa
+PRINT 'PUBLICACIONES DE EMPRESA MIGRADAS';
 EXEC MESSI_MAS3.migrarPublicacionesClientes
-EXEC MESSI_MAS3.migrarCompras
-EXEC MESSI_MAS3.migrarCalificacionesPersonas
-EXEC MESSI_MAS3.migrarCalificacionesEmpresa
+PRINT 'PUBLICACIONES DE CLIENTES MIGRADAS';
+--EXEC MESSI_MAS3.migrarCompras
+--PRINT 'COMPRAS MIGRADAS';
+--EXEC MESSI_MAS3.migrarCalificaciones_ComprasInmediatas_Personas
+--PRINT 'CALIFICACIONES DE PERSONAS MIGRADAS';
+--EXEC MESSI_MAS3.migrarCalificacionesEmpresa
+--PRINT 'CALIFICACIONES DE EMPRESAS MIGRADAS';
 
