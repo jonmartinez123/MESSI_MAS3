@@ -1466,7 +1466,7 @@ GO
 --MIGRACION DE COMPRAS NUEVA MODELO A SEGUIR
 BEGIN TRANSACTION
 INSERT INTO MESSI_MAS3.Compra(compras_personaComprador_id, compras_cantidad, compras_fecha , compras_publicacion_id)
-(SELECT(SELECT persona_id FROM MESSI_MAS3.Persona 
+(SELECT DISTINCT (SELECT persona_id FROM MESSI_MAS3.Persona 
 			WHERE persona_DNI = Cli_Dni AND Compra_Fecha IS NOT NULL AND Oferta_Fecha IS NULL ),
 		Compra_Cantidad ,
 		Compra_Fecha, 
