@@ -127,7 +127,7 @@ CREATE TABLE MESSI_MAS3.Funcionalidad (
 CREATE TABLE MESSI_MAS3.Usuario (
   usuario_id INT PRIMARY KEY NOT NULL IDENTITY,
   usuario_nombreUsuario NVARCHAR(255) NOT NULL,  --AGREGAR UNIQUE!!!
-  usuario_contrasenia NVARCHAR(30) NULL,				--Cambiado de NOT NULL a NULL y el nombre a 'contrasenia'
+  usuario_contrasenia VARBINARY(255) NULL,				--Cambiado de NOT NULL a NULL y el nombre a 'contrasenia'
   usuario_mail NVARCHAR(50) NULL,	--LINEA PELIGROSA VIGILAR!! AGREGAR UNIQUE SAQUE EL NOT NULL
   usuario_deleted INT DEFAULT 0,
   usuario_intentos INT DEFAULT 0, )
@@ -433,8 +433,10 @@ CREATE PROCEDURE [MESSI_MAS3].[generarUsuario](@usuario NVARCHAR(255),@password 
 AS BEGIN
 	set nocount on;
 	set xact_abort on;
+	DECLARE @passHasheada VARBINARY(255)
+	SET @passHasheada =  HASHBYTES('SHA2_256', @password)
 	INSERT INTO MESSI_MAS3.Usuario(usuario_nombreUsuario,usuario_contrasenia, usuario_mail) 
-	VALUES (@usuario,@password,@mail)
+	VALUES (@usuario,@passHasheada,@mail)
 	SELECT @ultimoIdInsertado = SCOPE_IDENTITY();
 	
 	
@@ -529,7 +531,7 @@ AS BEGIN
 
 	WHILE(@@FETCH_STATUS = 0)
 		BEGIN
-			EXECUTE MESSI_MAS3.generarUsuario @documento,NULL,@mail,@ultimoIdInsertado = @idUsuario OUTPUT; --esta bien esta linea?? por el documento pasado como param
+			EXECUTE MESSI_MAS3.generarUsuario @documento,'123456',@mail,@ultimoIdInsertado = @idUsuario OUTPUT; --esta bien esta linea?? por el documento pasado como param
 			DECLARE @idRol int;
 			SET @idRol = (select rol_id from MESSI_MAS3.Rol where rol_nombre = 'Cliente')
 			INSERT INTO MESSI_MAS3.Rol_Usuario(Rol_id,Usuario_id)
@@ -621,7 +623,7 @@ AS BEGIN
 	WHILE(@@FETCH_STATUS = 0)
 		BEGIN
 			
-			EXECUTE MESSI_MAS3.generarUsuario @cuit, NULL, @mail, @ultimoIdInsertado = @idUsuario OUTPUT;
+			EXECUTE MESSI_MAS3.generarUsuario @cuit, '123456', @mail, @ultimoIdInsertado = @idUsuario OUTPUT;
 			DECLARE @idRol int;
 			DECLARE @idDomicilio int;
 			EXECUTE MESSI_MAS3.generarDomicilio @calle,@numero,@piso,@dpto,NULL,@codigoPostal,@ultimoIdInsertado = @idDomicilio OUTPUT;
@@ -927,7 +929,7 @@ AS BEGIN
 		Compra_Cantidad,
 		Publicacion_Cod
 	FROM gd_esquema.Maestra	
-		WHERE Compra_Fecha IS NOT NULL AND Compra_Cantidad IS NOT NULL AND Publicacion_Cod IS NOT NULL AND Oferta_Fecha IS NULL AND Cli_Dni IS NOT NULL
+		WHERE Publicacion_Tipo = 'Compra Inmediata' AND Compra_Fecha IS NOT NULL AND Compra_Cantidad IS NOT NULL AND Publicacion_Cod IS NOT NULL AND Oferta_Fecha IS NULL AND Cli_Dni IS NOT NULL
 	OPEN cur
 	FETCH NEXT FROM cur
 	INTO 
@@ -1177,7 +1179,7 @@ AS BEGIN
 		Publicacion_Cod		
 	FROM gd_esquema.MAESTRA
 	WHERE 
-		Oferta_Monto IS NOT NULL AND  Oferta_Fecha IS NOT NULL AND Cli_Dni IS NOT NULL AND Calificacion_Cant_Estrellas IS NULL AND (Publ_Cli_Dni IS NOT NULL OR Publ_Empresa_Cuit IS NOT NULL)
+	Publicacion_Tipo = 'Subasta' AND Oferta_Monto IS NOT NULL AND  Oferta_Fecha IS NOT NULL AND Cli_Dni IS NOT NULL AND Calificacion_Cant_Estrellas IS NULL AND (Publ_Cli_Dni IS NOT NULL OR Publ_Empresa_Cuit IS NOT NULL)
 	OPEN cur
 	FETCH NEXT FROM cur
 	INTO 
@@ -1318,7 +1320,7 @@ AS BEGIN
 
 	FROM gd_esquema.MAESTRA
 	WHERE 
-		Oferta_Monto IS NULL AND Item_Factura_Cantidad IS NOT NULL AND Factura_Fecha IS NOT NULL AND  Forma_Pago_Desc IS NOT NULL AND Publ_Cli_Dni IS NOT NULL
+		Publicacion_Tipo = 'Compra Inmediata' AND Oferta_Monto IS NULL AND Item_Factura_Cantidad IS NOT NULL AND Factura_Fecha IS NOT NULL AND  Forma_Pago_Desc IS NOT NULL AND Publ_Cli_Dni IS NOT NULL
 	OPEN cur
 	FETCH NEXT FROM cur
 	INTO 
@@ -1404,7 +1406,7 @@ AS BEGIN
 
 	FROM gd_esquema.MAESTRA
 	WHERE 
-		Oferta_Monto IS NULL AND Item_Factura_Cantidad IS NOT NULL AND Factura_Fecha IS NOT NULL AND  Forma_Pago_Desc IS NOT NULL AND Publ_Empresa_Cuit IS NOT NULL
+		Publicacion_Tipo = 'Compra Inmediata' AND Oferta_Monto IS NULL AND Item_Factura_Cantidad IS NOT NULL AND Factura_Fecha IS NOT NULL AND  Forma_Pago_Desc IS NOT NULL AND Publ_Empresa_Cuit IS NOT NULL
 	OPEN cur
 	FETCH NEXT FROM cur
 	INTO 
@@ -1467,7 +1469,7 @@ EXEC MESSI_MAS3.meterDatosFijos
 PRINT 'DATOS INICIALES MIGRADOS';
 EXEC MESSI_MAS3.migrarRubros
 PRINT 'RUBROS MIGRADOS';
-EXEC MESSI_MAS3.migrarPersonas
+/*EXEC MESSI_MAS3.migrarPersonas
 PRINT 'PERSONAS MIGRADAS';
 EXEC MESSI_MAS3.migrarEmpresas
 PRINT 'EMPRESAS MIGRADAS';
@@ -1475,13 +1477,18 @@ EXEC MESSI_MAS3.migrarPublicacionesEmpresa
 PRINT 'PUBLICACIONES DE EMPRESA MIGRADAS';
 EXEC MESSI_MAS3.migrarPublicacionesClientes
 PRINT 'PUBLICACIONES DE CLIENTES MIGRADAS';
+EXEC MESSI_MAS3.migrarCompras
+PRINT 'COMPRAS INMEDIATAS MIGRADAS';
 EXEC MESSI_MAS3.migrarOfertas
---XEC MESSI_MAS3.migrarFacturasAPersonas
---EXEC MESSI_MAS3.migrarFacturasAEmpresas
---EXEC MESSI_MAS3.migrarCompras
---PRINT 'COMPRAS MIGRADAS';
---EXEC MESSI_MAS3.migrarCalificaciones_ComprasInmediatas_Personas
---PRINT 'CALIFICACIONES DE PERSONAS MIGRADAS';
---EXEC MESSI_MAS3.migrarCalificacionesEmpresa
---PRINT 'CALIFICACIONES DE EMPRESAS MIGRADAS';
+PRINT 'OFERTAS MIGRADAS - SIN GANADORES';
+EXEC MESSI_MAS3.buscarGanadoresOfertasEInsertarEnCompras
+PRINT 'SUBASTAS MIGRADAS CON GANADORES';
+EXEC MESSI_MAS3.migrarFacturasAPersonas
+PRINT 'FACTURAS A PERSONAS MIGRADAS';
+EXEC MESSI_MAS3.migrarFacturasAEmpresas
+PRINT 'FACTURAS A EMPRESAS MIGRADAS';
+EXEC MESSI_MAS3.migrarCalificacionesPersonas
+PRINT 'CALIFICACIONES DE PERSONAS MIGRADAS';
+EXEC MESSI_MAS3.migrarCalificacionesEmpresa
+PRINT 'CALIFICACIONES DE EMPRESAS MIGRADAS';*/
 
