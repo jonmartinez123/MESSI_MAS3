@@ -1463,13 +1463,43 @@ AS BEGIN
 END
 GO
 
+--MIGRACION DE COMPRAS NUEVA MODELO A SEGUIR
+BEGIN TRANSACTION
+INSERT INTO MESSI_MAS3.Compra(compras_personaComprador_id, compras_cantidad, compras_fecha , compras_publicacion_id)
+(SELECT(SELECT persona_id FROM MESSI_MAS3.Persona 
+			WHERE persona_DNI = Cli_Dni AND Compra_Fecha IS NOT NULL AND Oferta_Fecha IS NULL ),
+		Compra_Cantidad ,
+		Compra_Fecha, 
+		(SELECT publicacion_id FROM MESSI_MAS3.Publicacion WHERE Publicacion_Cod = publicacion_codigo)
+
+
+FROM gd_esquema.Maestra WHERE Compra_Cantidad IS NOT NULL AND Compra_Fecha IS NOT NULL)
+
+COMMIT
+
+/*
+ BEGIN TRANSACTION
+ INSERT INTO MESSI_MAS3.Compra(ID_Cliente,Fecha_Compra,ID_Tarjeta,ID_Usuario,Monto,Codigo_Pasaje,Codigo_Paquete)
+ (SELECT (SELECT ID_Cliente FROM EL_PUNTERO.TL_CLIENTE 
+			 WHERE Nro_Documento = Cli_Dni AND Apellido = Cli_Apellido AND Nombre = Cli_Nombre),
+		 (CASE WHEN Pasaje_FechaCompra = '1900-01-01 00:00:00.000' THEN Paquete_FechaCompra
+			 WHEN Paquete_FechaCompra = '1900-01-01 00:00:00.000'  THEN Pasaje_FechaCompra
+		  END),
+		  NULL,
+		  1,
+		 Paquete_Precio + Pasaje_Precio,
+		 [Pasaje_Codigo],
+		 [Paquete_Codigo]
+ FROM gd_esquema.Maestra);
+COMMIT*/
+
 /*---------------------------EXEC DE PARA MIGRAR---------------------------*/
 
 EXEC MESSI_MAS3.meterDatosFijos
 PRINT 'DATOS INICIALES MIGRADOS';
 EXEC MESSI_MAS3.migrarRubros
 PRINT 'RUBROS MIGRADOS';
-/*EXEC MESSI_MAS3.migrarPersonas
+EXEC MESSI_MAS3.migrarPersonas
 PRINT 'PERSONAS MIGRADAS';
 EXEC MESSI_MAS3.migrarEmpresas
 PRINT 'EMPRESAS MIGRADAS';
@@ -1477,7 +1507,7 @@ EXEC MESSI_MAS3.migrarPublicacionesEmpresa
 PRINT 'PUBLICACIONES DE EMPRESA MIGRADAS';
 EXEC MESSI_MAS3.migrarPublicacionesClientes
 PRINT 'PUBLICACIONES DE CLIENTES MIGRADAS';
-EXEC MESSI_MAS3.migrarCompras
+/*EXEC MESSI_MAS3.migrarCompras
 PRINT 'COMPRAS INMEDIATAS MIGRADAS';
 EXEC MESSI_MAS3.migrarOfertas
 PRINT 'OFERTAS MIGRADAS - SIN GANADORES';
