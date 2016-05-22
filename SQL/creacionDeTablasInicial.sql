@@ -1042,29 +1042,61 @@ RETURN @calificacionConvertida
 END
 GO
 
+CREATE FUNCTION [MESSI_MAS3].[adiestrarCalif](@calificacion INT)
+RETURNS INTEGER
+AS BEGIN
+DECLARE @califOrig INT, @califConver INT
+SET @califOrig = @calificacion
+SET @califConver = @califOrig/2
 
---Migramos Calificaciones de personas
+--SELECT @calificacionConvertida = @calificacion /2 
+IF( @califConver = 0 )
+	BEGIN
+		SET @califConver = 1
+	END
+ELSE
+
+
+RETURN @califConver
+END
+GO
+
+
+CREATE FUNCTION  MESSI_MAS3.coincidenCodPubliCompra(@codigoPubli NUMERIC(18,0), @idCompra INT)
+RETURNS INTEGER
+AS BEGIN
+DECLARE @codigoPubliEnIdCompra NUMERIC(18,0), @idPublicacionEnCompra INT
+SELECT @idPublicacionEnCompra = compras_publicacion_id FROM MESSI_MAS3.Compra WHERE @idCompra = compra_id
+SELECT @codigoPubliEnIdCompra = publicacion_codigo FROM MESSI_MAS3.Publicacion WHERE publicacion_id = @idPublicacionEnCompra
+DECLARE @BOLEANLOCO INT
+IF (@codigoPubli = @codigoPubliEnIdCompra)
+ BEGIN 
+	SET @BOLEANLOCO= 1 
+ END 
+
+ RETURN @BOLEANLOCO
+END
+GO
+
+/*
+--NUEVA Migramos Calificaciones de personas
 BEGIN TRANSACTION
-INSERT INTO MESSI_MAS3.Calificacion(califica,publicacion_codigo, publicacion_descripcion, publicacion_tipo,
-									publicacion_fechaInicio,publicacion_fechaFin, publicacion_idEstado, publicacion_idRubro,
-									 publicacion_idVisibilidad, publicacion_precio, publicacion_stock,publicacion_admitePreguntas, publicacion_tieneEnvio)
-(SELECT DISTINCT (SELECT empresa_id FROM MESSI_MAS3.Empresa 
-			WHERE empresa_cuit = Publ_Empresa_Cuit),
-		Publicacion_Cod ,	
-		Publicacion_Descripcion, 
-		Publicacion_Tipo,
-		Publicacion_Fecha,
-		Publicacion_Fecha_Venc,
-		4,
-		(SELECT rubro_id FROM MESSI_MAS3.Rubro WHERE rubro_descripcionCorta = Publicacion_Rubro_Descripcion),
-		(SELECT visibilidad_id FROM MESSI_MAS3.Visibilidad WHERE visibilidad_codigo = Publicacion_Visibilidad_Cod),
-		Publicacion_Precio,
-		Publicacion_Stock,
-		0,
-		0
-FROM MESSI_MAS3.Compra WHERE  IS NOT NULL AND Calificacion_Cant_Estrellas IS NOT NULL AND Cli_Dni IS NOT NULL AND Oferta_Monto IS NULL)
-COMMIT
 
+INSERT INTO MESSI_MAS3.Calificacion(calificacion_compraId, calificacion_codigo, calificacion_detalle, calificacion_idPersonaCalificador,
+									calificacion_idusuarioCalificado,calificacion_fecha, calificacion_cantidadEstrellas, 
+									 calificacion_pendiente)
+(SELECT DISTINCT (SELECT compra_id FROM MESSI_MAS3.Compra WHERE compras_fecha = Compra_Fecha AND compras_cantidad = Compra_Cantidad AND Compra_Fecha = compras_fecha AND MESSI_MAS3.coincidenCodPubliCompra(Publicacion_Cod, compra_id) = 1),
+		Calificacion_Codigo ,	
+		Calificacion_Descripcion, 
+		(SELECT persona_id FROM MESSI_MAS3.Persona WHERE Cli_Dni = persona_DNI AND Cli_Apeliido = persona_apellido AND Cli_Nombre =persona_nombre),
+		(SELECT persona_id FROM MESSI_MAS3.Persona WHERE Publ_Cli_Dni = persona_DNI AND Publ_Cli_Apeliido = persona_apellido AND Publ_Cli_Nombre =persona_nombre),
+		NULL,
+		MESSI_MAS3.adiestrarCalif(Calificacion_Cant_Estrellas),
+		0
+FROM gd_esquema.Maestra WHERE Publ_Cli_Dni IS NOT NULL AND Calificacion_Cant_Estrellas IS NOT NULL AND Cli_Dni IS NOT NULL AND Oferta_Monto IS NULL
+)
+COMMIT
+*/
 
 CREATE PROCEDURE [MESSI_MAS3].[migrarCalificacionesPersonas]
 AS BEGIN
@@ -1111,7 +1143,7 @@ AS BEGIN
 		DECLARE @idPubli INT, @califNeto INT
 		SET @idPubli = (SELECT publicacion_id FROM MESSI_MAS3.Publicacion WHERE (@CodPublicacion = publicacion_codigo))
 		SET @idCompra = (SELECT compra_id FROM MESSI_MAS3.Compra WHERE (@idPubli = compras_publicacion_id))
-		EXECUTE MESSI_MAS3.ConvertirCalificacion @cantidadEstrellas, @calificacionConvertida = @califNeto OUTPUT;
+		--EXECUTE MESSI_MAS3.ConvertirCalificacion @cantidadEstrellas, @calificacionConvertida = @califNeto OUTPUT;
 		SET @pendiente = 0
 		
 		INSERT INTO 
@@ -1320,6 +1352,7 @@ FROM gd_esquema.Maestra WHERE Publicacion_Tipo = 'Subasta' AND Oferta_Monto IS N
 COMMIT
 
 */
+
 
 CREATE FUNCTION [MESSI_MAS3].[obtenerIdUsuarioGanadorSegunPubID](@idPublicacion INT)
 RETURNS INTEGER
