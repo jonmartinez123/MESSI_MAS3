@@ -1,5 +1,4 @@
 
---Migro publicaciones de Personas
 /*--------------------------Migro publicaciones de Personas---------------------------*/
 BEGIN TRANSACTION
 INSERT INTO MESSI_MAS3.Publicacion(publicacion_idUsuario,publicacion_codigo, publicacion_descripcion, publicacion_tipo,
