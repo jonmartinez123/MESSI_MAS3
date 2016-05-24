@@ -22,7 +22,7 @@ namespace MercadoEnvio.Utils
         {
             e.Handled = !(char.IsLetterOrDigit(e.KeyChar) || e.KeyChar == (char)Keys.Back);
         }
-        public static void allowMaxLenght(this Form aForm, MaterialSkin.Controls.MaterialSingleLineTextField txt,int max, KeyPressEventArgs e)
+        public static void allowMaxLenght(this Form aForm, MaterialSkin.Controls.MaterialSingleLineTextField txt,int tamMax, KeyPressEventArgs e)
         {
 
             e.Handled = (txt.TextLength > tamMax);

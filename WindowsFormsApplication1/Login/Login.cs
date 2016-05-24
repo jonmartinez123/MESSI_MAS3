@@ -86,7 +86,8 @@ namespace MercadoEnvio.Login
              if ( !string.IsNullOrEmpty(pass) && !string.IsNullOrEmpty(usuario)) 
              {
                  Usuario user = new Usuario(usuario, pass);
-                 if (DAO.Login.validarUsuario(user.Username, user.Password) == 1)
+                 int respuesta = DAO.Login.validarUsuario(user);
+                 if ( respuesta == 1)
                  {
                      MessageBox.Show("EXISTE");
                      int cantidadIntentos = DAO.Login.traerIntentos(user);

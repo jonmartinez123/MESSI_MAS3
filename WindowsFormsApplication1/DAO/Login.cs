@@ -8,10 +8,10 @@ namespace MercadoEnvio.DAO
 {
     class Login
     {
-        public static int validarUsuario(String usuario, string password)
+        public static int validarUsuario(Modelo.Usuario usuario)
         {
 
-            return SqlConnector.executeProcedure("validar_usuario", usuario, EncriptadorSHA.encodear(password));
+            return SqlConnector.executeProcedure("validar_usuario", usuario.Username, EncriptadorSHA.encodear(usuario.Password));
         }
 
         public static String obtenerRolUsuario(Modelo.Usuario usuario)
