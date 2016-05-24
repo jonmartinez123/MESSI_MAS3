@@ -242,7 +242,7 @@ CREATE TABLE MESSI_MAS3.Visibilidad (
 -- -----------------------------------------------------
 CREATE TABLE MESSI_MAS3.Publicacion (
   publicacion_id INT PRIMARY KEY NOT NULL IDENTITY,
-  publicacion_codigo INT,
+  publicacion_codigo NUMERIC(18,0), --CAMBIADO DE INT A NUMERIC COMO LA TABLA MAESTRA
   publicacion_idEstado INT REFERENCES MESSI_MAS3.Estado (estado_id),
   publicacion_idVisibilidad INT REFERENCES MESSI_MAS3.Visibilidad (visibilidad_id),
   publicacion_idUsuario INT REFERENCES MESSI_MAS3.Usuario (usuario_id),
@@ -380,7 +380,7 @@ CREATE TABLE MESSI_MAS3.Factura_detalle (
   FacturaDetalle_valorItem NUMERIC(18,2) NOT NULL,
   facturaDetalle_numero NUMERIC(18,0) NOT NULL,
   facturaDetalle_item NVARCHAR(255) NULL,
-  facturaDetalle_id INT PRIMARY KEY REFERENCES MESSI_MAS3.Factura (factura_id),
+  facturaDetalle_id INT REFERENCES MESSI_MAS3.Factura (factura_id), --cambiado a FK SOLO, LE SAQUE QUE SEA PK
   facturaDetall_cantidadItems NUMERIC(18,0) NOT NULL,
   
  )
@@ -700,269 +700,8 @@ END
 GO
 
 
---migro publicaciones de Clientes
-CREATE PROCEDURE [MESSI_MAS3].[migrarPublicacionesClientes]
-AS BEGIN
-	set nocount on;
-	set xact_abort on;
-	DECLARE 
-			@codigoPubli INT,
-			@estadoPubli NVARCHAR(255),
-			@codigoVisibilidadPublicacion INT,
-			@fechaInicio DATETIME,
-			@fechaFin DATETIME,
-			@descripcion NVARCHAR(255),	
-			@tipoPublicacion NVARCHAR(255),
-			@tienePreguntas INT,
-			@descripcionRubro NVARCHAR(255),
-			@dni NVARCHAR(255),
-			@publiPrecio NUMERIC(18,0),
-			@stock NUMERIC(18,0)
-
-	DECLARE cur CURSOR FOR
-	
-	SELECT DISTINCT
-		Publicacion_Cod,
-		Publicacion_Estado,
-		Publicacion_Visibilidad_Cod,
-		Publicacion_Fecha,
-		Publicacion_Fecha_Venc,
-		Publicacion_Descripcion,
-		Publicacion_Tipo,
-		Publicacion_Rubro_Descripcion,
-		Publ_Cli_Dni,
-		Publicacion_Precio,
-		Publicacion_Stock
-	FROM gd_esquema.Maestra
-	WHERE (Publicacion_Fecha_Venc is NOT NULL) AND (Publicacion_Fecha is NOT NULL) AND (Publ_Cli_Dni IS NOT NULL ) 	AND Publicacion_Stock IS NOT NULL
 
 
-	OPEN cur
-	FETCH NEXT FROM cur
-	INTO 
-		@codigoPubli,
-		@estadoPubli,
-		@codigoVisibilidadPublicacion,
-		@fechaInicio,
-		@fechaFin,
-		@descripcion,
-		@tipoPublicacion,
-		@descripcionRubro,
-		@dni,
-		@publiPrecio,
-		@stock	
-	WHILE(@@FETCH_STATUS = 0)
-	BEGIN
-		DECLARE @idRubro INT,@idUserPublicador INT, @idEstado INT, @idVisibilidad INT
-		SET @idRubro = (SELECT rubro_id FROM MESSI_MAS3.Rubro WHERE (rubro_descripcionCorta = @descripcionRubro))
-		SET @idUserPublicador = (SELECT usuario_id FROM MESSI_MAS3.Usuario WHERE (usuario_nombreUsuario = @dni))
-		--SET @idEstado = (SELECT estado_id FROM MESSI_MAS3.Estado WHERE (estado_nombre = @estadoPubli))
-		SET @idEstado = 4
-		SET @idVisibilidad = (SELECT visibilidad_id FROM MESSI_MAS3.Visibilidad WHERE ( @codigoVisibilidadPublicacion = visibilidad_codigo))
-		INSERT INTO MESSI_MAS3.Publicacion(
-		publicacion_idUsuario,
-		publicacion_fechaInicio,
-		publicacion_fechaFin,
-		publicacion_descripcion,
-		publicacion_tipo,
-		publicacion_idVisibilidad,
-		publicacion_idRubro,
-		publicacion_idEstado,
-		publicacion_codigo,
-		publicacion_tieneEnvio,
-		publicacion_precio,
-		publicacion_stock)
-		VALUES (@idUserPublicador,
-		@fechaInicio,
-		@fechaFin,
-		@descripcion,
-		@tipoPublicacion,
-		@idVisibilidad,
-		@idRubro,
-		@idEstado,
-		@codigoPubli,
-		0,
-		@publiPrecio,
-		@stock)
-
-		FETCH NEXT FROM cur
-		INTO 
-			@codigoPubli,
-			@estadoPubli,
-			@codigoVisibilidadPublicacion,
-			@fechaInicio,
-			@fechaFin,
-			@descripcion,
-			@tipoPublicacion,
-			@descripcionRubro,
-			@dni,
-			@publiPrecio,
-			@stock
-	END
-	CLOSE cur 
-	DEALLOCATE cur
-
-	
-END
-GO
-
---migro publicaciones de Empresas
-CREATE PROCEDURE [MESSI_MAS3].[migrarPublicacionesEmpresa]
-AS BEGIN
-	set nocount on;
-	set xact_abort on;
-	DECLARE 
-			@codigoPubli INT,
-			@estadoPubli NVARCHAR(255),
-			@codigoVisibilidadPublicacion INT,
-			@fechaInicio DATETIME,
-			@fechaFin DATETIME,
-			@descripcion NVARCHAR(255),	
-			@tipoPublicacion NVARCHAR(255),
-			@tienePreguntas INT,
-			@descripcionRubro NVARCHAR(255),
-			@cuit NVARCHAR(255),
-			@publiPrecio NUMERIC(18,0),
-			@stock NUMERIC(18,0)
-	DECLARE cur CURSOR FOR
-	
-	SELECT DISTINCT
-		Publicacion_Cod,
-		Publicacion_Estado,
-		Publicacion_Visibilidad_Cod,
-		Publicacion_Fecha,
-		Publicacion_Fecha_Venc,
-		Publicacion_Descripcion,
-		Publicacion_Tipo,
-		Publicacion_Rubro_Descripcion,
-		Publ_Empresa_Cuit,
-		Publicacion_Precio,
-		Publicacion_Stock
-	FROM gd_esquema.Maestra
-	WHERE (Publicacion_Fecha_Venc is NOT NULL) AND (Publicacion_Fecha is NOT NULL) AND (Publ_Empresa_Cuit IS NOT NULL ) AND Publicacion_Stock IS NOT NULL	
-
-
-	OPEN cur
-	FETCH NEXT FROM cur
-	INTO 
-		@codigoPubli,
-		@estadoPubli,
-		@codigoVisibilidadPublicacion,
-		@fechaInicio,
-		@fechaFin,
-		@descripcion,
-		@tipoPublicacion,
-		@descripcionRubro,
-		@cuit,
-		@publiPrecio,
-		@stock
-	WHILE(@@FETCH_STATUS = 0)
-	BEGIN
-		DECLARE @idRubro INT,@idUserPublicador INT, @idEstado INT, @idVisibilidad INT
-		SET @idRubro = (SELECT rubro_id FROM MESSI_MAS3.Rubro WHERE (rubro_descripcionCorta = @descripcionRubro))
-		SET @idUserPublicador = (SELECT usuario_id FROM MESSI_MAS3.Usuario WHERE (usuario_nombreUsuario = @cuit))				--O habria que hacerlo desde la tabla de Empresa
-		--SET @idEstado = (SELECT estado_id FROM MESSI_MAS3.Estado WHERE (estado_nombre = @estadoPubli))
-		SET @idEstado = 4
-		SET @idVisibilidad = (SELECT visibilidad_id FROM MESSI_MAS3.Visibilidad WHERE ( @codigoVisibilidadPublicacion = visibilidad_codigo))
-		INSERT INTO MESSI_MAS3.Publicacion(
-		publicacion_idUsuario,
-		publicacion_fechaInicio,
-		publicacion_fechaFin,
-		publicacion_descripcion,
-		publicacion_tipo,
-		publicacion_idVisibilidad,
-		publicacion_idRubro,
-		publicacion_idEstado,
-		publicacion_codigo,
-		publicacion_precio,
-		publicacion_stock)
-		VALUES (@idUserPublicador,
-		@fechaInicio,
-		@fechaFin,
-		@descripcion,
-		@tipoPublicacion,
-		@idVisibilidad,
-		@idRubro,
-		@idEstado,
-		@codigoPubli,
-		@publiPrecio,
-		@stock
-		)
-
-		FETCH NEXT FROM cur
-		INTO 
-			@codigoPubli,
-		@estadoPubli,
-		@codigoVisibilidadPublicacion,
-		@fechaInicio,
-		@fechaFin,
-		@descripcion,
-		@tipoPublicacion,
-		@descripcionRubro,
-		@cuit,
-		@publiPrecio,
-		@stock
-	END
-	CLOSE cur 
-	DEALLOCATE cur
-	
-END
-GO
-
---PRIMERO HACER LA MIGRACION DE LAS COMPRAS, LUEGO CALIFICACIONES
-CREATE PROCEDURE [MESSI_MAS3].[migrarCompras]
-AS BEGIN
-	set nocount on;
-	set xact_abort on;
-	DECLARE 
-			@dni NVARCHAR(255),
-			@fechaCompra DATETIME,
-			@compraCant INT,
-			@codPublicacion INT
-	DECLARE cur CURSOR FOR
-	
-	SELECT DISTINCT
-		Cli_Dni,
-		Compra_Fecha,
-		Compra_Cantidad,
-		Publicacion_Cod
-	FROM gd_esquema.Maestra	
-		WHERE Publicacion_Tipo = 'Compra Inmediata' AND Compra_Fecha IS NOT NULL AND Compra_Cantidad IS NOT NULL AND Publicacion_Cod IS NOT NULL AND Oferta_Fecha IS NULL AND Cli_Dni IS NOT NULL
-	OPEN cur
-	FETCH NEXT FROM cur
-	INTO 
-			@dni,
-			@fechaCompra,
-			@compraCant,
-			@codPublicacion
-	WHILE(@@FETCH_STATUS = 0)
-	BEGIN 
-		DECLARE @idUser INT, @idPubli INT
-		SET @idUser = (SELECT usuario_id FROM MESSI_MAS3.Usuario WHERE( @dni = usuario_nombreUsuario))
-		SET @idPubli = (SELECT publicacion_id FROM MESSI_MAS3.Publicacion WHERE (publicacion_codigo = @codPublicacion))
-		
-		
-		INSERT INTO 
-		MESSI_MAS3.Compra(compras_personaComprador_id,	
-		compras_fecha,
-		compras_publicacion_id,
-		compras_cantidad)
-		VALUES (@idUser,
-		 @fechaCompra, 
-		 @idPubli,
-		 @compraCant)
-
-		FETCH NEXT FROM cur
-		INTO @dni,
-			@fechaCompra,
-			@compraCant,
-			@codPublicacion
-	END
-	CLOSE cur 
-	DEALLOCATE cur
-	
-END
-GO
 
 
 
@@ -986,174 +725,36 @@ RETURN @calificacionConvertida
 END
 GO
 
-
-CREATE PROCEDURE [MESSI_MAS3].[migrarCalificacionesPersonas]
+CREATE FUNCTION [MESSI_MAS3].[adiestrarCalif](@calificacion INT)
+RETURNS INTEGER
 AS BEGIN
-	set nocount on;
-	set xact_abort on;
-	DECLARE 
-			@codCalif	INT,
-			@idUsuarioCalificador INT,
-			@idCompra INT,
-			@fechaVenc DATETIME,
-			@cantidadEstrellas INT,
-			@CodPublicacion INT,
-			@detalle NVARCHAR(45),
-			@pendiente INT,
-			@dniVendedor NUMERIC(18,0),
-			@dniComprador NUMERIC(18,0),
-			@idPersonaCalificado INT
-	DECLARE cur CURSOR FOR
-	
-	SELECT DISTINCT
-		Calificacion_Codigo,	
-		Publicacion_Fecha_Venc,
-		Publicacion_Cod,
-		Calificacion_Cant_Estrellas,
-		Calificacion_Descripcion,
-		Publ_Cli_Dni, --dni del vendedor
-		Cli_Dni --dni del comprador
-	FROM gd_esquema.Maestra	
-		WHERE Publ_Cli_Dni IS NOT NULL AND Calificacion_Cant_Estrellas IS NOT NULL AND Cli_Dni IS NOT NULL AND Oferta_Monto IS NULL
-	OPEN cur
-	FETCH NEXT FROM cur
-	INTO 
-			@codCalif,
-			@fechaVenc,
-			@CodPublicacion,
-			@cantidadEstrellas,
-			@detalle,
-			@dniVendedor,
-			@dniComprador
-	WHILE(@@FETCH_STATUS = 0)
-	BEGIN 
-		SET @idUsuarioCalificador = (SELECT persona_id FROM MESSI_MAS3.Persona WHERE( @dniComprador = persona_DNI))
-		SET @idPersonaCalificado = (SELECT persona_id FROM MESSI_MAS3.Persona WHERE( @dniVendedor = persona_DNI))
-		DECLARE @idPubli INT, @califNeto INT
-		SET @idPubli = (SELECT publicacion_id FROM MESSI_MAS3.Publicacion WHERE (@CodPublicacion = publicacion_codigo))
-		SET @idCompra = (SELECT compra_id FROM MESSI_MAS3.Compra WHERE (@idPubli = compras_publicacion_id))
-		EXECUTE MESSI_MAS3.ConvertirCalificacion @cantidadEstrellas, @calificacionConvertida = @califNeto OUTPUT;
-		SET @pendiente = 0
-		
-		INSERT INTO 
-		MESSI_MAS3.Calificacion(calificacion_compraId,	
-		calificacion_cantidadEstrellas,
-		calificacion_detalle,
-		calificacion_fecha,
-		calificacion_idPersonaCalificador,
-		calificacion_pendiente,
-		calificacion_idusuarioCalificado,
-		calificacion_codigo)
-		VALUES (@idCompra,
-		 @califNeto, 
-		 @detalle,
-		 @fechaVenc,
-		 @idUsuarioCalificador,
-		 @pendiente,
-		 @idPersonaCalificado,
-		 @codCalif
-		 )
+DECLARE @califOrig INT, @califConver INT
+SET @califOrig = @calificacion
+SET @califConver = @califOrig/2
 
-		FETCH NEXT FROM cur
-		INTO @codCalif,
-			@fechaVenc,
-			@CodPublicacion,
-			@cantidadEstrellas,
-			@detalle,
-			@dniVendedor,
-			@dniComprador
+--SELECT @calificacionConvertida = @calificacion /2 
+IF( @califConver = 0 )
+	BEGIN
+		SET @califConver = 1
 	END
-	CLOSE cur 
-	DEALLOCATE cur
 
-	
+RETURN @califConver
 END
 GO
 
-
-
-
-CREATE PROCEDURE [MESSI_MAS3].[migrarCalificacionesEmpresa]
+CREATE FUNCTION  MESSI_MAS3.coincidenCodPubliCompra(@codigoPubli NUMERIC(18,0), @idCompra INT)
+RETURNS INTEGER
 AS BEGIN
-	set nocount on;
-	set xact_abort on;
-	DECLARE 
-			@codCalif	INT,
-			@idUsuarioCalificador INT,
-			@idCompra INT,
-			@fechaVenc DATETIME,
-			@cantidadEstrellas INT,
-			@CodPublicacion INT,
-			@detalle NVARCHAR(45),
-			@pendiente INT,
-			@cuitVendedor NVARCHAR(50),
-			@dniComprador NUMERIC(18,0),
-			@idEmpresaCalificada INT
-	DECLARE cur CURSOR FOR
-	
-	SELECT DISTINCT
-		Calificacion_Codigo,	
-		Publicacion_Fecha_Venc,
-		Publicacion_Cod,
-		Calificacion_Cant_Estrellas,
-		Calificacion_Descripcion,
-		Publ_Empresa_Cuit, --cuit del vendedor
-		Cli_Dni --dni del comprador
-	FROM gd_esquema.Maestra	
-		WHERE Publ_Empresa_Cuit IS NOT NULL AND Calificacion_Cant_Estrellas IS NOT NULL AND Cli_Dni IS NOT NULL AND Publicacion_Cod IS NOT NULL AND Oferta_Monto IS NULL
-	OPEN cur
-	FETCH NEXT FROM cur
-	INTO 
-			@codCalif,
-			@fechaVenc,
-			@CodPublicacion,
-			@cantidadEstrellas,
-			@detalle,
-			@cuitVendedor,
-			@dniComprador
-	WHILE(@@FETCH_STATUS = 0)
-	BEGIN 
-		SET @idUsuarioCalificador = (SELECT persona_id FROM MESSI_MAS3.Persona WHERE( @dniComprador = persona_DNI))
-		SET @idEmpresaCalificada = (SELECT empresa_id FROM MESSI_MAS3.Empresa WHERE( @cuitVendedor = empresa_cuit))
-		DECLARE @idPubli INT, @califNeto INT
-		SET @idPubli = (SELECT publicacion_id FROM MESSI_MAS3.Publicacion WHERE (publicacion_codigo = @CodPublicacion))
-		SET @idCompra = (SELECT TOP 1 compra_id FROM MESSI_MAS3.Compra WHERE (@idPubli = compras_publicacion_id AND @idUsuarioCalificador = compras_personaComprador_id))									--DEVUELVE MAS DE 1!! MITIGAR PARA QUE SEA EL CORRECTO
-		
-			EXECUTE MESSI_MAS3.ConvertirCalificacion @cantidadEstrellas, @calificacionConvertida = @califNeto OUTPUT;
-			SET @pendiente = 0  
-		
-			INSERT INTO 
-			MESSI_MAS3.Calificacion(calificacion_compraId,	
-			calificacion_cantidadEstrellas,
-			calificacion_detalle,
-			calificacion_fecha,
-			calificacion_idPersonaCalificador,
-			calificacion_pendiente,
-			calificacion_idusuarioCalificado,
-			calificacion_codigo)
-			VALUES (@idCompra,
-			@califNeto, 
-			@detalle,
-			@fechaVenc,
-			@idUsuarioCalificador,
-			@pendiente,
-			@idEmpresaCalificada,
-			@codCalif
-					)
-		
-		FETCH NEXT FROM cur
-		INTO @codCalif,
-			@fechaVenc,
-			@CodPublicacion,
-			@cantidadEstrellas,
-			@detalle,
-			@cuitVendedor,
-			@dniComprador
-	END
-	CLOSE cur 
-	DEALLOCATE cur
+DECLARE @codigoPubliEnIdCompra NUMERIC(18,0), @idPublicacionEnCompra INT
+SELECT @idPublicacionEnCompra = compras_publicacion_id FROM MESSI_MAS3.Compra WHERE @idCompra = compra_id
+SELECT @codigoPubliEnIdCompra = publicacion_codigo FROM MESSI_MAS3.Publicacion WHERE publicacion_id = @idPublicacionEnCompra
+DECLARE @BOLEANLOCO INT
+IF (@codigoPubli = @codigoPubliEnIdCompra)
+ BEGIN 
+	SET @BOLEANLOCO= 1 
+ END 
 
-	
+ RETURN @BOLEANLOCO
 END
 GO
 
@@ -1216,6 +817,17 @@ AS BEGIN
 END
 GO
 
+CREATE FUNCTION [MESSI_MAS3].[obtenerPublicacionIdDadoCodigo](@codigoPubli INT)
+RETURNS INTEGER
+AS BEGIN
+DECLARE @idPubli INT
+SELECT @idPubli = publicacion_id FROM MESSI_MAS3.Publicacion WHERE publicacion_codigo = @codigoPubli
+
+RETURN @idPubli;
+END
+GO
+
+
 CREATE FUNCTION [MESSI_MAS3].[obtenerIdUsuarioGanadorSegunPubID](@idPublicacion INT)
 RETURNS INTEGER
 AS
@@ -1235,7 +847,7 @@ BEGIN
 END
 GO
 
-CREATE PROCEDURE [MESSI_MAS3].[buscarGanadoresOfertasEInsertarEnCompras]
+CREATE PROCEDURE [MESSI_MAS3].[buscarGanadoresOfertas] --UPDATEAR LOS GANADORES DE LAS OFERTAS
 AS BEGIN
 	set nocount on;
 	set xact_abort on;
@@ -1261,20 +873,6 @@ AS BEGIN
 		DECLARE @ofertaMayor NUMERIC(18,2) 
 		SET @ofertaMayor = (SELECT TOP 1 oferta_valor FROM MESSI_MAS3.Oferta WHERE (oferta_persona_id = @idUserGanador AND oferta_idPublicacion = @idPubli) ORDER BY oferta_valor DESC)
 		UPDATE MESSI_MAS3.Oferta SET oferta_ganador = 1  WHERE (oferta_persona_id = @idUserGanador AND oferta_idPublicacion = @idPubli AND oferta_valor = @ofertaMayor)
-		SET @precioSubastado = (SELECT 1 oferta_valor FROM MESSI_MAS3.Oferta WHERE (oferta_persona_id = @idUserGanador AND oferta_idPublicacion = @idPubli AND oferta_ganador = 1))
-		SET @ofertaFecha = (SELECT 1 oferta_fecha FROM MESSI_MAS3.Oferta WHERE (oferta_persona_id = @idUserGanador AND oferta_idPublicacion = @idPubli AND oferta_ganador = 1))
-		SET @cantidadComprada = (SELECT TOP 1 publicacion_stock FROM MESSI_MAS3.Publicacion WHERE (publicacion_id = @idPubli AND publicacion_stock IS NOT NULL ))
-		INSERT INTO 
-		MESSI_MAS3.Compra(compras_cantidad,	
-		compras_fecha,
-		compras_publicacion_id,
-		compras_personaComprador_id
-		)
-		VALUES (@cantidadComprada,
-		 @ofertaFecha, 
-		 @idPubli,
-		 @idUserGanador
-		 )
 
 		FETCH NEXT FROM cur
 		INTO @idPubli
@@ -1288,209 +886,6 @@ GO
 
 
 
-
-CREATE PROCEDURE [MESSI_MAS3].[migrarFacturasAPersonas]		--Tanto cabecera como detalle
-AS BEGIN
-	set nocount on;
-	set xact_abort on;
-	DECLARE @idUser INT, 
-			@dni NUMERIC(18,0),
-			@fechaFactura DATETIME,
-			@totalFactura NUMERIC (18,2),
-			@nroFactura NUMERIC(18,0),
-			@formaDePago NVARCHAR(255),
-			@idFormaPago INT,
-			@cantItemFactura NUMERIC(18,0),
-			@itemMonto NUMERIC(18,2)
-			
-	DECLARE cur CURSOR FOR
-	
-	SELECT 
-		Factura_Fecha,
-		Factura_Total,
-		Factura_Nro,
-		Forma_Pago_Desc,
-		Publ_Cli_Dni,
-		Item_Factura_Cantidad,
-		Item_Factura_Monto
-
-		
-
-	FROM gd_esquema.MAESTRA
-	WHERE 
-		Publicacion_Tipo = 'Compra Inmediata' AND Oferta_Monto IS NULL AND Item_Factura_Cantidad IS NOT NULL AND Factura_Fecha IS NOT NULL AND  Forma_Pago_Desc IS NOT NULL AND Publ_Cli_Dni IS NOT NULL
-	OPEN cur
-	FETCH NEXT FROM cur
-	INTO 
-			@fechaFactura,
-			@totalFactura,
-			@nroFactura,
-			@formaDePago,
-			@dni,
-			@cantItemFactura,
-			@itemMonto
-	WHILE(@@FETCH_STATUS = 0)
-	BEGIN 
-		SET @idUser = (SELECT persona_id FROM MESSI_MAS3.Persona WHERE( @dni = persona_DNI))
-		SET @idFormaPago = (SELECT formaDePago_id FROM MESSI_MAS3.FormaDePago WHERE( @formaDePago = formadePago_nombre))
-
-		INSERT INTO 
-		MESSI_MAS3.Factura(factura_fecha,	
-		factura_importeTotal,
-		factura_numero,
-		factura_idVendedor,
-		factura_formaDePago)
-		VALUES (@fechaFactura,
-		 @totalFactura, 
-		 @nroFactura,
-		 @idUser,
-		 @idFormaPago
-		 )
-		 DECLARE @idFacturaSuper INT
-		 SELECT @idFacturaSuper = SCOPE_IDENTITY()
-		 INSERT INTO 
-		MESSI_MAS3.Factura_detalle(FacturaDetalle_valorItem,	
-		facturaDetalle_numero,
-		facturaDetalle_id,
-		facturaDetall_cantidadItems)
-		VALUES (@itemMonto,
-		 @nroFactura, 
-		 @idFacturaSuper,
-		 @cantItemFactura
-		 )
-
-		FETCH NEXT FROM cur
-		INTO @fechaFactura,
-			@totalFactura,
-			@nroFactura,
-			@formaDePago,
-			@dni,
-			@cantItemFactura,
-			@itemMonto
-	END
-	CLOSE cur 
-	DEALLOCATE cur
-
-	
-END
-GO
-
-CREATE PROCEDURE [MESSI_MAS3].[migrarFacturasAEmpresas]		--Tanto cabecera como detalle
-AS BEGIN
-	set nocount on;
-	set xact_abort on;
-	DECLARE @idUser INT, 
-			@cuit NVARCHAR(50),
-			@fechaFactura DATETIME,
-			@totalFactura NUMERIC (18,2),
-			@nroFactura NUMERIC(18,0),
-			@formaDePago NVARCHAR(255),
-			@idFormaPago INT,
-			@cantItemFactura NUMERIC(18,0),
-			@itemMonto NUMERIC(18,2)
-			
-	DECLARE cur CURSOR FOR
-	
-	SELECT 
-		Factura_Fecha,
-		Factura_Total,
-		Factura_Nro,
-		Forma_Pago_Desc,
-		Publ_Empresa_Cuit,
-		Item_Factura_Cantidad,
-		Item_Factura_Monto
-
-		
-
-	FROM gd_esquema.MAESTRA
-	WHERE 
-		Publicacion_Tipo = 'Compra Inmediata' AND Oferta_Monto IS NULL AND Item_Factura_Cantidad IS NOT NULL AND Factura_Fecha IS NOT NULL AND  Forma_Pago_Desc IS NOT NULL AND Publ_Empresa_Cuit IS NOT NULL
-	OPEN cur
-	FETCH NEXT FROM cur
-	INTO 
-			@fechaFactura,
-			@totalFactura,
-			@nroFactura,
-			@formaDePago,
-			@cuit,
-			@cantItemFactura,
-			@itemMonto
-	WHILE(@@FETCH_STATUS = 0)
-	BEGIN 
-		SET @idUser = (SELECT empresa_id FROM MESSI_MAS3.Empresa WHERE( @cuit = empresa_cuit))
-		SET @idFormaPago = (SELECT formaDePago_id FROM MESSI_MAS3.FormaDePago WHERE( @formaDePago = formadePago_nombre))
-
-		INSERT INTO 
-		MESSI_MAS3.Factura(factura_fecha,	
-		factura_importeTotal,
-		factura_numero,
-		factura_idVendedor,
-		factura_formaDePago)
-		VALUES (@fechaFactura,
-		 @totalFactura, 
-		 @nroFactura,
-		 @idUser,
-		 @idFormaPago
-		 )
-		 DECLARE @idFacturaSuper INT
-		 SELECT @idFacturaSuper = SCOPE_IDENTITY()
-		 INSERT INTO 
-		MESSI_MAS3.Factura_detalle(FacturaDetalle_valorItem,	
-		facturaDetalle_numero,
-		facturaDetalle_id,
-		facturaDetall_cantidadItems)
-		VALUES (@itemMonto,
-		 @nroFactura, 
-		 @idFacturaSuper,
-		 @cantItemFactura
-		 )
-
-		FETCH NEXT FROM cur
-		INTO @fechaFactura,
-			@totalFactura,
-			@nroFactura,
-			@formaDePago,
-			@cuit,
-			@cantItemFactura,
-			@itemMonto
-	END
-	CLOSE cur 
-	DEALLOCATE cur
-
-	
-END
-GO
-
---MIGRACION DE COMPRAS NUEVA MODELO A SEGUIR
-BEGIN TRANSACTION
-INSERT INTO MESSI_MAS3.Compra(compras_personaComprador_id, compras_cantidad, compras_fecha , compras_publicacion_id)
-(SELECT DISTINCT (SELECT persona_id FROM MESSI_MAS3.Persona 
-			WHERE persona_DNI = Cli_Dni AND Compra_Fecha IS NOT NULL AND Oferta_Fecha IS NULL ),
-		Compra_Cantidad ,
-		Compra_Fecha, 
-		(SELECT publicacion_id FROM MESSI_MAS3.Publicacion WHERE Publicacion_Cod = publicacion_codigo)
-
-
-FROM gd_esquema.Maestra WHERE Compra_Cantidad IS NOT NULL AND Compra_Fecha IS NOT NULL)
-
-COMMIT
-
-/*
- BEGIN TRANSACTION
- INSERT INTO MESSI_MAS3.Compra(ID_Cliente,Fecha_Compra,ID_Tarjeta,ID_Usuario,Monto,Codigo_Pasaje,Codigo_Paquete)
- (SELECT (SELECT ID_Cliente FROM EL_PUNTERO.TL_CLIENTE 
-			 WHERE Nro_Documento = Cli_Dni AND Apellido = Cli_Apellido AND Nombre = Cli_Nombre),
-		 (CASE WHEN Pasaje_FechaCompra = '1900-01-01 00:00:00.000' THEN Paquete_FechaCompra
-			 WHEN Paquete_FechaCompra = '1900-01-01 00:00:00.000'  THEN Pasaje_FechaCompra
-		  END),
-		  NULL,
-		  1,
-		 Paquete_Precio + Pasaje_Precio,
-		 [Pasaje_Codigo],
-		 [Paquete_Codigo]
- FROM gd_esquema.Maestra);
-COMMIT*/
-
 /*---------------------------EXEC DE PARA MIGRAR---------------------------*/
 
 EXEC MESSI_MAS3.meterDatosFijos
@@ -1501,22 +896,4 @@ EXEC MESSI_MAS3.migrarPersonas
 PRINT 'PERSONAS MIGRADAS';
 EXEC MESSI_MAS3.migrarEmpresas
 PRINT 'EMPRESAS MIGRADAS';
-EXEC MESSI_MAS3.migrarPublicacionesEmpresa
-PRINT 'PUBLICACIONES DE EMPRESA MIGRADAS';
-EXEC MESSI_MAS3.migrarPublicacionesClientes
-PRINT 'PUBLICACIONES DE CLIENTES MIGRADAS';
-/*EXEC MESSI_MAS3.migrarCompras
-PRINT 'COMPRAS INMEDIATAS MIGRADAS';
-EXEC MESSI_MAS3.migrarOfertas
-PRINT 'OFERTAS MIGRADAS - SIN GANADORES';
-EXEC MESSI_MAS3.buscarGanadoresOfertasEInsertarEnCompras
-PRINT 'SUBASTAS MIGRADAS CON GANADORES';
-EXEC MESSI_MAS3.migrarFacturasAPersonas
-PRINT 'FACTURAS A PERSONAS MIGRADAS';
-EXEC MESSI_MAS3.migrarFacturasAEmpresas
-PRINT 'FACTURAS A EMPRESAS MIGRADAS';
-EXEC MESSI_MAS3.migrarCalificacionesPersonas
-PRINT 'CALIFICACIONES DE PERSONAS MIGRADAS';
-EXEC MESSI_MAS3.migrarCalificacionesEmpresa
-PRINT 'CALIFICACIONES DE EMPRESAS MIGRADAS';*/
 
