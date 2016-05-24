@@ -127,7 +127,7 @@ CREATE TABLE MESSI_MAS3.Funcionalidad (
 CREATE TABLE MESSI_MAS3.Usuario (
   usuario_id INT PRIMARY KEY NOT NULL IDENTITY,
   usuario_nombreUsuario NVARCHAR(255) NOT NULL,  --AGREGAR UNIQUE!!!
-  usuario_contrasenia VARBINARY(255) NULL,				--Cambiado de NOT NULL a NULL y el nombre a 'contrasenia'
+  usuario_contrasenia NVARCHAR(255) NULL,				--Cambiado de NOT NULL a NULL y el nombre a 'contrasenia'
   usuario_mail NVARCHAR(50) NULL,	--LINEA PELIGROSA VIGILAR!! AGREGAR UNIQUE SAQUE EL NOT NULL
   usuario_deleted INT DEFAULT 0,
   usuario_intentos INT DEFAULT 0, )
@@ -429,19 +429,14 @@ END
 GO
 
 -- sp genero el usuario y devuelvo el id, me sirve para insertarlo de nuevo
-CREATE PROCEDURE [MESSI_MAS3].[generarUsuario](@usuario NVARCHAR(255),@password NVARCHAR(255), @mail NVARCHAR(255),@ultimoIdInsertado INT OUTPUT)
+CREATE PROCEDURE [MESSI_MAS3].[generarUsuario](@usuario NVARCHAR(255),@pass VARCHAR(16), @mail NVARCHAR(255),@ultimoIdInsertado INT OUTPUT)
 AS BEGIN
 	set nocount on;
 	set xact_abort on;
-	DECLARE @passHasheada VARBINARY(255)
-	SET @passHasheada =  HASHBYTES('SHA2_256', @password)
 	INSERT INTO MESSI_MAS3.Usuario(usuario_nombreUsuario,usuario_contrasenia, usuario_mail) 
-	VALUES (@usuario,@passHasheada,@mail)
+	VALUES (@usuario,SUBSTRING(master.dbo.fn_varbintohexstr(HashBytes('SHA2_256', @pass)), 3, 64) ,@mail)
 	SELECT @ultimoIdInsertado = SCOPE_IDENTITY();
-	
-	
 	RETURN
-	
 END
 GO  
 
@@ -531,7 +526,9 @@ AS BEGIN
 
 	WHILE(@@FETCH_STATUS = 0)
 		BEGIN
-			EXECUTE MESSI_MAS3.generarUsuario @documento,'123456',@mail,@ultimoIdInsertado = @idUsuario OUTPUT; --esta bien esta linea?? por el documento pasado como param
+			DECLARE @pass varchar(16)
+			SET @pass = '123456'
+			EXECUTE MESSI_MAS3.generarUsuario @documento,@pass ,@mail,@ultimoIdInsertado = @idUsuario OUTPUT; --esta bien esta linea?? por el documento pasado como param
 			DECLARE @idRol int;
 			SET @idRol = (select rol_id from MESSI_MAS3.Rol where rol_nombre = 'Cliente')
 			INSERT INTO MESSI_MAS3.Rol_Usuario(Rol_id,Usuario_id)
@@ -622,8 +619,9 @@ AS BEGIN
 		@codigoPostal
 	WHILE(@@FETCH_STATUS = 0)
 		BEGIN
-			
-			EXECUTE MESSI_MAS3.generarUsuario @cuit, '123456', @mail, @ultimoIdInsertado = @idUsuario OUTPUT;
+			DECLARE @pass varchar(16)
+			SET @pass = '123456'
+			EXECUTE MESSI_MAS3.generarUsuario @cuit, @pass,@mail, @ultimoIdInsertado = @idUsuario OUTPUT;
 			DECLARE @idRol int;
 			DECLARE @idDomicilio int;
 			EXECUTE MESSI_MAS3.generarDomicilio @calle,@numero,@piso,@dpto,NULL,@codigoPostal,@ultimoIdInsertado = @idDomicilio OUTPUT;
