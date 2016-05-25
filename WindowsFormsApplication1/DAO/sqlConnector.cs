@@ -120,20 +120,22 @@ namespace MercadoEnvio.DAO
             return cmd;
 
         }
-
-        // ejecuta cualquier procedure, podemos obtener el valor que devuelven si se quiere 
-        public static int executeProcedure(String sp, params object[] values)
+        public static SqlCommand generarComandoYAbrir(String sp, params object[] values)
         {
             SqlCommand cmd = generateCommand(sp, values);
             SqlConnection sqlcon = new SqlConnection(infoConexion());
             sqlcon.Open();
+            return cmd;
+        }
+        // ejecuta cualquier procedure, podemos obtener el valor que devuelven si se quiere 
+        public static int executeProcedure(String sp, params object[] values)
+        {
+            SqlCommand cmd = generarComandoYAbrir(sp, values);
             var returnParameter = cmd.Parameters.Add("@ReturnVal", SqlDbType.Int);
             returnParameter.Direction = ParameterDirection.ReturnValue;
             cmd.ExecuteNonQuery();
             return (int)returnParameter.Value;
         }
-
-
         public static DataTable retrieveDT(String sp, params Object[] values)
         {
             return retrieveDTToBeConverted(sp, values);
@@ -354,6 +356,12 @@ namespace MercadoEnvio.DAO
             {
                 command.Parameters.AddWithValue(argumentos[i], parametros[i]);
             }
+        }
+
+        internal static string ejecutarYDevolverString(String sp, params object[] values)
+        {
+            SqlCommand cmd = generarComandoYAbrir(sp, values);
+            return (String)cmd.ExecuteScalar();
         }
     }
 }

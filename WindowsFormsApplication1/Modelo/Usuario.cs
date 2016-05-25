@@ -3,28 +3,30 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using MercadoEnvio.DAO;
 
 namespace MercadoEnvio.Modelo
 {
     public class Usuario
     {
-        private String username { get; set; }
-        private String password { get; set; }
-        private int intentos { get; set; }
-        private Boolean estado { get; set; }
-        private String rol { get; set; }
-        public String Username { get { return username; } set { username = value; } }
-        public String Password { get { return password; } set { password = value; } }
-        public int Intentos { get { return intentos; } set { intentos = value; } }
-        public  Boolean Estado { get { return estado; } set { estado = value; } }
-        public String Rol { get { return rol; } set { rol = value; } }
-        public int IDRol { get; set; }
+        private int id;
+        private String nombreUsuario;
+        private String contrasenia;
+        private String mail;
+        private List<Rol> roles;
+        private int intentos;
+        public int Id { get { return id; } set {id=value;}}
+        public String NombreUsuario { get { return nombreUsuario; } set { nombreUsuario = value; } }
+        public int Intentos { get { return 0; }}
+        public String Contrasenia { get { return contrasenia; } set { contrasenia = value; } }
+        public String Mail { get { return mail; } set { mail = value; } }
+        public List<Rol> Roles { get { return roles; } set { roles= value;} }
 
         public Usuario(String username, String password)
         {
-            this.username = username;
-            this.password = password;
-            this.intentos = 0;
+            this.nombreUsuario = username;
+            this.contrasenia = password;
         }
+
     }
 }

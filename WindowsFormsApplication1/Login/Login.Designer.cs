@@ -28,25 +28,12 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.materialLabel1 = new MaterialSkin.Controls.MaterialLabel();
             this.materialLabel2 = new MaterialSkin.Controls.MaterialLabel();
-            this.iniciarSesion = new MaterialSkin.Controls.MaterialRaisedButton();
             this.txtPass = new MaterialSkin.Controls.MaterialSingleLineTextField();
             this.txtUsuario = new MaterialSkin.Controls.MaterialSingleLineTextField();
+            this.iniciar_sesion = new MaterialSkin.Controls.MaterialRaisedButton();
+            this.materialLabel3 = new MaterialSkin.Controls.MaterialLabel();
             this.SuspendLayout();
-            // 
-            // materialLabel1
-            // 
-            this.materialLabel1.AutoSize = true;
-            this.materialLabel1.Depth = 0;
-            this.materialLabel1.Font = new System.Drawing.Font("Roboto", 11F);
-            this.materialLabel1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.materialLabel1.Location = new System.Drawing.Point(55, 137);
-            this.materialLabel1.MouseState = MaterialSkin.MouseState.HOVER;
-            this.materialLabel1.Name = "materialLabel1";
-            this.materialLabel1.Size = new System.Drawing.Size(61, 19);
-            this.materialLabel1.TabIndex = 34;
-            this.materialLabel1.Text = "Usuario";
             // 
             // materialLabel2
             // 
@@ -60,19 +47,6 @@
             this.materialLabel2.Size = new System.Drawing.Size(75, 19);
             this.materialLabel2.TabIndex = 50;
             this.materialLabel2.Text = "Password";
-            // 
-            // iniciarSesion
-            // 
-            this.iniciarSesion.Depth = 0;
-            this.iniciarSesion.Location = new System.Drawing.Point(135, 271);
-            this.iniciarSesion.MouseState = MaterialSkin.MouseState.HOVER;
-            this.iniciarSesion.Name = "iniciarSesion";
-            this.iniciarSesion.Primary = true;
-            this.iniciarSesion.Size = new System.Drawing.Size(143, 23);
-            this.iniciarSesion.TabIndex = 3;
-            this.iniciarSesion.Text = "Iniciar Sesion";
-            this.iniciarSesion.UseVisualStyleBackColor = true;
-            this.iniciarSesion.Click += new System.EventHandler(this.iniciarSesion_Click);
             // 
             // txtPass
             // 
@@ -107,17 +81,43 @@
             this.txtUsuario.UseSystemPasswordChar = false;
             this.txtUsuario.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtUsuario_KeyPress);
             // 
+            // iniciar_sesion
+            // 
+            this.iniciar_sesion.Depth = 0;
+            this.iniciar_sesion.Location = new System.Drawing.Point(177, 269);
+            this.iniciar_sesion.MouseState = MaterialSkin.MouseState.HOVER;
+            this.iniciar_sesion.Name = "iniciar_sesion";
+            this.iniciar_sesion.Primary = true;
+            this.iniciar_sesion.Size = new System.Drawing.Size(105, 23);
+            this.iniciar_sesion.TabIndex = 51;
+            this.iniciar_sesion.Text = "Inicar Sesión";
+            this.iniciar_sesion.UseVisualStyleBackColor = true;
+            this.iniciar_sesion.Click += new System.EventHandler(this.iniciarSesion_Click);
+            // 
+            // materialLabel3
+            // 
+            this.materialLabel3.AutoSize = true;
+            this.materialLabel3.Depth = 0;
+            this.materialLabel3.Font = new System.Drawing.Font("Roboto", 11F);
+            this.materialLabel3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.materialLabel3.Location = new System.Drawing.Point(59, 137);
+            this.materialLabel3.MouseState = MaterialSkin.MouseState.HOVER;
+            this.materialLabel3.Name = "materialLabel3";
+            this.materialLabel3.Size = new System.Drawing.Size(61, 19);
+            this.materialLabel3.TabIndex = 52;
+            this.materialLabel3.Text = "Usuario";
+            // 
             // Login
             // 
-            this.AcceptButton = this.iniciarSesion;
+            this.AcceptButton = this.iniciar_sesion;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(444, 336);
+            this.Controls.Add(this.materialLabel3);
+            this.Controls.Add(this.iniciar_sesion);
             this.Controls.Add(this.txtPass);
-            this.Controls.Add(this.iniciarSesion);
             this.Controls.Add(this.txtUsuario);
             this.Controls.Add(this.materialLabel2);
-            this.Controls.Add(this.materialLabel1);
             this.MaximizeBox = false;
             this.Name = "Login";
             this.Sizable = false;
@@ -137,6 +137,8 @@
         private MaterialSkin.Controls.MaterialRaisedButton iniciarSesion;
         private MaterialSkin.Controls.MaterialSingleLineTextField txtPass;
         private MaterialSkin.Controls.MaterialSingleLineTextField txtUsuario;
+        private MaterialSkin.Controls.MaterialRaisedButton iniciar_sesion;
+        private MaterialSkin.Controls.MaterialLabel materialLabel3;
 
 
     }

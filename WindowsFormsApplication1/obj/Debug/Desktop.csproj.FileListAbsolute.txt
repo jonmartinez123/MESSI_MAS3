@@ -20,3 +20,4 @@ C:\Users\Familia\Dropbox\4 año\Gestion de datos\Trabajo Practico\repositorio\ME
 C:\Users\Familia\Dropbox\4 año\Gestion de datos\Trabajo Practico\repositorio\MESSI_MAS3\WindowsFormsApplication1\obj\Debug\WindowsFormsApplication1.exe
 C:\Users\Familia\Dropbox\4 año\Gestion de datos\Trabajo Practico\repositorio\MESSI_MAS3\WindowsFormsApplication1\obj\Debug\WindowsFormsApplication1.pdb
 C:\Users\Familia\Dropbox\4 año\Gestion de datos\Trabajo Practico\repositorio\MESSI_MAS3\WindowsFormsApplication1\obj\Debug\MercadoEnvio.ABM_Visibilidad.Form1.resources
+C:\Users\Familia\Dropbox\4 año\Gestion de datos\Trabajo Practico\repositorio\MESSI_MAS3\WindowsFormsApplication1\obj\Debug\MercadoEnvio.Login.SeleccionRol.resources
