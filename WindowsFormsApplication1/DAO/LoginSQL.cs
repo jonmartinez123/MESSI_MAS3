@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using MercadoEnvio.Utils;
+using MercadoEnvio.Modelo;
+using System.Data.SqlClient;
 namespace MercadoEnvio.DAO
 
 {
@@ -64,22 +66,27 @@ while (reader.Read())
         {
             throw new NotImplementedException();
         }
-        /*public static Modelo.Usuario ObtenerPorUserName(string userName)
-        {
-            //Traigo el usuario cuyo nombre de usuario coincida con el del parametro
-            var param = new List<SPParameter> { new SPParameter("User", userName) };
-            var sp = new StoreProcedure("getUserPorNombre", param);
 
-            List<Modelo.Usuario> users = sp.ExecuteReader<Modelo.Usuario>();
-
-            if (users == null || users.Count == 0)
-                return null;
-
-            return users[0];
-        }*/
         internal static int getID()
         {
             return SqlConnector.executeProcedure("getID",Persistencia.usuario.NombreUsuario);
+        }
+        internal static List<Rol> getRoles()
+        {
+            SqlCommand cmd = SqlConnector.generarComandoYAbrir("getRoles", Persistencia.usuario.Id);
+            var reader = cmd.ExecuteReader();
+
+            List<Rol> roles = new List<Rol>();
+            Rol rol;
+
+            while (reader.Read())
+            {
+                rol = new Rol();
+                rol.Id = int.Parse(reader["rol_id"].ToString());
+                rol.Nombre = reader["rol_nombre"].ToString();
+                roles.Add(rol);
+            }
+            return roles;
         }
         internal static String getMail()
         {

@@ -9,15 +9,15 @@ C:\Users\jonymartinez\Source\Repos\MESSI_MAS3\WindowsFormsApplication1\obj\Debug
 C:\Users\jonymartinez\Documents\VSRepos\MESSI_MAS3\WindowsFormsApplication1\bin\Debug\WindowsFormsApplication1.exe.config
 C:\Users\jonymartinez\Documents\VSRepos\MESSI_MAS3\WindowsFormsApplication1\obj\Debug\WindowsFormsApplication1.exe
 C:\Users\jonymartinez\Documents\VSRepos\MESSI_MAS3\WindowsFormsApplication1\obj\Debug\WindowsFormsApplication1.pdb
+C:\Users\Familia\Dropbox\4 año\Gestion de datos\Trabajo Practico\repositorio\MESSI_MAS3\WindowsFormsApplication1\obj\Debug\Desktop.csprojResolveAssemblyReference.cache
+C:\Users\Familia\Dropbox\4 año\Gestion de datos\Trabajo Practico\repositorio\MESSI_MAS3\WindowsFormsApplication1\obj\Debug\MercadoEnvio.ABM_Visibilidad.Form1.resources
+C:\Users\Familia\Dropbox\4 año\Gestion de datos\Trabajo Practico\repositorio\MESSI_MAS3\WindowsFormsApplication1\obj\Debug\MercadoEnvio.Login.Login.resources
+C:\Users\Familia\Dropbox\4 año\Gestion de datos\Trabajo Practico\repositorio\MESSI_MAS3\WindowsFormsApplication1\obj\Debug\MercadoEnvio.Login.SeleccionRol.resources
+C:\Users\Familia\Dropbox\4 año\Gestion de datos\Trabajo Practico\repositorio\MESSI_MAS3\WindowsFormsApplication1\obj\Debug\MercadoEnvio.Properties.Resources.resources
+C:\Users\Familia\Dropbox\4 año\Gestion de datos\Trabajo Practico\repositorio\MESSI_MAS3\WindowsFormsApplication1\obj\Debug\Desktop.csproj.GenerateResource.Cache
 C:\Users\Familia\Dropbox\4 año\Gestion de datos\Trabajo Practico\repositorio\MESSI_MAS3\WindowsFormsApplication1\bin\Debug\WindowsFormsApplication1.exe.config
 C:\Users\Familia\Dropbox\4 año\Gestion de datos\Trabajo Practico\repositorio\MESSI_MAS3\WindowsFormsApplication1\bin\Debug\WindowsFormsApplication1.exe
 C:\Users\Familia\Dropbox\4 año\Gestion de datos\Trabajo Practico\repositorio\MESSI_MAS3\WindowsFormsApplication1\bin\Debug\WindowsFormsApplication1.pdb
 C:\Users\Familia\Dropbox\4 año\Gestion de datos\Trabajo Practico\repositorio\MESSI_MAS3\WindowsFormsApplication1\bin\Debug\MaterialSkin.dll
-C:\Users\Familia\Dropbox\4 año\Gestion de datos\Trabajo Practico\repositorio\MESSI_MAS3\WindowsFormsApplication1\obj\Debug\Desktop.csprojResolveAssemblyReference.cache
-C:\Users\Familia\Dropbox\4 año\Gestion de datos\Trabajo Practico\repositorio\MESSI_MAS3\WindowsFormsApplication1\obj\Debug\MercadoEnvio.Login.Login.resources
-C:\Users\Familia\Dropbox\4 año\Gestion de datos\Trabajo Practico\repositorio\MESSI_MAS3\WindowsFormsApplication1\obj\Debug\MercadoEnvio.Properties.Resources.resources
-C:\Users\Familia\Dropbox\4 año\Gestion de datos\Trabajo Practico\repositorio\MESSI_MAS3\WindowsFormsApplication1\obj\Debug\Desktop.csproj.GenerateResource.Cache
 C:\Users\Familia\Dropbox\4 año\Gestion de datos\Trabajo Practico\repositorio\MESSI_MAS3\WindowsFormsApplication1\obj\Debug\WindowsFormsApplication1.exe
 C:\Users\Familia\Dropbox\4 año\Gestion de datos\Trabajo Practico\repositorio\MESSI_MAS3\WindowsFormsApplication1\obj\Debug\WindowsFormsApplication1.pdb
-C:\Users\Familia\Dropbox\4 año\Gestion de datos\Trabajo Practico\repositorio\MESSI_MAS3\WindowsFormsApplication1\obj\Debug\MercadoEnvio.ABM_Visibilidad.Form1.resources
-C:\Users\Familia\Dropbox\4 año\Gestion de datos\Trabajo Practico\repositorio\MESSI_MAS3\WindowsFormsApplication1\obj\Debug\MercadoEnvio.Login.SeleccionRol.resources

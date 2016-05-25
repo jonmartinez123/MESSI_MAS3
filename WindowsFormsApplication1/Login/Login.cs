@@ -41,10 +41,12 @@ namespace MercadoEnvio.Login
                             this.cargarDatosUsuarioLogueado();
                             // List<Decimal> funcionalidades = DAO.DAORol.getIdFuncionalidades(user.IDRol);
                             this.Hide();
-                            /*if (cantidadRoles > 1) { 
-                                
+                            if (Persistencia.usuario.Roles.Count > 1) {
+                                SeleccionRol sr = new SeleccionRol();
+                                sr.ShowDialog();
+                            }else{
+                                //ir a las funcionalidades directo
                             }
-                            rol.ShowDialog();*/
                             return;
                         }
                         else
@@ -73,6 +75,7 @@ namespace MercadoEnvio.Login
          {
              Persistencia.usuario.Id = DAO.LoginSQL.getID();
              Persistencia.usuario.Mail = DAO.LoginSQL.getMail();
+             Persistencia.usuario.Roles = DAO.LoginSQL.getRoles();
              DAO.LoginSQL.vaciarIntentos();
          }
          private void Login_Load(object sender, System.EventArgs e)
