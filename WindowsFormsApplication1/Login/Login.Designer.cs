@@ -32,7 +32,6 @@
             this.materialLabel2 = new MaterialSkin.Controls.MaterialLabel();
             this.iniciarSesion = new MaterialSkin.Controls.MaterialRaisedButton();
             this.txtPass = new MaterialSkin.Controls.MaterialSingleLineTextField();
-            this.lblIntentos = new MaterialSkin.Controls.MaterialLabel();
             this.txtUsuario = new MaterialSkin.Controls.MaterialSingleLineTextField();
             this.SuspendLayout();
             // 
@@ -65,7 +64,7 @@
             // iniciarSesion
             // 
             this.iniciarSesion.Depth = 0;
-            this.iniciarSesion.Location = new System.Drawing.Point(140, 290);
+            this.iniciarSesion.Location = new System.Drawing.Point(135, 271);
             this.iniciarSesion.MouseState = MaterialSkin.MouseState.HOVER;
             this.iniciarSesion.Name = "iniciarSesion";
             this.iniciarSesion.Primary = true;
@@ -90,20 +89,6 @@
             this.txtPass.TabIndex = 2;
             this.txtPass.UseSystemPasswordChar = true;
             this.txtPass.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtPass_KeyPress);
-
-            // 
-            // lblIntentos
-            // 
-            this.lblIntentos.AutoSize = true;
-            this.lblIntentos.Depth = 0;
-            this.lblIntentos.Font = new System.Drawing.Font("Roboto", 11F);
-            this.lblIntentos.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.lblIntentos.Location = new System.Drawing.Point(59, 240);
-            this.lblIntentos.MouseState = MaterialSkin.MouseState.HOVER;
-            this.lblIntentos.Name = "lblIntentos";
-            this.lblIntentos.Size = new System.Drawing.Size(64, 19);
-            this.lblIntentos.TabIndex = 35;
-            this.lblIntentos.Text = "Intentos";
             // 
             // txtUsuario
             // 
@@ -128,7 +113,6 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(444, 336);
-            this.Controls.Add(this.lblIntentos);
             this.Controls.Add(this.txtPass);
             this.Controls.Add(this.iniciarSesion);
             this.Controls.Add(this.txtUsuario);
@@ -152,7 +136,6 @@
         private MaterialSkin.Controls.MaterialLabel materialLabel2;
         private MaterialSkin.Controls.MaterialRaisedButton iniciarSesion;
         private MaterialSkin.Controls.MaterialSingleLineTextField txtPass;
-        private MaterialSkin.Controls.MaterialLabel lblIntentos;
         private MaterialSkin.Controls.MaterialSingleLineTextField txtUsuario;
 
 

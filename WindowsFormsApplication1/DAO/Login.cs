@@ -8,10 +8,10 @@ namespace MercadoEnvio.DAO
 {
     class Login
     {
-        public static int validarUsuario(Modelo.Usuario usuario)
+        public static int validarUsuario(string username, string pass)
         {
 
-            return SqlConnector.executeProcedure("validar_usuario", usuario.Username, EncriptadorSHA.encodear(usuario.Password));
+            return SqlConnector.executeProcedure("validar_usuario", username, EncriptadorSHA.encodear(pass));
         }
 
         public static String obtenerRolUsuario(Modelo.Usuario usuario)
@@ -19,19 +19,20 @@ namespace MercadoEnvio.DAO
             return SqlConnector.retrieveList("get_rol", "rol_nombre", usuario.Username).First();
         }
 
-        internal static int aumentarIntentos(Modelo.Usuario user)
+        internal static int aumentarIntentos(string username)
         {
-            return SqlConnector.executeProcedure("aumentar_intentos", user.Username);
+            return SqlConnector.executeProcedure("aumentar_intentos", username);
         }
 
-        internal static int vaciarIntentos(Modelo.Usuario user)
+        internal static void vaciarIntentos(Modelo.Usuario user)
         {
-            return SqlConnector.executeProcedure("vaciar_intentos", user.Username);
+            SqlConnector.executeProcedure("vaciar_intentos", user.Username);
+            Persistencia.usuario.Intentos = 0; 
         }
 
-        internal static int traerIntentos(Modelo.Usuario user)
+        internal static int traerIntentos(string username)
         {
-            return SqlConnector.executeProcedure("traer_intentos", user.Username);
+            return SqlConnector.executeProcedure("traer_intentos", username);
         }
 
         internal static Boolean existeUsuario(String username)

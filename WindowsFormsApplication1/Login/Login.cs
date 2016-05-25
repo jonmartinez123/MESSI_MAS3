@@ -81,50 +81,45 @@ namespace MercadoEnvio.Login
 
          private void iniciarSesion_Click(object sender, EventArgs e)
          {
-            string usuario = txtUsuario.Text;
+            string username = txtUsuario.Text;
             string pass = txtPass.Text;
-             if ( !string.IsNullOrEmpty(pass) && !string.IsNullOrEmpty(usuario)) 
-             {
-                 Usuario user = new Usuario(usuario, pass);
-                 int respuesta = DAO.Login.validarUsuario(user);
-                 if ( respuesta == 1)
-                 {
-                     MessageBox.Show("EXISTE");
-                     int cantidadIntentos = DAO.Login.traerIntentos(user);
-                     if (cantidadIntentos <= 3)
-                     {
+            if (!string.IsNullOrEmpty(pass) && !string.IsNullOrEmpty(username))
+            {
+                if (DAO.Login.existeUsuario(username))
+                {
+                    int cantidadIntentos = DAO.Login.traerIntentos(username);
+                    if (cantidadIntentos <= 3)
+                    {
+                        if (DAO.Login.validarUsuario(username, pass) == 1)
+                        {
+                            Persistencia.usuario = new Usuario(username, pass);
+                            DAO.Login.vaciarIntentos(Persistencia.usuario);
+                            // List<Decimal> funcionalidades = DAO.DAORol.getIdFuncionalidades(user.IDRol);
+                            this.Hide();
+                            ABM_Rol.Rol rol = new ABM_Rol.Rol();
+                            rol.ShowDialog();
+                            return;
+                        }
+                        else
+                        {
+                            DAO.Login.aumentarIntentos(username);
+                            MessageBox.Show("Usuario o contraseñia incorrecta, se aumento la cantidad de intentos para " + username);
+                        }
 
-                     }
-                     else {
-                        MessageBox.Show("Contactar al ADMIN por superacion de" + cantidadIntentos + "intentos");
-                     }
-                     
-                     user.Intentos = DAO.Login.vaciarIntentos(user);
-                    // List<Decimal> funcionalidades = DAO.DAORol.getIdFuncionalidades(user.IDRol);
-                     //this.openInNewWindow(new MainMenu(funcionalidades, user.IDRol));
-                     this.Close();
-                     return;
-                 }
-                 /*
-                 user.Intentos = DAO.Login.getIntentos(user);
-                 user.Estado = user.Intentos >= 3 ? false : true;
-                 user.Rol = DAO.Login.obtenerRolUsuario(user);
-                 user.IDRol = DAO.Login.obtenerIDRolUsuario(user);
+                    }
+                    else
+                    {
+                        MessageBox.Show("Contactar al ADMIN por superacion de " + cantidadIntentos + " intentos");
+                    }
 
-
-
-
-                 if (!user.Estado)
-                 {
-                     MessageBox.Show("El usuario está inhabilitado!");
-                     return;
-                 }
-
-                 user.Intentos = DAO.Login.aumentarIntentos(user);
-                 if (user.Intentos == 3) { MessageBox.Show("Usuario inhabilitado!"); return; }*/
-             }
-             MessageBox.Show("El usuario o la contraseña no son correctas");
-
+                }
+                else
+                {
+                    MessageBox.Show("El usuario no existe");
+                }
+            }else {
+                MessageBox.Show("Los campos usuario y contraseña deben estar completos");
+            }
          }
          private void Login_Load(object sender, System.EventArgs e)
          {
