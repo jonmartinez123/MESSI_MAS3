@@ -28,6 +28,8 @@ namespace MercadoEnvio.Login
         private void SeleccionRol_Load(object sender, EventArgs e)
         {
             cmbRol.DataSource = Persistencia.usuario.Roles;
+            cmbRol.DisplayMember = "Nombre";
+            cmbRol.ValueMember = "Id";
         }
     }
 }

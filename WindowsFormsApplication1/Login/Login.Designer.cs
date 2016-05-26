@@ -131,10 +131,8 @@
 
        
         #endregion
-
-        private MaterialSkin.Controls.MaterialLabel materialLabel1;
+        
         private MaterialSkin.Controls.MaterialLabel materialLabel2;
-        private MaterialSkin.Controls.MaterialRaisedButton iniciarSesion;
         private MaterialSkin.Controls.MaterialSingleLineTextField txtPass;
         private MaterialSkin.Controls.MaterialSingleLineTextField txtUsuario;
         private MaterialSkin.Controls.MaterialRaisedButton iniciar_sesion;
