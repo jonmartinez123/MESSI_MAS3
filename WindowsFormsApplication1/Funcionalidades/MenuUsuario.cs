@@ -23,9 +23,11 @@ namespace MercadoEnvio.Funcionalidades
         }
         private void MenuUsuario_Load(object sender, EventArgs e)
         {
-
+            
         }
-
+        private void asignarFuncionalidades() { 
+            
+        }
 
     }
 }

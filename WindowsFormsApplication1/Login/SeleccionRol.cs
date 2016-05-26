@@ -17,9 +17,11 @@ namespace MercadoEnvio.Login
 {
     public partial class SeleccionRol : MaterialForm
     {
-        public SeleccionRol()
+        private List<Rol> roles;
+        public SeleccionRol(List<Rol> rs)
         {
             InitializeComponent();
+            roles = rs;
             var materialSkinManager = MaterialSkinManager.Instance;
             materialSkinManager.AddFormToManage(this);
             materialSkinManager.Theme = MaterialSkinManager.Themes.LIGHT;
@@ -27,7 +29,7 @@ namespace MercadoEnvio.Login
 
         private void SeleccionRol_Load(object sender, EventArgs e)
         {
-            cmbRol.DataSource = Persistencia.usuario.Roles;
+            cmbRol.DataSource = roles;
             cmbRol.DisplayMember = "Nombre";
             cmbRol.ValueMember = "Id";
         }
@@ -38,7 +40,11 @@ namespace MercadoEnvio.Login
             {
                 MessageBox.Show("Debe seleccionar algun rol para ingresar");
             }
-            else { 
+            else {
+                Rol rolSeleccionado = (Rol)cmbRol.SelectedItem;
+                Persistencia.usuario.Rol = rolSeleccionado;
+                Funcionalidades.MenuUsuario menuUsuario = new Funcionalidades.MenuUsuario();
+                menuUsuario.ShowDialog();
                 //SETEAR LA LISTA DE funcionalidades a ese rol
             }
         }

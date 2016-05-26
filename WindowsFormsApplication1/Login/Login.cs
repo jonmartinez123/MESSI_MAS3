@@ -16,6 +16,7 @@ namespace MercadoEnvio.Login
 {
     public partial class Login: MaterialForm
     {
+        private List<Rol> roles;
         public Login() {
 
           InitializeComponent();
@@ -41,11 +42,13 @@ namespace MercadoEnvio.Login
                             this.cargarDatosUsuarioLogueado();
                             // List<Decimal> funcionalidades = DAO.DAORol.getIdFuncionalidades(user.IDRol);
                             this.Hide();
-                            if (Persistencia.usuario.Roles.Count > 1) {
-                                SeleccionRol sr = new SeleccionRol();
+                            if (roles.Count > 1) {
+                                SeleccionRol sr = new SeleccionRol(roles);
                                 sr.ShowDialog();
                             }else{
-                                //ir a las funcionalidades directo
+                                Persistencia.usuario.Rol = roles.First();
+                                Funcionalidades.MenuUsuario menuUsuario = new Funcionalidades.MenuUsuario();
+                                menuUsuario.ShowDialog();
                             }
                             return;
                         }
@@ -75,8 +78,8 @@ namespace MercadoEnvio.Login
          {
              Persistencia.usuario.Id = DAO.LoginSQL.getID();
              Persistencia.usuario.Mail = DAO.LoginSQL.getMail();
-             Persistencia.usuario.Roles = DAO.LoginSQL.getRoles();
              DAO.LoginSQL.vaciarIntentos();
+             roles = DAO.LoginSQL.getRoles();
          }
          private void Login_Load(object sender, System.EventArgs e)
          {

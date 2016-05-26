@@ -13,14 +13,15 @@ namespace MercadoEnvio.Modelo
         private String nombreUsuario;
         private String contrasenia;
         private String mail;
-        private List<Rol> roles;
+        private Rol rol;
+        //private List<Rol> roles;
         //private int intentos;
         public int Id { get { return id; } set {id=value;}}
         public String NombreUsuario { get { return nombreUsuario; } set { nombreUsuario = value; } }
         //public int Intentos { get { return 0; }}
         public String Contrasenia { get { return contrasenia; } set { contrasenia = value; } }
         public String Mail { get { return mail; } set { mail = value; } }
-        public List<Rol> Roles { get { return roles; } set { roles= value;} }
+        public Rol Rol { get { return rol; } set { rol = value; } }
 
         public Usuario(String username, String password)
         {
