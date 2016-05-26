@@ -428,6 +428,12 @@ AS BEGIN
 END
 GO
 
+CREATE PROCEDURE [MESSI_MAS3].crearUsuario(@usuario NVARCHAR(255),@pass VARCHAR(16), @mail NVARCHAR(255))
+AS BEGIN TRANSACTION
+	INSERT INTO MESSI_MAS3.Usuario(usuario_nombreUsuario,usuario_contrasenia, usuario_mail) 
+	VALUES (@usuario,SUBSTRING(master.dbo.fn_varbintohexstr(HashBytes('SHA2_256', @pass)), 3, 64) ,@mail)
+	COMMIT
+GO
 -- sp genero el usuario y devuelvo el id, me sirve para insertarlo de nuevo
 CREATE PROCEDURE [MESSI_MAS3].[generarUsuario](@usuario NVARCHAR(255),@pass VARCHAR(16), @mail NVARCHAR(255),@ultimoIdInsertado INT OUTPUT)
 AS BEGIN
@@ -883,8 +889,32 @@ AS BEGIN
 	
 END
 GO
+/*---------------------------INSERCION DE FUNCIONALIDADES---------------------------*/
+CREATE PROCEDURE [MESSI_MAS3].crearFuncionalidades
+AS
+BEGIN
+INSERT INTO Funcionalidad (funcionalidad_descripcion) VALUES ('ABM ROL'),('ABM USUARIO'),('ABM RUBRO'),('ABM VISIBILIDAD'),('PUBLICAR'),('COMPRAR/OFERTAR'),('HISTORIAL DE CLIENTE'),('CALIFICAR AL VENDEDOR'),('CONSULTAR FACTURAS'),('LISTADO ESTADISTICO') 
+END
+GO
 
+/*---------------------------INSERCION DE ADMINISTRADOR---------------------------*/
+CREATE PROCEDURE [MESSI_MAS3].[crearAdmin]
+AS
+BEGIN
+EXEC MESSI_MAS3.crearUsuario 'admin','w23e', null
+DECLARE @Uid int
+DECLARE @Rid int
+SELECT @Uid=usuario_id FROM Usuario WHERE usuario_nombreUsuario='admin'
+SELECT @Rid=rol_id FROM Rol WHERE rol_nombre='Administrativo'
+INSERT INTO MESSI_MAS3.Funcionalidad_Rol (Rol_id,Funcionalidad_id) SELECT @Rid,funcionalidad_id FROM MESSI_MAS3.Funcionalidad
+INSERT INTO MESSI_MAS3.Rol_Usuario (Usuario_id,Rol_id) VALUES (@Uid,@Rid)
+END
+GO
 
+/*
+FALTA AGREGAR campo nombre al usuario en vez de que este en empresa y persona Y CAMBIARLO EN DER, y ver que funcionalidades agregar
+EL nombre del admin es Administrador General
+*/
 
 /*---------------------------EXEC DE PARA MIGRAR---------------------------*/
 
@@ -896,4 +926,9 @@ EXEC MESSI_MAS3.migrarPersonas
 PRINT 'PERSONAS MIGRADAS';
 EXEC MESSI_MAS3.migrarEmpresas
 PRINT 'EMPRESAS MIGRADAS';
+EXEC MESSI_MAS3.crearFuncionalidades
+PRINT 'FUNCIONALIDADES CREADAS';
+EXEC MESSI_MAS3.crearAdmin
+PRINT 'ADMIN CREADO'
+
 

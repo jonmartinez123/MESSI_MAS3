@@ -31,5 +31,16 @@ namespace MercadoEnvio.Login
             cmbRol.DisplayMember = "Nombre";
             cmbRol.ValueMember = "Id";
         }
+
+        private void materialRaisedButton1_Click(object sender, EventArgs e)
+        {
+            if (cmbRol.SelectedIndex == -1)
+            {
+                MessageBox.Show("Debe seleccionar algun rol para ingresar");
+            }
+            else { 
+                //SETEAR LA LISTA DE funcionalidades a ese rol
+            }
+        }
     }
 }

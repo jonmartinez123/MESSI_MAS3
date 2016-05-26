@@ -52,6 +52,7 @@
             this.materialRaisedButton1.TabIndex = 1;
             this.materialRaisedButton1.Text = "Ingresar";
             this.materialRaisedButton1.UseVisualStyleBackColor = true;
+            this.materialRaisedButton1.Click += new System.EventHandler(this.materialRaisedButton1_Click);
             // 
             // materialLabel1
             // 
