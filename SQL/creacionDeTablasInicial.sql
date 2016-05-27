@@ -62,6 +62,9 @@ IF EXISTS(SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'MESSI_MA
 IF EXISTS(SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'MESSI_MAS3' AND  TABLE_NAME = 'Publicacion')
 	DROP TABLE MESSI_MAS3.Publicacion
 
+IF EXISTS(SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'MESSI_MAS3' AND  TABLE_NAME = 'tipoPublicacion')
+	DROP TABLE MESSI_MAS3.tipoPublicacion
+
 IF EXISTS(SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'MESSI_MAS3' AND  TABLE_NAME = 'Estado')
 	DROP TABLE MESSI_MAS3.Estado
 
@@ -212,7 +215,7 @@ CREATE TABLE MESSI_MAS3.Empresa (
   empresa_fechaCreacion DATETIME NOT NULL,
   empresa_idDomicilio INT REFERENCES MESSI_MAS3.Domicilio (domicilio_idDomicilio),
   empresa_telefono VARCHAR(10) NULL,													--Cambie de NOT NULL a NULL
-  empresa_rubro INT REFERENCES MESSI_MAS3.Rubro (rubro_id),)
+  empresa_rubroId INT REFERENCES MESSI_MAS3.Rubro (rubro_id) NULL,)
  
 -- -----------------------------------------------------
 -- Table MESSI_MAS3.Estado
@@ -238,6 +241,18 @@ CREATE TABLE MESSI_MAS3.Visibilidad (
 
 
 -- -----------------------------------------------------
+-- Table MESSI_MAS3.tipoPublicacion
+-- -----------------------------------------------------
+    
+CREATE TABLE MESSI_MAS3.tipoPublicacion(
+   tipoPublicacion_id INT PRIMARY KEY NOT NULL IDENTITY,
+   tipoPublicacion_nombre NVARCHAR(255) NOT NULL,
+   tipoPublicacion_tieneEnvio INT DEFAULT 1
+
+   )
+
+
+-- -----------------------------------------------------
 -- Table MESSI_MAS3.Publicacion
 -- -----------------------------------------------------
 CREATE TABLE MESSI_MAS3.Publicacion (
@@ -250,11 +265,10 @@ CREATE TABLE MESSI_MAS3.Publicacion (
   publicacion_fechaFin DATETIME NOT NULL,
   publicacion_descripcion VARCHAR(255) NULL,
   publicacion_admitePreguntas INT DEFAULT 0 NOT NULL,
-  publicacion_tipo NVARCHAR(255) NOT NULL,
+  publicacion_tipoPublicacionId INT REFERENCES MESSI_MAS3.tipoPublicacion(tipoPublicacion_id),
   publicacion_minimoSubasta NUMERIC(10,2) NULL,			--DUDA MIRAR KOIFFO EL TIPO DE LA VARIABLE
   publicacion_precio NUMERIC(18,2),
   publicacion_idRubro INT NOT NULL,
-  publicacion_tieneEnvio INT DEFAULT 0 NULL,
   publicacion_stock NUMERIC(18,0) NULL,
   
    )
@@ -274,6 +288,7 @@ CREATE TABLE MESSI_MAS3.Rubro_x_Publicacion (
 CREATE TABLE MESSI_MAS3.Rol_Usuario (
   Usuario_id INT REFERENCES MESSI_MAS3.Usuario (usuario_id),
   Rol_id INT REFERENCES MESSI_MAS3.Rol (rol_id),
+  deleted INT DEFAULT 0 --nuevo cambio por correccion del der
 )
 
 -- -----------------------------------------------------
@@ -282,6 +297,8 @@ CREATE TABLE MESSI_MAS3.Rol_Usuario (
 CREATE TABLE MESSI_MAS3.Funcionalidad_Rol (
   Rol_id INT REFERENCES MESSI_MAS3.Rol(rol_id),
   Funcionalidad_id INT REFERENCES MESSI_MAS3.Funcionalidad (funcionalidad_id),
+  deleted INT DEFAULT 0 --nuevo cambio por correccion del der
+  
   )
 
 -- -----------------------------------------------------
@@ -343,33 +360,9 @@ CREATE TABLE MESSI_MAS3.Factura (
   factura_idVendedor INT REFERENCES MESSI_MAS3.Usuario (usuario_id),
   factura_numero NUMERIC(18,0) NOT NULL,
   factura_formaDePago INT REFERENCES MESSI_MAS3.FormaDePago (formaDePago_id),
+  factura_publicacionId INT REFERENCES MESSI_MAS3.Publicacion(publicacion_id),
   
 )
-
--- -----------------------------------------------------
--- Table MESSI_MAS3.Pregunta
--- -----------------------------------------------------
-CREATE TABLE MESSI_MAS3.Pregunta (
-  pregunta_id INT PRIMARY KEY NOT NULL IDENTITY,
-  pregunta NVARCHAR(255) NOT NULL,
-  pregunta_idPublicacion INT REFERENCES MESSI_MAS3.Publicacion (publicacion_id),
-  pregunta_idPersonaPreguntador INT REFERENCES MESSI_MAS3.Persona (persona_id), 
-  pregunta_fecha DATETIME NOT NULL, )
- 
-
-
-
--- -----------------------------------------------------
--- Table MESSI_MAS3.Respuesta
--- -----------------------------------------------------
-CREATE TABLE MESSI_MAS3.Respuesta (
-  respuesta_id INT PRIMARY KEY NOT NULL IDENTITY,
-  respuesta_idPregunta INT REFERENCES MESSI_MAS3.Pregunta (pregunta_id),
-  respuesta_fecha DATETIME NULL,
-  respuesta_textorespuesta NVARCHAR(255) NULL,
-  respuesta_idUsQueResponde INT REFERENCES MESSI_MAS3.Usuario (usuario_id),
-  
-  )
 
 
 
@@ -382,6 +375,7 @@ CREATE TABLE MESSI_MAS3.Factura_detalle (
   facturaDetalle_item NVARCHAR(255) NULL,
   facturaDetalle_id INT REFERENCES MESSI_MAS3.Factura (factura_id), --cambiado a FK SOLO, LE SAQUE QUE SEA PK
   facturaDetall_cantidadItems NUMERIC(18,0) NOT NULL,
+  
   
  )
 
@@ -422,6 +416,10 @@ AS BEGIN
 	INSERT INTO MESSI_MAS3.Visibilidad(visibilidad_codigo,visibilidad_descripcion,visibilidad_porcentaje,visibilidad_precio) VALUES('10004','Plata','0.20','100.00')
 	INSERT INTO MESSI_MAS3.Visibilidad(visibilidad_codigo,visibilidad_descripcion,visibilidad_porcentaje,visibilidad_precio) VALUES('10005','Bronce','0.30','60.00')
 	INSERT INTO MESSI_MAS3.Visibilidad(visibilidad_codigo,visibilidad_descripcion,visibilidad_porcentaje,visibilidad_precio) VALUES('10006','Gratis','0.00','0.00')
+
+	--TIPO PUBLICACION
+	INSERT INTO MESSI_MAS3.tipoPublicacion(tipoPublicacion_nombre) VALUES ('Subasta')
+	INSERT INTO MESSI_MAS3.tipoPublicacion(tipoPublicacion_nombre) VALUES ('Oferta')
 
 	
 
@@ -642,14 +640,16 @@ AS BEGIN
 				empresa_idDomicilio,
 				empresa_cuit,
 				empresa_id,
-				empresa_fechaCreacion)
+				empresa_fechaCreacion,
+				empresa_rubroId)
 			VALUES (
 				@razonSocial,
 				@telefono,
 				@idDomicilio,
 				@cuit,
 				@idUsuario,
-				@fechaCreacion)
+				@fechaCreacion,
+				NULL)
 			
 				
 		FETCH NEXT FROM cur
