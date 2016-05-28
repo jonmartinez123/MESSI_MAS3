@@ -46,7 +46,7 @@ BEGIN
 END
 GO
 
-
+/*
 CREATE PROCEDURE [MESSI_MAS3].getTelefono (@idUsuario int)
 AS 
 BEGIN
@@ -54,7 +54,7 @@ BEGIN
 	SELECT @tel = usuario_telefono FROM MESSI_MAS3.Usuario WHERE usuario_id = @idUsuario
 	RETURN @tel
 END
-GO
+GO*/
 
 CREATE PROCEDURE [MESSI_MAS3].traer_intentos (@idUsuario int)
 AS 
