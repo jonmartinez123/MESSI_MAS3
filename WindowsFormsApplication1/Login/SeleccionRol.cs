@@ -34,7 +34,7 @@ namespace MercadoEnvio.Login
             cmbRol.ValueMember = "Id";
         }
 
-        private void materialRaisedButton1_Click(object sender, EventArgs e)
+        private void btnIngresar_Click(object sender, EventArgs e)
         {
             if (cmbRol.SelectedIndex == -1)
             {
@@ -42,10 +42,18 @@ namespace MercadoEnvio.Login
             }
             else {
                 Rol rolSeleccionado = (Rol)cmbRol.SelectedItem;
-                Persistencia.usuario.Rol = rolSeleccionado;
-                Funcionalidades.MenuUsuario menuUsuario = new Funcionalidades.MenuUsuario();
-                menuUsuario.ShowDialog();
-                //SETEAR LA LISTA DE funcionalidades a ese rol
+                List<Funcionalidad> funcionalidades = RolSQl.getFuncionalidades(rolSeleccionado);
+                if (funcionalidades.Count() > 0)
+                {
+                    Persistencia.usuario.Rol = rolSeleccionado;
+                    Persistencia.usuario.Rol.Funcionalidades = funcionalidades;
+                    this.Hide();
+                    Funcionalidades.MenuUsuario menuUsuario = new Funcionalidades.MenuUsuario();
+                    menuUsuario.ShowDialog();
+                }
+                else {
+                    MessageBox.Show("El rol " + rolSeleccionado + " no tiene funcionalidades, elija otro");
+                }
             }
         }
     }

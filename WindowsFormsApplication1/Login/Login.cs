@@ -42,18 +42,28 @@ namespace MercadoEnvio.Login
                             this.cargarDatosUsuarioLogueado();
                             // List<Decimal> funcionalidades = DAO.DAORol.getIdFuncionalidades(user.IDRol);
                             this.Hide();
-                            if (roles.Count > 1) {
+                            if (roles.Count > 1)
+                            {
                                 SeleccionRol sr = new SeleccionRol(roles);
                                 sr.ShowDialog();
-                            }else{
-                                Persistencia.usuario.Rol = roles.First();
-                                Funcionalidades.MenuUsuario menuUsuario = new Funcionalidades.MenuUsuario();
-                                menuUsuario.ShowDialog();
                             }
-                            return;
-                        }
-                        else
-                        {
+                            else
+                            {
+                                Rol rolSeleccionado = roles.First();
+                                Persistencia.usuario.Rol = rolSeleccionado;
+                                List<Funcionalidad> funcionalidades = RolSQl.getFuncionalidades(rolSeleccionado);
+                                if (funcionalidades.Count() > 0)
+                                {
+                                    Persistencia.usuario.Rol.Funcionalidades = funcionalidades;
+                                    Funcionalidades.MenuUsuario menuUsuario = new Funcionalidades.MenuUsuario();
+                                    menuUsuario.ShowDialog();
+                                }
+                                else
+                                {
+                                    MessageBox.Show("No se encontraron funcionalidades para el rol " + rolSeleccionado);
+                                }
+                            }
+                        }else{
                             DAO.LoginSQL.aumentarIntentos(username);
                             MessageBox.Show("Usuario o contraseñia incorrecta, se aumento la cantidad de intentos para " + username);
                         }

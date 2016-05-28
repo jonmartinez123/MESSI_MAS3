@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.cmbRol = new System.Windows.Forms.ComboBox();
-            this.materialRaisedButton1 = new MaterialSkin.Controls.MaterialRaisedButton();
+            this.btnIngresar = new MaterialSkin.Controls.MaterialRaisedButton();
             this.materialLabel1 = new MaterialSkin.Controls.MaterialLabel();
             this.SuspendLayout();
             // 
@@ -41,18 +41,18 @@
             this.cmbRol.Size = new System.Drawing.Size(121, 21);
             this.cmbRol.TabIndex = 0;
             // 
-            // materialRaisedButton1
+            // btnIngresar
             // 
-            this.materialRaisedButton1.Depth = 0;
-            this.materialRaisedButton1.Location = new System.Drawing.Point(187, 257);
-            this.materialRaisedButton1.MouseState = MaterialSkin.MouseState.HOVER;
-            this.materialRaisedButton1.Name = "materialRaisedButton1";
-            this.materialRaisedButton1.Primary = true;
-            this.materialRaisedButton1.Size = new System.Drawing.Size(121, 23);
-            this.materialRaisedButton1.TabIndex = 1;
-            this.materialRaisedButton1.Text = "Ingresar";
-            this.materialRaisedButton1.UseVisualStyleBackColor = true;
-            this.materialRaisedButton1.Click += new System.EventHandler(this.materialRaisedButton1_Click);
+            this.btnIngresar.Depth = 0;
+            this.btnIngresar.Location = new System.Drawing.Point(187, 257);
+            this.btnIngresar.MouseState = MaterialSkin.MouseState.HOVER;
+            this.btnIngresar.Name = "btnIngresar";
+            this.btnIngresar.Primary = true;
+            this.btnIngresar.Size = new System.Drawing.Size(121, 23);
+            this.btnIngresar.TabIndex = 1;
+            this.btnIngresar.Text = "Ingresar";
+            this.btnIngresar.UseVisualStyleBackColor = true;
+            this.btnIngresar.Click += new System.EventHandler(this.btnIngresar_Click);
             // 
             // materialLabel1
             // 
@@ -73,7 +73,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(444, 336);
             this.Controls.Add(this.materialLabel1);
-            this.Controls.Add(this.materialRaisedButton1);
+            this.Controls.Add(this.btnIngresar);
             this.Controls.Add(this.cmbRol);
             this.MaximizeBox = false;
             this.Name = "SeleccionRol";
@@ -89,7 +89,7 @@
         #endregion
 
         private System.Windows.Forms.ComboBox cmbRol;
-        private MaterialSkin.Controls.MaterialRaisedButton materialRaisedButton1;
+        private MaterialSkin.Controls.MaterialRaisedButton btnIngresar;
         private MaterialSkin.Controls.MaterialLabel materialLabel1;
     }
 }

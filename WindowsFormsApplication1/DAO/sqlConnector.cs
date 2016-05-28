@@ -361,7 +361,12 @@ namespace MercadoEnvio.DAO
         internal static string ejecutarYDevolverString(String sp, params object[] values)
         {
             SqlCommand cmd = generarComandoYAbrir(sp, values);
-            return (String)cmd.ExecuteScalar();
+            Object objeto = cmd.ExecuteScalar();
+            if (objeto.GetType() != typeof(DBNull))
+            {
+                return (string)objeto;
+            }
+            return "NULL";
         }
     }
 }

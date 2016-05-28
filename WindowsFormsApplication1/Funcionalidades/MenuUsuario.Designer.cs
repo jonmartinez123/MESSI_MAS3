@@ -28,124 +28,135 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
-            this.administraciónToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.rolToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.usuarioToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.rubroToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.visibilidadToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuHome = new System.Windows.Forms.MenuStrip();
+            this.administracionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.abm_rolToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.abm_usuarioToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.abm_rubroToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.abm_visibilidadToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.publicarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.comprarOfertarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.historialDeClienteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.calificarAlVendedorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.consultarFacturasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.listadoEstadisticoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuStrip1.SuspendLayout();
+            this.menuHome.SuspendLayout();
             this.SuspendLayout();
             // 
-            // menuStrip1
+            // menuHome
             // 
-            this.menuStrip1.GripStyle = System.Windows.Forms.ToolStripGripStyle.Visible;
-            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.administraciónToolStripMenuItem,
+            this.menuHome.GripStyle = System.Windows.Forms.ToolStripGripStyle.Visible;
+            this.menuHome.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.administracionToolStripMenuItem,
             this.publicarToolStripMenuItem,
             this.comprarOfertarToolStripMenuItem,
             this.historialDeClienteToolStripMenuItem,
             this.calificarAlVendedorToolStripMenuItem,
             this.consultarFacturasToolStripMenuItem,
             this.listadoEstadisticoToolStripMenuItem});
-            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
-            this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(817, 24);
-            this.menuStrip1.TabIndex = 0;
-            this.menuStrip1.Text = "menuStrip1";
+            this.menuHome.Location = new System.Drawing.Point(0, 0);
+            this.menuHome.Name = "menuHome";
+            this.menuHome.Size = new System.Drawing.Size(817, 24);
+            this.menuHome.TabIndex = 0;
+            this.menuHome.Text = "menuStrip1";
             // 
-            // administraciónToolStripMenuItem
+            // administracionToolStripMenuItem
             // 
-            this.administraciónToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.rolToolStripMenuItem,
-            this.usuarioToolStripMenuItem,
-            this.rubroToolStripMenuItem,
-            this.visibilidadToolStripMenuItem});
-            this.administraciónToolStripMenuItem.Name = "administraciónToolStripMenuItem";
-            this.administraciónToolStripMenuItem.Size = new System.Drawing.Size(100, 20);
-            this.administraciónToolStripMenuItem.Text = "Administración";
+            this.administracionToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.abm_rolToolStripMenuItem,
+            this.abm_usuarioToolStripMenuItem,
+            this.abm_rubroToolStripMenuItem,
+            this.abm_visibilidadToolStripMenuItem});
+            this.administracionToolStripMenuItem.Name = "administracionToolStripMenuItem";
+            this.administracionToolStripMenuItem.Size = new System.Drawing.Size(100, 20);
+            this.administracionToolStripMenuItem.Text = "Administración";
             // 
-            // rolToolStripMenuItem
+            // abm_rolToolStripMenuItem
             // 
-            this.rolToolStripMenuItem.Name = "rolToolStripMenuItem";
-            this.rolToolStripMenuItem.Size = new System.Drawing.Size(165, 22);
-            this.rolToolStripMenuItem.Text = "ABM ROL";
+            this.abm_rolToolStripMenuItem.Name = "abm_rolToolStripMenuItem";
+            this.abm_rolToolStripMenuItem.Size = new System.Drawing.Size(165, 22);
+            this.abm_rolToolStripMenuItem.Text = "ABM ROL";
+            this.abm_rolToolStripMenuItem.Click += new System.EventHandler(this.abm_rolToolStripMenuItem_Click);
             // 
-            // usuarioToolStripMenuItem
+            // abm_usuarioToolStripMenuItem
             // 
-            this.usuarioToolStripMenuItem.Name = "usuarioToolStripMenuItem";
-            this.usuarioToolStripMenuItem.Size = new System.Drawing.Size(165, 22);
-            this.usuarioToolStripMenuItem.Text = "ABM USUARIO";
+            this.abm_usuarioToolStripMenuItem.Name = "abm_usuarioToolStripMenuItem";
+            this.abm_usuarioToolStripMenuItem.Size = new System.Drawing.Size(165, 22);
+            this.abm_usuarioToolStripMenuItem.Text = "ABM USUARIO";
+            this.abm_usuarioToolStripMenuItem.Click += new System.EventHandler(this.abm_usuarioToolStripMenuItem_Click);
             // 
-            // rubroToolStripMenuItem
+            // abm_rubroToolStripMenuItem
             // 
-            this.rubroToolStripMenuItem.Name = "rubroToolStripMenuItem";
-            this.rubroToolStripMenuItem.Size = new System.Drawing.Size(165, 22);
-            this.rubroToolStripMenuItem.Text = "ABM RUBRO";
+            this.abm_rubroToolStripMenuItem.Name = "abm_rubroToolStripMenuItem";
+            this.abm_rubroToolStripMenuItem.Size = new System.Drawing.Size(165, 22);
+            this.abm_rubroToolStripMenuItem.Text = "ABM RUBRO";
+            this.abm_rubroToolStripMenuItem.Click += new System.EventHandler(this.abm_rubroToolStripMenuItem_Click);
             // 
-            // visibilidadToolStripMenuItem
+            // abm_visibilidadToolStripMenuItem
             // 
-            this.visibilidadToolStripMenuItem.Name = "visibilidadToolStripMenuItem";
-            this.visibilidadToolStripMenuItem.Size = new System.Drawing.Size(165, 22);
-            this.visibilidadToolStripMenuItem.Text = "ABM VISIBILIDAD";
+            this.abm_visibilidadToolStripMenuItem.Name = "abm_visibilidadToolStripMenuItem";
+            this.abm_visibilidadToolStripMenuItem.Size = new System.Drawing.Size(165, 22);
+            this.abm_visibilidadToolStripMenuItem.Text = "ABM VISIBILIDAD";
+            this.abm_visibilidadToolStripMenuItem.Click += new System.EventHandler(this.abm_visibilidadToolStripMenuItem_Click);
             // 
             // publicarToolStripMenuItem
             // 
             this.publicarToolStripMenuItem.Name = "publicarToolStripMenuItem";
             this.publicarToolStripMenuItem.Size = new System.Drawing.Size(62, 20);
             this.publicarToolStripMenuItem.Text = "Publicar";
+            this.publicarToolStripMenuItem.Click += new System.EventHandler(this.publicarToolStripMenuItem_Click);
             // 
             // comprarOfertarToolStripMenuItem
             // 
             this.comprarOfertarToolStripMenuItem.Name = "comprarOfertarToolStripMenuItem";
             this.comprarOfertarToolStripMenuItem.Size = new System.Drawing.Size(108, 20);
             this.comprarOfertarToolStripMenuItem.Text = "Comprar/Ofertar";
+            this.comprarOfertarToolStripMenuItem.Click += new System.EventHandler(this.comprarOfertarToolStripMenuItem_Click);
             // 
             // historialDeClienteToolStripMenuItem
             // 
             this.historialDeClienteToolStripMenuItem.Name = "historialDeClienteToolStripMenuItem";
             this.historialDeClienteToolStripMenuItem.Size = new System.Drawing.Size(119, 20);
             this.historialDeClienteToolStripMenuItem.Text = "Historial de Cliente";
+            this.historialDeClienteToolStripMenuItem.Click += new System.EventHandler(this.historialDeClienteToolStripMenuItem_Click);
             // 
             // calificarAlVendedorToolStripMenuItem
             // 
             this.calificarAlVendedorToolStripMenuItem.Name = "calificarAlVendedorToolStripMenuItem";
             this.calificarAlVendedorToolStripMenuItem.Size = new System.Drawing.Size(127, 20);
             this.calificarAlVendedorToolStripMenuItem.Text = "Calificar al Vendedor";
+            this.calificarAlVendedorToolStripMenuItem.Click += new System.EventHandler(this.calificarAlVendedorToolStripMenuItem_Click);
             // 
             // consultarFacturasToolStripMenuItem
             // 
             this.consultarFacturasToolStripMenuItem.Name = "consultarFacturasToolStripMenuItem";
             this.consultarFacturasToolStripMenuItem.Size = new System.Drawing.Size(117, 20);
             this.consultarFacturasToolStripMenuItem.Text = "Consultar Facturas";
+            this.consultarFacturasToolStripMenuItem.Click += new System.EventHandler(this.consultarFacturasToolStripMenuItem_Click);
             // 
             // listadoEstadisticoToolStripMenuItem
             // 
             this.listadoEstadisticoToolStripMenuItem.Name = "listadoEstadisticoToolStripMenuItem";
             this.listadoEstadisticoToolStripMenuItem.Size = new System.Drawing.Size(116, 20);
             this.listadoEstadisticoToolStripMenuItem.Text = "Listado Estadistico";
+            this.listadoEstadisticoToolStripMenuItem.Click += new System.EventHandler(this.listadoEstadisticoToolStripMenuItem_Click);
             // 
             // MenuUsuario
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(817, 336);
-            this.Controls.Add(this.menuStrip1);
-            this.MainMenuStrip = this.menuStrip1;
+            this.Controls.Add(this.menuHome);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.SizableToolWindow;
+            this.MainMenuStrip = this.menuHome;
             this.MaximizeBox = false;
             this.Name = "MenuUsuario";
             this.Sizable = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Menu De Usuario";
             this.Load += new System.EventHandler(this.MenuUsuario_Load);
-            this.menuStrip1.ResumeLayout(false);
-            this.menuStrip1.PerformLayout();
+            this.menuHome.ResumeLayout(false);
+            this.menuHome.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -153,14 +164,14 @@
 
         #endregion
 
-        private System.Windows.Forms.MenuStrip menuStrip1;
-        private System.Windows.Forms.ToolStripMenuItem administraciónToolStripMenuItem;
+        private System.Windows.Forms.MenuStrip menuHome;
+        private System.Windows.Forms.ToolStripMenuItem administracionToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem publicarToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem comprarOfertarToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem rolToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem usuarioToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem rubroToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem visibilidadToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem abm_rolToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem abm_usuarioToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem abm_rubroToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem abm_visibilidadToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem historialDeClienteToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem calificarAlVendedorToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem consultarFacturasToolStripMenuItem;

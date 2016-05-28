@@ -11,7 +11,7 @@ namespace MercadoEnvio.DAO
     {
         internal static List<Funcionalidad> getFuncionalidades(Rol rol)
         {
-            SqlCommand cmd = SqlConnector.generarComandoYAbrir("getFuncionalidades", rol);
+            SqlCommand cmd = SqlConnector.generarComandoYAbrir("getFuncionalidades", rol.Id);
             var reader = cmd.ExecuteReader();
 
             List<Funcionalidad> funcionalidades = new List<Funcionalidad>();

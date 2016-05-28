@@ -8,6 +8,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using MercadoEnvio.Modelo;
+using MercadoEnvio.Utils;
+
 using MaterialSkin;
 
 namespace MercadoEnvio.Funcionalidades
@@ -26,8 +29,153 @@ namespace MercadoEnvio.Funcionalidades
             
         }
         private void asignarFuncionalidades() { 
-            
+            var administracion = false;
+            var publicar = false;
+            var comprarOfertar = false;
+            var historialDeCliente = false;
+            var calificarVendedor = false;
+            var consultarFacturas = false;
+            var listadoEstadistico = false;
+
+            //Obtengo todas las funcionalidades asignadas al rol del usuario logueado
+            foreach (Funcionalidad fun in Persistencia.usuario.Rol.Funcionalidades)
+            {
+                //Obtengo un objeto 'Funcionalidad' a partir de la descripción del rol (como aparece en la base)
+                switch (Funcionalidad.obtenerEnum(fun.Descripcion))
+                {
+                    case Funcionalidad.Funcionalidades.ABM_Rol:
+                        abm_rolToolStripMenuItem.Visible = true;
+                        administracion = true;
+                    break;
+
+                    case Funcionalidad.Funcionalidades.ABM_Rubro:
+                        abm_rubroToolStripMenuItem.Visible = true;
+                        administracion = true;
+                    break;
+
+                    case Funcionalidad.Funcionalidades.ABM_Usuario:
+                        abm_usuarioToolStripMenuItem.Visible = true;
+                        administracion = true;
+                    break;
+
+                    case Funcionalidad.Funcionalidades.ABM_Visibilidad:
+                        abm_visibilidadToolStripMenuItem.Visible = true;
+                        administracion = true;
+                    break;
+
+                    case Funcionalidad.Funcionalidades.Calificar_Al_Vendedor:
+                        calificarAlVendedorToolStripMenuItem.Visible = true;
+                        calificarVendedor = true;
+                    break;
+                    case Funcionalidad.Funcionalidades.ComprarOfertar:
+                        comprarOfertarToolStripMenuItem.Visible = true;
+                        comprarOfertar = true;
+                    break;
+                    case Funcionalidad.Funcionalidades.Consultar_Facturas:
+                        consultarFacturasToolStripMenuItem.Visible = true;
+                        consultarFacturas = true;
+                    break;
+                    case Funcionalidad.Funcionalidades.Historial_De_Cliente:
+                        historialDeClienteToolStripMenuItem.Visible = true;
+                        historialDeCliente=true;
+                    break;
+                    case Funcionalidad.Funcionalidades.Listado_Estadistico:
+                        listadoEstadisticoToolStripMenuItem.Visible = true;
+                        listadoEstadistico=true;
+                    break;
+                    case Funcionalidad.Funcionalidades.Publicar:
+                        publicarToolStripMenuItem.Visible = true;
+                        publicar=true;
+                    break;
+                }
+            }
+
+            //Si no posee ninguna funcionalidad de administración borro el menu item
+            if (!administracion)
+                menuHome.Items.Remove(administracionToolStripMenuItem);
+            //Si no posee ninguna funcionalidad de administración borro el menu item
+            if (!publicar)
+                menuHome.Items.Remove(publicarToolStripMenuItem);
+            //Si no posee ninguna funcionalidad de administración borro el menu item
+            if (!historialDeCliente)
+                menuHome.Items.Remove(historialDeClienteToolStripMenuItem);
+
+           //Si no posee ninguna funcionalidad de administración borro el menu item
+            if (!consultarFacturas)
+                menuHome.Items.Remove(consultarFacturasToolStripMenuItem);
+            //Si no posee ninguna funcionalidad de administración borro el menu item
+            if (!comprarOfertar)
+                menuHome.Items.Remove(comprarOfertarToolStripMenuItem);
+            //Si no posee ninguna funcionalidad de administración borro el menu item
+            if (!calificarVendedor)
+                menuHome.Items.Remove(calificarAlVendedorToolStripMenuItem);
+
+
+            //Si no posee ninguna funcionalidad de estadistica borro el menu item
+            if (!listadoEstadistico)
+                menuHome.Items.Remove(listadoEstadisticoToolStripMenuItem);
         }
+
+        private void abm_rolToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ABM_Rol.Rol rol = new ABM_Rol.Rol();
+            rol.ShowDialog();
+        }
+
+        private void abm_usuarioToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ABM_Usuario.Usuario usuario = new ABM_Usuario.Usuario();
+            usuario.ShowDialog();
+        }
+
+        private void abm_rubroToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ABM_Rubro.Rubro rub = new ABM_Rubro.Rubro();
+            rub.ShowDialog();
+        }
+
+        private void abm_visibilidadToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ABM_Visibilidad.Visibilidad visibilidad = new ABM_Visibilidad.Visibilidad();
+            visibilidad.ShowDialog();
+        }
+
+        private void publicarToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Publicar.Publicar pub = new Publicar.Publicar();
+            pub.ShowDialog();
+        }
+
+        private void comprarOfertarToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ComprarOfertar.ComprarOfertar comp = new ComprarOfertar.ComprarOfertar();
+            comp.ShowDialog();
+        }
+
+        private void historialDeClienteToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Historial_Cliente.HistorialCliente historial = new Historial_Cliente.HistorialCliente();
+            historial.ShowDialog();
+        }
+
+        private void calificarAlVendedorToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Calificar.Calificar cal = new Calificar.Calificar();
+            cal.ShowDialog();
+        }
+
+        private void consultarFacturasToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Facturas.ConsultarFacturas facturas = new Facturas.ConsultarFacturas();
+            facturas.ShowDialog();
+        }
+
+        private void listadoEstadisticoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Listado_Estadistico.ListadoEstadistico listado = new Listado_Estadistico.ListadoEstadistico();
+            listado.ShowDialog();
+        }
+
 
     }
 }
