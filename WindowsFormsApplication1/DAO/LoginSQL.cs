@@ -17,38 +17,33 @@ namespace MercadoEnvio.DAO
             return SqlConnector.executeProcedure("validar_usuario", username, EncriptadorSHA.encodear(pass));
         }
 
-        internal static int aumentarIntentos(string username)
+        internal static int aumentarIntentos(int idUsuario)
         {
-            return SqlConnector.executeProcedure("aumentar_intentos", username);
+            return SqlConnector.executeProcedure("aumentar_intentos", idUsuario);
         }
 
-        internal static void vaciarIntentos()
+        internal static void vaciarIntentos(int idUsuario)
         {
-            SqlConnector.executeProcedure("vaciar_intentos", Persistencia.usuario.NombreUsuario);
+            SqlConnector.executeProcedure("vaciar_intentos", idUsuario);
         }
 
-        internal static int traerIntentos(string username)
+        internal static int traerIntentos(int idUsuario)
         {
-            return SqlConnector.executeProcedure("traer_intentos", username);
+            return SqlConnector.executeProcedure("traer_intentos", idUsuario);
         }
 
-        internal static Boolean existeUsuario(String username)
+        internal static Boolean existeUsuario(string nombreUsuario)
         {
-            return SqlConnector.executeProcedure("existe_usuario", username) == 1 ? true : false;
+            return SqlConnector.executeProcedure("existe_usuario", nombreUsuario) == 1 ? true : false;
         }
 
-        internal static List<short> getFuncionalidades(int p)
+        internal static int getID(string nombreUsuario)
         {
-            throw new NotImplementedException();
+            return SqlConnector.executeProcedure("getID", nombreUsuario);
         }
-
-        internal static int getID()
+        internal static List<Rol> getRoles(int id)
         {
-            return SqlConnector.executeProcedure("getID",Persistencia.usuario.NombreUsuario);
-        }
-        internal static List<Rol> getRoles()
-        {
-            SqlCommand cmd = SqlConnector.generarComandoYAbrir("getRoles", Persistencia.usuario.Id);
+            SqlCommand cmd = SqlConnector.generarComandoYAbrir("getRoles", id);
             var reader = cmd.ExecuteReader();
 
             List<Rol> roles = new List<Rol>();
@@ -63,9 +58,12 @@ namespace MercadoEnvio.DAO
             }
             return roles;
         }
-        internal static String getMail()
+        internal static String getMail(int id)
         {
-            return SqlConnector.ejecutarYDevolverString("getMail", Persistencia.usuario.Id);
+            return SqlConnector.ejecutarYDevolverString("getMail", id);
+        }
+        internal static int getTelefono(int id) {
+            return SqlConnector.executeProcedure("getTelefono", id);
         }
     }
 }

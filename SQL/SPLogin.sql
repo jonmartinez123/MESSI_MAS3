@@ -46,25 +46,35 @@ BEGIN
 END
 GO
 
-CREATE PROCEDURE [MESSI_MAS3].traer_intentos (@nombreUsuario NVARCHAR(255))
+
+CREATE PROCEDURE [MESSI_MAS3].getTelefono (@idUsuario int)
+AS 
+BEGIN
+	DECLARE @tel int
+	SELECT @tel = usuario_telefono FROM MESSI_MAS3.Usuario WHERE usuario_id = @idUsuario
+	RETURN @tel
+END
+GO
+
+CREATE PROCEDURE [MESSI_MAS3].traer_intentos (@idUsuario int)
 AS 
 BEGIN
 	DECLARE @cant int
-	SELECT @cant = usuario_intentos FROM MESSI_MAS3.Usuario WHERE usuario_nombreUsuario = @nombreUsuario
+	SELECT @cant = usuario_intentos FROM MESSI_MAS3.Usuario WHERE usuario_id = @idUsuario
 	RETURN @cant
 END
 GO
 
-CREATE PROCEDURE [MESSI_MAS3].vaciar_intentos (@nombreUsuario NVARCHAR(255))
+CREATE PROCEDURE [MESSI_MAS3].vaciar_intentos (@idUsuario int)
 AS 
 BEGIN
-	UPDATE MESSI_MAS3.Usuario SET usuario_intentos=0  WHERE usuario_nombreUsuario = @nombreUsuario
+	UPDATE MESSI_MAS3.Usuario SET usuario_intentos=0  WHERE usuario_id = @idUsuario
 END
 GO
 
-CREATE PROCEDURE [MESSI_MAS3].aumentar_intentos (@nombreUsuario NVARCHAR(255))
+CREATE PROCEDURE [MESSI_MAS3].aumentar_intentos (@idUsuario int)
 AS 
 BEGIN
-	UPDATE MESSI_MAS3.Usuario SET usuario_intentos=usuario_intentos+1  WHERE usuario_nombreUsuario = @nombreUsuario
+	UPDATE MESSI_MAS3.Usuario SET usuario_intentos=usuario_intentos+1  WHERE usuario_id = @idUsuario
 END
 GO

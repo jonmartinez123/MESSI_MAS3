@@ -26,7 +26,7 @@ namespace MercadoEnvio.Funcionalidades
         }
         private void MenuUsuario_Load(object sender, EventArgs e)
         {
-            
+            asignarFuncionalidades();
         }
         private void asignarFuncionalidades() { 
             var administracion = false;
@@ -90,30 +90,17 @@ namespace MercadoEnvio.Funcionalidades
                 }
             }
 
-            //Si no posee ninguna funcionalidad de administración borro el menu item
-            if (!administracion)
-                menuHome.Items.Remove(administracionToolStripMenuItem);
-            //Si no posee ninguna funcionalidad de administración borro el menu item
-            if (!publicar)
-                menuHome.Items.Remove(publicarToolStripMenuItem);
-            //Si no posee ninguna funcionalidad de administración borro el menu item
-            if (!historialDeCliente)
-                menuHome.Items.Remove(historialDeClienteToolStripMenuItem);
+            //borro menu cuenta si no es empresa o admin
+            if (Persistencia.usuario.Tipo == null) menuHome.Items.Remove(cuentaToolStripMenuItem);
 
-           //Si no posee ninguna funcionalidad de administración borro el menu item
-            if (!consultarFacturas)
-                menuHome.Items.Remove(consultarFacturasToolStripMenuItem);
             //Si no posee ninguna funcionalidad de administración borro el menu item
-            if (!comprarOfertar)
-                menuHome.Items.Remove(comprarOfertarToolStripMenuItem);
-            //Si no posee ninguna funcionalidad de administración borro el menu item
-            if (!calificarVendedor)
-                menuHome.Items.Remove(calificarAlVendedorToolStripMenuItem);
-
-
-            //Si no posee ninguna funcionalidad de estadistica borro el menu item
-            if (!listadoEstadistico)
-                menuHome.Items.Remove(listadoEstadisticoToolStripMenuItem);
+            if (!administracion) menuHome.Items.Remove(administracionToolStripMenuItem);
+            if (!publicar) menuHome.Items.Remove(publicarToolStripMenuItem);
+            if (!historialDeCliente) menuHome.Items.Remove(historialDeClienteToolStripMenuItem);
+            if (!consultarFacturas) menuHome.Items.Remove(consultarFacturasToolStripMenuItem);
+            if (!comprarOfertar) menuHome.Items.Remove(comprarOfertarToolStripMenuItem);
+            if (!calificarVendedor) menuHome.Items.Remove(calificarAlVendedorToolStripMenuItem);
+            if (!listadoEstadistico) menuHome.Items.Remove(listadoEstadisticoToolStripMenuItem);
         }
 
         private void abm_rolToolStripMenuItem_Click(object sender, EventArgs e)
@@ -176,6 +163,12 @@ namespace MercadoEnvio.Funcionalidades
             listado.ShowDialog();
         }
 
-
+        private void cerrarSesiontoolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Persistencia.usuario = null;
+            this.Hide();
+            Login.Login lg = new Login.Login();
+            lg.ShowDialog();
+        }
     }
 }

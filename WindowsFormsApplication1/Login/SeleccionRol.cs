@@ -50,6 +50,7 @@ namespace MercadoEnvio.Login
                     this.Hide();
                     Funcionalidades.MenuUsuario menuUsuario = new Funcionalidades.MenuUsuario();
                     menuUsuario.ShowDialog();
+                    Close();
                 }
                 else {
                     MessageBox.Show("El rol " + rolSeleccionado + " no tiene funcionalidades, elija otro");

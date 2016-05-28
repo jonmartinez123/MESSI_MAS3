@@ -121,6 +121,9 @@
     <Compile Include="Funcionalidades\MenuUsuario.Designer.cs">
       <DependentUpon>MenuUsuario.cs</DependentUpon>
     </Compile>
+    <Compile Include="Modelo\Empresa.cs" />
+    <Compile Include="Modelo\Persona.cs" />
+    <Compile Include="Modelo\TipoUsuario.cs" />
     <Compile Include="Publicar\Publicar.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -200,7 +203,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config">
+    <None Include="Utils\App.config">
       <SubType>Designer</SubType>
     </None>
   </ItemGroup>

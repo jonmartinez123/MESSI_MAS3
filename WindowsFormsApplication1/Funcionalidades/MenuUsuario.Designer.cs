@@ -40,6 +40,10 @@
             this.calificarAlVendedorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.consultarFacturasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.listadoEstadisticoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.cerrarSesiontoolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.cuentaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.modificarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.darseDeBajaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuHome.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -53,10 +57,12 @@
             this.historialDeClienteToolStripMenuItem,
             this.calificarAlVendedorToolStripMenuItem,
             this.consultarFacturasToolStripMenuItem,
-            this.listadoEstadisticoToolStripMenuItem});
+            this.listadoEstadisticoToolStripMenuItem,
+            this.cuentaToolStripMenuItem,
+            this.cerrarSesiontoolStripMenuItem});
             this.menuHome.Location = new System.Drawing.Point(0, 0);
             this.menuHome.Name = "menuHome";
-            this.menuHome.Size = new System.Drawing.Size(817, 24);
+            this.menuHome.Size = new System.Drawing.Size(944, 24);
             this.menuHome.TabIndex = 0;
             this.menuHome.Text = "menuStrip1";
             // 
@@ -141,11 +147,39 @@
             this.listadoEstadisticoToolStripMenuItem.Text = "Listado Estadistico";
             this.listadoEstadisticoToolStripMenuItem.Click += new System.EventHandler(this.listadoEstadisticoToolStripMenuItem_Click);
             // 
+            // cerrarSesiontoolStripMenuItem
+            // 
+            this.cerrarSesiontoolStripMenuItem.Name = "cerrarSesiontoolStripMenuItem";
+            this.cerrarSesiontoolStripMenuItem.Size = new System.Drawing.Size(88, 20);
+            this.cerrarSesiontoolStripMenuItem.Text = "Cerrar Sesion";
+            this.cerrarSesiontoolStripMenuItem.Click += new System.EventHandler(this.cerrarSesiontoolStripMenuItem_Click);
+            // 
+            // cuentaToolStripMenuItem
+            // 
+            this.cuentaToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.modificarToolStripMenuItem,
+            this.darseDeBajaToolStripMenuItem});
+            this.cuentaToolStripMenuItem.Name = "cuentaToolStripMenuItem";
+            this.cuentaToolStripMenuItem.Size = new System.Drawing.Size(57, 20);
+            this.cuentaToolStripMenuItem.Text = "Cuenta";
+            // 
+            // modificarToolStripMenuItem
+            // 
+            this.modificarToolStripMenuItem.Name = "modificarToolStripMenuItem";
+            this.modificarToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.modificarToolStripMenuItem.Text = "Modificar";
+            // 
+            // darseDeBajaToolStripMenuItem
+            // 
+            this.darseDeBajaToolStripMenuItem.Name = "darseDeBajaToolStripMenuItem";
+            this.darseDeBajaToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.darseDeBajaToolStripMenuItem.Text = "Darse de Baja";
+            // 
             // MenuUsuario
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(817, 336);
+            this.ClientSize = new System.Drawing.Size(944, 356);
             this.Controls.Add(this.menuHome);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.SizableToolWindow;
             this.MainMenuStrip = this.menuHome;
@@ -176,5 +210,9 @@
         private System.Windows.Forms.ToolStripMenuItem calificarAlVendedorToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem consultarFacturasToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem listadoEstadisticoToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem cerrarSesiontoolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem cuentaToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem modificarToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem darseDeBajaToolStripMenuItem;
     }
 }
