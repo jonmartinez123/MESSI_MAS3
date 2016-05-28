@@ -30,13 +30,16 @@
         {
             this.SuspendLayout();
             // 
-            // GenerarPublicacion
+            // Publicar
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(284, 261);
-            this.Name = "GenerarPublicacion";
-            this.Text = "Form1";
+            this.MaximizeBox = false;
+            this.Name = "Publicar";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.Text = "Generar Publicacion";
+            this.Load += new System.EventHandler(this.Publicar_Load);
             this.ResumeLayout(false);
 
         }

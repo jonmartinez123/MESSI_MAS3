@@ -7,14 +7,24 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using MaterialSkin;
+using MaterialSkin.Controls;
 
 namespace MercadoEnvio.Calificar
 {
-    public partial class Calificar : Form
+    public partial class Calificar : MaterialForm
     {
         public Calificar()
         {
             InitializeComponent();
+            var materialSkinManager = MaterialSkinManager.Instance;
+            materialSkinManager.AddFormToManage(this);
+            materialSkinManager.Theme = MaterialSkinManager.Themes.LIGHT;
+        }
+
+        private void Calificar_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

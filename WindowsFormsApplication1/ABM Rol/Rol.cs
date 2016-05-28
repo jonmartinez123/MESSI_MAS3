@@ -7,14 +7,24 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using MaterialSkin.Controls;
+using MaterialSkin;
 
 namespace MercadoEnvio.ABM_Rol
 {
-    public partial class Rol : Form
+    public partial class Rol : MaterialForm
     {
         public Rol()
         {
             InitializeComponent();
+            var materialSkinManager = MaterialSkinManager.Instance;
+            materialSkinManager.AddFormToManage(this);
+            materialSkinManager.Theme = MaterialSkinManager.Themes.LIGHT;
+        }
+
+        private void Rol_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

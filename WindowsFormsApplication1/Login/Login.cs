@@ -18,7 +18,6 @@ namespace MercadoEnvio.Login
     {
         private List<Rol> roles;
         public Login() {
-
           InitializeComponent();
           var materialSkinManager = MaterialSkinManager.Instance;
           materialSkinManager.AddFormToManage(this);
