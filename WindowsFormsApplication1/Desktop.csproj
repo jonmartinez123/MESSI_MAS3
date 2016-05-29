@@ -115,7 +115,11 @@
     <Compile Include="Funcionalidades\MenuUsuario.Designer.cs">
       <DependentUpon>MenuUsuario.cs</DependentUpon>
     </Compile>
+    <Compile Include="Modelo\Domicilio.cs" />
     <Compile Include="Modelo\Empresa.cs" />
+    <Compile Include="Modelo\Factura.cs" />
+    <Compile Include="Modelo\FormaDePago.cs" />
+    <Compile Include="Modelo\Localidad.cs" />
     <Compile Include="Modelo\Persona.cs" />
     <Compile Include="Modelo\TipoUsuario.cs" />
     <Compile Include="Publicar\Publicar.cs">
