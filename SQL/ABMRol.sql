@@ -3,8 +3,8 @@ CREATE PROCEDURE MESSI_MAS3.get_funcionalidades(@rol nvarchar(255))
 AS				--Puede crashear ya que los nombres de la columna coinciden con los de la tabla intermedia
 BEGIN
 	SELECT funcionalidad_id, funcionalidad_descripcion FROM MESSI_MAS3.Funcionalidad, MESSI_MAS3.Funcionalidad_Rol, MESSI_MAS3.Rol
-	WHERE funcionalidad_id = Funcionalidad_id AND
-	rol_id = Rol_id AND
+	WHERE funcionalidad_id = Funcionalidad_rol_id  AND
+	rol_id = Rol_func_id  AND
 	rol_nombre = @rol
 END
 GO
@@ -14,8 +14,8 @@ AS
 BEGIN 
 SELECT funcionalidad_id, funcionalidad_descripcion FROM MESSI_MAS3.FUNCIONALIDAD
 WHERE NOT EXISTS (SELECT 1 FROM MESSI_MAS3.Funcionalidad_Rol, MESSI_MAS3.ROL
-	WHERE Funcionalidad_id = funcionalidad_id AND 
-	Rol_id = rol_id AND
+	WHERE Funcionalidad_rol_id  = funcionalidad_id AND 
+	Rol_func_id  = rol_id AND
 	rol_nombre = @rol)
 END
 GO
@@ -77,7 +77,7 @@ GO
 CREATE PROCEDURE MESSI_MAS3.asignar_funcionalidad_a_rol (@rol nvarchar(255), @func nvarchar(255))
 AS
 BEGIN
-	INSERT INTO MESSI_MAS3.Funcionalidad_Rol(Rol_id, Funcionalidad_id) VALUES ((SELECT TOP 1 rol_id FROM MESSI_MAS3.ROL WHERE rol_nombre = @rol),
+	INSERT INTO MESSI_MAS3.Funcionalidad_Rol(Rol_func_id, Funcionalidad_rol_id) VALUES ((SELECT TOP 1 rol_id FROM MESSI_MAS3.ROL WHERE rol_nombre = @rol),
 	 (SELECT TOP 1 funcionalidad_id FROM MESSI_MAS3.FUNCIONALIDAD WHERE funcionalidad_descripcion = @func))
 END
 GO
@@ -93,8 +93,8 @@ CREATE PROCEDURE MESSI_MAS3.borrar_funcionalidad(@rol nvarchar(255), @descripcio
 AS
 BEGIN
 	DELETE FROM MESSI_MAS3.Funcionalidad_Rol
-	WHERE Funcionalidad_id = (SELECT funcionalidad_id FROM MESSI_MAS3.FUNCIONALIDAD WHERE funcionalidad_descripcion = @descripcion_func)
-	AND Rol_id = (SELECT MESSI_MAS3.getIdRol(@rol))
+	WHERE Funcionalidad_rol_id = (SELECT funcionalidad_id FROM MESSI_MAS3.FUNCIONALIDAD WHERE funcionalidad_descripcion = @descripcion_func)
+	AND Rol_func_id = (SELECT MESSI_MAS3.getIdRol(@rol))
 
 END
 GO

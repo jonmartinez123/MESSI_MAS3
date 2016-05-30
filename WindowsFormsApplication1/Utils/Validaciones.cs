@@ -28,5 +28,25 @@ namespace MercadoEnvio.Utils
             e.Handled = (txt.TextLength > tamMax);
         }
 
+        public static Boolean isValid(this Control control)
+        {
+            if (control.Text == "") { MessageBox.Show("Falta especificar" + control.AccessibleDescription); }
+            return false;
+        }
+
+
+       /* // try catchea una excepcion proviniente de campos vacios
+        public static Boolean validateNotNullForAll(this Form aForm, Control.ControlCollection controls)
+        {
+            var isValid = false;
+            try { isValid = aForm.validar(controls); }
+            catch (Exception excepcion)
+            {
+                MessageBox.Show(excepcion.Message);
+            }
+            return isValid;
+        }*/
+
+
     }
 }

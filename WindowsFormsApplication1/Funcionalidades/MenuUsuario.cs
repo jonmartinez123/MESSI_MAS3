@@ -38,7 +38,7 @@ namespace MercadoEnvio.Funcionalidades
             var listadoEstadistico = false;
 
             //Obtengo todas las funcionalidades asignadas al rol del usuario logueado
-            foreach (Funcionalidad fun in Persistencia.usuario.Rol.Funcionalidades)
+            foreach (Funcionalidad fun in Persistencia.usuario.Rol.getFuncionalidades)
             {
                 //Obtengo un objeto 'Funcionalidad' a partir de la descripción del rol (como aparece en la base)
                 switch (Funcionalidad.obtenerEnum(fun.Descripcion))
@@ -105,7 +105,7 @@ namespace MercadoEnvio.Funcionalidades
 
         private void abm_rolToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            ABM_Rol.Rol rol = new ABM_Rol.Rol();
+            ABM_Rol.Listado rol = new ABM_Rol.Listado();
             rol.ShowDialog();
         }
 

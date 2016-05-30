@@ -295,8 +295,8 @@ CREATE TABLE MESSI_MAS3.Rol_Usuario (
 -- Table MESSI_MAS3.FuncionalidadRol
 -- -----------------------------------------------------
 CREATE TABLE MESSI_MAS3.Funcionalidad_Rol (
-  Rol_id INT REFERENCES MESSI_MAS3.Rol(rol_id),
-  Funcionalidad_id INT REFERENCES MESSI_MAS3.Funcionalidad (funcionalidad_id),
+  Rol_func_id INT REFERENCES MESSI_MAS3.Rol(rol_id),
+  Funcionalidad_rol_id INT REFERENCES MESSI_MAS3.Funcionalidad (funcionalidad_id),
   deleted INT DEFAULT 0 --nuevo cambio por correccion del der
   
   )
@@ -906,7 +906,7 @@ DECLARE @Uid int
 DECLARE @Rid int
 SELECT @Uid=usuario_id FROM Usuario WHERE usuario_nombreUsuario='admin'
 SELECT @Rid=rol_id FROM Rol WHERE rol_nombre='Administrativo'
-INSERT INTO MESSI_MAS3.Funcionalidad_Rol (Rol_id,Funcionalidad_id) SELECT @Rid,funcionalidad_id FROM MESSI_MAS3.Funcionalidad WHERE funcionalidad_descripcion LIKE 'ABM %'
+INSERT INTO MESSI_MAS3.Funcionalidad_Rol (Rol_func_id ,Funcionalidad_rol_id ) SELECT @Rid,funcionalidad_id FROM MESSI_MAS3.Funcionalidad WHERE funcionalidad_descripcion LIKE 'ABM %'
 INSERT INTO MESSI_MAS3.Rol_Usuario (Usuario_id,Rol_id) VALUES (@Uid,@Rid)
 END
 GO

@@ -52,7 +52,7 @@ namespace MercadoEnvio.DAO
             while (reader.Read())
             {
                 rol = new Rol();
-                rol.Id = int.Parse(reader["rol_id"].ToString());
+                rol.getid = int.Parse(reader["rol_id"].ToString());
                 rol.Nombre = reader["rol_nombre"].ToString();
                 roles.Add(rol);
             }

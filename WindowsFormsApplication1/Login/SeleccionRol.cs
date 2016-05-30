@@ -46,7 +46,7 @@ namespace MercadoEnvio.Login
                 if (funcionalidades.Count() > 0)
                 {
                     Persistencia.usuario.Rol = rolSeleccionado;
-                    Persistencia.usuario.Rol.Funcionalidades = funcionalidades;
+                    Persistencia.usuario.Rol.getFuncionalidades = funcionalidades;
                     this.Hide();
                     Funcionalidades.MenuUsuario menuUsuario = new Funcionalidades.MenuUsuario();
                     menuUsuario.ShowDialog();
