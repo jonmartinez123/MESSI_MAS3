@@ -108,7 +108,7 @@ namespace MercadoEnvio.Login
          private void txtPass_KeyPress(object sender, KeyPressEventArgs e)
          {
              this.allowAlphanumericOnly(e);
-             this.allowMaxLenght(txtPass,16, e);
+             if (e.KeyChar != 8) this.allowMaxLenght(txtPass, 15, e);
          }
 
     }

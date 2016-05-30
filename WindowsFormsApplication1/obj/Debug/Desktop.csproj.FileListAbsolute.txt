@@ -31,3 +31,28 @@ C:\Users\Familia\Dropbox\4 año\Gestion de datos\Trabajo Practico\repositorio\ME
 C:\Users\Familia\Dropbox\4 año\Gestion de datos\Trabajo Practico\repositorio\MESSI_MAS3\WindowsFormsApplication1\obj\Debug\MercadoEnvio.ComprarOfertar.ComprarOfertar.resources
 C:\Users\Familia\Dropbox\4 año\Gestion de datos\Trabajo Practico\repositorio\MESSI_MAS3\WindowsFormsApplication1\obj\Debug\MercadoEnvio.Historial_Cliente.HistorialCliente.resources
 C:\Users\Familia\Dropbox\4 año\Gestion de datos\Trabajo Practico\repositorio\MESSI_MAS3\WindowsFormsApplication1\obj\Debug\MercadoEnvio.Listado_Estadistico.ListadoEstadistico.resources
+C:\Users\Eric\Desktop\MESSI_MAS3\WindowsFormsApplication1\bin\Debug\WindowsFormsApplication1.exe.config
+C:\Users\Eric\Desktop\MESSI_MAS3\WindowsFormsApplication1\obj\Debug\WindowsFormsApplication1.exe
+C:\Users\Eric\Desktop\MESSI_MAS3\WindowsFormsApplication1\obj\Debug\WindowsFormsApplication1.pdb
+C:\Users\Eric\Desktop\MESSI_MAS3\WindowsFormsApplication1\bin\Debug\WindowsFormsApplication1.exe
+C:\Users\Eric\Desktop\MESSI_MAS3\WindowsFormsApplication1\bin\Debug\WindowsFormsApplication1.pdb
+C:\Users\Eric\Desktop\MESSI_MAS3\WindowsFormsApplication1\bin\Debug\MaterialSkin.dll
+C:\Users\Eric\Desktop\MESSI_MAS3\WindowsFormsApplication1\obj\Debug\Desktop.csprojResolveAssemblyReference.cache
+C:\Users\Eric\Desktop\MESSI_MAS3\WindowsFormsApplication1\obj\Debug\MercadoEnvio.ABM_Rol.Rol.resources
+C:\Users\Eric\Desktop\MESSI_MAS3\WindowsFormsApplication1\obj\Debug\MercadoEnvio.ABM_Rubro.Rubro.resources
+C:\Users\Eric\Desktop\MESSI_MAS3\WindowsFormsApplication1\obj\Debug\MercadoEnvio.ABM_Usuario.Usuario.resources
+C:\Users\Eric\Desktop\MESSI_MAS3\WindowsFormsApplication1\obj\Debug\MercadoEnvio.ABM_Visibilidad.Visibilidad.resources
+C:\Users\Eric\Desktop\MESSI_MAS3\WindowsFormsApplication1\obj\Debug\MercadoEnvio.Calificar.Calificar.resources
+C:\Users\Eric\Desktop\MESSI_MAS3\WindowsFormsApplication1\obj\Debug\MercadoEnvio.ComprarOfertar.ComprarOfertar.resources
+C:\Users\Eric\Desktop\MESSI_MAS3\WindowsFormsApplication1\obj\Debug\MercadoEnvio.Facturas.ConsultarFacturas.resources
+C:\Users\Eric\Desktop\MESSI_MAS3\WindowsFormsApplication1\obj\Debug\MercadoEnvio.Funcionalidades.MenuUsuario.resources
+C:\Users\Eric\Desktop\MESSI_MAS3\WindowsFormsApplication1\obj\Debug\MercadoEnvio.Historial_Cliente.HistorialCliente.resources
+C:\Users\Eric\Desktop\MESSI_MAS3\WindowsFormsApplication1\obj\Debug\MercadoEnvio.Listado_Estadistico.ListadoEstadistico.resources
+C:\Users\Eric\Desktop\MESSI_MAS3\WindowsFormsApplication1\obj\Debug\MercadoEnvio.Login.Login.resources
+C:\Users\Eric\Desktop\MESSI_MAS3\WindowsFormsApplication1\obj\Debug\MercadoEnvio.Login.SeleccionRol.resources
+C:\Users\Eric\Desktop\MESSI_MAS3\WindowsFormsApplication1\obj\Debug\MercadoEnvio.Properties.Resources.resources
+C:\Users\Eric\Desktop\MESSI_MAS3\WindowsFormsApplication1\obj\Debug\MercadoEnvio.Publicar.Publicar.resources
+C:\Users\Eric\Desktop\MESSI_MAS3\WindowsFormsApplication1\obj\Debug\Desktop.csproj.GenerateResource.Cache
+C:\Users\Eric\Desktop\MESSI_MAS3\WindowsFormsApplication1\obj\Debug\MercadoEnvio.ABM_Usuario.CrearUsuario.resources
+C:\Users\Eric\Desktop\MESSI_MAS3\WindowsFormsApplication1\obj\Debug\MercadoEnvio.ABM_Usuario.CrearCliente.resources
+C:\Users\Eric\Desktop\MESSI_MAS3\WindowsFormsApplication1\obj\Debug\MercadoEnvio.ABM_Usuario.CrearEmpresa.resources

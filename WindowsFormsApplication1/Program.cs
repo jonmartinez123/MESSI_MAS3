@@ -21,6 +21,7 @@ namespace MercadoEnvio
             Application.SetCompatibleTextRenderingDefault(false);
  
             Application.Run(new Login.Login());
+
         }
     }
 }

@@ -34,5 +34,11 @@ namespace MercadoEnvio.Modelo
             this.contrasenia = password;
         }
 
+        public Usuario(String username, String password)
+        {
+            this.nombreUsuario = username;
+            this.contrasenia = password;
+        }
+
     }
 }

@@ -26,5 +26,11 @@ namespace MercadoEnvio.ABM_Usuario
         {
 
         }
+
+        private void btnCrearUsuario_Click(object sender, EventArgs e)
+        {
+            CrearUsuario cUsuario = new CrearUsuario();
+            cUsuario.ShowDialog();
+        }
     }
 }
