@@ -56,8 +56,11 @@ IF EXISTS(SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'MESSI_MA
 IF EXISTS(SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'MESSI_MAS3' AND  TABLE_NAME = 'Rubro')
 	DROP TABLE MESSI_MAS3.Rubro
 
-IF EXISTS(SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'MESSI_MAS3' AND  TABLE_NAME = 'Persona')
-	DROP TABLE MESSI_MAS3.Persona
+IF EXISTS(SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'MESSI_MAS3' AND  TABLE_NAME = 'Cliente')
+	DROP TABLE MESSI_MAS3.Cliente
+
+IF EXISTS(SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'MESSI_MAS3' AND  TABLE_NAME = 'TipoDocumento')
+	DROP TABLE MESSI_MAS3.TipoDocumento
 
 IF EXISTS(SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'MESSI_MAS3' AND  TABLE_NAME = 'Publicacion')
 	DROP TABLE MESSI_MAS3.Publicacion
@@ -131,9 +134,10 @@ CREATE TABLE MESSI_MAS3.Usuario (
   usuario_id INT PRIMARY KEY NOT NULL IDENTITY,
   usuario_nombreUsuario NVARCHAR(255) NOT NULL,  --AGREGAR UNIQUE!!!
   usuario_contrasenia NVARCHAR(255) NULL,				--Cambiado de NOT NULL a NULL y el nombre a 'contrasenia'
-  usuario_mail NVARCHAR(50) NULL,	--LINEA PELIGROSA VIGILAR!! AGREGAR UNIQUE SAQUE EL NOT NULL
   usuario_deleted INT DEFAULT 0,
-  usuario_intentos INT DEFAULT 0, )
+  usuario_intentos INT DEFAULT 0,
+  usuario_primeraPublicacion INT DEFAULT 1 -- significa True y luego de hacer la primera publicacion se setea en 0
+   )
  
 
 
@@ -146,7 +150,12 @@ CREATE TABLE MESSI_MAS3.Rol (
   rol_deleted INT DEFAULT 0, 
   )
 
+  CREATE TABLE MESSI_MAS3.TipoDocumento(
+	tipoDocumento_id INT PRIMARY KEY NOT NULL IDENTITY,
+	tipoDocumento_nombre VARCHAR(100),
+	 )
 
+GO
 
 -- -----------------------------------------------------
 -- Table MESSI_MAS3.Localidad
@@ -175,19 +184,20 @@ CREATE TABLE MESSI_MAS3.Domicilio (
 																							
 
 -- -----------------------------------------------------
--- Table MESSI_MAS3.Persona
+-- Table MESSI_MAS3.Cliente
 -- -----------------------------------------------------
 
-CREATE TABLE MESSI_MAS3.Persona (
-  persona_nombre NVARCHAR(255) NOT NULL,
-  persona_apellido NVARCHAR(255) NOT NULL,
-  persona_DNI NUMERIC(18,0) NOT NULL UNIQUE,
-  persona_fechaNacimiento DATETIME NOT NULL,
-  persona_fechaCreacion DATETIME NOT NULL,
-  persona_idDomicilio INT REFERENCES MESSI_MAS3.Domicilio(domicilio_idDomicilio),
-  persona_id INT PRIMARY KEY REFERENCES MESSI_MAS3.Usuario(usuario_id),
-  persona_tel NUMERIC(15,0) DEFAULT 0,
-  persona_mail NVARCHAR(255) NULL,			--cambie a NULL 
+CREATE TABLE MESSI_MAS3.Cliente (
+  cliente_nombre NVARCHAR(255) NOT NULL,
+  cliente_apellido NVARCHAR(255) NOT NULL,
+  cliente_DNI NUMERIC(18,0) NOT NULL UNIQUE,
+  cliente_fechaNacimiento DATETIME NOT NULL,
+  cliente_fechaCreacion DATETIME NOT NULL,
+  cliente_idDomicilio INT REFERENCES MESSI_MAS3.Domicilio(domicilio_idDomicilio),
+  cliente_id INT PRIMARY KEY REFERENCES MESSI_MAS3.Usuario(usuario_id),
+  cliente_tel NUMERIC(15,0) DEFAULT 0,
+  cliente_mail NVARCHAR(255) NULL,	
+  cliente_tipoDocumento_id INT REFERENCES MESSI_MAS3.TipoDocumento(tipoDocumento_id) ,
   )
 
 
@@ -215,8 +225,9 @@ CREATE TABLE MESSI_MAS3.Empresa (
   empresa_fechaCreacion DATETIME NOT NULL,
   empresa_idDomicilio INT REFERENCES MESSI_MAS3.Domicilio (domicilio_idDomicilio),
   empresa_telefono VARCHAR(10) NULL,													--Cambie de NOT NULL a NULL
-  empresa_rubroId INT REFERENCES MESSI_MAS3.Rubro (rubro_id) NULL,)
- 
+  empresa_rubroId INT REFERENCES MESSI_MAS3.Rubro (rubro_id) NULL,
+  empresa_mail NVARCHAR(255),
+  empresa_nombreContacto NVARCHAR(255) DEFAULT NULL)
 -- -----------------------------------------------------
 -- Table MESSI_MAS3.Estado
 -- -----------------------------------------------------
@@ -308,7 +319,7 @@ CREATE TABLE MESSI_MAS3.Compra (
   compra_id INT PRIMARY KEY NOT NULL IDENTITY,
   compras_publicacion_id INT REFERENCES MESSI_MAS3.Publicacion (publicacion_id),
   compras_fecha DATETIME NOT NULL,
-  compras_personaComprador_id INT REFERENCES MESSI_MAS3.Persona(persona_id),
+  compras_personaComprador_id INT REFERENCES MESSI_MAS3.Cliente(cliente_id),
   compras_cantidad NUMERIC(18,0) NOT NULL, )
  
 -- -----------------------------------------------------
@@ -317,7 +328,7 @@ CREATE TABLE MESSI_MAS3.Compra (
 CREATE TABLE MESSI_MAS3.Oferta (
   oferta_id INT PRIMARY KEY NOT NULL IDENTITY,
   oferta_valor NUMERIC(18,2) NOT NULL,
-  oferta_persona_id INT REFERENCES MESSI_MAS3.Persona(persona_id),						
+  oferta_persona_id INT REFERENCES MESSI_MAS3.Cliente(cliente_id),						
   oferta_idPublicacion INT REFERENCES MESSI_MAS3.Publicacion (publicacion_id),
   oferta_fecha DATETIME NOT NULL,
   oferta_ganador INT DEFAULT 0,
@@ -329,7 +340,7 @@ CREATE TABLE MESSI_MAS3.Oferta (
 -- -----------------------------------------------------
 CREATE TABLE MESSI_MAS3.Calificacion (
   calificacion_id INT PRIMARY KEY NOT NULL IDENTITY,
-  calificacion_idPersonaCalificador INT REFERENCES MESSI_MAS3.Persona(persona_id), 
+  calificacion_idPersonaCalificador INT REFERENCES MESSI_MAS3.Cliente(cliente_id), 
   calificacion_compraId INT REFERENCES MESSI_MAS3.Compra(compra_id),
   calificacion_fecha DATETIME NULL,
   calificacion_cantidadEstrellas NUMERIC(18,0) NULL,
@@ -380,6 +391,8 @@ CREATE TABLE MESSI_MAS3.Factura_detalle (
  )
 
  GO
+
+
  
  
 /*--------------------------MIGRACIONES---------------------------*/
@@ -421,24 +434,32 @@ AS BEGIN
 	INSERT INTO MESSI_MAS3.tipoPublicacion(tipoPublicacion_nombre) VALUES ('Subasta')
 	INSERT INTO MESSI_MAS3.tipoPublicacion(tipoPublicacion_nombre) VALUES ('Oferta')
 
+
+	--TIPO DOCUMENTO
+
+	INSERT INTO MESSI_MAS3.TipoDocumento(tipoDocumento_nombre) VALUES ('DNI')
+	INSERT INTO MESSI_MAS3.TipoDocumento(tipoDocumento_nombre) VALUES ('PASAPORTE')
+	INSERT INTO MESSI_MAS3.TipoDocumento(tipoDocumento_nombre) VALUES ('LIBRETA CIVICA')
+
+	
 	
 
 END
 GO
 
-CREATE PROCEDURE [MESSI_MAS3].crearUsuario(@usuario NVARCHAR(255),@pass VARCHAR(16), @mail NVARCHAR(255))
+CREATE PROCEDURE [MESSI_MAS3].crearUsuario(@usuario NVARCHAR(255),@pass VARCHAR(16))
 AS BEGIN TRANSACTION
-	INSERT INTO MESSI_MAS3.Usuario(usuario_nombreUsuario,usuario_contrasenia, usuario_mail) 
-	VALUES (@usuario,SUBSTRING(master.dbo.fn_varbintohexstr(HashBytes('SHA2_256', @pass)), 3, 64) ,@mail)
+	INSERT INTO MESSI_MAS3.Usuario(usuario_nombreUsuario,usuario_contrasenia) 
+	VALUES (@usuario,SUBSTRING(master.dbo.fn_varbintohexstr(HashBytes('SHA2_256', @pass)), 3, 64))
 	COMMIT
 GO
 -- sp genero el usuario y devuelvo el id, me sirve para insertarlo de nuevo
-CREATE PROCEDURE [MESSI_MAS3].[generarUsuario](@usuario NVARCHAR(255),@pass VARCHAR(16), @mail NVARCHAR(255),@ultimoIdInsertado INT OUTPUT)
+CREATE PROCEDURE [MESSI_MAS3].[generarUsuario](@usuario NVARCHAR(255),@pass VARCHAR(16),@ultimoIdInsertado INT OUTPUT)
 AS BEGIN
 	set nocount on;
 	set xact_abort on;
-	INSERT INTO MESSI_MAS3.Usuario(usuario_nombreUsuario,usuario_contrasenia, usuario_mail) 
-	VALUES (@usuario,SUBSTRING(master.dbo.fn_varbintohexstr(HashBytes('SHA2_256', @pass)), 3, 64) ,@mail)
+	INSERT INTO MESSI_MAS3.Usuario(usuario_nombreUsuario,usuario_contrasenia, usuario_primeraPublicacion) 
+	VALUES (@usuario,SUBSTRING(master.dbo.fn_varbintohexstr(HashBytes('SHA2_256', @pass)), 3, 64), 0)
 	SELECT @ultimoIdInsertado = SCOPE_IDENTITY();
 	RETURN
 END
@@ -480,8 +501,8 @@ AS BEGIN
 END
 GO  
 
---SP PARA MIGRAR TODOS LAS PERSONAS DE LA TABLA MAESTRA
-CREATE PROCEDURE [MESSI_MAS3].[migrarPersonas]
+--SP PARA MIGRAR TODOS LAS Clientes DE LA TABLA MAESTRA
+CREATE PROCEDURE [MESSI_MAS3].[migrarClientes]
 AS BEGIN
 	set nocount on;
 	set xact_abort on;
@@ -532,7 +553,7 @@ AS BEGIN
 		BEGIN
 			DECLARE @pass varchar(16)
 			SET @pass = '123456'
-			EXECUTE MESSI_MAS3.generarUsuario @documento,@pass ,@mail,@ultimoIdInsertado = @idUsuario OUTPUT; --esta bien esta linea?? por el documento pasado como param
+			EXECUTE MESSI_MAS3.generarUsuario @documento,@pass,@ultimoIdInsertado = @idUsuario OUTPUT; --esta bien esta linea?? por el documento pasado como param
 			DECLARE @idRol int;
 			SET @idRol = (select rol_id from MESSI_MAS3.Rol where rol_nombre = 'Cliente')
 			INSERT INTO MESSI_MAS3.Rol_Usuario(Rol_id,Usuario_id)
@@ -540,14 +561,16 @@ AS BEGIN
 			DECLARE @idDomicilio int;
 			EXECUTE MESSI_MAS3.generarDomicilio @calle,@numero,@piso,@dpto,NULL,@codigoPostal,@ultimoIdInsertado = @idDomicilio OUTPUT;
 			
-			INSERT INTO MESSI_MAS3.Persona(
-				persona_nombre,
-				persona_apellido,
-				persona_DNI,
-				persona_idDomicilio,
-				persona_fechaNacimiento,
-				persona_fechaCreacion,
-				persona_id)
+			INSERT INTO MESSI_MAS3.Cliente(
+				cliente_nombre,
+				cliente_apellido,
+				cliente_DNI,
+				cliente_idDomicilio,
+				cliente_fechaNacimiento,
+				cliente_fechaCreacion,
+				cliente_id,
+				cliente_tipoDocumento_id
+				)
 			VALUES (
 				@nombre,
 				@apellido,
@@ -555,7 +578,8 @@ AS BEGIN
 				@idDomicilio,
 				@fechaNac,
 				GETDATE(),
-				@idUsuario)
+				@idUsuario,
+				1)
 			
 				
 		FETCH NEXT FROM cur
@@ -625,7 +649,7 @@ AS BEGIN
 		BEGIN
 			DECLARE @pass varchar(16)
 			SET @pass = '123456'
-			EXECUTE MESSI_MAS3.generarUsuario @cuit, @pass,@mail, @ultimoIdInsertado = @idUsuario OUTPUT;
+			EXECUTE MESSI_MAS3.generarUsuario @cuit, @pass, @ultimoIdInsertado = @idUsuario OUTPUT;
 			DECLARE @idRol int;
 			DECLARE @idDomicilio int;
 			EXECUTE MESSI_MAS3.generarDomicilio @calle,@numero,@piso,@dpto,NULL,@codigoPostal,@ultimoIdInsertado = @idDomicilio OUTPUT;
@@ -794,7 +818,7 @@ AS BEGIN
 			@codPubli
 	WHILE(@@FETCH_STATUS = 0)
 	BEGIN 
-		SET @idUser = (SELECT persona_id FROM MESSI_MAS3.Persona WHERE( @dni = persona_DNI))
+		SET @idUser = (SELECT cliente_id FROM MESSI_MAS3.Cliente WHERE( @dni = cliente_DNI))
 		SET @idPubli = (SELECT publicacion_id FROM MESSI_MAS3.Publicacion WHERE (@CodPubli = publicacion_codigo))
 
 		INSERT INTO 
@@ -901,18 +925,18 @@ GO
 CREATE PROCEDURE [MESSI_MAS3].[crearAdmin]
 AS
 BEGIN
-EXEC MESSI_MAS3.crearUsuario 'admin','w23e', null
+EXEC MESSI_MAS3.crearUsuario 'admin','w23e'
 DECLARE @Uid int
 DECLARE @Rid int
 SELECT @Uid=usuario_id FROM Usuario WHERE usuario_nombreUsuario='admin'
 SELECT @Rid=rol_id FROM Rol WHERE rol_nombre='Administrativo'
-INSERT INTO MESSI_MAS3.Funcionalidad_Rol (Rol_func_id ,Funcionalidad_rol_id ) SELECT @Rid,funcionalidad_id FROM MESSI_MAS3.Funcionalidad WHERE funcionalidad_descripcion LIKE 'ABM %'
+INSERT INTO MESSI_MAS3.Funcionalidad_Rol (Rol_func_id,Funcionalidad_rol_id) SELECT @Rid,funcionalidad_id FROM MESSI_MAS3.Funcionalidad WHERE funcionalidad_descripcion LIKE 'ABM %'
 INSERT INTO MESSI_MAS3.Rol_Usuario (Usuario_id,Rol_id) VALUES (@Uid,@Rid)
 END
 GO
 
 /*
-FALTA AGREGAR campo nombre al usuario en vez de que este en empresa y persona Y CAMBIARLO EN DER, y ver que funcionalidades agregar
+FALTA AGREGAR campo nombre al usuario en vez de que este en empresa y cliente Y CAMBIARLO EN DER, y ver que funcionalidades agregar
 EL nombre del admin es Administrador General
 */
 
@@ -922,8 +946,8 @@ EXEC MESSI_MAS3.meterDatosFijos
 PRINT 'DATOS INICIALES MIGRADOS';
 EXEC MESSI_MAS3.migrarRubros
 PRINT 'RUBROS MIGRADOS';
-EXEC MESSI_MAS3.migrarPersonas
-PRINT 'PERSONAS MIGRADAS';
+EXEC MESSI_MAS3.migrarClientes
+PRINT 'Clientes MIGRADAS';
 EXEC MESSI_MAS3.migrarEmpresas
 PRINT 'EMPRESAS MIGRADAS';
 EXEC MESSI_MAS3.crearFuncionalidades
