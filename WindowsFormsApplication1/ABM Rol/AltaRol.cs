@@ -26,6 +26,7 @@ namespace MercadoEnvio.ABM_Rol
         private void AltaRol_Load(object sender, EventArgs e)
         {
             this.agregarFuncionalidades(DAO.RolSQl.getAllFuncionalidades());
+            
         }
 
 
@@ -82,13 +83,6 @@ namespace MercadoEnvio.ABM_Rol
             }
         }
 
-        private void FuncionalidadesRol_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-            
-        }
-
-
-
         private void quitar_Click(object sender, EventArgs e)
         {
             if (Extension.anySelected(FuncionalidadesRol,"una funcionalidad")) //probar esto
@@ -109,10 +103,6 @@ namespace MercadoEnvio.ABM_Rol
                 this.Funcionalidad.Items.Add(elem);
             }
         }
-
-
-
-   
 
 
 }

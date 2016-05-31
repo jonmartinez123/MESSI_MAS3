@@ -52,6 +52,7 @@
             this.Nombre.Name = "Nombre";
             this.Nombre.Size = new System.Drawing.Size(149, 20);
             this.Nombre.TabIndex = 30;
+            this.Nombre.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.Nombre_KeyPress);
             // 
             // Estado
             // 
@@ -63,6 +64,7 @@
             this.Estado.TabIndex = 29;
             this.Estado.Text = "Habilitado";
             this.Estado.UseVisualStyleBackColor = false;
+            this.Estado.CheckedChanged += new System.EventHandler(this.Estado_CheckedChanged);
             // 
             // label2
             // 
@@ -92,6 +94,7 @@
             this.cambiarNombre.TabIndex = 31;
             this.cambiarNombre.Text = "Cambiar Nombre";
             this.cambiarNombre.UseVisualStyleBackColor = true;
+            this.cambiarNombre.Click += new System.EventHandler(this.cambiarNombre_Click);
             // 
             // FuncionalidadesRol
             // 
@@ -126,6 +129,7 @@
             this.Cerrar.TabIndex = 33;
             this.Cerrar.Text = "Cerrar";
             this.Cerrar.UseVisualStyleBackColor = true;
+            this.Cerrar.Click += new System.EventHandler(this.Cerrar_Click);
             // 
             // eliminar
             // 
@@ -135,6 +139,7 @@
             this.eliminar.TabIndex = 34;
             this.eliminar.Text = "Eliminar";
             this.eliminar.UseVisualStyleBackColor = true;
+            this.eliminar.Click += new System.EventHandler(this.eliminar_Click);
             // 
             // Agregar
             // 
@@ -144,6 +149,7 @@
             this.Agregar.TabIndex = 35;
             this.Agregar.Text = "Agregar";
             this.Agregar.UseVisualStyleBackColor = true;
+            this.Agregar.Click += new System.EventHandler(this.Agregar_Click);
             // 
             // FuncionalidadSeleccion
             // 

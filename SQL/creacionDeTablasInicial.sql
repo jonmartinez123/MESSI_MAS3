@@ -134,7 +134,7 @@ CREATE TABLE MESSI_MAS3.Usuario (
   usuario_id INT PRIMARY KEY NOT NULL IDENTITY,
   usuario_nombreUsuario NVARCHAR(255) NOT NULL,  --AGREGAR UNIQUE!!!
   usuario_contrasenia NVARCHAR(255) NULL,				--Cambiado de NOT NULL a NULL y el nombre a 'contrasenia'
-  usuario_deleted INT DEFAULT 0,
+  usuario_deleted INT DEFAULT 0,						--flag de Baja logica
   usuario_intentos INT DEFAULT 0,
   usuario_primeraPublicacion INT DEFAULT 1 -- significa True y luego de hacer la primera publicacion se setea en 0
    )
@@ -147,8 +147,10 @@ CREATE TABLE MESSI_MAS3.Usuario (
 CREATE TABLE MESSI_MAS3.Rol (
   rol_id INT PRIMARY KEY NOT NULL IDENTITY,
   rol_nombre NVARCHAR(255) NULL,
-  rol_deleted INT DEFAULT 0, 
+  rol_habilitado INT DEFAULT 1,						--Si se da de baja, lo seteamos en 0
   )
+
+
 
   CREATE TABLE MESSI_MAS3.TipoDocumento(
 	tipoDocumento_id INT PRIMARY KEY NOT NULL IDENTITY,
@@ -580,7 +582,8 @@ AS BEGIN
 				GETDATE(),
 				@idUsuario,
 				1)
-			
+		
+		
 				
 		FETCH NEXT FROM cur
 		INTO 

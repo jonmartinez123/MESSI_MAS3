@@ -1,6 +1,6 @@
 /*------ABM DE ROL------*/
 CREATE PROCEDURE MESSI_MAS3.get_funcionalidades(@rol nvarchar(255))
-AS				--Puede crashear ya que los nombres de la columna coinciden con los de la tabla intermedia
+AS				
 BEGIN
 	SELECT funcionalidad_id, funcionalidad_descripcion FROM MESSI_MAS3.Funcionalidad, MESSI_MAS3.Funcionalidad_Rol, MESSI_MAS3.Rol
 	WHERE funcionalidad_id = Funcionalidad_rol_id  AND
@@ -23,7 +23,7 @@ GO
 CREATE PROCEDURE MESSI_MAS3.get_roles
 AS
 BEGIN
-	SELECT rol_nombre, rol_deleted FROM MESSI_MAS3.ROL
+	SELECT rol_id, rol_nombre, rol_habilitado FROM MESSI_MAS3.ROL  --Le agregue el rol_id
 END
 GO
 
@@ -44,7 +44,7 @@ GO
 CREATE PROCEDURE MESSI_MAS3.crear_rol(@descripcion nvarchar(255), @estado INT)
 AS
 BEGIN
-	INSERT INTO MESSI_MAS3.ROL(rol_nombre, rol_deleted)
+	INSERT INTO MESSI_MAS3.ROL(rol_nombre, rol_habilitado)
 	VALUES(@descripcion, @estado)
 END
 GO
@@ -54,7 +54,7 @@ CREATE PROCEDURE MESSI_MAS3.bajar_rol(@descripcion nvarchar(255))
 AS
 BEGIN
 	UPDATE MESSI_MAS3.ROL
-	SET rol_deleted = 1
+	SET rol_habilitado = 0
 	WHERE rol_nombre = @descripcion
 
 	DECLARE @rolId INT
@@ -77,7 +77,7 @@ GO
 CREATE PROCEDURE MESSI_MAS3.asignar_funcionalidad_a_rol (@rol nvarchar(255), @func nvarchar(255))
 AS
 BEGIN
-	INSERT INTO MESSI_MAS3.Funcionalidad_Rol(Rol_func_id, Funcionalidad_rol_id) VALUES ((SELECT TOP 1 rol_id FROM MESSI_MAS3.ROL WHERE rol_nombre = @rol),
+	INSERT INTO MESSI_MAS3.Funcionalidad_Rol(Rol_func_id, Funcionalidad_rol_id) VALUES ((SELECT rol_id FROM MESSI_MAS3.ROL WHERE rol_nombre = @rol),
 	 (SELECT TOP 1 funcionalidad_id FROM MESSI_MAS3.FUNCIONALIDAD WHERE funcionalidad_descripcion = @func))
 END
 GO
@@ -119,7 +119,7 @@ CREATE PROCEDURE MESSI_MAS3.habilitar_rol(@nombre nvarchar(255))
 AS
 BEGIN
 	UPDATE MESSI_MAS3.ROL
-	SET rol_deleted = 0
+	SET rol_habilitado = 1
 	WHERE rol_nombre = @nombre
 END
 GO

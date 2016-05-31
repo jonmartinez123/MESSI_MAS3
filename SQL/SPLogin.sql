@@ -14,7 +14,7 @@ GO
 CREATE PROCEDURE [MESSI_MAS3].getRoles (@id int)
 AS
 BEGIN
-	SELECT MESSI_MAS3.Rol.rol_id, rol_nombre FROM MESSI_MAS3.Rol_Usuario,MESSI_MAS3.Rol WHERE Usuario_id=@id AND MESSI_MAS3.Rol_Usuario.Rol_id = MESSI_MAS3.Rol.rol_id AND rol_deleted=0
+	SELECT MESSI_MAS3.Rol.rol_id, rol_nombre FROM MESSI_MAS3.Rol_Usuario,MESSI_MAS3.Rol WHERE Usuario_id=@id AND MESSI_MAS3.Rol_Usuario.Rol_id = MESSI_MAS3.Rol.rol_id AND rol_habilitado=1
 END
 GO
 
@@ -27,12 +27,12 @@ BEGIN
 END
 GO
 
-CREATE PROCEDURE [MESSI_MAS3].getMail (@id int)
+/*CREATE PROCEDURE [MESSI_MAS3].getMail (@id int)
 AS
 BEGIN
 	SELECT  usuario_mail FROM MESSI_MAS3.Usuario WHERE usuario_id=@id
 END
-GO
+GO*/
 
 CREATE PROCEDURE [MESSI_MAS3].existe_usuario (@nombreUsuario NVARCHAR(255))
 AS

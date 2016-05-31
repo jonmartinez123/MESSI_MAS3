@@ -29,13 +29,13 @@
         private void InitializeComponent()
         {
             this.ListadoRoles = new System.Windows.Forms.DataGridView();
-            this.col_id = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.col_rol = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.col_habilitado = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.agregar = new System.Windows.Forms.Button();
             this.button_Cerrar = new System.Windows.Forms.Button();
             this.groupBox_SeleccionarRol = new System.Windows.Forms.GroupBox();
             this.modificar = new System.Windows.Forms.Button();
+            this.col_id = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.col_rol = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.col_habilitado = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.ListadoRoles)).BeginInit();
             this.groupBox_SeleccionarRol.SuspendLayout();
             this.SuspendLayout();
@@ -57,22 +57,7 @@
             this.ListadoRoles.Name = "ListadoRoles";
             this.ListadoRoles.Size = new System.Drawing.Size(346, 335);
             this.ListadoRoles.TabIndex = 0;
-            // 
-            // col_id
-            // 
-            this.col_id.HeaderText = "ID";
-            this.col_id.Name = "col_id";
-            // 
-            // col_rol
-            // 
-            this.col_rol.HeaderText = "Rol";
-            this.col_rol.Name = "col_rol";
-            this.col_rol.ReadOnly = true;
-            // 
-            // col_habilitado
-            // 
-            this.col_habilitado.HeaderText = "Habilitado";
-            this.col_habilitado.Name = "col_habilitado";
+            this.ListadoRoles.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.ListadoRoles_CellContentClick);
             // 
             // agregar
             // 
@@ -121,6 +106,25 @@
             this.modificar.UseVisualStyleBackColor = false;
             this.modificar.Click += new System.EventHandler(this.modificar_Click);
             // 
+            // col_id
+            // 
+            this.col_id.DataPropertyName = "col_id";
+            this.col_id.HeaderText = "ID";
+            this.col_id.Name = "col_id";
+            // 
+            // col_rol
+            // 
+            this.col_rol.DataPropertyName = "col_rol";
+            this.col_rol.HeaderText = "Rol";
+            this.col_rol.Name = "col_rol";
+            this.col_rol.ReadOnly = true;
+            // 
+            // col_habilitado
+            // 
+            this.col_habilitado.DataPropertyName = "col_habilitado";
+            this.col_habilitado.HeaderText = "Habilitado";
+            this.col_habilitado.Name = "col_habilitado";
+            // 
             // Listado
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -131,7 +135,7 @@
             this.Name = "Listado";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "ABM Rol";
-            this.Load += new System.EventHandler(this.Rol_Load);
+            this.Load += new System.EventHandler(this.Listado_Load);
             ((System.ComponentModel.ISupportInitialize)(this.ListadoRoles)).EndInit();
             this.groupBox_SeleccionarRol.ResumeLayout(false);
             this.ResumeLayout(false);
@@ -141,13 +145,13 @@
         #endregion
 
         private System.Windows.Forms.DataGridView ListadoRoles;
-        private System.Windows.Forms.DataGridViewTextBoxColumn col_id;
-        private System.Windows.Forms.DataGridViewTextBoxColumn col_rol;
-        private System.Windows.Forms.DataGridViewTextBoxColumn col_habilitado;
         private System.Windows.Forms.Button agregar;
         private System.Windows.Forms.Button button_Cerrar;
         private System.Windows.Forms.GroupBox groupBox_SeleccionarRol;
         private System.Windows.Forms.Button modificar;
+        private System.Windows.Forms.DataGridViewTextBoxColumn col_id;
+        private System.Windows.Forms.DataGridViewTextBoxColumn col_rol;
+        private System.Windows.Forms.DataGridViewTextBoxColumn col_habilitado;
 
 
     }

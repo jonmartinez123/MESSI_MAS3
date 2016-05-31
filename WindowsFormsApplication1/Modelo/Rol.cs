@@ -11,6 +11,7 @@ namespace MercadoEnvio.Modelo
         private int id;
         public String nombre;
         public Boolean habilitado;
+        public int habiliInteger;
         private List<Funcionalidad> funcionalidades;
         private List<String> funcionalidadesString; //Cambie de Funcionalidades a String
         public List<Funcionalidad> getFuncionalidades { get { return funcionalidades; } set { funcionalidades = value; } }
@@ -40,6 +41,17 @@ namespace MercadoEnvio.Modelo
             this.id = Decimal.ToInt32(id);
             this.nombre = nombre;
             this.habilitado = habilitado;
+            
+
+
+        }
+
+        public Rol(Decimal id, String nombre, Boolean habilitado, Int32 intHabilitado)
+        {
+            this.id = Decimal.ToInt32(id);
+            this.nombre = nombre;
+            this.habilitado = habilitado;
+            this.habiliInteger = intHabilitado;
 
 
         }

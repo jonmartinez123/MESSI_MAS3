@@ -88,6 +88,7 @@
             this.Nombre.Name = "Nombre";
             this.Nombre.Size = new System.Drawing.Size(149, 20);
             this.Nombre.TabIndex = 26;
+            this.Nombre.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.Nombre_KeyPress);
             // 
             // Estado
             // 
@@ -156,6 +157,7 @@
             this.Funcionalidad.Name = "Funcionalidad";
             this.Funcionalidad.Size = new System.Drawing.Size(207, 21);
             this.Funcionalidad.TabIndex = 27;
+            
             // 
             // Cerrar
             // 
@@ -165,6 +167,7 @@
             this.Cerrar.TabIndex = 24;
             this.Cerrar.Text = "Cerrar";
             this.Cerrar.UseVisualStyleBackColor = true;
+            this.Cerrar.Click += new System.EventHandler(this.Cerrar_Click);
             // 
             // groupBox2
             // 
@@ -211,6 +214,7 @@
             this.Name = "AltaRol";
             this.Text = "AltaRol";
             this.Load += new System.EventHandler(this.AltaRol_Load);
+            
             ((System.ComponentModel.ISupportInitialize)(this.FuncionalidadesRol)).EndInit();
             this.datosRol.ResumeLayout(false);
             this.datosRol.PerformLayout();

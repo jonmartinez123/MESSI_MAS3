@@ -25,9 +25,9 @@ namespace MercadoEnvio.ABM_Rol
             materialSkinManager.Theme = MaterialSkinManager.Themes.LIGHT;
         }
 
-        private void Rol_Load(object sender, EventArgs e)
+        private void Listado_Load(object sender, EventArgs e)
         {
-
+            this.reload();
         }
 
        //
@@ -40,7 +40,7 @@ namespace MercadoEnvio.ABM_Rol
         }
 
         public Decimal rol { get; set; }
-
+            
         private void Agregar_Click(object sender, EventArgs e)
         {
             Extension.openInNewWindow(this, new AltaRol(this)); //peligrosa linea
@@ -67,11 +67,19 @@ namespace MercadoEnvio.ABM_Rol
     public Modelo.Rol getCurrentRol(){
         return new Modelo.Rol(Convert.ToDecimal(Extension.cellValue(ListadoRoles, "col_id")),
             Convert.ToString(Extension.cellValue(this.ListadoRoles, "col_rol")),
-            Convert.ToBoolean(Extension.cellValue(this.ListadoRoles, "col_habilitado")));
+            true,
+            Convert.ToInt32(Extension.cellValue(this.ListadoRoles, "col_habilitado")));
+
+        //Convert.ToBoolean(Extension.cellValue(this.ListadoRoles, "col_habilitado"))
     }
 
     public void reload() {
         DAO.RolSQl.getAllRoles(ListadoRoles);
+    }
+
+    private void ListadoRoles_CellContentClick(object sender, DataGridViewCellEventArgs e)
+    {
+
     }
 
 

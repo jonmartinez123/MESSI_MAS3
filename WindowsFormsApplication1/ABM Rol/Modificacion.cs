@@ -69,7 +69,10 @@ namespace MercadoEnvio.ABM_Rol
         public void reload()
         {
             this.Nombre.Text = rol.nombre;
-            this.Estado.Checked = rol.habilitado;
+
+            if (rol.habiliInteger == 1) { this.Estado.Checked = true; }
+            if (rol.habiliInteger == 0) { this.Estado.Checked = false; }
+            //this.Estado.Checked = rol.habilitado;
             this.FuncionalidadSeleccion.Items.Clear();
 
             this.agregarFuncionalidades(DAO.RolSQl.getFuncionalidadesQueNoTiene(rol));
@@ -143,6 +146,9 @@ namespace MercadoEnvio.ABM_Rol
             }
         }
 
+ 
 
+
+ 
     }
 }

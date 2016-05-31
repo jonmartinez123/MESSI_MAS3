@@ -91,7 +91,7 @@ namespace MercadoEnvio.Login
          {
              int id=  DAO.LoginSQL.getID(Persistencia.usuario.NombreUsuario);
              Persistencia.usuario.Id = id;
-             Persistencia.usuario.Mail = DAO.LoginSQL.getMail(id);
+             //Persistencia.usuario.Mail = DAO.LoginSQL.getMail(id);
              //Persistencia.usuario.Telefono = DAO.LoginSQL.getTelefono(id);
              DAO.LoginSQL.vaciarIntentos(id);
              roles = DAO.LoginSQL.getRoles(id);
