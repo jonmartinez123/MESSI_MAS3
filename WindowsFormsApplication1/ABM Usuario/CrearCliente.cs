@@ -18,14 +18,14 @@ namespace MercadoEnvio.ABM_Usuario
 {
     public partial class CrearCliente : MaterialForm
     {
-        Modelo.Usuario usuarioGlobal;
+        Modelo.Cliente clienteGlobal;
 
-        public CrearCliente(Modelo.Usuario unUsuario)
+        public CrearCliente(Modelo.Cliente unCliente)
         {
             inicializar();
-            usuarioGlobal = unUsuario;
+            clienteGlobal = unCliente;
+            if (clienteGlobal.tieneId()) cargarFormularioParaModoficacion(unCliente);
         }
-
 
         private void inicializar()
         {
@@ -38,7 +38,7 @@ namespace MercadoEnvio.ABM_Usuario
         private void txtNombre_KeyPress(object sender, KeyPressEventArgs e)
         {
             this.allowAlphanumericOnly(e);
-            if(e.KeyChar != 8) this.allowMaxLenght(txtNombre, 254, e);
+            if (e.KeyChar != 8) this.allowMaxLenght(txtNombre, 254, e);
         }
 
         private void txtApellido_KeyPress(object sender, KeyPressEventArgs e)
@@ -55,12 +55,13 @@ namespace MercadoEnvio.ABM_Usuario
 
         private bool esInvalidoMail(string mail)
         {
-           return !(mail.Contains('@') && mail.Contains('.'));
+            return !(mail.Contains('@') && mail.Contains('.'));
         }
 
         private void btnOK_Click(object sender, EventArgs e)
         {
-            try{
+            try
+            {
                 #region Validaciones
                 var exceptionMessage = string.Empty;
 
@@ -105,10 +106,39 @@ namespace MercadoEnvio.ABM_Usuario
 
 
                 #endregion
+
+                //Modelo.Usuario clienteConDatos = cargarCliente();
             }
-            catch (Exception ex){
+            catch (Exception ex)
+            {
                 MessageBox.Show(ex.Message, "Atención");
             }
+        }
+
+    /*    private Modelo.Usuario cargarCliente()
+        {
+            //  Modelo.Cliente unUsuario = new Modelo.Cliente(clienteGlobal.NombreUsuario, clienteGlobal.Password);
+            //TODO falta cargar todos los datos
+            return unUsuario;
+        }*/
+
+        private void cargarFormularioParaModoficacion(Modelo.Cliente unCliente)
+        {
+            //ActiveForm.Text = "Modificar Usuario";
+            txtNombre.Text = unCliente.Nombre;
+            txtApellido.Text = unCliente.Apellido;
+            //cmbTipo.Text = unCliente.TipoDocumento.Descripcion;
+            txtDocumento.Text = unCliente.DNI.ToString();
+            //dtpFechaNacimiento.Text = unCliente.FechaNacimiento.ToShortDateString();
+            txtMail.Text = unCliente.Mail;
+            txtTel.Text = unCliente.Telefono.ToString();
+            txtCalle.Text = unCliente.Domicilio.Calle;
+            txtAltura.Text = unCliente.Domicilio.Altura.ToString();
+            txtPiso.Text = unCliente.Domicilio.Piso.ToString();
+            txtDepto.Text = unCliente.Domicilio.Departamento.ToString();
+            //cmbLocalidad.Text = unCliente.Domicilio.Localidad.Nombre;
+            txtCodigoPostal.Text = unCliente.Domicilio.Localidad.CodigoPostal.ToString();
+
         }
 
         private void txtMail_KeyPress(object sender, KeyPressEventArgs e)
@@ -152,7 +182,8 @@ namespace MercadoEnvio.ABM_Usuario
             this.allowNumericOnly(e);
             if (e.KeyChar != 8) this.allowMaxLenght(txtCodigoPostal, 17, e);
         }
-        
+
 
     }
 }
+

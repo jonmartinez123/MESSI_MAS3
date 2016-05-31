@@ -14,11 +14,14 @@ namespace MercadoEnvio.Modelo
         private string departamento;
         private Localidad localidad;
         private string ciudad;
+        private int codigoPostal;
+
         public string Calle { get { return calle; } set { calle = value; } }
         public int Altura { get { return altura; } set { altura = value; } }
         public int Piso { get { return piso; } set { piso = value; } }
         public string Departamento { get { return departamento; } set { departamento = value; } }
         public string Ciudad { get { return ciudad; } set { ciudad = value; } }
         public Localidad Localidad { get { return localidad; } set { localidad = value; } }
+        public int CodigoPostal { get { return codigoPostal; } set { codigoPostal = value; } }
     }
 }

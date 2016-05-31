@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using MaterialSkin;
 using MaterialSkin.Controls;
+using MercadoEnvio.Utils;
 
 namespace MercadoEnvio.ABM_Usuario
 {
@@ -26,7 +27,8 @@ namespace MercadoEnvio.ABM_Usuario
         {
         }
 
-        private void btnContinuar_Click(object sender, EventArgs e){
+        private void btnContinuar_Click(object sender, EventArgs e)
+        {
 
             try
             {
@@ -52,16 +54,19 @@ namespace MercadoEnvio.ABM_Usuario
 
                 #endregion
 
-                Modelo.Usuario unUsuario = new Modelo.Usuario(txtUsuario.Text, txtPass.Text);
+                Modelo.Cliente unCliente = new Modelo.Cliente(-1, txtUsuario.Text, txtPass.Text);
 
                 this.Hide();
 
-                if (cmbTipo.Text == "Cliente") {
-                    CrearCliente cCliente = new CrearCliente(unUsuario);
+                if (cmbTipo.Text == "Cliente")
+                {
+                    //Extension.openInNewWindow(this, new CrearCliente(unCliente));
+                    CrearCliente cCliente = new CrearCliente(unCliente);
                     cCliente.ShowDialog();
                 }
-                else if (cmbTipo.Text == "Empresa") {
-                   // CrearEmpresa cCliente = new CrearEmpresa(unUsuario);
+                else if (cmbTipo.Text == "Empresa")
+                {
+                    // CrearEmpresa cCliente = new CrearEmpresa(unUsuario);
                     //cCliente.ShowDialog();
                 }
 
@@ -73,7 +78,8 @@ namespace MercadoEnvio.ABM_Usuario
             }
         }
 
-        void validarUsername(string username) {
+        void validarUsername(string username)
+        {
             //Buscar en la base a ver si existe (SP)
         }
     }

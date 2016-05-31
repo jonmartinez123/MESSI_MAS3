@@ -91,7 +91,7 @@ namespace MercadoEnvio.Funcionalidades
             }
 
             //borro menu cuenta si no es empresa o admin
-            if (Persistencia.usuario.Tipo == null) menuHome.Items.Remove(cuentaToolStripMenuItem);
+           // if (Persistencia.usuario.Tipo == null) menuHome.Items.Remove(cuentaToolStripMenuItem);
 
             //Si no posee ninguna funcionalidad de administración borro el menu item
             if (!administracion) menuHome.Items.Remove(administracionToolStripMenuItem);

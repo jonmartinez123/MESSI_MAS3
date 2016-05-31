@@ -11,33 +11,37 @@ namespace MercadoEnvio.Modelo
     {
         private int id;
         private String nombreUsuario;
-        private String contrasenia;
-        private String mail;
-        private int telefono;
+        private String password;
         private Rol rol;
-        private TipoUsuario tipo;
+
+        public int Id { get { return id; } set { id = value; } }
+        public String NombreUsuario { get { return nombreUsuario; } set { nombreUsuario = value; } }
+        public String Password { get { return password; } set { password = value; } }
+        public Rol Rol { get { return rol; } set { rol = value; } }
+
         //private List<Rol> roles;
         //private int intentos;
-        public int Id { get { return id; } set {id=value;}}
-        public String NombreUsuario { get { return nombreUsuario; } set { nombreUsuario = value; } }
         //public int Intentos { get { return 0; }}
-        public String Contrasenia { get { return contrasenia; } set { contrasenia = value; } }
-        public String Mail { get { return mail; } set { mail = value; } }
-        public Rol Rol { get { return rol; } set { rol = value; } }
-        public int Telefono { get { return telefono; } set { telefono = value; } }
-        public TipoUsuario Tipo { get { return tipo; } set { tipo = value; } }
+
+        public Usuario()
+        {
+        }
 
         public Usuario(int id,String username, String password)
         {
             this.id = id;
             this.nombreUsuario = username;
-            this.contrasenia = password;
+            this.password = password;
         }
 
         public Usuario(String username, String password)
         {
             this.nombreUsuario = username;
-            this.contrasenia = password;
+            this.password = password;
+        }
+
+        public bool tieneId(){
+            return this.Id != -1;
         }
 
     }

@@ -10,6 +10,7 @@ namespace MercadoEnvio.Modelo
     {
         private string nombre;
         private int codigoPostal;
+
         public string Nombre { get { return nombre; } set { nombre = value; } }
         public int CodigoPostal { get { return codigoPostal; } set { codigoPostal = value; } }
     }

@@ -38,7 +38,6 @@ C:\Users\Eric\Desktop\MESSI_MAS3\WindowsFormsApplication1\bin\Debug\WindowsForms
 C:\Users\Eric\Desktop\MESSI_MAS3\WindowsFormsApplication1\bin\Debug\WindowsFormsApplication1.pdb
 C:\Users\Eric\Desktop\MESSI_MAS3\WindowsFormsApplication1\bin\Debug\MaterialSkin.dll
 C:\Users\Eric\Desktop\MESSI_MAS3\WindowsFormsApplication1\obj\Debug\Desktop.csprojResolveAssemblyReference.cache
-C:\Users\Eric\Desktop\MESSI_MAS3\WindowsFormsApplication1\obj\Debug\MercadoEnvio.ABM_Rol.Rol.resources
 C:\Users\Eric\Desktop\MESSI_MAS3\WindowsFormsApplication1\obj\Debug\MercadoEnvio.ABM_Rubro.Rubro.resources
 C:\Users\Eric\Desktop\MESSI_MAS3\WindowsFormsApplication1\obj\Debug\MercadoEnvio.ABM_Usuario.Usuario.resources
 C:\Users\Eric\Desktop\MESSI_MAS3\WindowsFormsApplication1\obj\Debug\MercadoEnvio.ABM_Visibilidad.Visibilidad.resources
@@ -56,3 +55,6 @@ C:\Users\Eric\Desktop\MESSI_MAS3\WindowsFormsApplication1\obj\Debug\Desktop.cspr
 C:\Users\Eric\Desktop\MESSI_MAS3\WindowsFormsApplication1\obj\Debug\MercadoEnvio.ABM_Usuario.CrearUsuario.resources
 C:\Users\Eric\Desktop\MESSI_MAS3\WindowsFormsApplication1\obj\Debug\MercadoEnvio.ABM_Usuario.CrearCliente.resources
 C:\Users\Eric\Desktop\MESSI_MAS3\WindowsFormsApplication1\obj\Debug\MercadoEnvio.ABM_Usuario.CrearEmpresa.resources
+C:\Users\Eric\Desktop\MESSI_MAS3\WindowsFormsApplication1\obj\Debug\MercadoEnvio.ABM_Rol.AltaRol.resources
+C:\Users\Eric\Desktop\MESSI_MAS3\WindowsFormsApplication1\obj\Debug\MercadoEnvio.ABM_Rol.Listado.resources
+C:\Users\Eric\Desktop\MESSI_MAS3\WindowsFormsApplication1\obj\Debug\MercadoEnvio.ABM_Rol.Modificacion.resources
