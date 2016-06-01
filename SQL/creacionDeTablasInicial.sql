@@ -200,6 +200,7 @@ CREATE TABLE MESSI_MAS3.Cliente (
   cliente_tel NUMERIC(15,0) DEFAULT 0,
   cliente_mail NVARCHAR(255) NULL,	
   cliente_tipoDocumento_id INT REFERENCES MESSI_MAS3.TipoDocumento(tipoDocumento_id) ,
+  cliente_calificacionPromedio INT DEFAULT 0 NULL,	
   )
 
 
@@ -223,7 +224,7 @@ CREATE TABLE MESSI_MAS3.Empresa (
   empresa_razonSocial NVARCHAR(255) NOT NULL,
   empresa_cuit NVARCHAR(50) NOT NULL,
   empresa_id INT PRIMARY KEY REFERENCES MESSI_MAS3.Usuario (usuario_id),
-  empresa_calificacionPromedio INT NULL,						--Cambio de Not null a NULL
+  empresa_calificacionPromedio INT DEFAULT 0 NULL,						--Cambio de Not null a NULL
   empresa_fechaCreacion DATETIME NOT NULL,
   empresa_idDomicilio INT REFERENCES MESSI_MAS3.Domicilio (domicilio_idDomicilio),
   empresa_telefono VARCHAR(10) NULL,													--Cambie de NOT NULL a NULL
@@ -519,6 +520,7 @@ AS BEGIN
 			@piso NUMERIC(18,0),
 			@dpto NVARCHAR(255),
 			@codigoPostal NVARCHAR(255)
+
 	DECLARE cur CURSOR FOR
 
 	SELECT DISTINCT 
@@ -571,7 +573,8 @@ AS BEGIN
 				cliente_fechaNacimiento,
 				cliente_fechaCreacion,
 				cliente_id,
-				cliente_tipoDocumento_id
+				cliente_tipoDocumento_id,
+				cliente_mail
 				)
 			VALUES (
 				@nombre,
@@ -581,7 +584,8 @@ AS BEGIN
 				@fechaNac,
 				GETDATE(),
 				@idUsuario,
-				1)
+				1,
+				@mail)
 		
 		
 				
@@ -668,7 +672,8 @@ AS BEGIN
 				empresa_cuit,
 				empresa_id,
 				empresa_fechaCreacion,
-				empresa_rubroId)
+				empresa_rubroId,
+				empresa_mail)
 			VALUES (
 				@razonSocial,
 				@telefono,
@@ -676,7 +681,8 @@ AS BEGIN
 				@cuit,
 				@idUsuario,
 				@fechaCreacion,
-				NULL)
+				NULL,
+				@mail)
 			
 				
 		FETCH NEXT FROM cur
@@ -916,6 +922,68 @@ AS BEGIN
 	
 END
 GO
+
+
+/*--------------------------Calculo las calificaciones promedio---------------------------*/
+CREATE FUNCTION [MESSI_MAS3].[esEmpresa](@idUser INT)
+RETURNS INTEGER
+AS BEGIN
+DECLARE @idlocoUsuario INT, @esEmpresa INT, @idEmpresa INT
+SET @esEmpresa = 0
+SET @idlocoUsuario = @idUser
+
+SELECT @esEmpresa = empresa_id FROM MESSI_MAS3.Empresa WHERE @idlocoUsuario = empresa_id
+
+RETURN @esEmpresa
+
+END
+GO
+
+
+CREATE PROCEDURE [MESSI_MAS3].[insertarCalificacionPromedio] --UPDATEAR LOS GANADORES DE LAS OFERTAS
+AS BEGIN
+	set nocount on;
+	set xact_abort on;
+	DECLARE @idUserCalificado int,
+			@promedioEstrellasInt int
+
+	DECLARE cur CURSOR FOR
+	
+	SELECT DISTINCT
+   calificacion_idusuarioCalificado,
+   FLOOR(AVG(calificacion_cantidadEstrellas)) AS PROMEDIO
+	FROM
+   MESSI_MAS3.Calificacion
+   GROUP BY calificacion_idusuarioCalificado
+
+
+	OPEN cur
+	FETCH NEXT FROM cur
+	INTO 
+			@idUserCalificado,
+			@promedioEstrellasInt
+
+	WHILE(@@FETCH_STATUS = 0)
+	BEGIN 
+	IF (MESSI_MAS3.esEmpresa(@idUserCalificado) = 0)
+		BEGIN
+		UPDATE MESSI_MAS3.Cliente SET cliente_calificacionPromedio = @promedioEstrellasInt  WHERE (cliente_id = @idUserCalificado)
+		END
+	ELSE
+		BEGIN
+			UPDATE MESSI_MAS3.Empresa SET empresa_calificacionPromedio = @promedioEstrellasInt  WHERE (empresa_id = @idUserCalificado)
+		END
+		FETCH NEXT FROM cur
+		INTO @idUserCalificado,
+			@promedioEstrellasInt
+	END
+	CLOSE cur 
+	DEALLOCATE cur
+
+	
+END
+GO
+
 /*---------------------------INSERCION DE FUNCIONALIDADES---------------------------*/
 CREATE PROCEDURE [MESSI_MAS3].crearFuncionalidades
 AS
