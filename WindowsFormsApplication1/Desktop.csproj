@@ -123,6 +123,12 @@
     <Compile Include="Calificar\Calificar.Designer.cs">
       <DependentUpon>Calificar.cs</DependentUpon>
     </Compile>
+    <Compile Include="Calificar\darCalificacion.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Calificar\darCalificacion.Designer.cs">
+      <DependentUpon>darCalificacion.cs</DependentUpon>
+    </Compile>
     <Compile Include="ComprarOfertar\ComprarOfertar.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -130,6 +136,7 @@
       <DependentUpon>ComprarOfertar.cs</DependentUpon>
     </Compile>
     <Compile Include="Config\ConfiguracionVariable.cs" />
+    <Compile Include="DAO\CalificacionSQL.cs" />
     <Compile Include="DAO\LoginSQL.cs" />
     <Compile Include="DAO\RolSQl.cs" />
     <Compile Include="DAO\sqlConnector.cs" />
@@ -147,6 +154,7 @@
       <DependentUpon>MenuUsuario.cs</DependentUpon>
     </Compile>
     <Compile Include="Modelo\Administrador.cs" />
+    <Compile Include="Modelo\Calificacion.cs" />
     <Compile Include="Modelo\Cliente.cs" />
     <Compile Include="Modelo\Domicilio.cs" />
     <Compile Include="Modelo\Empresa.cs" />
@@ -224,6 +232,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Calificar\Calificar.resx">
       <DependentUpon>Calificar.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Calificar\darCalificacion.resx">
+      <DependentUpon>darCalificacion.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ComprarOfertar\ComprarOfertar.resx">
       <DependentUpon>ComprarOfertar.cs</DependentUpon>

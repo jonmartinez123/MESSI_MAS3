@@ -121,7 +121,7 @@ namespace MercadoEnvio.ABM_Rol
 
         private void cambiarNombre_Click(object sender, EventArgs e)
         {
-            if (String.IsNullOrEmpty(Nombre.Text))
+            if (!String.IsNullOrEmpty(Nombre.Text))
             {
                 if (DAO.RolSQl.yaExisteRol(Nombre.Text) == 1)
                 {

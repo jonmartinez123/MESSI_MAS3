@@ -21,3 +21,14 @@ ELSE
 
 END
 GO
+
+
+--get_calificacionesPendientesDe
+CREATE PROCEDURE [MESSI_MAS3].[get_calificacionesPendientesDe](@idUsuario INT)
+AS BEGIN
+SELECT calificacion_compraId, compras_publicacion_id, tipoPublicacion_nombre, publicacion_fechaFin, publicacion_descripcion
+	 FROM MESSI_MAS3.Calificacion, MESSI_MAS3.Compra, MESSI_MAS3.Publicacion, MESSI_MAS3.tipoPublicacion
+	WHERE (calificacion_idPersonaCalificador = @idUsuario AND calificacion_pendiente = 1 AND compras_publicacion_id = publicacion_id AND publicacion_tipoPublicacionId = tipoPublicacion_nombre)
+
+END
+GO

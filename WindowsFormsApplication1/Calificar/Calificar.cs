@@ -24,7 +24,18 @@ namespace MercadoEnvio.Calificar
 
         private void Calificar_Load(object sender, EventArgs e)
         {
+            this.reload();
+        }
 
+        private void cerrarCalificacion_button_Click(object sender, EventArgs e)
+        {
+           
+        }
+
+        private void reload() {
+            DAO.CalificacionSQL.getCalificacionesPendientes(calificacionesPendientes);
+           // DAO.CalificacionSQL.getHistoricoCalificaciones(historicoCalificacionesUltimas);
+           // DAO.CalificacionSQL.getComprasXEstrellas(comprasxEstrellas);
         }
     }
 }
