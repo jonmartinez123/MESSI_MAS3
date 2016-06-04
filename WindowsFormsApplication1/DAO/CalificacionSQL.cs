@@ -7,7 +7,7 @@ using System.Windows.Forms;
 
 namespace MercadoEnvio.DAO
 {
-    class CalificacionSQL
+   public class CalificacionSQL
     {
         internal static void getCalificacionesPendientes(DataGridView calificacionesPendientes)
         {
@@ -23,6 +23,11 @@ namespace MercadoEnvio.DAO
         {
             SqlConnector.retrieveDT("get_comprasXEstrellasSegunId", comprasxEstrellas, Convert.ToString(Utils.Persistencia.usuario.Id));
  
+        }
+
+        internal static void actualizarCalificacion(int idCalificacion, string mensajeCalificacion, int cantidadEstrellasDadas)
+        {
+            SqlConnector.executeProcedure("actualizar_calificacionDe", idCalificacion, mensajeCalificacion, cantidadEstrellasDadas);
         }
     }
 }

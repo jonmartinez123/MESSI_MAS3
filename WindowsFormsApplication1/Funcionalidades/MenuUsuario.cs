@@ -147,7 +147,7 @@ namespace MercadoEnvio.Funcionalidades
 
         private void calificarAlVendedorToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Calificar.Calificar cal = new Calificar.Calificar();
+            Calificar.Calif cal = new Calificar.Calif();
             cal.ShowDialog();
         }
 

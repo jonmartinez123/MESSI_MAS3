@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace MercadoEnvio.Modelo
 {
-    class Calificacion
+   public class Calificacion
     {
         public int idCalificacion;
         public String detalleCalif;
@@ -19,6 +19,10 @@ namespace MercadoEnvio.Modelo
 
         //Constructores
         public Calificacion() { }
+        public Calificacion(Decimal id)
+        {
+            this.idCalificacion = Convert.ToInt32(id);
+        }
         public Calificacion(Int32 id, String detalle, String tipo, Int32 estrellas)
         {
             this.idCalificacion = id;

@@ -29,13 +29,13 @@
         private void InitializeComponent()
         {
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.cantidad1 = new System.Windows.Forms.RadioButton();
-            this.cantidad2 = new System.Windows.Forms.RadioButton();
-            this.cantidad3 = new System.Windows.Forms.RadioButton();
-            this.cantidad4 = new System.Windows.Forms.RadioButton();
             this.cantidad5 = new System.Windows.Forms.RadioButton();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.button1 = new System.Windows.Forms.Button();
+            this.cantidad4 = new System.Windows.Forms.RadioButton();
+            this.cantidad3 = new System.Windows.Forms.RadioButton();
+            this.cantidad2 = new System.Windows.Forms.RadioButton();
+            this.cantidad1 = new System.Windows.Forms.RadioButton();
+            this.mensajeCalificacion = new System.Windows.Forms.TextBox();
+            this.updatearCalificacion_button = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
@@ -56,6 +56,46 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Cantidad estrellas";
             // 
+            // cantidad5
+            // 
+            this.cantidad5.AutoSize = true;
+            this.cantidad5.Location = new System.Drawing.Point(6, 114);
+            this.cantidad5.Name = "cantidad5";
+            this.cantidad5.Size = new System.Drawing.Size(31, 17);
+            this.cantidad5.TabIndex = 0;
+            this.cantidad5.Text = "5";
+            this.cantidad5.UseVisualStyleBackColor = true;
+            // 
+            // cantidad4
+            // 
+            this.cantidad4.AutoSize = true;
+            this.cantidad4.Location = new System.Drawing.Point(6, 91);
+            this.cantidad4.Name = "cantidad4";
+            this.cantidad4.Size = new System.Drawing.Size(31, 17);
+            this.cantidad4.TabIndex = 0;
+            this.cantidad4.Text = "4";
+            this.cantidad4.UseVisualStyleBackColor = true;
+            // 
+            // cantidad3
+            // 
+            this.cantidad3.AutoSize = true;
+            this.cantidad3.Location = new System.Drawing.Point(6, 68);
+            this.cantidad3.Name = "cantidad3";
+            this.cantidad3.Size = new System.Drawing.Size(31, 17);
+            this.cantidad3.TabIndex = 0;
+            this.cantidad3.Text = "3";
+            this.cantidad3.UseVisualStyleBackColor = true;
+            // 
+            // cantidad2
+            // 
+            this.cantidad2.AutoSize = true;
+            this.cantidad2.Location = new System.Drawing.Point(7, 45);
+            this.cantidad2.Name = "cantidad2";
+            this.cantidad2.Size = new System.Drawing.Size(31, 17);
+            this.cantidad2.TabIndex = 0;
+            this.cantidad2.Text = "2";
+            this.cantidad2.UseVisualStyleBackColor = true;
+            // 
             // cantidad1
             // 
             this.cantidad1.AutoSize = true;
@@ -68,62 +108,23 @@
             this.cantidad1.Text = "1";
             this.cantidad1.UseVisualStyleBackColor = true;
             // 
-            // cantidad2
+            // mensajeCalificacion
             // 
-            this.cantidad2.AutoSize = true;
-            this.cantidad2.Location = new System.Drawing.Point(7, 45);
-            this.cantidad2.Name = "cantidad2";
-            this.cantidad2.Size = new System.Drawing.Size(31, 17);
-            this.cantidad2.TabIndex = 0;
-            this.cantidad2.Text = "2";
-            this.cantidad2.UseVisualStyleBackColor = true;
+            this.mensajeCalificacion.Location = new System.Drawing.Point(133, 94);
+            this.mensajeCalificacion.Multiline = true;
+            this.mensajeCalificacion.Name = "mensajeCalificacion";
+            this.mensajeCalificacion.Size = new System.Drawing.Size(293, 124);
+            this.mensajeCalificacion.TabIndex = 1;
             // 
-            // cantidad3
+            // updatearCalificacion_button
             // 
-            this.cantidad3.AutoSize = true;
-            this.cantidad3.Location = new System.Drawing.Point(6, 68);
-            this.cantidad3.Name = "cantidad3";
-            this.cantidad3.Size = new System.Drawing.Size(31, 17);
-            this.cantidad3.TabIndex = 0;
-            this.cantidad3.Text = "3";
-            this.cantidad3.UseVisualStyleBackColor = true;
-            // 
-            // cantidad4
-            // 
-            this.cantidad4.AutoSize = true;
-            this.cantidad4.Location = new System.Drawing.Point(6, 91);
-            this.cantidad4.Name = "cantidad4";
-            this.cantidad4.Size = new System.Drawing.Size(31, 17);
-            this.cantidad4.TabIndex = 0;
-            this.cantidad4.Text = "4";
-            this.cantidad4.UseVisualStyleBackColor = true;
-            // 
-            // cantidad5
-            // 
-            this.cantidad5.AutoSize = true;
-            this.cantidad5.Location = new System.Drawing.Point(6, 114);
-            this.cantidad5.Name = "cantidad5";
-            this.cantidad5.Size = new System.Drawing.Size(31, 17);
-            this.cantidad5.TabIndex = 0;
-            this.cantidad5.Text = "5";
-            this.cantidad5.UseVisualStyleBackColor = true;
-            // 
-            // textBox1
-            // 
-            this.textBox1.Location = new System.Drawing.Point(133, 94);
-            this.textBox1.Multiline = true;
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(293, 124);
-            this.textBox1.TabIndex = 1;
-            // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(272, 227);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(86, 23);
-            this.button1.TabIndex = 2;
-            this.button1.Text = "Aceptar";
-            this.button1.UseVisualStyleBackColor = true;
+            this.updatearCalificacion_button.Location = new System.Drawing.Point(272, 227);
+            this.updatearCalificacion_button.Name = "updatearCalificacion_button";
+            this.updatearCalificacion_button.Size = new System.Drawing.Size(86, 23);
+            this.updatearCalificacion_button.TabIndex = 2;
+            this.updatearCalificacion_button.Text = "Aceptar";
+            this.updatearCalificacion_button.UseVisualStyleBackColor = true;
+            this.updatearCalificacion_button.Click += new System.EventHandler(this.button1_Click);
             // 
             // button2
             // 
@@ -133,6 +134,7 @@
             this.button2.TabIndex = 3;
             this.button2.Text = "Cancelar";
             this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // label1
             // 
@@ -151,8 +153,8 @@
             this.ClientSize = new System.Drawing.Size(462, 262);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.button2);
-            this.Controls.Add(this.button1);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.updatearCalificacion_button);
+            this.Controls.Add(this.mensajeCalificacion);
             this.Controls.Add(this.groupBox1);
             this.Name = "darCalificacion";
             this.Text = "Dar calificacion";
@@ -172,8 +174,8 @@
         private System.Windows.Forms.RadioButton cantidad3;
         private System.Windows.Forms.RadioButton cantidad2;
         private System.Windows.Forms.RadioButton cantidad1;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.TextBox mensajeCalificacion;
+        private System.Windows.Forms.Button updatearCalificacion_button;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Label label1;
     }

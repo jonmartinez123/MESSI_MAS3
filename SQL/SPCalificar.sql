@@ -28,7 +28,7 @@ CREATE PROCEDURE [MESSI_MAS3].[get_calificacionesPendientesDeID](@idUsuario NVAR
 AS BEGIN
 DECLARE @idCasteado int
 SET @idCasteado = CAST(@idUsuario AS INT)
-SELECT DISTINCT calificacion_compraId, compras_publicacion_id, tipoPublicacion_nombre, publicacion_fechaFin, publicacion_descripcion  FROM MESSI_MAS3.Calificacion, MESSI_MAS3.Compra, MESSI_MAS3.Publicacion, MESSI_MAS3.tipoPublicacion 
+SELECT DISTINCT calificacion_id, calificacion_compraId, compras_publicacion_id, tipoPublicacion_nombre, publicacion_fechaFin, publicacion_descripcion  FROM MESSI_MAS3.Calificacion, MESSI_MAS3.Compra, MESSI_MAS3.Publicacion, MESSI_MAS3.tipoPublicacion 
 
 WHERE calificacion_pendiente = 1 AND (compra_id = calificacion_compraId AND calificacion_idPersonaCalificador = @idCasteado) AND (publicacion_id = compras_publicacion_id AND tipoPublicacion_id = publicacion_tipoPublicacionId) 
 
@@ -60,6 +60,14 @@ SELECT (SELECT COUNT(*) FROM MESSI_MAS3.Calificacion WHERE calificacion_cantidad
 		(SELECT COUNT(*) FROM MESSI_MAS3.Calificacion WHERE calificacion_cantidadEstrellas = 3 AND calificacion_pendiente = 0 AND calificacion_idPersonaCalificador = @idUsuario),
 		(SELECT COUNT(*) FROM MESSI_MAS3.Calificacion WHERE calificacion_cantidadEstrellas = 4 AND calificacion_pendiente = 0 AND calificacion_idPersonaCalificador = @idUsuario),
 		(SELECT COUNT(*) FROM MESSI_MAS3.Calificacion WHERE calificacion_cantidadEstrellas = 5 AND calificacion_pendiente = 0 AND calificacion_idPersonaCalificador = @idUsuario)
+
+END
+GO
+
+CREATE PROCEDURE [MESSI_MAS3].[actualizar_calificacionDe](@idCalificacion INT, @mensaje NVARCHAR(255), @cantidadEstrellas INT)
+AS BEGIN
+
+UPDATE MESSI_MAS3.Calificacion SET calificacion_pendiente = 0, calificacion_cantidadEstrellas = @cantidadEstrellas, calificacion_detalle = @mensaje WHERE calificacion_id = @idCalificacion
 
 END
 GO

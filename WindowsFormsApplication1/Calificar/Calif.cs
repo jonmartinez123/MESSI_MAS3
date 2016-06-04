@@ -9,12 +9,13 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using MaterialSkin;
 using MaterialSkin.Controls;
+using MercadoEnvio.Utils;
 
 namespace MercadoEnvio.Calificar
 {
-    public partial class Calificar : MaterialForm
+    public partial class Calif : MaterialForm
     {
-        public Calificar()
+        public Calif()
         {
             InitializeComponent();
             var materialSkinManager = MaterialSkinManager.Instance;
@@ -29,13 +30,23 @@ namespace MercadoEnvio.Calificar
 
         private void cerrarCalificacion_button_Click(object sender, EventArgs e)
         {
-           
+            this.Close();
         }
 
-        private void reload() {
+        public void reload() {
             DAO.CalificacionSQL.getCalificacionesPendientes(calificacionesPendientes);
           DAO.CalificacionSQL.getHistoricoCalificaciones(historicoCalificacionesUltimas);
            DAO.CalificacionSQL.getComprasXEstrellas(comprasxEstrellas);
+        }
+
+        private void calificar_button_Click(object sender, EventArgs e)
+        {
+            Extension.openInNewWindow(this, (new darCalificacion(this, getCurrentCalificacion())));
+        }
+
+        private Modelo.Calificacion getCurrentCalificacion()
+        {
+            return new Modelo.Calificacion(Convert.ToDecimal(Extension.cellValue(this.calificacionesPendientes, "idCalif")));
         }
     }
 }
