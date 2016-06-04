@@ -44,7 +44,7 @@ namespace MercadoEnvio.ABM_Rol
 
         private void Agregar_Click(object sender, EventArgs e)
         {
-            if (FuncionalidadSeleccion.isValid())
+            if (!(FuncionalidadSeleccion.SelectedIndex == -1))
             {
                 DAO.RolSQl.agregarFuncionalidad(rol, FuncionalidadSeleccion.SelectedItem.ToString());
                 this.reload();

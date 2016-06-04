@@ -34,8 +34,8 @@ namespace MercadoEnvio.Calificar
 
         private void reload() {
             DAO.CalificacionSQL.getCalificacionesPendientes(calificacionesPendientes);
-           // DAO.CalificacionSQL.getHistoricoCalificaciones(historicoCalificacionesUltimas);
-           // DAO.CalificacionSQL.getComprasXEstrellas(comprasxEstrellas);
+          DAO.CalificacionSQL.getHistoricoCalificaciones(historicoCalificacionesUltimas);
+           DAO.CalificacionSQL.getComprasXEstrellas(comprasxEstrellas);
         }
     }
 }

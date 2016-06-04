@@ -1003,6 +1003,8 @@ SELECT @Uid=usuario_id FROM Usuario WHERE usuario_nombreUsuario='admin'
 SELECT @Rid=rol_id FROM Rol WHERE rol_nombre='Administrativo'
 INSERT INTO MESSI_MAS3.Funcionalidad_Rol (Rol_func_id,Funcionalidad_rol_id) SELECT @Rid,funcionalidad_id FROM MESSI_MAS3.Funcionalidad WHERE funcionalidad_descripcion LIKE 'ABM %'
 INSERT INTO MESSI_MAS3.Rol_Usuario (Usuario_id,Rol_id) VALUES (@Uid,@Rid)
+INSERT INTO MESSI_MAS3.Funcionalidad_Rol (Rol_func_id,Funcionalidad_rol_id) VALUES (1,9) --consultar facturas realizadas, es necesario para el Administrativo?
+INSERT INTO MESSI_MAS3.Funcionalidad_Rol (Rol_func_id,Funcionalidad_rol_id) VALUES (1,10) --funcionalidad listado estadistico
 END
 GO
 
