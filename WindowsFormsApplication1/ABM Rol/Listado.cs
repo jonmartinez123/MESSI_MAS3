@@ -46,12 +46,6 @@ namespace MercadoEnvio.ABM_Rol
             Extension.openInNewWindow(this, new AltaRol(this)); //peligrosa linea
         }
 
-        private void Cerrar_Click(object sender, EventArgs e)
-        {
-            this.Close();
-        }
-
-
         private void RolListado_Load(object sender, EventArgs e)
         {
             this.reload();
@@ -82,14 +76,9 @@ namespace MercadoEnvio.ABM_Rol
 
     }
 
-
-
-
-
-  
-
-  
-
-
+    private void button_Cerrar_Click(object sender, EventArgs e)
+    {
+        this.Close();
+    }
     }
 }

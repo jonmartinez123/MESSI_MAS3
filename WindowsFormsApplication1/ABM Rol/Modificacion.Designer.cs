@@ -32,18 +32,20 @@
             this.Estado = new System.Windows.Forms.CheckBox();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.cambiarNombre = new System.Windows.Forms.Button();
             this.FuncionalidadesRol = new System.Windows.Forms.DataGridView();
             this.col_id = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.col_funcionalidades = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Cerrar = new System.Windows.Forms.Button();
-            this.eliminar = new System.Windows.Forms.Button();
-            this.Agregar = new System.Windows.Forms.Button();
             this.FuncionalidadSeleccion = new System.Windows.Forms.ComboBox();
             this.label3 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.cambiarNombre = new MaterialSkin.Controls.MaterialRaisedButton();
+            this.Agregar = new MaterialSkin.Controls.MaterialRaisedButton();
+            this.eliminar = new MaterialSkin.Controls.MaterialRaisedButton();
+            this.Cerrar = new MaterialSkin.Controls.MaterialRaisedButton();
             ((System.ComponentModel.ISupportInitialize)(this.FuncionalidadesRol)).BeginInit();
+            this.groupBox1.SuspendLayout();
+            this.groupBox2.SuspendLayout();
             this.SuspendLayout();
             // 
             // Nombre
@@ -86,16 +88,6 @@
             this.label1.TabIndex = 27;
             this.label1.Text = "Nombre:";
             // 
-            // cambiarNombre
-            // 
-            this.cambiarNombre.Location = new System.Drawing.Point(315, 103);
-            this.cambiarNombre.Name = "cambiarNombre";
-            this.cambiarNombre.Size = new System.Drawing.Size(101, 23);
-            this.cambiarNombre.TabIndex = 31;
-            this.cambiarNombre.Text = "Cambiar Nombre";
-            this.cambiarNombre.UseVisualStyleBackColor = true;
-            this.cambiarNombre.Click += new System.EventHandler(this.cambiarNombre_Click);
-            // 
             // FuncionalidadesRol
             // 
             this.FuncionalidadesRol.AccessibleDescription = "Funcionalidades";
@@ -121,42 +113,12 @@
             this.col_funcionalidades.HeaderText = "Funcionalidades";
             this.col_funcionalidades.Name = "col_funcionalidades";
             // 
-            // Cerrar
-            // 
-            this.Cerrar.Location = new System.Drawing.Point(350, 531);
-            this.Cerrar.Name = "Cerrar";
-            this.Cerrar.Size = new System.Drawing.Size(75, 23);
-            this.Cerrar.TabIndex = 33;
-            this.Cerrar.Text = "Cerrar";
-            this.Cerrar.UseVisualStyleBackColor = true;
-            this.Cerrar.Click += new System.EventHandler(this.Cerrar_Click);
-            // 
-            // eliminar
-            // 
-            this.eliminar.Location = new System.Drawing.Point(35, 531);
-            this.eliminar.Name = "eliminar";
-            this.eliminar.Size = new System.Drawing.Size(75, 23);
-            this.eliminar.TabIndex = 34;
-            this.eliminar.Text = "Eliminar";
-            this.eliminar.UseVisualStyleBackColor = true;
-            this.eliminar.Click += new System.EventHandler(this.eliminar_Click);
-            // 
-            // Agregar
-            // 
-            this.Agregar.Location = new System.Drawing.Point(348, 201);
-            this.Agregar.Name = "Agregar";
-            this.Agregar.Size = new System.Drawing.Size(75, 23);
-            this.Agregar.TabIndex = 35;
-            this.Agregar.Text = "Agregar";
-            this.Agregar.UseVisualStyleBackColor = true;
-            this.Agregar.Click += new System.EventHandler(this.Agregar_Click);
-            // 
             // FuncionalidadSeleccion
             // 
             this.FuncionalidadSeleccion.FormattingEnabled = true;
-            this.FuncionalidadSeleccion.Location = new System.Drawing.Point(125, 203);
+            this.FuncionalidadSeleccion.Location = new System.Drawing.Point(132, 203);
             this.FuncionalidadSeleccion.Name = "FuncionalidadSeleccion";
-            this.FuncionalidadSeleccion.Size = new System.Drawing.Size(217, 21);
+            this.FuncionalidadSeleccion.Size = new System.Drawing.Size(187, 21);
             this.FuncionalidadSeleccion.TabIndex = 36;
             // 
             // label3
@@ -172,6 +134,7 @@
             // groupBox1
             // 
             this.groupBox1.BackColor = System.Drawing.SystemColors.Window;
+            this.groupBox1.Controls.Add(this.cambiarNombre);
             this.groupBox1.Location = new System.Drawing.Point(12, 70);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(425, 91);
@@ -182,6 +145,7 @@
             // groupBox2
             // 
             this.groupBox2.BackColor = System.Drawing.SystemColors.Window;
+            this.groupBox2.Controls.Add(this.Agregar);
             this.groupBox2.Location = new System.Drawing.Point(12, 167);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(425, 80);
@@ -189,28 +153,83 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Agregar funcionalidades";
             // 
+            // cambiarNombre
+            // 
+            this.cambiarNombre.Depth = 0;
+            this.cambiarNombre.Location = new System.Drawing.Point(288, 19);
+            this.cambiarNombre.MouseState = MaterialSkin.MouseState.HOVER;
+            this.cambiarNombre.Name = "cambiarNombre";
+            this.cambiarNombre.Primary = true;
+            this.cambiarNombre.Size = new System.Drawing.Size(125, 23);
+            this.cambiarNombre.TabIndex = 0;
+            this.cambiarNombre.Text = "Cambiar Nombre";
+            this.cambiarNombre.UseVisualStyleBackColor = true;
+            this.cambiarNombre.Click += new System.EventHandler(this.cambiarNombre_Click);
+            // 
+            // Agregar
+            // 
+            this.Agregar.Depth = 0;
+            this.Agregar.Location = new System.Drawing.Point(338, 34);
+            this.Agregar.MouseState = MaterialSkin.MouseState.HOVER;
+            this.Agregar.Name = "Agregar";
+            this.Agregar.Primary = true;
+            this.Agregar.Size = new System.Drawing.Size(75, 23);
+            this.Agregar.TabIndex = 36;
+            this.Agregar.Text = "Agregar";
+            this.Agregar.UseVisualStyleBackColor = true;
+            this.Agregar.Click += new System.EventHandler(this.Agregar_Click);
+            // 
+            // eliminar
+            // 
+            this.eliminar.Depth = 0;
+            this.eliminar.Location = new System.Drawing.Point(53, 531);
+            this.eliminar.MouseState = MaterialSkin.MouseState.HOVER;
+            this.eliminar.Name = "eliminar";
+            this.eliminar.Primary = true;
+            this.eliminar.Size = new System.Drawing.Size(75, 23);
+            this.eliminar.TabIndex = 40;
+            this.eliminar.Text = "Eliminar";
+            this.eliminar.UseVisualStyleBackColor = true;
+            this.eliminar.Click += new System.EventHandler(this.eliminar_Click);
+            // 
+            // Cerrar
+            // 
+            this.Cerrar.Depth = 0;
+            this.Cerrar.Location = new System.Drawing.Point(350, 531);
+            this.Cerrar.MouseState = MaterialSkin.MouseState.HOVER;
+            this.Cerrar.Name = "Cerrar";
+            this.Cerrar.Primary = true;
+            this.Cerrar.Size = new System.Drawing.Size(75, 23);
+            this.Cerrar.TabIndex = 41;
+            this.Cerrar.Text = "Cerrar";
+            this.Cerrar.UseVisualStyleBackColor = true;
+            this.Cerrar.Click += new System.EventHandler(this.Cerrar_Click);
+            // 
             // Modificacion
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(461, 595);
+            this.Controls.Add(this.Cerrar);
+            this.Controls.Add(this.eliminar);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.FuncionalidadSeleccion);
-            this.Controls.Add(this.Agregar);
-            this.Controls.Add(this.eliminar);
-            this.Controls.Add(this.Cerrar);
             this.Controls.Add(this.FuncionalidadesRol);
-            this.Controls.Add(this.cambiarNombre);
             this.Controls.Add(this.Nombre);
             this.Controls.Add(this.Estado);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.groupBox2);
+            this.MaximizeBox = false;
             this.Name = "Modificacion";
+            this.Sizable = false;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Modificacion";
             this.Load += new System.EventHandler(this.Modificacion_Load);
             ((System.ComponentModel.ISupportInitialize)(this.FuncionalidadesRol)).EndInit();
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox2.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -222,16 +241,16 @@
         private System.Windows.Forms.CheckBox Estado;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Button cambiarNombre;
         private System.Windows.Forms.DataGridView FuncionalidadesRol;
         private System.Windows.Forms.DataGridViewTextBoxColumn col_id;
         private System.Windows.Forms.DataGridViewTextBoxColumn col_funcionalidades;
-        private System.Windows.Forms.Button Cerrar;
-        private System.Windows.Forms.Button eliminar;
-        private System.Windows.Forms.Button Agregar;
         private System.Windows.Forms.ComboBox FuncionalidadSeleccion;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.GroupBox groupBox2;
+        private MaterialSkin.Controls.MaterialRaisedButton cambiarNombre;
+        private MaterialSkin.Controls.MaterialRaisedButton Agregar;
+        private MaterialSkin.Controls.MaterialRaisedButton eliminar;
+        private MaterialSkin.Controls.MaterialRaisedButton Cerrar;
     }
 }

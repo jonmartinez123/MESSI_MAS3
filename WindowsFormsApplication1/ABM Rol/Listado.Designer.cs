@@ -29,13 +29,13 @@
         private void InitializeComponent()
         {
             this.ListadoRoles = new System.Windows.Forms.DataGridView();
-            this.agregar = new System.Windows.Forms.Button();
-            this.button_Cerrar = new System.Windows.Forms.Button();
-            this.groupBox_SeleccionarRol = new System.Windows.Forms.GroupBox();
-            this.modificar = new System.Windows.Forms.Button();
             this.col_id = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.col_rol = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.col_habilitado = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.groupBox_SeleccionarRol = new System.Windows.Forms.GroupBox();
+            this.button_Cerrar = new MaterialSkin.Controls.MaterialRaisedButton();
+            this.agregar = new MaterialSkin.Controls.MaterialRaisedButton();
+            this.modificar = new MaterialSkin.Controls.MaterialRaisedButton();
             ((System.ComponentModel.ISupportInitialize)(this.ListadoRoles)).BeginInit();
             this.groupBox_SeleccionarRol.SuspendLayout();
             this.SuspendLayout();
@@ -55,56 +55,10 @@
             this.col_habilitado});
             this.ListadoRoles.Location = new System.Drawing.Point(115, 36);
             this.ListadoRoles.Name = "ListadoRoles";
-            this.ListadoRoles.Size = new System.Drawing.Size(346, 335);
+            this.ListadoRoles.ReadOnly = true;
+            this.ListadoRoles.Size = new System.Drawing.Size(611, 255);
             this.ListadoRoles.TabIndex = 0;
             this.ListadoRoles.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.ListadoRoles_CellContentClick);
-            // 
-            // agregar
-            // 
-            this.agregar.BackColor = System.Drawing.SystemColors.Menu;
-            this.agregar.Location = new System.Drawing.Point(724, 348);
-            this.agregar.Name = "agregar";
-            this.agregar.Size = new System.Drawing.Size(75, 23);
-            this.agregar.TabIndex = 22;
-            this.agregar.Text = "Agregar";
-            this.agregar.UseVisualStyleBackColor = false;
-            this.agregar.Click += new System.EventHandler(this.Agregar_Click);
-            // 
-            // button_Cerrar
-            // 
-            this.button_Cerrar.BackColor = System.Drawing.SystemColors.Menu;
-            this.button_Cerrar.Location = new System.Drawing.Point(815, 348);
-            this.button_Cerrar.Name = "button_Cerrar";
-            this.button_Cerrar.Size = new System.Drawing.Size(75, 23);
-            this.button_Cerrar.TabIndex = 1;
-            this.button_Cerrar.Text = "Cerrar";
-            this.button_Cerrar.UseVisualStyleBackColor = false;
-            this.button_Cerrar.Click += new System.EventHandler(this.Cerrar_Click);
-            // 
-            // groupBox_SeleccionarRol
-            // 
-            this.groupBox_SeleccionarRol.BackColor = System.Drawing.SystemColors.Window;
-            this.groupBox_SeleccionarRol.Controls.Add(this.modificar);
-            this.groupBox_SeleccionarRol.Controls.Add(this.ListadoRoles);
-            this.groupBox_SeleccionarRol.Controls.Add(this.agregar);
-            this.groupBox_SeleccionarRol.Controls.Add(this.button_Cerrar);
-            this.groupBox_SeleccionarRol.Location = new System.Drawing.Point(44, 88);
-            this.groupBox_SeleccionarRol.Name = "groupBox_SeleccionarRol";
-            this.groupBox_SeleccionarRol.Size = new System.Drawing.Size(924, 400);
-            this.groupBox_SeleccionarRol.TabIndex = 22;
-            this.groupBox_SeleccionarRol.TabStop = false;
-            this.groupBox_SeleccionarRol.Text = "Roles";
-            // 
-            // modificar
-            // 
-            this.modificar.BackColor = System.Drawing.SystemColors.Menu;
-            this.modificar.Location = new System.Drawing.Point(629, 348);
-            this.modificar.Name = "modificar";
-            this.modificar.Size = new System.Drawing.Size(75, 23);
-            this.modificar.TabIndex = 23;
-            this.modificar.Text = "Modificar";
-            this.modificar.UseVisualStyleBackColor = false;
-            this.modificar.Click += new System.EventHandler(this.modificar_Click);
             // 
             // col_id
             // 
@@ -125,11 +79,64 @@
             this.col_habilitado.HeaderText = "Habilitado";
             this.col_habilitado.Name = "col_habilitado";
             // 
+            // groupBox_SeleccionarRol
+            // 
+            this.groupBox_SeleccionarRol.BackColor = System.Drawing.SystemColors.Window;
+            this.groupBox_SeleccionarRol.Controls.Add(this.button_Cerrar);
+            this.groupBox_SeleccionarRol.Controls.Add(this.agregar);
+            this.groupBox_SeleccionarRol.Controls.Add(this.modificar);
+            this.groupBox_SeleccionarRol.Controls.Add(this.ListadoRoles);
+            this.groupBox_SeleccionarRol.Location = new System.Drawing.Point(44, 88);
+            this.groupBox_SeleccionarRol.Name = "groupBox_SeleccionarRol";
+            this.groupBox_SeleccionarRol.Size = new System.Drawing.Size(924, 400);
+            this.groupBox_SeleccionarRol.TabIndex = 22;
+            this.groupBox_SeleccionarRol.TabStop = false;
+            this.groupBox_SeleccionarRol.Text = "Roles";
+            // 
+            // button_Cerrar
+            // 
+            this.button_Cerrar.Depth = 0;
+            this.button_Cerrar.Location = new System.Drawing.Point(583, 348);
+            this.button_Cerrar.MouseState = MaterialSkin.MouseState.HOVER;
+            this.button_Cerrar.Name = "button_Cerrar";
+            this.button_Cerrar.Primary = true;
+            this.button_Cerrar.Size = new System.Drawing.Size(143, 23);
+            this.button_Cerrar.TabIndex = 26;
+            this.button_Cerrar.Text = "Cerrar";
+            this.button_Cerrar.UseVisualStyleBackColor = true;
+            this.button_Cerrar.Click += new System.EventHandler(this.button_Cerrar_Click);
+            // 
+            // agregar
+            // 
+            this.agregar.Depth = 0;
+            this.agregar.Location = new System.Drawing.Point(365, 348);
+            this.agregar.MouseState = MaterialSkin.MouseState.HOVER;
+            this.agregar.Name = "agregar";
+            this.agregar.Primary = true;
+            this.agregar.Size = new System.Drawing.Size(156, 23);
+            this.agregar.TabIndex = 25;
+            this.agregar.Text = "Agregar";
+            this.agregar.UseVisualStyleBackColor = true;
+            this.agregar.Click += new System.EventHandler(this.Agregar_Click);
+            // 
+            // modificar
+            // 
+            this.modificar.Depth = 0;
+            this.modificar.Location = new System.Drawing.Point(115, 348);
+            this.modificar.MouseState = MaterialSkin.MouseState.HOVER;
+            this.modificar.Name = "modificar";
+            this.modificar.Primary = true;
+            this.modificar.Size = new System.Drawing.Size(154, 23);
+            this.modificar.TabIndex = 24;
+            this.modificar.Text = "Modificar";
+            this.modificar.UseVisualStyleBackColor = true;
+            this.modificar.Click += new System.EventHandler(this.modificar_Click);
+            // 
             // Listado
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1017, 550);
+            this.ClientSize = new System.Drawing.Size(1003, 506);
             this.Controls.Add(this.groupBox_SeleccionarRol);
             this.MaximizeBox = false;
             this.Name = "Listado";
@@ -145,13 +152,13 @@
         #endregion
 
         private System.Windows.Forms.DataGridView ListadoRoles;
-        private System.Windows.Forms.Button agregar;
-        private System.Windows.Forms.Button button_Cerrar;
         private System.Windows.Forms.GroupBox groupBox_SeleccionarRol;
-        private System.Windows.Forms.Button modificar;
         private System.Windows.Forms.DataGridViewTextBoxColumn col_id;
         private System.Windows.Forms.DataGridViewTextBoxColumn col_rol;
         private System.Windows.Forms.DataGridViewTextBoxColumn col_habilitado;
+        private MaterialSkin.Controls.MaterialRaisedButton button_Cerrar;
+        private MaterialSkin.Controls.MaterialRaisedButton agregar;
+        private MaterialSkin.Controls.MaterialRaisedButton modificar;
 
 
     }

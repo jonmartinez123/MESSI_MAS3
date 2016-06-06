@@ -25,25 +25,5 @@ namespace MercadoEnvio.ABM_Visibilidad
         {
 
         }
-
-        private void modificar_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void agregar_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void groupBox_SeleccionarVisibilidad_Enter(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button_Cerrar_Click(object sender, EventArgs e)
-        {
-            this.Close();
-        }
     }
 }

@@ -164,6 +164,7 @@
     <Compile Include="Modelo\Rubro.cs" />
     <Compile Include="Modelo\TipoDocumento.cs" />
     <Compile Include="Modelo\Usuario.cs" />
+    <Compile Include="Modelo\Visibilidad.cs" />
     <Compile Include="Publicar\Publicar.cs">
       <SubType>Form</SubType>
     </Compile>
