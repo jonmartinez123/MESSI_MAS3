@@ -165,7 +165,6 @@ GO
 CREATE TABLE MESSI_MAS3.Localidad (
   localidad_id INT PRIMARY KEY NOT NULL IDENTITY,
   localidad_nombre NVARCHAR(255) NULL,			--cambio de Not null a NULL
-  localidad_codigoPostal NVARCHAR(50) NOT NULL,
   )
 
 
@@ -180,8 +179,8 @@ CREATE TABLE MESSI_MAS3.Domicilio (
   domicilio_altura NUMERIC(18,0) NOT NULL,
   domicilio_piso NUMERIC(18,0) NOT NULL,
   domicilio_departamento NVARCHAR(50) NOT NULL,
-  domicilio_ciudad NVARCHAR(45) NULL,)					--CAMBIO DE DEFAULT 'BUENOS AIRES' A NULL							
-
+  domicilio_ciudad NVARCHAR(45) NULL,					--CAMBIO DE DEFAULT 'BUENOS AIRES' A NULL							
+  domicilio_codigoPostal NVARCHAR(50) NOT NULL,)
 
 																							
 
@@ -444,7 +443,9 @@ AS BEGIN
 	INSERT INTO MESSI_MAS3.TipoDocumento(tipoDocumento_nombre) VALUES ('PASAPORTE')
 	INSERT INTO MESSI_MAS3.TipoDocumento(tipoDocumento_nombre) VALUES ('LIBRETA CIVICA')
 
-	
+	--LOCALIDAD
+
+	INSERT INTO MESSI_MAS3.Localidad(localidad_nombre) VALUES ('CABA')
 	
 
 END
@@ -468,32 +469,17 @@ AS BEGIN
 END
 GO  
 
---sp inserto localidad y devuelvo el ultimo
-CREATE PROCEDURE [MESSI_MAS3].[generarLocalidad](@localidadCod NVARCHAR(50) , @ultimoIdInsertado INT OUTPUT)
-AS BEGIN
-	set nocount on;
-	set xact_abort on;
-	INSERT INTO MESSI_MAS3.Localidad(localidad_codigoPostal) 
-	VALUES (@localidadCod)
-	SELECT @ultimoIdInsertado = SCOPE_IDENTITY();
-	
-	RETURN
-	
-END
-GO  
 
 
 -- inserto el domicilio y devuelvo el ultimo
-CREATE PROCEDURE [MESSI_MAS3].[generarDomicilio](@calle NVARCHAR(100),@altura NUMERIC(18,0), @piso NUMERIC(18,0),@departamento NVARCHAR(50), @ciudad NVARCHAR(45), @localidadCod NVARCHAR(50), @ultimoIdInsertado INT OUTPUT)
+CREATE PROCEDURE [MESSI_MAS3].[generarDomicilio](@calle NVARCHAR(100),@altura NUMERIC(18,0), @piso NUMERIC(18,0),@departamento NVARCHAR(50), @ciudad NVARCHAR(45), @codigoPostal NVARCHAR(50), @ultimoIdInsertado INT OUTPUT)
 AS BEGIN
 	set nocount on;
 	set xact_abort on;
-	-- INSERTO EL NUEVO DOMICILIO Y LOCALIDAD
-	DECLARE @idLocalidad int;
-	EXECUTE MESSI_MAS3.generarLocalidad @localidadCod,@ultimoIdInsertado = @idLocalidad OUTPUT;
+	-- INSERTO EL NUEVO DOMICILIO
 
-	INSERT INTO MESSI_MAS3.Domicilio(domicilio_calle,domicilio_altura, domicilio_piso,domicilio_departamento,domicilio_ciudad, domicilio_localidad_id) 
-	VALUES (@calle,@altura,@piso, @departamento, @ciudad, @idLocalidad)
+	INSERT INTO MESSI_MAS3.Domicilio(domicilio_calle,domicilio_altura, domicilio_piso,domicilio_departamento,domicilio_ciudad, domicilio_localidad_id, domicilio_codigoPostal) 
+	VALUES (@calle,@altura,@piso, @departamento, @ciudad, NULL, @codigoPostal)
 	
 	
 	-- OBTENGO EL ULTIMO ID 
@@ -564,7 +550,7 @@ AS BEGIN
 			VALUES(@idRol, @idUsuario)
 			DECLARE @idDomicilio int;
 			EXECUTE MESSI_MAS3.generarDomicilio @calle,@numero,@piso,@dpto,NULL,@codigoPostal,@ultimoIdInsertado = @idDomicilio OUTPUT;
-			
+
 			INSERT INTO MESSI_MAS3.Cliente(
 				cliente_nombre,
 				cliente_apellido,

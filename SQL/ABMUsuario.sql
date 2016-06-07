@@ -1,6 +1,6 @@
 /*------ABM DE USUARIO------*/
 
-CREATE PROCEDURE MESSI_MAS3.existe_nombreUsuario(@usuario nvarchar(255))
+CREATE PROCEDURE MESSI_MAS3.existe_username(@usuario nvarchar(255))
 AS
 BEGIN
 	IF(EXISTS(SELECT 1 FROM MESSI_MAS3.Usuario WHERE usuario_nombreUsuario = @usuario)) BEGIN RETURN 1 END RETURN -1
@@ -35,7 +35,7 @@ END
 GO
 
 /*------CLIENTE------*/
-CREATE PROCEDURE MESSI_MAS3.get_clientes()
+CREATE PROCEDURE MESSI_MAS3.get_clientes
 AS				
 BEGIN
 	SELECT usuario_id, usuario_nombreUsuario, cliente_nombre, cliente_apellido, cliente_DNI, cliente_mail, usuario_deleted 
@@ -47,7 +47,7 @@ GO
 CREATE PROCEDURE MESSI_MAS3.get_cliente(@id INT)
 AS				
 BEGIN
-	SELECT cliente_nombre, cliente_apellido, cliente_DNI, cliente_tipoDocumento_id, cliente_mail, cliente_telefono, domicilio_calle, domicilio_altura, domicilio_piso, domicilio_departamento, domicilio_codigoPostal, domicilio_localidad_id
+	SELECT cliente_nombre, cliente_apellido, cliente_DNI, cliente_tipoDocumento_id, cliente_mail, cliente_tel, domicilio_calle, domicilio_altura, domicilio_piso, domicilio_departamento, domicilio_codigoPostal, domicilio_localidad_id
 	FROM MESSI_MAS3.Cliente, MESSI_MAS3.Domicilio
 	WHERE cliente_id = @id AND cliente_idDomicilio = domicilio_idDomicilio
 END
@@ -70,10 +70,11 @@ CREATE PROCEDURE MESSI_MAS3.modificar_cliente(@idCliente INT, @nombre nvarchar(2
 AS
 BEGIN
 	UPDATE MESSI_MAS3.Cliente
-	SET cliente_nombre = @nombre, cliente_apellido = @apellido, cliente_mail = @mail, cliente_DNI = @dni, cliente_fechaNacimiento = @fechaNacimiento, cliente_telefono = @telefono, cliente_tipoDocumento_id = @idTipoDocumento 
+	SET cliente_nombre = @nombre, cliente_apellido = @apellido, cliente_mail = @mail, cliente_DNI = @dni, cliente_fechaNacimiento = @fechaNacimiento, cliente_tel = @telefono, cliente_tipoDocumento_id = @idTipoDocumento 
 	WHERE cliente_id = @idCliente
 
-	SET @idDomicilioCliente = (SELECT cliente_idDomicilio FROM MESSI_MAS3.Cliente WHERE cliente_id = @idCliente)
+	DECLARE @idDomicilioCliente INT
+	SELECT cliente_idDomicilio = @idDomicilioCliente FROM MESSI_MAS3.Cliente WHERE cliente_id = @idCliente
 
 	UPDATE MESSI_MAS3.Domicilio
 	SET domicilio_localidad_id = @idLocalidad, domicilio_calle = @calle , domicilio_altura = @altura, domicilio_piso = @piso, domicilio_departamento = @departamento ,domicilio_ciudad = @ciudad, domicilio_codigoPostal = @codigoPostal
