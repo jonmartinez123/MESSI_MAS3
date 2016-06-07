@@ -29,5 +29,25 @@ namespace MercadoEnvio.DAO
             return clientes;
         }
 
+        public static int getClientesFiltadros(DataGridView dg, string nombre, string apellido, string mail, int dni)
+        {
+            return SqlConnector.retrieveDT("get_clientesFiltrados", dg, nombre, apellido, mail, dni);
+        }
+
+        public static void darDeBajaUsuario(int idUsuario)
+        {
+            SqlConnector.executeProcedure("baja_usuario", idUsuario);
+        }
+
+        public static void darDeAltaUsuario(int idUsuario)
+        {
+            SqlConnector.executeProcedure("alta_usuario", idUsuario);
+        }
+
+        public static void cambiarPassword(string password)
+        {
+            SqlConnector.executeProcedure("cambiarPassword", password);
+        }
+
     }
 }

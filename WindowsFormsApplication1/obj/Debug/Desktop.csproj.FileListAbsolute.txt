@@ -39,7 +39,6 @@ C:\Users\Eric\Desktop\MESSI_MAS3\WindowsFormsApplication1\obj\Debug\Desktop.cspr
 C:\Users\Eric\Desktop\MESSI_MAS3\WindowsFormsApplication1\obj\Debug\MercadoEnvio.ABM_Rubro.Rubro.resources
 C:\Users\Eric\Desktop\MESSI_MAS3\WindowsFormsApplication1\obj\Debug\MercadoEnvio.ABM_Usuario.Usuario.resources
 C:\Users\Eric\Desktop\MESSI_MAS3\WindowsFormsApplication1\obj\Debug\MercadoEnvio.ABM_Visibilidad.Visibilidad.resources
-C:\Users\Eric\Desktop\MESSI_MAS3\WindowsFormsApplication1\obj\Debug\MercadoEnvio.Calificar.Calificar.resources
 C:\Users\Eric\Desktop\MESSI_MAS3\WindowsFormsApplication1\obj\Debug\MercadoEnvio.ComprarOfertar.ComprarOfertar.resources
 C:\Users\Eric\Desktop\MESSI_MAS3\WindowsFormsApplication1\obj\Debug\MercadoEnvio.Facturas.ConsultarFacturas.resources
 C:\Users\Eric\Desktop\MESSI_MAS3\WindowsFormsApplication1\obj\Debug\MercadoEnvio.Funcionalidades.MenuUsuario.resources
@@ -64,3 +63,5 @@ C:\Users\Familia\Dropbox\4 año\Gestion de datos\Trabajo Practico\repositorio\ME
 C:\Users\Familia\Dropbox\4 año\Gestion de datos\Trabajo Practico\repositorio\MESSI_MAS3\WindowsFormsApplication1\obj\Debug\MercadoEnvio.ABM_Usuario.CrearUsuario.resources
 C:\Users\Familia\Dropbox\4 año\Gestion de datos\Trabajo Practico\repositorio\MESSI_MAS3\WindowsFormsApplication1\obj\Debug\MercadoEnvio.Calificar.Calif.resources
 C:\Users\Familia\Dropbox\4 año\Gestion de datos\Trabajo Practico\repositorio\MESSI_MAS3\WindowsFormsApplication1\obj\Debug\MercadoEnvio.Calificar.darCalificacion.resources
+C:\Users\Eric\Desktop\MESSI_MAS3\WindowsFormsApplication1\obj\Debug\MercadoEnvio.Calificar.Calif.resources
+C:\Users\Eric\Desktop\MESSI_MAS3\WindowsFormsApplication1\obj\Debug\MercadoEnvio.Calificar.darCalificacion.resources

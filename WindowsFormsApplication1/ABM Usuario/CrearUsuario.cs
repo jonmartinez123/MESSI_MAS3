@@ -15,12 +15,31 @@ namespace MercadoEnvio.ABM_Usuario
 {
     public partial class CrearUsuario : MaterialForm
     {
+
+        private Modelo.Usuario usuarioGlobal;
+
         public CrearUsuario()
+        {
+            inicializar();
+            txtUsuario.Enabled = true;
+            usuarioGlobal.Id = -1;
+        }
+
+        private void inicializar()
         {
             InitializeComponent();
             var materialSkinManager = MaterialSkinManager.Instance;
             materialSkinManager.AddFormToManage(this);
             materialSkinManager.Theme = MaterialSkinManager.Themes.LIGHT;
+        }
+
+        public CrearUsuario(Modelo.Usuario unUsuario)
+        {
+            inicializar();
+            usuarioGlobal = unUsuario;
+            txtUsuario.Text = usuarioGlobal.NombreUsuario;
+            txtUsuario.Enabled = false;
+            cmbTipo.Enabled = false;
         }
 
         private void crearUsuario_Load(object sender, System.EventArgs e)
@@ -35,10 +54,10 @@ namespace MercadoEnvio.ABM_Usuario
                 #region Validaciones
                 var exceptionMessage = string.Empty;
 
-                if (string.IsNullOrEmpty(txtUsuario.Text) && string.IsNullOrEmpty(txtPass.Text) && string.IsNullOrEmpty(txtPassRepetida.Text))
+                if (string.IsNullOrEmpty(txtUsuario.Text) && usuarioGlobal.Id == -1 && string.IsNullOrEmpty(txtPass.Text) && string.IsNullOrEmpty(txtPassRepetida.Text))
                     throw new Exception("No puede haber campos vacíos");
 
-                if (string.IsNullOrEmpty(txtUsuario.Text))
+                if (string.IsNullOrEmpty(txtUsuario.Text) && usuarioGlobal.Id == -1)
                     throw new Exception("Debe completar el nombre de usuario");
 
                 if (string.IsNullOrEmpty(txtPass.Text))
@@ -50,25 +69,34 @@ namespace MercadoEnvio.ABM_Usuario
                 if (txtPassRepetida.Text != txtPass.Text)
                     throw new Exception("Las passwords no coinciden");
 
-                validarUsername(txtUsuario.Text);
+                
 
                 #endregion
 
-                Modelo.Cliente unCliente = new Modelo.Cliente(-1, txtUsuario.Text, txtPass.Text);
-
-                this.Hide();
-
-                if (cmbTipo.Text == "Cliente")
+                if (usuarioGlobal.Id == -1)
                 {
-                    //Extension.openInNewWindow(this, new CrearCliente(unCliente));
-                    CrearCliente cCliente = new CrearCliente(unCliente);
-                    cCliente.ShowDialog();
+                    validarUsername(txtUsuario.Text);
+
+                    Modelo.Cliente unCliente = new Modelo.Cliente(-1, txtUsuario.Text, txtPass.Text);
+
+                    this.Hide();
+
+                    if (cmbTipo.Text == "Cliente")
+                    {
+                        //Extension.openInNewWindow(this, new CrearCliente(unCliente));
+                        CrearCliente cCliente = new CrearCliente(unCliente);
+                        cCliente.ShowDialog();
+                    }
+                    else if (cmbTipo.Text == "Empresa")
+                    {
+                        // CrearEmpresa cCliente = new CrearEmpresa(unUsuario);
+                        //cCliente.ShowDialog();
+                    }
                 }
-                else if (cmbTipo.Text == "Empresa")
-                {
-                    // CrearEmpresa cCliente = new CrearEmpresa(unUsuario);
-                    //cCliente.ShowDialog();
+                else { 
+                    DAO.UsuarioSQL.cambiarPassword(txtPass.Text);
                 }
+
 
                 Close();
             }
