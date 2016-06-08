@@ -21,7 +21,7 @@ namespace MercadoEnvio
             Application.SetCompatibleTextRenderingDefault(false);
  
             Application.Run(new Login.Login());
-            Application.Run(new ABM_Rol.Listado());
+            Application.Run(new ABM_Usuario.Usuario());
 
         }
     }

@@ -24,7 +24,7 @@ namespace MercadoEnvio.ABM_Usuario
 
         private void Usuario_Load(object sender, EventArgs e)
         {
-
+            filtrarClientes();
         }
 
         private void btnCrearUsuario_Click(object sender, EventArgs e)
@@ -35,24 +35,40 @@ namespace MercadoEnvio.ABM_Usuario
 
         private void btnFiltrarCliente_Click(object sender, EventArgs e)
         {
+            filtrarClientes();
+        }
 
+        private void filtrarClientes()
+        {
             int dni;
-            if (!Int32.TryParse(txtDni.Text, out dni)) MessageBox.Show("El DNI debe contener caracteres numericos" , "Atención");
+            if (!Int32.TryParse(txtDni.Text, out dni) && txtDni.Text != "") MessageBox.Show("El DNI debe contener caracteres numericos", "Atención");
 
             DAO.UsuarioSQL.getClientesFiltadros(dgvClientes, txtNombre.Text, txtApellido.Text, txtMailCliente.Text, dni);
         }
 
         private void dgvClientes_SelectionChanged(object sender, EventArgs e)
         {
-            if (dgvClientes.SelectedRows.Count == 1){
+            if (dgvClientes.SelectedRows.Count == 1)
+            {
+                btnHabilitadoCliente.Enabled = true; 
+                btnCambiarPassCliente.Enabled = true;
+                btnModificarCliente.Enabled = true;
+
                 DataGridViewRow row = this.dgvClientes.SelectedRows[0];
                 int hab = Convert.ToInt16(row.Cells["colHabilitado"].Value);
-                if (hab == 1){
+                if (hab == 1)
+                {
                     btnHabilitadoCliente.Text = "Dar de Baja";
                 }
-                else{
+                else
+                {
                     btnHabilitadoCliente.Text = "Dar de Alta";
                 }
+            }
+            else{
+                btnHabilitadoCliente.Enabled = false;
+                btnCambiarPassCliente.Enabled = false;
+                btnModificarCliente.Enabled = false;
             }
         }
 
@@ -69,6 +85,7 @@ namespace MercadoEnvio.ABM_Usuario
                     DAO.UsuarioSQL.darDeAltaUsuario(id);
                 }
             }
+            filtrarClientes();
         }
 
         private void btnModificarCliente_Click(object sender, EventArgs e)

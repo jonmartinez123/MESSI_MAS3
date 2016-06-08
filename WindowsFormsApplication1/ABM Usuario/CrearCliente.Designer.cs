@@ -57,14 +57,14 @@
             // 
             this.txtDocumento.Depth = 0;
             this.txtDocumento.Hint = "";
-            this.txtDocumento.Location = new System.Drawing.Point(367, 201);
+            this.txtDocumento.Location = new System.Drawing.Point(397, 201);
             this.txtDocumento.MouseState = MaterialSkin.MouseState.HOVER;
             this.txtDocumento.Name = "txtDocumento";
             this.txtDocumento.PasswordChar = '\0';
             this.txtDocumento.SelectedText = "";
             this.txtDocumento.SelectionLength = 0;
             this.txtDocumento.SelectionStart = 0;
-            this.txtDocumento.Size = new System.Drawing.Size(140, 23);
+            this.txtDocumento.Size = new System.Drawing.Size(110, 23);
             this.txtDocumento.TabIndex = 75;
             this.txtDocumento.UseSystemPasswordChar = false;
             this.txtDocumento.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtDocumento_KeyPress);
@@ -222,13 +222,9 @@
             // cmbTipo
             // 
             this.cmbTipo.FormattingEnabled = true;
-            this.cmbTipo.Items.AddRange(new object[] {
-            "DNI",
-            "Pasaporte",
-            "Cedula"});
             this.cmbTipo.Location = new System.Drawing.Point(277, 201);
             this.cmbTipo.Name = "cmbTipo";
-            this.cmbTipo.Size = new System.Drawing.Size(84, 21);
+            this.cmbTipo.Size = new System.Drawing.Size(114, 21);
             this.cmbTipo.TabIndex = 74;
             this.cmbTipo.Tag = "";
             this.cmbTipo.Text = "Tipo";

@@ -34,6 +34,22 @@ BEGIN
 END
 GO
 
+CREATE PROCEDURE MESSI_MAS3.get_localidades
+AS				
+BEGIN
+	SELECT localidad_nombre, localidad_id
+	FROM MESSI_MAS3.Localidad
+END
+GO
+
+CREATE PROCEDURE MESSI_MAS3.get_tipoDocumentos
+AS				
+BEGIN
+	SELECT tipoDocumento_nombre, tipoDocumento_id
+	FROM MESSI_MAS3.TipoDocumento
+END
+GO
+
 /*------CLIENTE------*/
 CREATE PROCEDURE MESSI_MAS3.get_clientes
 AS				

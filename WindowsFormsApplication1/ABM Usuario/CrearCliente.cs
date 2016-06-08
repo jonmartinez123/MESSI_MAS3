@@ -33,6 +33,19 @@ namespace MercadoEnvio.ABM_Usuario
             var materialSkinManager = MaterialSkinManager.Instance;
             materialSkinManager.AddFormToManage(this);
             materialSkinManager.Theme = MaterialSkinManager.Themes.LIGHT;
+
+            cargarCombosBox();
+        }
+
+        private void cargarCombosBox()
+        {
+            cmbLocalidad.DataSource = DAO.LocalidadSQL.getLocalidades();
+            cmbLocalidad.DisplayMember = "Nombre";
+            cmbLocalidad.ValueMember = "Id";
+
+            cmbTipo.DataSource = DAO.TipoDocumentoSQL.getTipoDocumentos();
+            cmbTipo.DisplayMember = "Descripcion";
+            cmbTipo.ValueMember = "Id";
         }
 
         private void txtNombre_KeyPress(object sender, KeyPressEventArgs e)
@@ -122,12 +135,16 @@ namespace MercadoEnvio.ABM_Usuario
             return unUsuario;
         }*/
 
-        private void cargarFormularioParaModoficacion(Modelo.Cliente unCliente)
+        private void   cargarFormularioParaModoficacion(Modelo.Cliente c)
         {
+            Modelo.Cliente unCliente = DAO.UsuarioSQL.getCliente(c.Id);
+
             //ActiveForm.Text = "Modificar Usuario";
+            btnOK.Text = "Modificar";
+
             txtNombre.Text = unCliente.Nombre;
             txtApellido.Text = unCliente.Apellido;
-            //cmbTipo.Text = unCliente.TipoDocumento.Descripcion;
+            cmbTipo.SelectedValue = unCliente.TipoDocumento.Id;
             txtDocumento.Text = unCliente.DNI.ToString();
             //dtpFechaNacimiento.Text = unCliente.FechaNacimiento.ToShortDateString();
             txtMail.Text = unCliente.Mail;
@@ -136,8 +153,8 @@ namespace MercadoEnvio.ABM_Usuario
             txtAltura.Text = unCliente.Domicilio.Altura.ToString();
             txtPiso.Text = unCliente.Domicilio.Piso.ToString();
             txtDepto.Text = unCliente.Domicilio.Departamento.ToString();
-            //cmbLocalidad.Text = unCliente.Domicilio.Localidad.Nombre;
-            txtCodigoPostal.Text = unCliente.Domicilio.Localidad.CodigoPostal.ToString();
+            if (unCliente.Domicilio.Localidad.Id != -1) cmbLocalidad.SelectedValue = unCliente.Domicilio.Localidad.Id;
+            txtCodigoPostal.Text = unCliente.Domicilio.CodigoPostal.ToString();
 
         }
 

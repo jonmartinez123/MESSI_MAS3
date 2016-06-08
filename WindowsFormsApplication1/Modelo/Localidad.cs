@@ -9,9 +9,9 @@ namespace MercadoEnvio.Modelo
     public class Localidad
     {
         private string nombre;
-        private int codigoPostal;
+        private int id;
 
         public string Nombre { get { return nombre; } set { nombre = value; } }
-        public int CodigoPostal { get { return codigoPostal; } set { codigoPostal = value; } }
+        public int Id { get { return id; } set { id = value; } }
     }
 }

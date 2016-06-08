@@ -76,7 +76,7 @@
             this.tabControl1.Location = new System.Drawing.Point(12, 76);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(693, 343);
+            this.tabControl1.Size = new System.Drawing.Size(725, 343);
             this.tabControl1.TabIndex = 0;
             // 
             // tabPage1
@@ -98,7 +98,7 @@
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(685, 317);
+            this.tabPage1.Size = new System.Drawing.Size(717, 317);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Clientes";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -167,7 +167,7 @@
             // 
             // btnModificarCliente
             // 
-            this.btnModificarCliente.Location = new System.Drawing.Point(331, 272);
+            this.btnModificarCliente.Location = new System.Drawing.Point(354, 272);
             this.btnModificarCliente.Name = "btnModificarCliente";
             this.btnModificarCliente.Size = new System.Drawing.Size(109, 23);
             this.btnModificarCliente.TabIndex = 105;
@@ -177,7 +177,7 @@
             // 
             // btnHabilitadoCliente
             // 
-            this.btnHabilitadoCliente.Location = new System.Drawing.Point(561, 272);
+            this.btnHabilitadoCliente.Location = new System.Drawing.Point(584, 272);
             this.btnHabilitadoCliente.Name = "btnHabilitadoCliente";
             this.btnHabilitadoCliente.Size = new System.Drawing.Size(109, 23);
             this.btnHabilitadoCliente.TabIndex = 104;
@@ -187,7 +187,7 @@
             // 
             // btnCambiarPassCliente
             // 
-            this.btnCambiarPassCliente.Location = new System.Drawing.Point(446, 272);
+            this.btnCambiarPassCliente.Location = new System.Drawing.Point(469, 272);
             this.btnCambiarPassCliente.Name = "btnCambiarPassCliente";
             this.btnCambiarPassCliente.Size = new System.Drawing.Size(109, 23);
             this.btnCambiarPassCliente.TabIndex = 106;
@@ -212,7 +212,7 @@
             this.dgvClientes.MultiSelect = false;
             this.dgvClientes.Name = "dgvClientes";
             this.dgvClientes.ReadOnly = true;
-            this.dgvClientes.Size = new System.Drawing.Size(647, 150);
+            this.dgvClientes.Size = new System.Drawing.Size(673, 150);
             this.dgvClientes.TabIndex = 103;
             this.dgvClientes.SelectionChanged += new System.EventHandler(this.dgvClientes_SelectionChanged);
             // 
@@ -261,30 +261,30 @@
             // 
             // txtDni
             // 
-            this.txtDni.Location = new System.Drawing.Point(403, 61);
+            this.txtDni.Location = new System.Drawing.Point(407, 61);
             this.txtDni.Name = "txtDni";
-            this.txtDni.Size = new System.Drawing.Size(266, 20);
+            this.txtDni.Size = new System.Drawing.Size(255, 20);
             this.txtDni.TabIndex = 94;
             // 
             // txtMailCliente
             // 
-            this.txtMailCliente.Location = new System.Drawing.Point(403, 35);
+            this.txtMailCliente.Location = new System.Drawing.Point(407, 34);
             this.txtMailCliente.Name = "txtMailCliente";
-            this.txtMailCliente.Size = new System.Drawing.Size(266, 20);
+            this.txtMailCliente.Size = new System.Drawing.Size(255, 20);
             this.txtMailCliente.TabIndex = 93;
             // 
             // txtApellido
             // 
-            this.txtApellido.Location = new System.Drawing.Point(80, 60);
+            this.txtApellido.Location = new System.Drawing.Point(91, 59);
             this.txtApellido.Name = "txtApellido";
-            this.txtApellido.Size = new System.Drawing.Size(266, 20);
+            this.txtApellido.Size = new System.Drawing.Size(255, 20);
             this.txtApellido.TabIndex = 92;
             // 
             // txtNombre
             // 
-            this.txtNombre.Location = new System.Drawing.Point(80, 34);
+            this.txtNombre.Location = new System.Drawing.Point(91, 34);
             this.txtNombre.Name = "txtNombre";
-            this.txtNombre.Size = new System.Drawing.Size(266, 20);
+            this.txtNombre.Size = new System.Drawing.Size(255, 20);
             this.txtNombre.TabIndex = 91;
             // 
             // materialLabel3
@@ -402,7 +402,7 @@
             // 
             // btnCrearUsuario
             // 
-            this.btnCrearUsuario.Location = new System.Drawing.Point(592, 425);
+            this.btnCrearUsuario.Location = new System.Drawing.Point(624, 425);
             this.btnCrearUsuario.Name = "btnCrearUsuario";
             this.btnCrearUsuario.Size = new System.Drawing.Size(109, 23);
             this.btnCrearUsuario.TabIndex = 1;
@@ -414,7 +414,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(731, 471);
+            this.ClientSize = new System.Drawing.Size(749, 471);
             this.Controls.Add(this.btnCrearUsuario);
             this.Controls.Add(this.tabControl1);
             this.MaximizeBox = false;

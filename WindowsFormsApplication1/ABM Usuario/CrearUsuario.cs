@@ -94,7 +94,7 @@ namespace MercadoEnvio.ABM_Usuario
                     }
                 }
                 else { 
-                    DAO.UsuarioSQL.cambiarPassword(txtPass.Text);
+                    DAO.UsuarioSQL.cambiarPassword(usuarioGlobal.Id, txtPass.Text);
                 }
 
 

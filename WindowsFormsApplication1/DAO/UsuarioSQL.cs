@@ -44,9 +44,51 @@ namespace MercadoEnvio.DAO
             SqlConnector.executeProcedure("alta_usuario", idUsuario);
         }
 
-        public static void cambiarPassword(string password)
+        public static void cambiarPassword(int idUsuario, string password)
         {
-            SqlConnector.executeProcedure("cambiarPassword", password);
+            SqlConnector.executeProcedure("cambiarPassword", idUsuario, password);
+        }
+
+        public static Cliente getCliente(int id){
+            SqlCommand cmd = SqlConnector.generarComandoYAbrir("get_cliente", id);
+            var reader = cmd.ExecuteReader();
+
+            Modelo.Cliente c = new Modelo.Cliente();
+
+            while (reader.Read())
+            {
+                
+                c.Nombre = reader["cliente_nombre"].ToString();
+                c.Apellido = reader["cliente_apellido"].ToString();
+                c.DNI = int.Parse(reader["cliente_DNI"].ToString());
+
+                Modelo.TipoDocumento tipo = new Modelo.TipoDocumento();
+                tipo.Id = int.Parse(reader["cliente_tipoDocumento_id"].ToString());
+                c.TipoDocumento = tipo;
+
+                c.Mail = reader["cliente_mail"].ToString();
+                c.Telefono = int.Parse(reader["cliente_tel"].ToString());
+
+                Modelo.Localidad l = new Modelo.Localidad();
+                //l.Id = int.Parse(reader["domicilio_localidad_id"].ToString());
+                int localidadId;
+                if(!Int32.TryParse(reader["domicilio_localidad_id"].ToString(), out localidadId)){
+                    l.Id = -1;
+                }
+                else{
+                    l.Id = localidadId;
+                }
+
+                Modelo.Domicilio d = new Domicilio();
+                d.Calle = reader["domicilio_calle"].ToString();
+                d.Altura = int.Parse(reader["domicilio_altura"].ToString());
+                d.Piso = int.Parse(reader["domicilio_piso"].ToString());
+                d.Departamento = reader["domicilio_departamento"].ToString();
+                d.CodigoPostal = int.Parse(reader["domicilio_codigoPostal"].ToString());
+                d.Localidad = l;
+                c.Domicilio = d;
+            }
+            return c;
         }
 
     }
