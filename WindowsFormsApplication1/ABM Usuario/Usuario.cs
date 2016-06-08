@@ -41,9 +41,12 @@ namespace MercadoEnvio.ABM_Usuario
         private void filtrarClientes()
         {
             int dni;
-            if (!Int32.TryParse(txtDni.Text, out dni) && txtDni.Text != "") MessageBox.Show("El DNI debe contener caracteres numericos", "Atención");
-
-            DAO.UsuarioSQL.getClientesFiltadros(dgvClientes, txtNombre.Text, txtApellido.Text, txtMailCliente.Text, dni);
+            if (!Int32.TryParse(txtDni.Text, out dni) && txtDni.Text != ""){
+                MessageBox.Show("El DNI debe contener caracteres numericos", "Atención");
+            }
+            else {
+                DAO.UsuarioSQL.getClientesFiltadros(dgvClientes, txtNombre.Text, txtApellido.Text, txtMailCliente.Text, txtDni.Text);
+            }
         }
 
         private void dgvClientes_SelectionChanged(object sender, EventArgs e)
@@ -58,11 +61,11 @@ namespace MercadoEnvio.ABM_Usuario
                 int hab = Convert.ToInt16(row.Cells["colHabilitado"].Value);
                 if (hab == 1)
                 {
-                    btnHabilitadoCliente.Text = "Dar de Baja";
+                    btnHabilitadoCliente.Text = "Dar de Alta";
                 }
                 else
                 {
-                    btnHabilitadoCliente.Text = "Dar de Alta";
+                    btnHabilitadoCliente.Text = "Dar de Baja";
                 }
             }
             else{

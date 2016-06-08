@@ -221,13 +221,13 @@
             // 
             // cmbTipo
             // 
+            this.cmbTipo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbTipo.FormattingEnabled = true;
             this.cmbTipo.Location = new System.Drawing.Point(277, 201);
             this.cmbTipo.Name = "cmbTipo";
             this.cmbTipo.Size = new System.Drawing.Size(114, 21);
             this.cmbTipo.TabIndex = 74;
             this.cmbTipo.Tag = "";
-            this.cmbTipo.Text = "Tipo";
             // 
             // txtCalle
             // 
@@ -350,6 +350,7 @@
             // 
             // cmbLocalidad
             // 
+            this.cmbLocalidad.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbLocalidad.FormattingEnabled = true;
             this.cmbLocalidad.Location = new System.Drawing.Point(276, 473);
             this.cmbLocalidad.Name = "cmbLocalidad";
@@ -361,7 +362,7 @@
             this.btnOK.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
             this.btnOK.Location = new System.Drawing.Point(351, 574);
             this.btnOK.Name = "btnOK";
-            this.btnOK.Size = new System.Drawing.Size(156, 23);
+            this.btnOK.Size = new System.Drawing.Size(156, 27);
             this.btnOK.TabIndex = 85;
             this.btnOK.Text = "Crear";
             this.btnOK.UseVisualStyleBackColor = true;

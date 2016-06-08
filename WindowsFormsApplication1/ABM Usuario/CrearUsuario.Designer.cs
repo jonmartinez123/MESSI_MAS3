@@ -139,6 +139,7 @@
             // 
             // cmbTipo
             // 
+            this.cmbTipo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbTipo.FormattingEnabled = true;
             this.cmbTipo.Items.AddRange(new object[] {
             "Cliente",
@@ -147,7 +148,6 @@
             this.cmbTipo.Name = "cmbTipo";
             this.cmbTipo.Size = new System.Drawing.Size(231, 21);
             this.cmbTipo.TabIndex = 60;
-            this.cmbTipo.Text = "Tipo";
             // 
             // btnContinuar
             // 

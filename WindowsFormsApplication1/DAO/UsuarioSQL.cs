@@ -1,4 +1,5 @@
-﻿using MercadoEnvio.Modelo;
+﻿using MercadoEnvio.Utils;
+using MercadoEnvio.Modelo;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,26 +13,16 @@ namespace MercadoEnvio.DAO
     class UsuarioSQL
     {
 
-        internal static List<Cliente> getClientes(string nombre, string apellido, int dni, string mail)
+        public static int getClientesFiltadros(DataGridView dg, string nombre, string apellido, string mail, string dni)
         {
-            SqlCommand cmd = SqlConnector.generarComandoYAbrir("getClientes", nombre, apellido, dni, mail);
-            var reader = cmd.ExecuteReader();
-
-            List<Cliente> clientes = new List<Cliente>();
-            Cliente c;
-            while (reader.Read())
+            if (dni == "")
             {
-                c = new Cliente();
-                c.Id = int.Parse(reader["cliente_id"].ToString());
-                c.Nombre = reader["cliente_nombre"].ToString();
-                clientes.Add(c);
+                return SqlConnector.retrieveDT("get_clientesFiltrados", dg, nombre, apellido, mail, null);
             }
-            return clientes;
-        }
-
-        public static int getClientesFiltadros(DataGridView dg, string nombre, string apellido, string mail, int dni)
-        {
-            return SqlConnector.retrieveDT("get_clientesFiltrados", dg, nombre, apellido, mail, dni);
+            else {
+                return SqlConnector.retrieveDT("get_clientesFiltrados", dg, nombre, apellido, mail, Int32.Parse(dni));
+            }
+            
         }
 
         public static void darDeBajaUsuario(int idUsuario)
@@ -46,7 +37,18 @@ namespace MercadoEnvio.DAO
 
         public static void cambiarPassword(int idUsuario, string password)
         {
-            SqlConnector.executeProcedure("cambiarPassword", idUsuario, password);
+            SqlConnector.executeProcedure("cambiarPassword", idUsuario, EncriptadorSHA.encodear(password));
+        }
+
+
+        public static void modificarCliente(Modelo.Cliente c)
+        {
+            SqlConnector.executeProcedure("modificar_cliente", c.Id, c.Nombre, c.Apellido, c.Mail, c.DNI, c.FechaNacimiento, c.Telefono, c.TipoDocumento.Id, c.Domicilio.Localidad.Id, c.Domicilio.Calle, c.Domicilio.Altura, c.Domicilio.Piso, c.Domicilio.Departamento, c.Domicilio.Ciudad, c.Domicilio.CodigoPostal.ToString());
+        }
+
+        public static void crearCliente(Modelo.Cliente c)
+        {
+            SqlConnector.executeProcedure("modificar_cliente",c.NombreUsuario, EncriptadorSHA.encodear(c.Password), c.Nombre, c.Apellido, c.Mail, c.DNI, c.FechaNacimiento, c.Telefono, c.TipoDocumento.Id, c.Domicilio.Localidad.Id, c.Domicilio.Calle, c.Domicilio.Altura, c.Domicilio.Piso, c.Domicilio.Departamento, c.Domicilio.Ciudad, c.Domicilio.CodigoPostal.ToString());
         }
 
         public static Cliente getCliente(int id){
@@ -70,7 +72,7 @@ namespace MercadoEnvio.DAO
                 c.Telefono = int.Parse(reader["cliente_tel"].ToString());
 
                 Modelo.Localidad l = new Modelo.Localidad();
-                //l.Id = int.Parse(reader["domicilio_localidad_id"].ToString());
+
                 int localidadId;
                 if(!Int32.TryParse(reader["domicilio_localidad_id"].ToString(), out localidadId)){
                     l.Id = -1;
@@ -87,6 +89,8 @@ namespace MercadoEnvio.DAO
                 d.CodigoPostal = int.Parse(reader["domicilio_codigoPostal"].ToString());
                 d.Localidad = l;
                 c.Domicilio = d;
+
+                c.FechaNacimiento = DateTime.Parse(reader["cliente_fechaNacimiento"].ToString());
             }
             return c;
         }

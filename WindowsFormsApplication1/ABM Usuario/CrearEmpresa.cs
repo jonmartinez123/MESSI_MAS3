@@ -40,7 +40,7 @@ namespace MercadoEnvio.ABM_Usuario
                 if (string.IsNullOrEmpty(txtRazonSocial.Text) && string.IsNullOrEmpty(txtCUIT.Text) && string.IsNullOrEmpty(cmbRubro.Text)
                     && string.IsNullOrEmpty(txtMail.Text) && string.IsNullOrEmpty(txtTel.Text) && string.IsNullOrEmpty(txtCalle.Text) &&
                     string.IsNullOrEmpty(txtPiso.Text) && string.IsNullOrEmpty(txtDepto.Text) && string.IsNullOrEmpty(cmbLocalidad.Text) &&
-                    string.IsNullOrEmpty(txtCodigoPostal.Text) && string.IsNullOrEmpty(txtNombreContacto.Text) && string.IsNullOrEmpty(cmbCiudad.Text))
+                    string.IsNullOrEmpty(txtCodigoPostal.Text) && string.IsNullOrEmpty(txtNombreContacto.Text) && string.IsNullOrEmpty(txtCiudad.Text))
                     throw new Exception("No puede haber campos vacíos");
 
                 if (string.IsNullOrEmpty(txtRazonSocial.Text))
@@ -79,8 +79,8 @@ namespace MercadoEnvio.ABM_Usuario
                 if (string.IsNullOrEmpty(txtNombreContacto.Text))
                     throw new Exception("Debe completar el nombre del contacto");
 
-                if (string.IsNullOrEmpty(cmbCiudad.Text))
-                    throw new Exception("Debe seleccionar una ciudad");
+                if (string.IsNullOrEmpty(txtCiudad.Text))
+                    throw new Exception("Debe comppletar la ciudad");
 
 
                 #endregion

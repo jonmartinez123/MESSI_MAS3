@@ -440,12 +440,14 @@ AS BEGIN
 	--TIPO DOCUMENTO
 
 	INSERT INTO MESSI_MAS3.TipoDocumento(tipoDocumento_nombre) VALUES ('DNI')
-	INSERT INTO MESSI_MAS3.TipoDocumento(tipoDocumento_nombre) VALUES ('PASAPORTE')
-	INSERT INTO MESSI_MAS3.TipoDocumento(tipoDocumento_nombre) VALUES ('LIBRETA CIVICA')
+	INSERT INTO MESSI_MAS3.TipoDocumento(tipoDocumento_nombre) VALUES ('Pasaporte')
+	INSERT INTO MESSI_MAS3.TipoDocumento(tipoDocumento_nombre) VALUES ('Libreta civica')
 
 	--LOCALIDAD
 
 	INSERT INTO MESSI_MAS3.Localidad(localidad_nombre) VALUES ('CABA')
+	INSERT INTO MESSI_MAS3.Localidad(localidad_nombre) VALUES ('Escobar')
+	INSERT INTO MESSI_MAS3.Localidad(localidad_nombre) VALUES ('La Plata')
 	
 
 END

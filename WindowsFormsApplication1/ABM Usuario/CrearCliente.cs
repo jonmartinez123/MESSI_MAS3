@@ -120,7 +120,19 @@ namespace MercadoEnvio.ABM_Usuario
 
                 #endregion
 
-                //Modelo.Usuario clienteConDatos = cargarCliente();
+                Modelo.Cliente clienteConDatos = cargarCliente();
+                if (clienteGlobal.tieneId()){                            //Veo si es para modificar o crear
+                    clienteConDatos.Id = clienteGlobal.Id;
+                    DAO.UsuarioSQL.modificarCliente(clienteConDatos);
+                    MessageBox.Show("El cliente se modifico con exito", "Atención");
+                }
+                else {
+                    clienteConDatos.NombreUsuario = clienteGlobal.NombreUsuario;
+                    clienteConDatos.Password = clienteGlobal.Password;
+                    DAO.UsuarioSQL.crearCliente(clienteConDatos);
+                    MessageBox.Show("El cliente se modifico con exito", "Atención");
+                }
+                this.Close();
             }
             catch (Exception ex)
             {
@@ -128,14 +140,51 @@ namespace MercadoEnvio.ABM_Usuario
             }
         }
 
-    /*    private Modelo.Usuario cargarCliente()
+        private Cliente cargarCliente()
         {
-            //  Modelo.Cliente unUsuario = new Modelo.Cliente(clienteGlobal.NombreUsuario, clienteGlobal.Password);
-            //TODO falta cargar todos los datos
-            return unUsuario;
-        }*/
+            Modelo.Cliente unCliente = new Modelo.Cliente();
 
-        private void   cargarFormularioParaModoficacion(Modelo.Cliente c)
+            unCliente.Nombre = txtNombre.Text;
+            unCliente.Apellido = txtApellido.Text;
+            unCliente.TipoDocumento = (TipoDocumento)cmbTipo.SelectedItem;
+
+            int dni;
+            if (!Int32.TryParse(txtDocumento.Text, out dni)) throw new Exception("El DNI solo debe contener caracteres numericos");
+            unCliente.DNI = dni;
+
+            unCliente.FechaNacimiento = dtpFechaNacimiento.Value.Date;
+            unCliente.Mail = txtMail.Text;
+
+            int tel;
+            if (!Int32.TryParse(txtTel.Text, out tel)) throw new Exception("El telefono solo debe contener caracteres numericos");
+            unCliente.Telefono = tel;
+
+            unCliente.Domicilio = new Domicilio();
+
+            unCliente.Domicilio.Calle = txtCalle.Text;
+
+            int altura;
+            if (!Int32.TryParse(txtAltura.Text, out altura)) throw new Exception("La altura solo debe contener caracteres numericos");
+            unCliente.Domicilio.Altura = altura;
+
+            int piso;
+            if (!Int32.TryParse(txtPiso.Text, out piso)) throw new Exception("El piso solo debe contener caracteres numericos");
+            unCliente.Domicilio.Piso = piso;
+
+            unCliente.Domicilio.Departamento = txtDepto.Text;
+
+            unCliente.Domicilio.Localidad = new Localidad();
+            unCliente.Domicilio.Localidad = (Localidad)cmbLocalidad.SelectedItem;
+
+            int cp;
+            if (!Int32.TryParse(txtCodigoPostal.Text, out cp)) throw new Exception("El código postal solo debe contener caracteres numericos");
+            unCliente.Domicilio.CodigoPostal = cp;
+
+            return unCliente;
+
+        }
+
+        private void cargarFormularioParaModoficacion(Modelo.Cliente c)
         {
             Modelo.Cliente unCliente = DAO.UsuarioSQL.getCliente(c.Id);
 
@@ -146,7 +195,7 @@ namespace MercadoEnvio.ABM_Usuario
             txtApellido.Text = unCliente.Apellido;
             cmbTipo.SelectedValue = unCliente.TipoDocumento.Id;
             txtDocumento.Text = unCliente.DNI.ToString();
-            //dtpFechaNacimiento.Text = unCliente.FechaNacimiento.ToShortDateString();
+            dtpFechaNacimiento.Text = unCliente.FechaNacimiento.ToShortDateString();
             txtMail.Text = unCliente.Mail;
             txtTel.Text = unCliente.Telefono.ToString();
             txtCalle.Text = unCliente.Domicilio.Calle;

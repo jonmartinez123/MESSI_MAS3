@@ -51,7 +51,7 @@
             this.cmbRubro = new System.Windows.Forms.ComboBox();
             this.txtNombreContacto = new MaterialSkin.Controls.MaterialSingleLineTextField();
             this.materialLabel10 = new MaterialSkin.Controls.MaterialLabel();
-            this.cmbCiudad = new System.Windows.Forms.ComboBox();
+            this.txtCiudad = new MaterialSkin.Controls.MaterialSingleLineTextField();
             this.SuspendLayout();
             // 
             // btnOK
@@ -66,6 +66,7 @@
             // 
             // cmbLocalidad
             // 
+            this.cmbLocalidad.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbLocalidad.FormattingEnabled = true;
             this.cmbLocalidad.Location = new System.Drawing.Point(276, 473);
             this.cmbLocalidad.Name = "cmbLocalidad";
@@ -336,6 +337,7 @@
             // 
             // cmbRubro
             // 
+            this.cmbRubro.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbRubro.FormattingEnabled = true;
             this.cmbRubro.Items.AddRange(new object[] {
             "DNI",
@@ -376,20 +378,27 @@
             this.materialLabel10.TabIndex = 111;
             this.materialLabel10.Text = "Código postal";
             // 
-            // cmbCiudad
+            // txtCiudad
             // 
-            this.cmbCiudad.FormattingEnabled = true;
-            this.cmbCiudad.Location = new System.Drawing.Point(276, 522);
-            this.cmbCiudad.Name = "cmbCiudad";
-            this.cmbCiudad.Size = new System.Drawing.Size(231, 21);
-            this.cmbCiudad.TabIndex = 112;
+            this.txtCiudad.Depth = 0;
+            this.txtCiudad.Hint = "";
+            this.txtCiudad.Location = new System.Drawing.Point(276, 524);
+            this.txtCiudad.MouseState = MaterialSkin.MouseState.HOVER;
+            this.txtCiudad.Name = "txtCiudad";
+            this.txtCiudad.PasswordChar = '\0';
+            this.txtCiudad.SelectedText = "";
+            this.txtCiudad.SelectionLength = 0;
+            this.txtCiudad.SelectionStart = 0;
+            this.txtCiudad.Size = new System.Drawing.Size(231, 23);
+            this.txtCiudad.TabIndex = 112;
+            this.txtCiudad.UseSystemPasswordChar = false;
             // 
             // CrearEmpresa
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(624, 690);
-            this.Controls.Add(this.cmbCiudad);
+            this.Controls.Add(this.txtCiudad);
             this.Controls.Add(this.materialLabel10);
             this.Controls.Add(this.txtNombreContacto);
             this.Controls.Add(this.btnOK);
@@ -445,6 +454,6 @@
         private System.Windows.Forms.ComboBox cmbRubro;
         private MaterialSkin.Controls.MaterialSingleLineTextField txtNombreContacto;
         private MaterialSkin.Controls.MaterialLabel materialLabel10;
-        private System.Windows.Forms.ComboBox cmbCiudad;
+        private MaterialSkin.Controls.MaterialSingleLineTextField txtCiudad;
     }
 }

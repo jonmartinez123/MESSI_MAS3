@@ -22,6 +22,7 @@ namespace MercadoEnvio.ABM_Usuario
         {
             inicializar();
             txtUsuario.Enabled = true;
+            usuarioGlobal = new Modelo.Usuario();
             usuarioGlobal.Id = -1;
         }
 
@@ -108,7 +109,7 @@ namespace MercadoEnvio.ABM_Usuario
 
         void validarUsername(string username)
         {
-            //Buscar en la base a ver si existe (SP)
+            if (DAO.LoginSQL.existeUsuario(username)) throw new Exception("El nombre de usuario no esta disponible");
         }
     }
 }
