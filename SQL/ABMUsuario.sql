@@ -207,3 +207,17 @@ BEGIN
 	VALUES (@idUsuario, @razonSocial, @mail, @cuit, @telefono, @nombreContacto, @idRubro, GETDATE(), @idDomicilio)
 END
 GO
+
+CREATE PROCEDURE MESSI_MAS3.existe_razonSocial(@razon nvarchar(255))
+AS
+BEGIN
+	IF(EXISTS(SELECT 1 FROM MESSI_MAS3.Empresa WHERE empresa_razonSocial = @razon)) BEGIN RETURN 1 END RETURN -1
+END
+GO
+
+CREATE PROCEDURE MESSI_MAS3.existe_cuit(@cuit nvarchar(255))
+AS
+BEGIN
+	IF(EXISTS(SELECT 1 FROM MESSI_MAS3.Empresa WHERE empresa_cuit = @cuit)) BEGIN RETURN 1 END RETURN -1
+END
+GO

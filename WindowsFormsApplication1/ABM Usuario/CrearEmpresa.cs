@@ -67,8 +67,12 @@ namespace MercadoEnvio.ABM_Usuario
                 if (string.IsNullOrEmpty(txtRazonSocial.Text))
                     throw new Exception("Debe completar la razón social");
 
+                validarRazonSocial(txtRazonSocial.Text);
+
                 if (string.IsNullOrEmpty(txtCUIT.Text))
                     throw new Exception("Debe completar el número de CUIT");
+
+                validarCUIT(txtCUIT.Text);
 
                 if (string.IsNullOrEmpty(cmbRubro.Text))
                     throw new Exception("Debe seleccionar el rubro principal");
@@ -102,6 +106,8 @@ namespace MercadoEnvio.ABM_Usuario
 
                 if (string.IsNullOrEmpty(txtCiudad.Text))
                     throw new Exception("Debe comppletar la ciudad");
+
+                
 
                 #endregion
 
@@ -217,7 +223,7 @@ namespace MercadoEnvio.ABM_Usuario
 
         private void txtCUIT_KeyPress(object sender, KeyPressEventArgs e)
         {
-            this.allowNumericOnly(e);
+            //this.allowNumericOnly(e);
             if (e.KeyChar != 8) this.allowMaxLenght(txtCodigoPostal, 10, e);
         }
 
@@ -247,6 +253,15 @@ namespace MercadoEnvio.ABM_Usuario
             txtCiudad.Text = e.Domicilio.Ciudad;
             txtCodigoPostal.Text = e.Domicilio.CodigoPostal.ToString();
     
+        }
+
+        void validarRazonSocial(string razon){
+            if (DAO.UsuarioSQL.existeRazonSocial(razon)) throw new Exception("La razón social ingresada ya existe");
+        }
+
+        void validarCUIT(string cuit)
+        {
+            if (DAO.UsuarioSQL.existeCUIT(cuit)) throw new Exception("El CUIT ingresado ya existe");
         }
     }
 }

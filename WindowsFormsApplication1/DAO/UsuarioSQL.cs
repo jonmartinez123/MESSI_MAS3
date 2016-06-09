@@ -175,5 +175,14 @@ namespace MercadoEnvio.DAO
             SqlConnector.executeProcedure("crear_empresa", e.NombreUsuario, EncriptadorSHA.encodear(e.Password), e.RazonSocial, e.Mail, e.Cuit, e.Telefono, e.NombreContacto, e.Domicilio.Localidad.Id, e.Domicilio.Calle, e.Domicilio.Altura, e.Domicilio.Piso, e.Domicilio.Departamento, e.Domicilio.Ciudad, e.Domicilio.CodigoPostal.ToString(), e.RubroPrincipal.Id);
         }
 
+        internal static Boolean existeRazonSocial(string razon)
+        {
+            return SqlConnector.executeProcedure("existe_razonSocial", razon) == 1 ? true : false;
+        }
+
+        internal static Boolean existeCUIT(string cuit)
+        {
+            return SqlConnector.executeProcedure("existe_cuit", cuit) == 1 ? true : false;
+        }
     }
 }
