@@ -77,7 +77,7 @@ BEGIN
 END
 GO
 
-CREATE PROCEDURE MESSI_MAS3.get_clientesFiltrados(@nombre nvarchar(255), @apellido nvarchar(255), @mail nvarchar(255), @dni NUMERIC(18,0))
+CREATE PROCEDURE MESSI_MAS3.get_clientesFiltrados(@nombre nvarchar(255), @apellido nvarchar(255), @mail nvarchar(255), @dni NUMERIC(18,0), @IdTipoDocumento INT)
 AS				
 BEGIN
 	SELECT usuario_id, usuario_nombreUsuario, cliente_nombre, cliente_apellido, cliente_DNI, cliente_mail, usuario_deleted 
@@ -86,7 +86,20 @@ BEGIN
 		AND cliente_nombre LIKE CONCAT('%', @nombre, '%')
 		AND cliente_apellido LIKE CONCAT('%', @apellido, '%')
 		AND cliente_mail LIKE CONCAT('%', @mail, '%')
-		AND cliente_DNI LIKE CONCAT('%', @dni, '%')
+		AND cliente_DNI = @dni
+		AND cliente_tipoDocumento_id = @IdTipoDocumento
+END
+GO
+
+CREATE PROCEDURE MESSI_MAS3.get_clientesFiltradosSinDocumento(@nombre nvarchar(255), @apellido nvarchar(255), @mail nvarchar(255))
+AS				
+BEGIN
+	SELECT usuario_id, usuario_nombreUsuario, cliente_nombre, cliente_apellido, cliente_DNI, cliente_mail, usuario_deleted 
+	FROM MESSI_MAS3.Cliente, MESSI_MAS3.Usuario
+	WHERE cliente_id = usuario_id 
+		AND cliente_nombre LIKE CONCAT('%', @nombre, '%')
+		AND cliente_apellido LIKE CONCAT('%', @apellido, '%')
+		AND cliente_mail LIKE CONCAT('%', @mail, '%')
 END
 GO
 
@@ -143,7 +156,18 @@ BEGIN
 	FROM MESSI_MAS3.Empresa, MESSI_MAS3.Usuario
 	WHERE empresa_id = usuario_id 
 		AND empresa_razonSocial LIKE CONCAT('%', @razonSocial, '%')
-		AND empresa_cuit LIKE CONCAT('%', @cuit, '%')
+		AND empresa_cuit = @cuit
+		AND empresa_mail LIKE CONCAT('%', @mail, '%')
+END
+GO
+
+CREATE PROCEDURE MESSI_MAS3.get_empresasFiltradasSinCUIT(@razonSocial nvarchar(255), @mail nvarchar(255))
+AS				
+BEGIN
+	SELECT usuario_id, usuario_nombreUsuario, empresa_razonSocial, empresa_cuit, empresa_mail, empresa_nombreContacto, usuario_deleted 
+	FROM MESSI_MAS3.Empresa, MESSI_MAS3.Usuario
+	WHERE empresa_id = usuario_id 
+		AND empresa_razonSocial LIKE CONCAT('%', @razonSocial, '%')
 		AND empresa_mail LIKE CONCAT('%', @mail, '%')
 END
 GO

@@ -30,6 +30,7 @@
         {
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.cmbTipoDocumento = new System.Windows.Forms.ComboBox();
             this.materialLabel5 = new MaterialSkin.Controls.MaterialLabel();
             this.materialLabel6 = new MaterialSkin.Controls.MaterialLabel();
             this.materialLabel4 = new MaterialSkin.Controls.MaterialLabel();
@@ -39,13 +40,6 @@
             this.btnHabilitadoCliente = new System.Windows.Forms.Button();
             this.btnCambiarPassCliente = new System.Windows.Forms.Button();
             this.dgvClientes = new System.Windows.Forms.DataGridView();
-            this.colId = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colUsuario = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colNombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colApellido = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colDNI = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colMail = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colHabilitado = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.txtDni = new System.Windows.Forms.TextBox();
             this.txtMailCliente = new System.Windows.Forms.TextBox();
             this.txtApellido = new System.Windows.Forms.TextBox();
@@ -72,6 +66,13 @@
             this.txtRazonSocial = new System.Windows.Forms.TextBox();
             this.materialLabel1 = new MaterialSkin.Controls.MaterialLabel();
             this.btnCrearUsuario = new System.Windows.Forms.Button();
+            this.colId = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colUsuario = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colNombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colApellido = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colDNI = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colMail = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colHabilitado = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvClientes)).BeginInit();
@@ -91,6 +92,7 @@
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.cmbTipoDocumento);
             this.tabPage1.Controls.Add(this.materialLabel5);
             this.tabPage1.Controls.Add(this.materialLabel6);
             this.tabPage1.Controls.Add(this.materialLabel4);
@@ -113,18 +115,27 @@
             this.tabPage1.Text = "Clientes";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
+            // cmbTipoDocumento
+            // 
+            this.cmbTipoDocumento.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbTipoDocumento.FormattingEnabled = true;
+            this.cmbTipoDocumento.Location = new System.Drawing.Point(469, 62);
+            this.cmbTipoDocumento.Name = "cmbTipoDocumento";
+            this.cmbTipoDocumento.Size = new System.Drawing.Size(94, 21);
+            this.cmbTipoDocumento.TabIndex = 112;
+            // 
             // materialLabel5
             // 
             this.materialLabel5.AutoSize = true;
             this.materialLabel5.Depth = 0;
             this.materialLabel5.Font = new System.Drawing.Font("Roboto", 11F);
             this.materialLabel5.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.materialLabel5.Location = new System.Drawing.Point(367, 60);
+            this.materialLabel5.Location = new System.Drawing.Point(376, 64);
             this.materialLabel5.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialLabel5.Name = "materialLabel5";
-            this.materialLabel5.Size = new System.Drawing.Size(34, 19);
+            this.materialLabel5.Size = new System.Drawing.Size(87, 19);
             this.materialLabel5.TabIndex = 111;
-            this.materialLabel5.Text = "DNI";
+            this.materialLabel5.Text = "Documento";
             // 
             // materialLabel6
             // 
@@ -132,7 +143,7 @@
             this.materialLabel6.Depth = 0;
             this.materialLabel6.Font = new System.Drawing.Font("Roboto", 11F);
             this.materialLabel6.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.materialLabel6.Location = new System.Drawing.Point(366, 35);
+            this.materialLabel6.Location = new System.Drawing.Point(376, 37);
             this.materialLabel6.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialLabel6.Name = "materialLabel6";
             this.materialLabel6.Size = new System.Drawing.Size(38, 19);
@@ -226,75 +237,32 @@
             this.dgvClientes.TabIndex = 103;
             this.dgvClientes.SelectionChanged += new System.EventHandler(this.dgvClientes_SelectionChanged);
             // 
-            // colId
-            // 
-            this.colId.HeaderText = "Id";
-            this.colId.Name = "colId";
-            this.colId.ReadOnly = true;
-            this.colId.Visible = false;
-            // 
-            // colUsuario
-            // 
-            this.colUsuario.HeaderText = "Usuario";
-            this.colUsuario.Name = "colUsuario";
-            this.colUsuario.ReadOnly = true;
-            // 
-            // colNombre
-            // 
-            this.colNombre.HeaderText = "Nombre";
-            this.colNombre.Name = "colNombre";
-            this.colNombre.ReadOnly = true;
-            // 
-            // colApellido
-            // 
-            this.colApellido.HeaderText = "Apellido";
-            this.colApellido.Name = "colApellido";
-            this.colApellido.ReadOnly = true;
-            // 
-            // colDNI
-            // 
-            this.colDNI.HeaderText = "DNI";
-            this.colDNI.Name = "colDNI";
-            this.colDNI.ReadOnly = true;
-            // 
-            // colMail
-            // 
-            this.colMail.HeaderText = "Mail";
-            this.colMail.Name = "colMail";
-            this.colMail.ReadOnly = true;
-            // 
-            // colHabilitado
-            // 
-            this.colHabilitado.HeaderText = "Habilitado";
-            this.colHabilitado.Name = "colHabilitado";
-            this.colHabilitado.ReadOnly = true;
-            // 
             // txtDni
             // 
-            this.txtDni.Location = new System.Drawing.Point(407, 61);
+            this.txtDni.Location = new System.Drawing.Point(574, 63);
             this.txtDni.Name = "txtDni";
-            this.txtDni.Size = new System.Drawing.Size(255, 20);
+            this.txtDni.Size = new System.Drawing.Size(119, 20);
             this.txtDni.TabIndex = 94;
             // 
             // txtMailCliente
             // 
-            this.txtMailCliente.Location = new System.Drawing.Point(407, 34);
+            this.txtMailCliente.Location = new System.Drawing.Point(420, 37);
             this.txtMailCliente.Name = "txtMailCliente";
-            this.txtMailCliente.Size = new System.Drawing.Size(255, 20);
+            this.txtMailCliente.Size = new System.Drawing.Size(273, 20);
             this.txtMailCliente.TabIndex = 93;
             // 
             // txtApellido
             // 
             this.txtApellido.Location = new System.Drawing.Point(91, 59);
             this.txtApellido.Name = "txtApellido";
-            this.txtApellido.Size = new System.Drawing.Size(255, 20);
+            this.txtApellido.Size = new System.Drawing.Size(269, 20);
             this.txtApellido.TabIndex = 92;
             // 
             // txtNombre
             // 
-            this.txtNombre.Location = new System.Drawing.Point(91, 34);
+            this.txtNombre.Location = new System.Drawing.Point(91, 36);
             this.txtNombre.Name = "txtNombre";
-            this.txtNombre.Size = new System.Drawing.Size(255, 20);
+            this.txtNombre.Size = new System.Drawing.Size(269, 20);
             this.txtNombre.TabIndex = 91;
             // 
             // materialLabel3
@@ -338,7 +306,7 @@
             this.materialLabel9.Depth = 0;
             this.materialLabel9.Font = new System.Drawing.Font("Roboto", 11F);
             this.materialLabel9.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.materialLabel9.Location = new System.Drawing.Point(393, 35);
+            this.materialLabel9.Location = new System.Drawing.Point(398, 35);
             this.materialLabel9.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialLabel9.Name = "materialLabel9";
             this.materialLabel9.Size = new System.Drawing.Size(38, 19);
@@ -351,7 +319,7 @@
             this.materialLabel8.Depth = 0;
             this.materialLabel8.Font = new System.Drawing.Font("Roboto", 11F);
             this.materialLabel8.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.materialLabel8.Location = new System.Drawing.Point(21, 61);
+            this.materialLabel8.Location = new System.Drawing.Point(21, 59);
             this.materialLabel8.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialLabel8.Name = "materialLabel8";
             this.materialLabel8.Size = new System.Drawing.Size(42, 19);
@@ -478,23 +446,23 @@
             // 
             // txtMailEmpresa
             // 
-            this.txtMailEmpresa.Location = new System.Drawing.Point(437, 35);
+            this.txtMailEmpresa.Location = new System.Drawing.Point(442, 35);
             this.txtMailEmpresa.Name = "txtMailEmpresa";
-            this.txtMailEmpresa.Size = new System.Drawing.Size(249, 20);
+            this.txtMailEmpresa.Size = new System.Drawing.Size(251, 20);
             this.txtMailEmpresa.TabIndex = 98;
             // 
             // txtCUIT
             // 
-            this.txtCUIT.Location = new System.Drawing.Point(125, 61);
+            this.txtCUIT.Location = new System.Drawing.Point(125, 58);
             this.txtCUIT.Name = "txtCUIT";
-            this.txtCUIT.Size = new System.Drawing.Size(249, 20);
+            this.txtCUIT.Size = new System.Drawing.Size(233, 20);
             this.txtCUIT.TabIndex = 97;
             // 
             // txtRazonSocial
             // 
             this.txtRazonSocial.Location = new System.Drawing.Point(125, 35);
             this.txtRazonSocial.Name = "txtRazonSocial";
-            this.txtRazonSocial.Size = new System.Drawing.Size(249, 20);
+            this.txtRazonSocial.Size = new System.Drawing.Size(233, 20);
             this.txtRazonSocial.TabIndex = 96;
             // 
             // materialLabel1
@@ -519,6 +487,49 @@
             this.btnCrearUsuario.Text = "Crear Usuario";
             this.btnCrearUsuario.UseVisualStyleBackColor = true;
             this.btnCrearUsuario.Click += new System.EventHandler(this.btnCrearUsuario_Click);
+            // 
+            // colId
+            // 
+            this.colId.HeaderText = "Id";
+            this.colId.Name = "colId";
+            this.colId.ReadOnly = true;
+            this.colId.Visible = false;
+            // 
+            // colUsuario
+            // 
+            this.colUsuario.HeaderText = "Usuario";
+            this.colUsuario.Name = "colUsuario";
+            this.colUsuario.ReadOnly = true;
+            // 
+            // colNombre
+            // 
+            this.colNombre.HeaderText = "Nombre";
+            this.colNombre.Name = "colNombre";
+            this.colNombre.ReadOnly = true;
+            // 
+            // colApellido
+            // 
+            this.colApellido.HeaderText = "Apellido";
+            this.colApellido.Name = "colApellido";
+            this.colApellido.ReadOnly = true;
+            // 
+            // colDNI
+            // 
+            this.colDNI.HeaderText = "Documento";
+            this.colDNI.Name = "colDNI";
+            this.colDNI.ReadOnly = true;
+            // 
+            // colMail
+            // 
+            this.colMail.HeaderText = "Mail";
+            this.colMail.Name = "colMail";
+            this.colMail.ReadOnly = true;
+            // 
+            // colHabilitado
+            // 
+            this.colHabilitado.HeaderText = "Habilitado";
+            this.colHabilitado.Name = "colHabilitado";
+            this.colHabilitado.ReadOnly = true;
             // 
             // Usuario
             // 
@@ -572,13 +583,6 @@
         private MaterialSkin.Controls.MaterialLabel materialLabel6;
         private MaterialSkin.Controls.MaterialLabel materialLabel4;
         private MaterialSkin.Controls.MaterialLabel materialLabel2;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colId;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colUsuario;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colNombre;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colApellido;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colDNI;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colMail;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colHabilitado;
         private MaterialSkin.Controls.MaterialLabel materialLabel9;
         private MaterialSkin.Controls.MaterialLabel materialLabel8;
         private MaterialSkin.Controls.MaterialLabel materialLabel7;
@@ -589,5 +593,13 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colMailEmpresa;
         private System.Windows.Forms.DataGridViewTextBoxColumn colNombreContacto;
         private System.Windows.Forms.DataGridViewTextBoxColumn colHabilitadoEmpresa;
+        private System.Windows.Forms.ComboBox cmbTipoDocumento;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colId;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colUsuario;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colNombre;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colApellido;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colDNI;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colMail;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colHabilitado;
     }
 }

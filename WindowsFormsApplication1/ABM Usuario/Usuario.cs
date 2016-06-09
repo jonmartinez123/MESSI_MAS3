@@ -24,6 +24,10 @@ namespace MercadoEnvio.ABM_Usuario
 
         private void Usuario_Load(object sender, EventArgs e)
         {
+            cmbTipoDocumento.DataSource = DAO.TipoDocumentoSQL.getTipoDocumentos();
+            cmbTipoDocumento.DisplayMember = "Descripcion";
+            cmbTipoDocumento.ValueMember = "Id";
+
             filtrarClientes();
             filtrarEmpresas();
         }
@@ -46,7 +50,7 @@ namespace MercadoEnvio.ABM_Usuario
                 MessageBox.Show("El DNI debe contener caracteres numericos", "Atención");
             }
             else {
-                DAO.UsuarioSQL.getClientesFiltadros(dgvClientes, txtNombre.Text, txtApellido.Text, txtMailCliente.Text, txtDni.Text);
+                DAO.UsuarioSQL.getClientesFiltadros(dgvClientes, txtNombre.Text, txtApellido.Text, txtMailCliente.Text, txtDni.Text, (Modelo.TipoDocumento)cmbTipoDocumento.SelectedItem);
             }
         }
 
@@ -204,6 +208,7 @@ namespace MercadoEnvio.ABM_Usuario
                 cCliente.ShowDialog();
             }
         }
+
 
 
     }

@@ -29,15 +29,15 @@ namespace MercadoEnvio.DAO
 
 
         //CLIENTE  
-        public static int getClientesFiltadros(DataGridView dg, string nombre, string apellido, string mail, string dni)
+        public static int getClientesFiltadros(DataGridView dg, string nombre, string apellido, string mail, string dni, Modelo.TipoDocumento tipo)
         {
             if (dni == "")
             {
-                return SqlConnector.retrieveDT("get_clientesFiltrados", dg, nombre, apellido, mail, null);
+                return SqlConnector.retrieveDT("get_clientesFiltradosSinDocumento", dg, nombre, apellido, mail);
             }
             else
             {
-                return SqlConnector.retrieveDT("get_clientesFiltrados", dg, nombre, apellido, mail, Int32.Parse(dni));
+                return SqlConnector.retrieveDT("get_clientesFiltrados", dg, nombre, apellido, mail, Int32.Parse(dni), tipo.Id);
             }
 
         }
@@ -101,8 +101,12 @@ namespace MercadoEnvio.DAO
 
         public static int getEmpresasFiltradas(DataGridView dg, string razonSocial, string cuit, string mail)
         {
-            return SqlConnector.retrieveDT("get_empresasFiltradas", dg, razonSocial, cuit, mail);
-
+            if (cuit == ""){
+                return SqlConnector.retrieveDT("get_empresasFiltradasSinCUIT", dg, razonSocial, mail);
+            }
+            else{
+                return SqlConnector.retrieveDT("get_empresasFiltradas", dg, razonSocial, mail, cuit);
+            }
         }
 
         public static void modificarEmpresa(Modelo.Empresa e)
