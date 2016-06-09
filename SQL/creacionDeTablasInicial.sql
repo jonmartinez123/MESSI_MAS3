@@ -29,9 +29,6 @@ IF EXISTS(SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'MESSI_MA
 IF EXISTS(SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'MESSI_MAS3' AND  TABLE_NAME = 'Oferta')
 	DROP TABLE MESSI_MAS3.Oferta
 
-IF EXISTS(SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'MESSI_MAS3' AND  TABLE_NAME = 'Respuesta')
-	DROP TABLE MESSI_MAS3.Respuesta
-
 IF EXISTS(SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'MESSI_MAS3' AND  TABLE_NAME = 'Rubro_x_Publicacion')
 	DROP TABLE MESSI_MAS3.Rubro_x_Publicacion
 
@@ -46,9 +43,6 @@ IF EXISTS(SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'MESSI_MA
 
 IF EXISTS(SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'MESSI_MAS3' AND  TABLE_NAME = 'Rol')
 	DROP TABLE MESSI_MAS3.Rol
-
-IF EXISTS(SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'MESSI_MAS3' AND  TABLE_NAME = 'Pregunta')
-	DROP TABLE MESSI_MAS3.Pregunta
 
 IF EXISTS(SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'MESSI_MAS3' AND  TABLE_NAME = 'Empresa')
 	DROP TABLE MESSI_MAS3.Empresa
@@ -122,7 +116,7 @@ GO
 -- -----------------------------------------------------
 CREATE TABLE MESSI_MAS3.Funcionalidad (
    funcionalidad_id INT PRIMARY KEY NOT NULL IDENTITY,
-   funcionalidad_descripcion NVARCHAR(255) NULL,
+   funcionalidad_descripcion NVARCHAR(255) NULL
   )
 
 
@@ -137,7 +131,7 @@ CREATE TABLE MESSI_MAS3.Usuario (
   usuario_deleted INT DEFAULT 0,						--flag de Baja logica
   usuario_intentos INT DEFAULT 0,
   usuario_primeraPublicacion INT DEFAULT 1 -- significa True y luego de hacer la primera publicacion se setea en 0
-   )
+  )
  
 
 
@@ -147,14 +141,14 @@ CREATE TABLE MESSI_MAS3.Usuario (
 CREATE TABLE MESSI_MAS3.Rol (
   rol_id INT PRIMARY KEY NOT NULL IDENTITY,
   rol_nombre NVARCHAR(255) NULL,
-  rol_habilitado INT DEFAULT 1,						--Si se da de baja, lo seteamos en 0
+  rol_habilitado INT DEFAULT 1						--Si se da de baja, lo seteamos en 0
   )
 
 
 
   CREATE TABLE MESSI_MAS3.TipoDocumento(
 	tipoDocumento_id INT PRIMARY KEY NOT NULL IDENTITY,
-	tipoDocumento_nombre VARCHAR(100),
+	tipoDocumento_nombre VARCHAR(100)
 	 )
 
 GO
@@ -164,8 +158,7 @@ GO
 -- -----------------------------------------------------
 CREATE TABLE MESSI_MAS3.Localidad (
   localidad_id INT PRIMARY KEY NOT NULL IDENTITY,
-  localidad_nombre NVARCHAR(255) NULL,			--cambio de Not null a NULL
-
+  localidad_nombre NVARCHAR(255) NULL			--cambio de Not null a NULL
   )
 
 
@@ -181,7 +174,7 @@ CREATE TABLE MESSI_MAS3.Domicilio (
   domicilio_piso NUMERIC(18,0) NOT NULL,
   domicilio_departamento NVARCHAR(50) NOT NULL,
   domicilio_ciudad NVARCHAR(45) NULL,					--CAMBIO DE DEFAULT 'BUENOS AIRES' A NULL							
-  domicilio_codigoPostal NVARCHAR(50) NOT NULL,)
+  domicilio_codigoPostal NVARCHAR(50) NOT NULL)
 
 
 																							
@@ -201,8 +194,7 @@ CREATE TABLE MESSI_MAS3.Cliente (
   cliente_tel NUMERIC(15,0) DEFAULT 0,
   cliente_mail NVARCHAR(255) NULL,	
   cliente_tipoDocumento_id INT REFERENCES MESSI_MAS3.TipoDocumento(tipoDocumento_id) ,
-  cliente_calificacionPromedio INT DEFAULT 0 NULL,	
-  )
+  cliente_calificacionPromedio INT DEFAULT 0 NULL)
 
 
 
@@ -212,8 +204,7 @@ CREATE TABLE MESSI_MAS3.Cliente (
 CREATE TABLE MESSI_MAS3.Rubro (
   rubro_id INT PRIMARY KEY NOT NULL IDENTITY,
   rubro_descripcionCorta NVARCHAR(255) NOT NULL,
-  rubro_descripcionLarga NVARCHAR(255) NULL,
-  )
+  rubro_descripcionLarga NVARCHAR(255) NULL)
 
 
 																				 
@@ -237,8 +228,7 @@ CREATE TABLE MESSI_MAS3.Empresa (
 -- -----------------------------------------------------
 CREATE TABLE MESSI_MAS3.Estado (
   estado_id INT PRIMARY KEY NOT NULL IDENTITY,
-  estado_nombre NVARCHAR(255) NOT NULL,
-  )
+  estado_nombre NVARCHAR(255) NOT NULL)
 
 
 
@@ -251,8 +241,7 @@ CREATE TABLE MESSI_MAS3.Visibilidad (
   visibilidad_descripcion NVARCHAR(255) NOT NULL,
   visibilidad_precio NUMERIC(18,2) NOT NULL,
   visibilidad_porcentaje NUMERIC(18,2) NOT NULL,
-visibilidad_costoEnvio NUMERIC(18,2) NOT NULL
-)
+  visibilidad_costoEnvio NUMERIC(18,2) NOT NULL)
 
 
 
@@ -263,9 +252,7 @@ visibilidad_costoEnvio NUMERIC(18,2) NOT NULL
 CREATE TABLE MESSI_MAS3.tipoPublicacion(
    tipoPublicacion_id INT PRIMARY KEY NOT NULL IDENTITY,
    tipoPublicacion_nombre NVARCHAR(255) NOT NULL,
-   tipoPublicacion_tieneEnvio INT DEFAULT 1
-
-   )
+   tipoPublicacion_tieneEnvio INT DEFAULT 1)
 
 
 -- -----------------------------------------------------
@@ -280,23 +267,18 @@ CREATE TABLE MESSI_MAS3.Publicacion (
   publicacion_fechaInicio DATETIME NOT NULL,
   publicacion_fechaFin DATETIME NOT NULL,
   publicacion_descripcion VARCHAR(255) NULL,
-  publicacion_admitePreguntas INT DEFAULT 0 NOT NULL,
   publicacion_tipoPublicacionId INT REFERENCES MESSI_MAS3.tipoPublicacion(tipoPublicacion_id),
   publicacion_minimoSubasta NUMERIC(10,2) NULL,			--DUDA MIRAR KOIFFO EL TIPO DE LA VARIABLE
   publicacion_precio NUMERIC(18,2),
   publicacion_idRubro INT NOT NULL,
-  publicacion_stock NUMERIC(18,0) NULL,
-  
-   )
-
-
+  publicacion_stock NUMERIC(18,0) NULL)
 
 -- -----------------------------------------------------
 -- Table MESSI_MAS3.Rubro_x_Publicacion
 -- -----------------------------------------------------
 CREATE TABLE MESSI_MAS3.Rubro_x_Publicacion (
   idPublicacion INT REFERENCES MESSI_MAS3.Publicacion (publicacion_id),
-  idRubro INT REFERENCES MESSI_MAS3.Rubro (rubro_id) ,)
+  idRubro INT REFERENCES MESSI_MAS3.Rubro (rubro_id))
   
 -- -----------------------------------------------------
 -- Table MESSI_MAS3.RolUsuario
@@ -336,7 +318,7 @@ CREATE TABLE MESSI_MAS3.Oferta (
   oferta_persona_id INT REFERENCES MESSI_MAS3.Cliente(cliente_id),						
   oferta_idPublicacion INT REFERENCES MESSI_MAS3.Publicacion (publicacion_id),
   oferta_fecha DATETIME NOT NULL,
-  oferta_ganador INT DEFAULT 0,
+  oferta_ganador INT DEFAULT 0
   )
 
 
@@ -352,7 +334,7 @@ CREATE TABLE MESSI_MAS3.Calificacion (
   calificacion_detalle NVARCHAR(255) NULL,
   calificacion_pendiente INT DEFAULT 1 NULL,					--ACA!!!
   calificacion_idusuarioCalificado INT REFERENCES MESSI_MAS3.Usuario(usuario_id),
-  calificacion_codigo NUMERIC (18,0),
+  calificacion_codigo NUMERIC (18,0)
 )
  
 
@@ -362,7 +344,7 @@ CREATE TABLE MESSI_MAS3.Calificacion (
 
 CREATE TABLE MESSI_MAS3.FormaDePago (
   formaDePago_id INT PRIMARY KEY NOT NULL IDENTITY,
-  formadePago_nombre NVARCHAR(255) NULL,
+  formadePago_nombre NVARCHAR(255) NULL
   )
 
 -- -----------------------------------------------------
@@ -376,8 +358,7 @@ CREATE TABLE MESSI_MAS3.Factura (
   factura_idVendedor INT REFERENCES MESSI_MAS3.Usuario (usuario_id),
   factura_numero NUMERIC(18,0) NOT NULL,
   factura_formaDePago INT REFERENCES MESSI_MAS3.FormaDePago (formaDePago_id),
-  factura_publicacionId INT REFERENCES MESSI_MAS3.Publicacion(publicacion_id),
-  
+  factura_publicacionId INT REFERENCES MESSI_MAS3.Publicacion(publicacion_id)
 )
 
 
@@ -390,14 +371,10 @@ CREATE TABLE MESSI_MAS3.Factura_detalle (
   facturaDetalle_numero NUMERIC(18,0) NOT NULL,
   facturaDetalle_item NVARCHAR(255) NULL,
   facturaDetalle_id INT REFERENCES MESSI_MAS3.Factura (factura_id), --cambiado a FK SOLO, LE SAQUE QUE SEA PK
-  facturaDetall_cantidadItems NUMERIC(18,0) NOT NULL,
-  
-  
+  facturaDetall_cantidadItems NUMERIC(18,0) NOT NULL
  )
 
  GO
-
-
  
  
 /*--------------------------MIGRACIONES---------------------------*/
@@ -408,8 +385,8 @@ CREATE TABLE MESSI_MAS3.Factura_detalle (
 
 
 CREATE PROCEDURE [MESSI_MAS3].[meterDatosFijos]
-AS BEGIN
-	
+AS 
+BEGIN
 	set nocount on;
 	set xact_abort on;
 
@@ -474,20 +451,6 @@ AS BEGIN
 	RETURN
 END
 GO  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 -- inserto el domicilio y devuelvo el ultimo
@@ -745,12 +708,6 @@ AS BEGIN
 	
 END
 GO
-
-
-
-
-
-
 
 CREATE PROCEDURE [MESSI_MAS3].[ConvertirCalificacion](@calificacion INT,@calificacionConvertida INT OUTPUT)
 AS BEGIN
@@ -1022,7 +979,7 @@ EL nombre del admin es Administrador General
 */
 
 /*---------------------------EXEC DE PARA MIGRAR---------------------------*/
-
+PRINT 'Iniciando'
 EXEC MESSI_MAS3.meterDatosFijos
 PRINT 'DATOS INICIALES MIGRADOS';
 EXEC MESSI_MAS3.migrarRubros
