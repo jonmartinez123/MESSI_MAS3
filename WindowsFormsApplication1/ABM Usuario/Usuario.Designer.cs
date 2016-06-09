@@ -52,11 +52,21 @@
             this.txtNombre = new System.Windows.Forms.TextBox();
             this.materialLabel3 = new MaterialSkin.Controls.MaterialLabel();
             this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.button4 = new System.Windows.Forms.Button();
+            this.materialLabel9 = new MaterialSkin.Controls.MaterialLabel();
+            this.materialLabel8 = new MaterialSkin.Controls.MaterialLabel();
+            this.materialLabel7 = new MaterialSkin.Controls.MaterialLabel();
+            this.btnFiltrarEmpresas = new System.Windows.Forms.Button();
             this.btnModificarEmpresa = new System.Windows.Forms.Button();
             this.btnLogicoEmpresa = new System.Windows.Forms.Button();
             this.btnCambiarPassEmpresa = new System.Windows.Forms.Button();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.dgvEmpresas = new System.Windows.Forms.DataGridView();
+            this.colIdEmpresa = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colUsuarioEmpresa = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colRazonSocial = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colCUIT = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colMailEmpresa = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colNombreContacto = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colHabilitadoEmpresa = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.txtMailEmpresa = new System.Windows.Forms.TextBox();
             this.txtCUIT = new System.Windows.Forms.TextBox();
             this.txtRazonSocial = new System.Windows.Forms.TextBox();
@@ -66,7 +76,7 @@
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvClientes)).BeginInit();
             this.tabPage2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvEmpresas)).BeginInit();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -302,11 +312,14 @@
             // 
             // tabPage2
             // 
-            this.tabPage2.Controls.Add(this.button4);
+            this.tabPage2.Controls.Add(this.materialLabel9);
+            this.tabPage2.Controls.Add(this.materialLabel8);
+            this.tabPage2.Controls.Add(this.materialLabel7);
+            this.tabPage2.Controls.Add(this.btnFiltrarEmpresas);
             this.tabPage2.Controls.Add(this.btnModificarEmpresa);
             this.tabPage2.Controls.Add(this.btnLogicoEmpresa);
             this.tabPage2.Controls.Add(this.btnCambiarPassEmpresa);
-            this.tabPage2.Controls.Add(this.dataGridView1);
+            this.tabPage2.Controls.Add(this.dgvEmpresas);
             this.tabPage2.Controls.Add(this.txtMailEmpresa);
             this.tabPage2.Controls.Add(this.txtCUIT);
             this.tabPage2.Controls.Add(this.txtRazonSocial);
@@ -314,78 +327,175 @@
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(685, 317);
+            this.tabPage2.Size = new System.Drawing.Size(717, 317);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Empresas";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
-            // button4
+            // materialLabel9
             // 
-            this.button4.Location = new System.Drawing.Point(20, 87);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(109, 23);
-            this.button4.TabIndex = 108;
-            this.button4.Text = "Filtrar";
-            this.button4.UseVisualStyleBackColor = true;
+            this.materialLabel9.AutoSize = true;
+            this.materialLabel9.Depth = 0;
+            this.materialLabel9.Font = new System.Drawing.Font("Roboto", 11F);
+            this.materialLabel9.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.materialLabel9.Location = new System.Drawing.Point(393, 35);
+            this.materialLabel9.MouseState = MaterialSkin.MouseState.HOVER;
+            this.materialLabel9.Name = "materialLabel9";
+            this.materialLabel9.Size = new System.Drawing.Size(38, 19);
+            this.materialLabel9.TabIndex = 111;
+            this.materialLabel9.Text = "Mail";
+            // 
+            // materialLabel8
+            // 
+            this.materialLabel8.AutoSize = true;
+            this.materialLabel8.Depth = 0;
+            this.materialLabel8.Font = new System.Drawing.Font("Roboto", 11F);
+            this.materialLabel8.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.materialLabel8.Location = new System.Drawing.Point(21, 61);
+            this.materialLabel8.MouseState = MaterialSkin.MouseState.HOVER;
+            this.materialLabel8.Name = "materialLabel8";
+            this.materialLabel8.Size = new System.Drawing.Size(42, 19);
+            this.materialLabel8.TabIndex = 110;
+            this.materialLabel8.Text = "CUIT";
+            // 
+            // materialLabel7
+            // 
+            this.materialLabel7.AutoSize = true;
+            this.materialLabel7.Depth = 0;
+            this.materialLabel7.Font = new System.Drawing.Font("Roboto", 11F);
+            this.materialLabel7.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.materialLabel7.Location = new System.Drawing.Point(22, 35);
+            this.materialLabel7.MouseState = MaterialSkin.MouseState.HOVER;
+            this.materialLabel7.Name = "materialLabel7";
+            this.materialLabel7.Size = new System.Drawing.Size(96, 19);
+            this.materialLabel7.TabIndex = 109;
+            this.materialLabel7.Text = "Razón Social";
+            // 
+            // btnFiltrarEmpresas
+            // 
+            this.btnFiltrarEmpresas.Location = new System.Drawing.Point(20, 87);
+            this.btnFiltrarEmpresas.Name = "btnFiltrarEmpresas";
+            this.btnFiltrarEmpresas.Size = new System.Drawing.Size(109, 23);
+            this.btnFiltrarEmpresas.TabIndex = 108;
+            this.btnFiltrarEmpresas.Text = "Filtrar";
+            this.btnFiltrarEmpresas.UseVisualStyleBackColor = true;
+            this.btnFiltrarEmpresas.Click += new System.EventHandler(this.btnFiltrarEmpresas_Click);
             // 
             // btnModificarEmpresa
             // 
-            this.btnModificarEmpresa.Location = new System.Drawing.Point(237, 272);
+            this.btnModificarEmpresa.Location = new System.Drawing.Point(354, 272);
             this.btnModificarEmpresa.Name = "btnModificarEmpresa";
             this.btnModificarEmpresa.Size = new System.Drawing.Size(109, 23);
             this.btnModificarEmpresa.TabIndex = 101;
             this.btnModificarEmpresa.Text = "Modificar";
             this.btnModificarEmpresa.UseVisualStyleBackColor = true;
+            this.btnModificarEmpresa.Click += new System.EventHandler(this.btnModificarEmpresa_Click);
             // 
             // btnLogicoEmpresa
             // 
-            this.btnLogicoEmpresa.Location = new System.Drawing.Point(467, 272);
+            this.btnLogicoEmpresa.Location = new System.Drawing.Point(584, 272);
             this.btnLogicoEmpresa.Name = "btnLogicoEmpresa";
             this.btnLogicoEmpresa.Size = new System.Drawing.Size(109, 23);
             this.btnLogicoEmpresa.TabIndex = 100;
             this.btnLogicoEmpresa.Text = "Dar de Baja";
             this.btnLogicoEmpresa.UseVisualStyleBackColor = true;
+            this.btnLogicoEmpresa.Click += new System.EventHandler(this.btnLogicoEmpresa_Click);
             // 
             // btnCambiarPassEmpresa
             // 
-            this.btnCambiarPassEmpresa.Location = new System.Drawing.Point(352, 272);
+            this.btnCambiarPassEmpresa.Location = new System.Drawing.Point(469, 272);
             this.btnCambiarPassEmpresa.Name = "btnCambiarPassEmpresa";
             this.btnCambiarPassEmpresa.Size = new System.Drawing.Size(109, 23);
             this.btnCambiarPassEmpresa.TabIndex = 102;
             this.btnCambiarPassEmpresa.Text = "Cambiar Password";
             this.btnCambiarPassEmpresa.UseVisualStyleBackColor = true;
+            this.btnCambiarPassEmpresa.Click += new System.EventHandler(this.btnCambiarPassEmpresa_Click);
             // 
-            // dataGridView1
+            // dgvEmpresas
             // 
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(20, 116);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(556, 150);
-            this.dataGridView1.TabIndex = 99;
+            this.dgvEmpresas.AllowUserToAddRows = false;
+            this.dgvEmpresas.AllowUserToDeleteRows = false;
+            this.dgvEmpresas.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvEmpresas.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.colIdEmpresa,
+            this.colUsuarioEmpresa,
+            this.colRazonSocial,
+            this.colCUIT,
+            this.colMailEmpresa,
+            this.colNombreContacto,
+            this.colHabilitadoEmpresa});
+            this.dgvEmpresas.Location = new System.Drawing.Point(20, 116);
+            this.dgvEmpresas.MultiSelect = false;
+            this.dgvEmpresas.Name = "dgvEmpresas";
+            this.dgvEmpresas.ReadOnly = true;
+            this.dgvEmpresas.ShowEditingIcon = false;
+            this.dgvEmpresas.Size = new System.Drawing.Size(673, 150);
+            this.dgvEmpresas.TabIndex = 99;
+            this.dgvEmpresas.SelectionChanged += new System.EventHandler(this.dgvEmpresas_SelectionChanged);
+            // 
+            // colIdEmpresa
+            // 
+            this.colIdEmpresa.HeaderText = "Id";
+            this.colIdEmpresa.Name = "colIdEmpresa";
+            this.colIdEmpresa.ReadOnly = true;
+            this.colIdEmpresa.Visible = false;
+            // 
+            // colUsuarioEmpresa
+            // 
+            this.colUsuarioEmpresa.HeaderText = "Usuario";
+            this.colUsuarioEmpresa.Name = "colUsuarioEmpresa";
+            this.colUsuarioEmpresa.ReadOnly = true;
+            // 
+            // colRazonSocial
+            // 
+            this.colRazonSocial.HeaderText = "Razón social";
+            this.colRazonSocial.Name = "colRazonSocial";
+            this.colRazonSocial.ReadOnly = true;
+            // 
+            // colCUIT
+            // 
+            this.colCUIT.HeaderText = "CUIT";
+            this.colCUIT.Name = "colCUIT";
+            this.colCUIT.ReadOnly = true;
+            // 
+            // colMailEmpresa
+            // 
+            this.colMailEmpresa.HeaderText = "Mail";
+            this.colMailEmpresa.Name = "colMailEmpresa";
+            this.colMailEmpresa.ReadOnly = true;
+            // 
+            // colNombreContacto
+            // 
+            this.colNombreContacto.HeaderText = "Nombre de contacto";
+            this.colNombreContacto.Name = "colNombreContacto";
+            this.colNombreContacto.ReadOnly = true;
+            // 
+            // colHabilitadoEmpresa
+            // 
+            this.colHabilitadoEmpresa.HeaderText = "Habilitado";
+            this.colHabilitadoEmpresa.Name = "colHabilitadoEmpresa";
+            this.colHabilitadoEmpresa.ReadOnly = true;
             // 
             // txtMailEmpresa
             // 
-            this.txtMailEmpresa.Location = new System.Drawing.Point(310, 35);
+            this.txtMailEmpresa.Location = new System.Drawing.Point(437, 35);
             this.txtMailEmpresa.Name = "txtMailEmpresa";
-            this.txtMailEmpresa.Size = new System.Drawing.Size(266, 20);
+            this.txtMailEmpresa.Size = new System.Drawing.Size(249, 20);
             this.txtMailEmpresa.TabIndex = 98;
-            this.txtMailEmpresa.Text = "Mail";
             // 
             // txtCUIT
             // 
-            this.txtCUIT.Location = new System.Drawing.Point(20, 61);
+            this.txtCUIT.Location = new System.Drawing.Point(125, 61);
             this.txtCUIT.Name = "txtCUIT";
-            this.txtCUIT.Size = new System.Drawing.Size(266, 20);
+            this.txtCUIT.Size = new System.Drawing.Size(249, 20);
             this.txtCUIT.TabIndex = 97;
-            this.txtCUIT.Text = "CUIT";
             // 
             // txtRazonSocial
             // 
-            this.txtRazonSocial.Location = new System.Drawing.Point(20, 35);
+            this.txtRazonSocial.Location = new System.Drawing.Point(125, 35);
             this.txtRazonSocial.Name = "txtRazonSocial";
-            this.txtRazonSocial.Size = new System.Drawing.Size(266, 20);
+            this.txtRazonSocial.Size = new System.Drawing.Size(249, 20);
             this.txtRazonSocial.TabIndex = 96;
-            this.txtRazonSocial.Text = "Razón Social";
             // 
             // materialLabel1
             // 
@@ -428,7 +538,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgvClientes)).EndInit();
             this.tabPage2.ResumeLayout(false);
             this.tabPage2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvEmpresas)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -444,7 +554,7 @@
         private System.Windows.Forms.TextBox txtApellido;
         private System.Windows.Forms.TextBox txtNombre;
         private System.Windows.Forms.Button btnLogicoEmpresa;
-        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.DataGridView dgvEmpresas;
         private System.Windows.Forms.TextBox txtMailEmpresa;
         private System.Windows.Forms.TextBox txtCUIT;
         private System.Windows.Forms.TextBox txtRazonSocial;
@@ -454,7 +564,7 @@
         private System.Windows.Forms.Button btnHabilitadoCliente;
         private System.Windows.Forms.Button btnCambiarPassCliente;
         private System.Windows.Forms.DataGridView dgvClientes;
-        private System.Windows.Forms.Button button4;
+        private System.Windows.Forms.Button btnFiltrarEmpresas;
         private System.Windows.Forms.Button btnModificarEmpresa;
         private System.Windows.Forms.Button btnCambiarPassEmpresa;
         private System.Windows.Forms.Button btnCrearUsuario;
@@ -469,5 +579,15 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colDNI;
         private System.Windows.Forms.DataGridViewTextBoxColumn colMail;
         private System.Windows.Forms.DataGridViewTextBoxColumn colHabilitado;
+        private MaterialSkin.Controls.MaterialLabel materialLabel9;
+        private MaterialSkin.Controls.MaterialLabel materialLabel8;
+        private MaterialSkin.Controls.MaterialLabel materialLabel7;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colIdEmpresa;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colUsuarioEmpresa;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colRazonSocial;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colCUIT;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colMailEmpresa;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colNombreContacto;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colHabilitadoEmpresa;
     }
 }

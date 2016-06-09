@@ -130,7 +130,7 @@ namespace MercadoEnvio.ABM_Usuario
                     clienteConDatos.NombreUsuario = clienteGlobal.NombreUsuario;
                     clienteConDatos.Password = clienteGlobal.Password;
                     DAO.UsuarioSQL.crearCliente(clienteConDatos);
-                    MessageBox.Show("El cliente se modifico con exito", "Atención");
+                    MessageBox.Show("El cliente se creo con exito", "Atención");
                 }
                 this.Close();
             }
@@ -209,7 +209,7 @@ namespace MercadoEnvio.ABM_Usuario
 
         private void txtMail_KeyPress(object sender, KeyPressEventArgs e)
         {
-            this.allowAlphanumericOnly(e);
+            //this.allowAlphanumericOnly(e);
             if (e.KeyChar != 8) this.allowMaxLenght(txtMail, 254, e);
         }
 

@@ -17,12 +17,33 @@ namespace MercadoEnvio.ABM_Usuario
 {
     public partial class CrearEmpresa : MaterialForm
     {
-        public CrearEmpresa()
+
+        Modelo.Empresa empresaGlobal;
+        public CrearEmpresa(Modelo.Empresa unaEmpresa)
+        {
+            inicializar();
+            empresaGlobal = unaEmpresa;
+            cargarCombosBox();
+            if (empresaGlobal.tieneId()) cargarFormularioParaModoficacion(unaEmpresa);
+        }
+ 
+        private void inicializar()
         {
             InitializeComponent();
             var materialSkinManager = MaterialSkinManager.Instance;
             materialSkinManager.AddFormToManage(this);
             materialSkinManager.Theme = MaterialSkinManager.Themes.LIGHT;
+        }
+
+        private void cargarCombosBox()
+        {
+            cmbLocalidad.DataSource = DAO.LocalidadSQL.getLocalidades();
+            cmbLocalidad.DisplayMember = "Nombre";
+            cmbLocalidad.ValueMember = "Id";
+
+            cmbRubro.DataSource = DAO.RubroSQL.getRubros();
+            cmbRubro.DisplayMember = "descripcionCorta";
+            cmbRubro.ValueMember = "Id";
         }
 
         private bool esInvalidoMail(string mail)
@@ -82,8 +103,21 @@ namespace MercadoEnvio.ABM_Usuario
                 if (string.IsNullOrEmpty(txtCiudad.Text))
                     throw new Exception("Debe comppletar la ciudad");
 
-
                 #endregion
+
+                Modelo.Empresa empresaConDatos = cargarEmpresa();
+                if (empresaGlobal.tieneId()) {                            //Veo si es para modificar o crear
+                    empresaConDatos.Id = empresaGlobal.Id;
+                    DAO.UsuarioSQL.modificarEmpresa(empresaConDatos);
+                    MessageBox.Show("La empresa se modifico con exito", "Atención");
+                }
+                else{
+                    empresaConDatos.NombreUsuario = empresaGlobal.NombreUsuario;
+                    empresaConDatos.Password = empresaGlobal.Password;
+                    DAO.UsuarioSQL.crearEmpresa(empresaConDatos);
+                    MessageBox.Show("La empresa se creo con exito", "Atención");
+                }
+                this.Close();
             }
             catch (Exception ex)
             {
@@ -91,9 +125,51 @@ namespace MercadoEnvio.ABM_Usuario
             }
         }
 
+        private Empresa cargarEmpresa()
+        {
+            Modelo.Empresa e = new Modelo.Empresa();
+
+            e.RazonSocial = txtRazonSocial.Text;
+            e.Cuit = txtCUIT.Text;
+            e.RubroPrincipal = (Rubro)cmbRubro.SelectedItem;
+            e.NombreContacto = txtNombreContacto.Text;
+            e.Mail = txtMail.Text;
+
+            int tel;
+            if (!Int32.TryParse(txtTel.Text, out tel)) throw new Exception("El telefono solo debe contener caracteres numericos");
+            e.Telefono = tel.ToString();
+
+            e.Domicilio = new Domicilio();
+
+            e.Domicilio.Calle = txtCalle.Text;
+
+            int altura;
+            if (!Int32.TryParse(txtAltura.Text, out altura)) throw new Exception("La altura solo debe contener caracteres numericos");
+            e.Domicilio.Altura = altura;
+
+            int piso;
+            if (!Int32.TryParse(txtPiso.Text, out piso)) throw new Exception("El piso solo debe contener caracteres numericos");
+            e.Domicilio.Piso = piso;
+
+            e.Domicilio.Departamento = txtDepto.Text;
+
+            e.Domicilio.Localidad = new Localidad();
+            e.Domicilio.Localidad = (Localidad)cmbLocalidad.SelectedItem;
+
+            int cp;
+            if (!Int32.TryParse(txtCodigoPostal.Text, out cp)) throw new Exception("El código postal solo debe contener caracteres numericos");
+            e.Domicilio.CodigoPostal = cp;
+
+            e.Domicilio.Ciudad = txtCiudad.Text;
+
+            return e;
+
+        
+        }
+
         private void txtMail_KeyPress(object sender, KeyPressEventArgs e)
         {
-            this.allowAlphanumericOnly(e);
+            //this.allowAlphanumericOnly(e);
             if (e.KeyChar != 8) this.allowMaxLenght(txtMail, 254, e);
         }
 
@@ -151,7 +227,27 @@ namespace MercadoEnvio.ABM_Usuario
             if (e.KeyChar != 8) this.allowMaxLenght(txtDepto, 254, e);
         }
 
+        private void cargarFormularioParaModoficacion(Modelo.Empresa unaEmpresa) {
+            Modelo.Empresa e = DAO.UsuarioSQL.getEmpresa(unaEmpresa.Id);
 
+            //ActiveForm.Text = "Modificar Usuario";
+            btnOK.Text = "Modificar";
+
+            txtRazonSocial.Text = e.RazonSocial;
+            txtCUIT.Text = e.Cuit;
+            if (e.RubroPrincipal.Id != -1) cmbRubro.SelectedValue = e.RubroPrincipal.Id;
+            txtNombreContacto.Text = e.NombreContacto;
+            txtMail.Text = e.Mail;
+            txtTel.Text = e.Telefono.ToString();
+            txtCalle.Text = e.Domicilio.Calle;
+            txtAltura.Text = e.Domicilio.Altura.ToString();
+            txtPiso.Text = e.Domicilio.Piso.ToString();
+            txtDepto.Text = e.Domicilio.Departamento.ToString();
+            if (e.Domicilio.Localidad.Id != -1) cmbLocalidad.SelectedValue = e.Domicilio.Localidad.Id;
+            txtCiudad.Text = e.Domicilio.Ciudad;
+            txtCodigoPostal.Text = e.Domicilio.CodigoPostal.ToString();
+    
+        }
     }
 }
 

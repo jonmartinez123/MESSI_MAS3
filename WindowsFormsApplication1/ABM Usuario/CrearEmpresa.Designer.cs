@@ -339,10 +339,6 @@
             // 
             this.cmbRubro.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbRubro.FormattingEnabled = true;
-            this.cmbRubro.Items.AddRange(new object[] {
-            "DNI",
-            "Pasaporte",
-            "Cedula"});
             this.cmbRubro.Location = new System.Drawing.Point(277, 201);
             this.cmbRubro.Name = "cmbRubro";
             this.cmbRubro.Size = new System.Drawing.Size(230, 21);

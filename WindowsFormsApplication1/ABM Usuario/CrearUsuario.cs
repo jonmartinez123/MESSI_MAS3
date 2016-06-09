@@ -78,21 +78,22 @@ namespace MercadoEnvio.ABM_Usuario
                 {
                     validarUsername(txtUsuario.Text);
 
-                    Modelo.Cliente unCliente = new Modelo.Cliente(-1, txtUsuario.Text, txtPass.Text);
-
-                    this.Hide();
-
                     if (cmbTipo.Text == "Cliente")
                     {
-                        //Extension.openInNewWindow(this, new CrearCliente(unCliente));
+                        Modelo.Cliente unCliente = new Modelo.Cliente(-1, txtUsuario.Text, txtPass.Text);
                         CrearCliente cCliente = new CrearCliente(unCliente);
                         cCliente.ShowDialog();
                     }
                     else if (cmbTipo.Text == "Empresa")
                     {
-                        // CrearEmpresa cCliente = new CrearEmpresa(unUsuario);
-                        //cCliente.ShowDialog();
+                        CrearEmpresa cEmpresa = new CrearEmpresa(new Modelo.Empresa(-1, txtUsuario.Text, txtPass.Text));
+                        cEmpresa.ShowDialog();
                     }
+                    else {
+                        throw new Exception("Debe seleccionar un tipo de usuario");
+                    }
+
+                    this.Hide();
                 }
                 else { 
                     DAO.UsuarioSQL.cambiarPassword(usuarioGlobal.Id, txtPass.Text);

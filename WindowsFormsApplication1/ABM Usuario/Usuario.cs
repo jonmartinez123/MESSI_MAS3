@@ -25,6 +25,7 @@ namespace MercadoEnvio.ABM_Usuario
         private void Usuario_Load(object sender, EventArgs e)
         {
             filtrarClientes();
+            filtrarEmpresas();
         }
 
         private void btnCrearUsuario_Click(object sender, EventArgs e)
@@ -102,8 +103,6 @@ namespace MercadoEnvio.ABM_Usuario
                 CrearCliente cCliente = new CrearCliente(unCliente);
                 cCliente.ShowDialog();
             }
-        
-            
         }
 
         private void btnCambiarPassCliente_Click(object sender, EventArgs e)
@@ -120,6 +119,92 @@ namespace MercadoEnvio.ABM_Usuario
                 cCliente.ShowDialog();
             }
         }
+
+        private void btnLogicoEmpresa_Click(object sender, EventArgs e)
+        {
+            if (dgvEmpresas.SelectedRows.Count == 1)
+            {
+                DataGridViewRow row = this.dgvEmpresas.SelectedRows[0];
+                int hab = Convert.ToInt16(row.Cells["colHabilitadoEmpresa"].Value);
+                int id = Convert.ToInt16(row.Cells["colIdEmpresa"].Value);
+                if (hab == 1)
+                {
+                    DAO.UsuarioSQL.darDeBajaUsuario(id);
+                }
+                else
+                {
+                    DAO.UsuarioSQL.darDeAltaUsuario(id);
+                }
+            }
+            filtrarEmpresas();
+        }
+
+        private void filtrarEmpresas()
+        {
+            DAO.UsuarioSQL.getEmpresasFiltradas(dgvEmpresas, txtRazonSocial.Text, txtCUIT.Text, txtMailEmpresa.Text);
+        }
+
+        private void btnFiltrarEmpresas_Click(object sender, EventArgs e)
+        {
+            filtrarEmpresas();
+        }
+
+        private void dgvEmpresas_SelectionChanged(object sender, EventArgs e)
+        {
+            if (dgvEmpresas.SelectedRows.Count == 1)
+            {
+                btnLogicoEmpresa.Enabled = true;
+                btnCambiarPassEmpresa.Enabled = true;
+                btnModificarEmpresa.Enabled = true;
+
+                DataGridViewRow row = this.dgvEmpresas.SelectedRows[0];
+                int hab = Convert.ToInt16(row.Cells["colHabilitadoEmpresa"].Value);
+                if (hab == 1)
+                {
+                    btnLogicoEmpresa.Text = "Dar de Alta";
+                }
+                else
+                {
+                    btnLogicoEmpresa.Text = "Dar de Baja";
+                }
+            }
+            else
+            {
+                btnLogicoEmpresa.Enabled = false;
+                btnCambiarPassEmpresa.Enabled = false;
+                btnModificarEmpresa.Enabled = false;
+            }
+        }
+
+        private void btnCambiarPassEmpresa_Click(object sender, EventArgs e)
+        {
+            if (dgvEmpresas.SelectedRows.Count == 1)
+            {
+                DataGridViewRow row = this.dgvEmpresas.SelectedRows[0];
+
+                Modelo.Usuario unUsuario = new Modelo.Usuario();
+                unUsuario.Id = Convert.ToInt16(row.Cells["colIdEmpresa"].Value);
+                unUsuario.NombreUsuario = row.Cells["colUsuarioEmpresa"].Value.ToString();
+
+                CrearUsuario cCliente = new CrearUsuario(unUsuario);
+                cCliente.ShowDialog();
+            }
+        }
+
+        private void btnModificarEmpresa_Click(object sender, EventArgs e)
+        {
+            if (dgvEmpresas.SelectedRows.Count == 1)
+            {
+                DataGridViewRow row = this.dgvEmpresas.SelectedRows[0];
+
+                Modelo.Empresa unaEmpresa = new Modelo.Empresa();
+                unaEmpresa.Id = Convert.ToInt16(row.Cells["colIdEmpresa"].Value);
+
+                CrearEmpresa cCliente = new CrearEmpresa(unaEmpresa);
+                cCliente.ShowDialog();
+            }
+        }
+
 
     }
 }

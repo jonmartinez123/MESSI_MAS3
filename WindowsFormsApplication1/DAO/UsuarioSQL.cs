@@ -12,20 +12,6 @@ namespace MercadoEnvio.DAO
 {
     class UsuarioSQL
     {
-
-        public static int getClientesFiltadros(DataGridView dg, string nombre, string apellido, string mail, string dni)
-        {
-            if (dni == "")
-            {
-                return SqlConnector.retrieveDT("get_clientesFiltrados", dg, nombre, apellido, mail, null);
-            }
-            else
-            {
-                return SqlConnector.retrieveDT("get_clientesFiltrados", dg, nombre, apellido, mail, Int32.Parse(dni));
-            }
-
-        }
-
         public static void darDeBajaUsuario(int idUsuario)
         {
             SqlConnector.executeProcedure("baja_usuario", idUsuario);
@@ -42,18 +28,31 @@ namespace MercadoEnvio.DAO
         }
 
 
+        //CLIENTE  
+        public static int getClientesFiltadros(DataGridView dg, string nombre, string apellido, string mail, string dni)
+        {
+            if (dni == "")
+            {
+                return SqlConnector.retrieveDT("get_clientesFiltrados", dg, nombre, apellido, mail, null);
+            }
+            else
+            {
+                return SqlConnector.retrieveDT("get_clientesFiltrados", dg, nombre, apellido, mail, Int32.Parse(dni));
+            }
+
+        }
+
         public static void modificarCliente(Modelo.Cliente c)
         {
-            SqlConnector.executeProcedure("modificar_cliente", c.Id, c.Nombre, c.Apellido, c.Mail, c.DNI, c.FechaNacimiento, c.Telefono, c.TipoDocumento.Id, c.Domicilio.Localidad.Id, c.Domicilio.Calle, c.Domicilio.Altura, c.Domicilio.Piso, c.Domicilio.Departamento, c.Domicilio.Ciudad, c.Domicilio.CodigoPostal.ToString());
+            SqlConnector.executeProcedure("modificar_cliente", c.Id, c.Nombre, c.Apellido, c.Mail, c.DNI, c.FechaNacimiento, c.Telefono, c.TipoDocumento.Id, c.Domicilio.Localidad.Id, c.Domicilio.Calle, c.Domicilio.Altura, c.Domicilio.Piso, c.Domicilio.Departamento, c.Domicilio.CodigoPostal.ToString());
         }
 
         public static void crearCliente(Modelo.Cliente c)
-        {
-            SqlConnector.executeProcedure("modificar_cliente", c.NombreUsuario, EncriptadorSHA.encodear(c.Password), c.Nombre, c.Apellido, c.Mail, c.DNI, c.FechaNacimiento, c.Telefono, c.TipoDocumento.Id, c.Domicilio.Localidad.Id, c.Domicilio.Calle, c.Domicilio.Altura, c.Domicilio.Piso, c.Domicilio.Departamento, c.Domicilio.Ciudad, c.Domicilio.CodigoPostal.ToString());
+        { 
+            SqlConnector.executeProcedure("modificar_cliente",c.NombreUsuario, EncriptadorSHA.encodear(c.Password), c.Nombre, c.Apellido, c.Mail, c.DNI, c.FechaNacimiento, c.Telefono, c.TipoDocumento.Id, c.Domicilio.Localidad.Id, c.Domicilio.Calle, c.Domicilio.Altura, c.Domicilio.Piso, c.Domicilio.Departamento, c.Domicilio.CodigoPostal.ToString());        
         }
 
-        public static Cliente getCliente(int id)
-        {
+        public static Cliente getCliente(int id){
             SqlCommand cmd = SqlConnector.generarComandoYAbrir("get_cliente", id);
             var reader = cmd.ExecuteReader();
 
@@ -61,7 +60,7 @@ namespace MercadoEnvio.DAO
 
             while (reader.Read())
             {
-
+                
                 c.Nombre = reader["cliente_nombre"].ToString();
                 c.Apellido = reader["cliente_apellido"].ToString();
                 c.DNI = int.Parse(reader["cliente_DNI"].ToString());
@@ -76,12 +75,10 @@ namespace MercadoEnvio.DAO
                 Modelo.Localidad l = new Modelo.Localidad();
 
                 int localidadId;
-                if (!Int32.TryParse(reader["domicilio_localidad_id"].ToString(), out localidadId))
-                {
+                if(!Int32.TryParse(reader["domicilio_localidad_id"].ToString(), out localidadId)){
                     l.Id = -1;
                 }
-                else
-                {
+                else{
                     l.Id = localidadId;
                 }
 
@@ -97,6 +94,81 @@ namespace MercadoEnvio.DAO
                 c.FechaNacimiento = DateTime.Parse(reader["cliente_fechaNacimiento"].ToString());
             }
             return c;
+        }
+
+
+        //EMPRESA
+
+        public static int getEmpresasFiltradas(DataGridView dg, string razonSocial, string cuit, string mail)
+        {
+            return SqlConnector.retrieveDT("get_empresasFiltradas", dg, razonSocial, cuit, mail);
+
+        }
+
+        public static void modificarEmpresa(Modelo.Empresa e)
+        {
+            SqlConnector.executeProcedure("modificar_empresa", e.Id, e.RazonSocial, e.Mail, e.Cuit, e.Telefono, e.NombreContacto, e.Domicilio.Localidad.Id, e.Domicilio.Calle, e.Domicilio.Altura, e.Domicilio.Piso, e.Domicilio.Departamento, e.Domicilio.Ciudad, e.Domicilio.CodigoPostal.ToString(), e.RubroPrincipal.Id);
+        }
+
+        public static Empresa getEmpresa(int id)
+        {
+            SqlCommand cmd = SqlConnector.generarComandoYAbrir("get_empresa", id);
+            var reader = cmd.ExecuteReader();
+
+            Modelo.Empresa e = new Modelo.Empresa();
+
+            while (reader.Read())
+            {
+                //empresa_razonSocial, empresa_cuit, empresa_telefono, empresa_rubroId, empresa_mail, empresa_nombreContacto, domicilio_calle, domicilio_altura, domicilio_piso, domicilio_departamento, domicilio_codigoPostal, domicilio_localidad_id, domicilio_ciudad
+                e.RazonSocial = reader["empresa_razonSocial"].ToString();
+                e.Cuit = reader["empresa_cuit"].ToString();
+                e.Telefono = reader["empresa_telefono"].ToString();
+                e.Mail = reader["empresa_mail"].ToString();
+                e.NombreContacto = reader["empresa_nombreContacto"].ToString();
+
+                Modelo.Localidad l = new Modelo.Localidad();
+
+                int localidadId;
+                if (!Int32.TryParse(reader["domicilio_localidad_id"].ToString(), out localidadId))
+                {
+                    l.Id = -1;
+                }
+                else
+                {
+                    l.Id = localidadId;
+                }
+
+                Modelo.Rubro r = new Modelo.Rubro();
+
+                int rubroId;
+                if (!Int32.TryParse(reader["empresa_rubroId"].ToString(), out rubroId))
+                {
+                    r.Id = -1;
+                }
+                else
+                {
+                    r.Id = localidadId;
+                }
+
+                e.RubroPrincipal = r;
+
+                Modelo.Domicilio d = new Domicilio();
+                d.Calle = reader["domicilio_calle"].ToString();
+                d.Altura = int.Parse(reader["domicilio_altura"].ToString());
+                d.Piso = int.Parse(reader["domicilio_piso"].ToString());
+                d.Departamento = reader["domicilio_departamento"].ToString();
+                d.CodigoPostal = int.Parse(reader["domicilio_codigoPostal"].ToString());
+                d.Ciudad = reader["domicilio_ciudad"].ToString();
+                d.Localidad = l;
+                e.Domicilio = d;
+
+            }
+            return e;
+        }
+
+        public static void crearEmpresa(Modelo.Empresa e)
+        { 
+            SqlConnector.executeProcedure("crear_empresa", e.RazonSocial, e.Mail, e.Cuit, e.Telefono, e.NombreContacto, e.Domicilio.Localidad.Id, e.Domicilio.Calle, e.Domicilio.Altura, e.Domicilio.Piso, e.Domicilio.Departamento, e.Domicilio.Ciudad, e.Domicilio.CodigoPostal.ToString(), e.RubroPrincipal.Id);
         }
 
     }
