@@ -168,7 +168,7 @@ namespace MercadoEnvio.DAO
 
         public static void crearEmpresa(Modelo.Empresa e)
         { 
-            SqlConnector.executeProcedure("crear_empresa", e.RazonSocial, e.Mail, e.Cuit, e.Telefono, e.NombreContacto, e.Domicilio.Localidad.Id, e.Domicilio.Calle, e.Domicilio.Altura, e.Domicilio.Piso, e.Domicilio.Departamento, e.Domicilio.Ciudad, e.Domicilio.CodigoPostal.ToString(), e.RubroPrincipal.Id);
+            SqlConnector.executeProcedure("crear_empresa", e.NombreUsuario, EncriptadorSHA.encodear(e.Password), e.RazonSocial, e.Mail, e.Cuit, e.Telefono, e.NombreContacto, e.Domicilio.Localidad.Id, e.Domicilio.Calle, e.Domicilio.Altura, e.Domicilio.Piso, e.Domicilio.Departamento, e.Domicilio.Ciudad, e.Domicilio.CodigoPostal.ToString(), e.RubroPrincipal.Id);
         }
 
     }

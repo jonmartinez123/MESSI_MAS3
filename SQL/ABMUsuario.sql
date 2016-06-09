@@ -179,7 +179,7 @@ BEGIN
 	DECLARE @idDomicilio INT
 	SELECT @idDomicilio = SCOPE_IDENTITY()
 
-	INSERT INTO MESSI_MAS3.Empresa(empresa_id, empresa_razonSocial, empresa_mail, empresa_cuit, empresa_telefono, empresa_nombreContacto, empresa_rubroId)
-	VALUES (@idUsuario, @razonSocial, @mail, @cuit, @telefono, @nombreContacto, @idRubro)
+	INSERT INTO MESSI_MAS3.Empresa(empresa_id, empresa_razonSocial, empresa_mail, empresa_cuit, empresa_telefono, empresa_nombreContacto, empresa_rubroId, empresa_fechaCreacion, empresa_idDomicilio)
+	VALUES (@idUsuario, @razonSocial, @mail, @cuit, @telefono, @nombreContacto, @idRubro, GETDATE(), @idDomicilio)
 END
 GO
