@@ -19,10 +19,11 @@ namespace MercadoEnvio.DAO
             {
                 return SqlConnector.retrieveDT("get_clientesFiltrados", dg, nombre, apellido, mail, null);
             }
-            else {
+            else
+            {
                 return SqlConnector.retrieveDT("get_clientesFiltrados", dg, nombre, apellido, mail, Int32.Parse(dni));
             }
-            
+
         }
 
         public static void darDeBajaUsuario(int idUsuario)
@@ -48,10 +49,11 @@ namespace MercadoEnvio.DAO
 
         public static void crearCliente(Modelo.Cliente c)
         {
-            SqlConnector.executeProcedure("modificar_cliente",c.NombreUsuario, EncriptadorSHA.encodear(c.Password), c.Nombre, c.Apellido, c.Mail, c.DNI, c.FechaNacimiento, c.Telefono, c.TipoDocumento.Id, c.Domicilio.Localidad.Id, c.Domicilio.Calle, c.Domicilio.Altura, c.Domicilio.Piso, c.Domicilio.Departamento, c.Domicilio.Ciudad, c.Domicilio.CodigoPostal.ToString());
+            SqlConnector.executeProcedure("modificar_cliente", c.NombreUsuario, EncriptadorSHA.encodear(c.Password), c.Nombre, c.Apellido, c.Mail, c.DNI, c.FechaNacimiento, c.Telefono, c.TipoDocumento.Id, c.Domicilio.Localidad.Id, c.Domicilio.Calle, c.Domicilio.Altura, c.Domicilio.Piso, c.Domicilio.Departamento, c.Domicilio.Ciudad, c.Domicilio.CodigoPostal.ToString());
         }
 
-        public static Cliente getCliente(int id){
+        public static Cliente getCliente(int id)
+        {
             SqlCommand cmd = SqlConnector.generarComandoYAbrir("get_cliente", id);
             var reader = cmd.ExecuteReader();
 
@@ -59,7 +61,7 @@ namespace MercadoEnvio.DAO
 
             while (reader.Read())
             {
-                
+
                 c.Nombre = reader["cliente_nombre"].ToString();
                 c.Apellido = reader["cliente_apellido"].ToString();
                 c.DNI = int.Parse(reader["cliente_DNI"].ToString());
@@ -74,10 +76,12 @@ namespace MercadoEnvio.DAO
                 Modelo.Localidad l = new Modelo.Localidad();
 
                 int localidadId;
-                if(!Int32.TryParse(reader["domicilio_localidad_id"].ToString(), out localidadId)){
+                if (!Int32.TryParse(reader["domicilio_localidad_id"].ToString(), out localidadId))
+                {
                     l.Id = -1;
                 }
-                else{
+                else
+                {
                     l.Id = localidadId;
                 }
 

@@ -24,8 +24,10 @@ namespace MercadoEnvio.Utils
         }
         public static void allowMaxLenght(this Form aForm, MaterialSkin.Controls.MaterialSingleLineTextField txt,int tamMax, KeyPressEventArgs e)
         {
-
-            e.Handled = (txt.TextLength > tamMax);
+            if (txt.Text.Length == tamMax)
+            {
+                e.Handled = e.KeyChar != (char)Keys.Back;
+            }
         }
 
         public static Boolean isValid(this Control control)

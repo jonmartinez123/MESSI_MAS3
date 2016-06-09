@@ -25,14 +25,16 @@ namespace MercadoEnvio.ABM_Rol
 
         private void AltaRol_Load(object sender, EventArgs e)
         {
+            FuncionalidadesRol.MultiSelect = false;
+            FuncionalidadesRol.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             this.agregarFuncionalidades(DAO.RolSQl.getAllFuncionalidades());
-            
+
         }
 
 
-    //Comienzo metodos
+        //Comienzo metodos
         public ABM_Rol.Listado launcher { get; set; }
-    
+
 
         public AltaRol(ABM_Rol.Listado launcher)
         {
@@ -45,15 +47,16 @@ namespace MercadoEnvio.ABM_Rol
 
         private void Cerrar_Click(object sender, EventArgs e)
         {
-            launcher.reload();
+            launcher.Show();
             this.Close();
         }
 
         private void Guardar_Click(object sender, EventArgs e)
         {
-           
+
             if (!(String.IsNullOrEmpty(Nombre.Text)))
-            { Modelo.Rol rol = new Modelo.Rol(this.Nombre.Text, this.Estado.Checked); //linea peligrosa
+            {
+                Modelo.Rol rol = new Modelo.Rol(this.Nombre.Text, this.Estado.Checked); //linea peligrosa
                 if (this.FuncionalidadesRol.Rows.Count == 0) { MessageBox.Show("El rol debe tener al menos una funcionalidad"); return; }
                 DAO.RolSQl.crearNuevoRol(rol, FuncionalidadesRol);
                 MessageBox.Show("Rol creado con éxito!");
@@ -85,7 +88,7 @@ namespace MercadoEnvio.ABM_Rol
 
         private void quitar_Click(object sender, EventArgs e)
         {
-            if (Extension.anySelected(FuncionalidadesRol,"una funcionalidad")) //probar esto
+            if (Extension.anySelected(FuncionalidadesRol, "una funcionalidad")) //probar esto
             {
                 this.FuncionalidadesRol.Rows.RemoveAt(this.FuncionalidadesRol.CurrentRow.Index);
             }
@@ -97,14 +100,15 @@ namespace MercadoEnvio.ABM_Rol
         }
 
 
-        private void agregarFuncionalidades<T>(List<T> list) {
+        private void agregarFuncionalidades<T>(List<T> list)
+        {
             foreach (T elem in list)
             {
                 this.Funcionalidad.Items.Add(elem);
             }
         }
 
-}
+    }
 }
 
-        
+

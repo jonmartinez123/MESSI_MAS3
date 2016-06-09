@@ -111,6 +111,18 @@
     <Compile Include="ABM Usuario\Usuario.Designer.cs">
       <DependentUpon>Usuario.cs</DependentUpon>
     </Compile>
+    <Compile Include="ABM Visibilidad\Alta.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ABM Visibilidad\Alta.Designer.cs">
+      <DependentUpon>Alta.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ABM Visibilidad\Modificacion.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ABM Visibilidad\Modificacion.Designer.cs">
+      <DependentUpon>Modificacion.cs</DependentUpon>
+    </Compile>
     <Compile Include="ABM Visibilidad\Visibilidad.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -143,10 +155,11 @@
     <Compile Include="DAO\sqlConnector.cs" />
     <Compile Include="DAO\TipoDocumentoSQL.cs" />
     <Compile Include="DAO\UsuarioSQL.cs" />
-    <Compile Include="Facturas\ConsultarFacturas.cs">
+    <Compile Include="DAO\VisibilidadSQL.cs" />
+    <Compile Include="DAO\Facturas\ConsultarFacturas.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Facturas\ConsultarFacturas.Designer.cs">
+    <Compile Include="DAO\Facturas\ConsultarFacturas.Designer.cs">
       <DependentUpon>ConsultarFacturas.cs</DependentUpon>
     </Compile>
     <Compile Include="Funcionalidades\MenuUsuario.cs">
@@ -229,6 +242,12 @@
     <EmbeddedResource Include="ABM Usuario\Usuario.resx">
       <DependentUpon>Usuario.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="ABM Visibilidad\Alta.resx">
+      <DependentUpon>Alta.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ABM Visibilidad\Modificacion.resx">
+      <DependentUpon>Modificacion.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ABM Visibilidad\Visibilidad.resx">
       <DependentUpon>Visibilidad.cs</DependentUpon>
       <SubType>Designer</SubType>
@@ -242,7 +261,7 @@
     <EmbeddedResource Include="ComprarOfertar\ComprarOfertar.resx">
       <DependentUpon>ComprarOfertar.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Facturas\ConsultarFacturas.resx">
+    <EmbeddedResource Include="DAO\Facturas\ConsultarFacturas.resx">
       <DependentUpon>ConsultarFacturas.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Funcionalidades\MenuUsuario.resx">

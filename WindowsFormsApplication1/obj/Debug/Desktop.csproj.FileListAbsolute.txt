@@ -65,3 +65,5 @@ C:\Users\Familia\Dropbox\4 año\Gestion de datos\Trabajo Practico\repositorio\ME
 C:\Users\Familia\Dropbox\4 año\Gestion de datos\Trabajo Practico\repositorio\MESSI_MAS3\WindowsFormsApplication1\obj\Debug\MercadoEnvio.Calificar.darCalificacion.resources
 C:\Users\Eric\Desktop\MESSI_MAS3\WindowsFormsApplication1\obj\Debug\MercadoEnvio.Calificar.Calif.resources
 C:\Users\Eric\Desktop\MESSI_MAS3\WindowsFormsApplication1\obj\Debug\MercadoEnvio.Calificar.darCalificacion.resources
+C:\Users\Familia\Dropbox\4 año\Gestion de datos\Trabajo Practico\repositorio\MESSI_MAS3\WindowsFormsApplication1\obj\Debug\MercadoEnvio.ABM_Visibilidad.Alta.resources
+C:\Users\Familia\Dropbox\4 año\Gestion de datos\Trabajo Practico\repositorio\MESSI_MAS3\WindowsFormsApplication1\obj\Debug\MercadoEnvio.ABM_Visibilidad.Modificacion.resources

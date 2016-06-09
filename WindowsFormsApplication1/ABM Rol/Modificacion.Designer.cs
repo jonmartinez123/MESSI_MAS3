@@ -38,8 +38,8 @@
             this.FuncionalidadSeleccion = new System.Windows.Forms.ComboBox();
             this.label3 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.cambiarNombre = new MaterialSkin.Controls.MaterialRaisedButton();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.Agregar = new MaterialSkin.Controls.MaterialRaisedButton();
             this.eliminar = new MaterialSkin.Controls.MaterialRaisedButton();
             this.Cerrar = new MaterialSkin.Controls.MaterialRaisedButton();
@@ -142,17 +142,6 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Cambiar nombre Rol";
             // 
-            // groupBox2
-            // 
-            this.groupBox2.BackColor = System.Drawing.SystemColors.Window;
-            this.groupBox2.Controls.Add(this.Agregar);
-            this.groupBox2.Location = new System.Drawing.Point(12, 167);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(425, 80);
-            this.groupBox2.TabIndex = 39;
-            this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "Agregar funcionalidades";
-            // 
             // cambiarNombre
             // 
             this.cambiarNombre.Depth = 0;
@@ -165,6 +154,17 @@
             this.cambiarNombre.Text = "Cambiar Nombre";
             this.cambiarNombre.UseVisualStyleBackColor = true;
             this.cambiarNombre.Click += new System.EventHandler(this.cambiarNombre_Click);
+            // 
+            // groupBox2
+            // 
+            this.groupBox2.BackColor = System.Drawing.SystemColors.Window;
+            this.groupBox2.Controls.Add(this.Agregar);
+            this.groupBox2.Location = new System.Drawing.Point(12, 167);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(425, 80);
+            this.groupBox2.TabIndex = 39;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "Agregar funcionalidades";
             // 
             // Agregar
             // 
@@ -201,7 +201,7 @@
             this.Cerrar.Primary = true;
             this.Cerrar.Size = new System.Drawing.Size(75, 23);
             this.Cerrar.TabIndex = 41;
-            this.Cerrar.Text = "Cerrar";
+            this.Cerrar.Text = "Volver";
             this.Cerrar.UseVisualStyleBackColor = true;
             this.Cerrar.Click += new System.EventHandler(this.Cerrar_Click);
             // 

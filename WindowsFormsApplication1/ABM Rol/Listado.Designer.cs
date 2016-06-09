@@ -65,6 +65,7 @@
             this.col_id.DataPropertyName = "col_id";
             this.col_id.HeaderText = "ID";
             this.col_id.Name = "col_id";
+            this.col_id.ReadOnly = true;
             // 
             // col_rol
             // 
@@ -78,6 +79,7 @@
             this.col_habilitado.DataPropertyName = "col_habilitado";
             this.col_habilitado.HeaderText = "Habilitado";
             this.col_habilitado.Name = "col_habilitado";
+            this.col_habilitado.ReadOnly = true;
             // 
             // groupBox_SeleccionarRol
             // 
@@ -102,7 +104,7 @@
             this.button_Cerrar.Primary = true;
             this.button_Cerrar.Size = new System.Drawing.Size(143, 23);
             this.button_Cerrar.TabIndex = 26;
-            this.button_Cerrar.Text = "Cerrar";
+            this.button_Cerrar.Text = "Volver";
             this.button_Cerrar.UseVisualStyleBackColor = true;
             this.button_Cerrar.Click += new System.EventHandler(this.button_Cerrar_Click);
             // 

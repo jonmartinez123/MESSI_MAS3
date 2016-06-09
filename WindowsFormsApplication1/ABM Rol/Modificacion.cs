@@ -20,20 +20,13 @@ namespace MercadoEnvio.ABM_Rol
         public ABM_Rol.Listado launcher { get; set; }
         public Boolean checkeadoPorUsuario { get; set; }
 
-
-        public Modificacion()
+        public Modificacion(ABM_Rol.Listado launcher, Modelo.Rol rol)
         {
             checkeadoPorUsuario = false;
             InitializeComponent();
             var materialSkinManager = MaterialSkinManager.Instance;
             materialSkinManager.AddFormToManage(this);
             materialSkinManager.Theme = MaterialSkinManager.Themes.LIGHT;
-        }
-
-        public Modificacion(ABM_Rol.Listado launcher, Modelo.Rol rol)
-        {
-            checkeadoPorUsuario = false;
-            InitializeComponent();
             this.launcher = launcher;
             this.rol = rol;
             DAO.RolSQl.getFuncionalidadesRol(rol, FuncionalidadesRol);
@@ -49,20 +42,19 @@ namespace MercadoEnvio.ABM_Rol
                 DAO.RolSQl.agregarFuncionalidad(rol, FuncionalidadSeleccion.SelectedItem.ToString());
                 this.reload();
                 reloadMenu();
-
-
             }
         }
 
         private void Cerrar_Click(object sender, EventArgs e)
         {
-            launcher.reload();
+            launcher.Show();
             this.Close();
         }
 
-
         private void Modificacion_Load(object sender, EventArgs e)
         {
+            FuncionalidadesRol.MultiSelect = false;
+            FuncionalidadesRol.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             this.reload();
         }
 
@@ -104,8 +96,6 @@ namespace MercadoEnvio.ABM_Rol
 
         private void reloadMenu()
         {
-            
-            
             this.reload();
         }
         private void Estado_CheckedChanged(object sender, EventArgs e)
@@ -146,9 +136,9 @@ namespace MercadoEnvio.ABM_Rol
             }
         }
 
- 
 
 
- 
+
+
     }
 }

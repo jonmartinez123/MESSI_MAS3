@@ -165,6 +165,7 @@ GO
 CREATE TABLE MESSI_MAS3.Localidad (
   localidad_id INT PRIMARY KEY NOT NULL IDENTITY,
   localidad_nombre NVARCHAR(255) NULL,			--cambio de Not null a NULL
+
   )
 
 
@@ -181,6 +182,7 @@ CREATE TABLE MESSI_MAS3.Domicilio (
   domicilio_departamento NVARCHAR(50) NOT NULL,
   domicilio_ciudad NVARCHAR(45) NULL,					--CAMBIO DE DEFAULT 'BUENOS AIRES' A NULL							
   domicilio_codigoPostal NVARCHAR(50) NOT NULL,)
+
 
 																							
 
@@ -249,6 +251,7 @@ CREATE TABLE MESSI_MAS3.Visibilidad (
   visibilidad_descripcion NVARCHAR(255) NOT NULL,
   visibilidad_precio NUMERIC(18,2) NOT NULL,
   visibilidad_porcentaje NUMERIC(18,2) NOT NULL,
+visibilidad_costoEnvio NUMERIC(18,2) NOT NULL
 )
 
 
@@ -426,11 +429,11 @@ AS BEGIN
 	INSERT INTO MESSI_MAS3.Estado(estado_nombre) VALUES ('Finalizada')
 	
 	-- VISIBILIDADES
-	INSERT INTO MESSI_MAS3.Visibilidad(visibilidad_codigo,visibilidad_descripcion,visibilidad_porcentaje,visibilidad_precio) VALUES('10002','Platino','0.10','180.00')
-	INSERT INTO MESSI_MAS3.Visibilidad(visibilidad_codigo,visibilidad_descripcion,visibilidad_porcentaje,visibilidad_precio) VALUES('10003','Oro','0.15','140.00')
-	INSERT INTO MESSI_MAS3.Visibilidad(visibilidad_codigo,visibilidad_descripcion,visibilidad_porcentaje,visibilidad_precio) VALUES('10004','Plata','0.20','100.00')
-	INSERT INTO MESSI_MAS3.Visibilidad(visibilidad_codigo,visibilidad_descripcion,visibilidad_porcentaje,visibilidad_precio) VALUES('10005','Bronce','0.30','60.00')
-	INSERT INTO MESSI_MAS3.Visibilidad(visibilidad_codigo,visibilidad_descripcion,visibilidad_porcentaje,visibilidad_precio) VALUES('10006','Gratis','0.00','0.00')
+	INSERT INTO MESSI_MAS3.Visibilidad(visibilidad_codigo,visibilidad_descripcion,visibilidad_porcentaje,visibilidad_precio,visibilidad_costoEnvio) VALUES('10002','Platino','0.10','180.00','20.00')
+	INSERT INTO MESSI_MAS3.Visibilidad(visibilidad_codigo,visibilidad_descripcion,visibilidad_porcentaje,visibilidad_precio,visibilidad_costoEnvio) VALUES('10003','Oro','0.15','140.00','30.00')
+	INSERT INTO MESSI_MAS3.Visibilidad(visibilidad_codigo,visibilidad_descripcion,visibilidad_porcentaje,visibilidad_precio,visibilidad_costoEnvio) VALUES('10004','Plata','0.20','100.00','40.00')
+	INSERT INTO MESSI_MAS3.Visibilidad(visibilidad_codigo,visibilidad_descripcion,visibilidad_porcentaje,visibilidad_precio,visibilidad_costoEnvio) VALUES('10005','Bronce','0.30','60.00','50.00')
+	INSERT INTO MESSI_MAS3.Visibilidad(visibilidad_codigo,visibilidad_descripcion,visibilidad_porcentaje,visibilidad_precio,visibilidad_costoEnvio) VALUES('10006','Gratis','0.00','0.00','0.00')
 
 	--TIPO PUBLICACION
 	INSERT INTO MESSI_MAS3.tipoPublicacion(tipoPublicacion_nombre) VALUES ('Subasta')
@@ -449,6 +452,7 @@ AS BEGIN
 	INSERT INTO MESSI_MAS3.Localidad(localidad_nombre) VALUES ('Escobar')
 	INSERT INTO MESSI_MAS3.Localidad(localidad_nombre) VALUES ('La Plata')
 	
+
 
 END
 GO
@@ -473,12 +477,27 @@ GO
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
 -- inserto el domicilio y devuelvo el ultimo
 CREATE PROCEDURE [MESSI_MAS3].[generarDomicilio](@calle NVARCHAR(100),@altura NUMERIC(18,0), @piso NUMERIC(18,0),@departamento NVARCHAR(50), @ciudad NVARCHAR(45), @codigoPostal NVARCHAR(50), @ultimoIdInsertado INT OUTPUT)
 AS BEGIN
 	set nocount on;
 	set xact_abort on;
 	-- INSERTO EL NUEVO DOMICILIO
+
+
 
 	INSERT INTO MESSI_MAS3.Domicilio(domicilio_calle,domicilio_altura, domicilio_piso,domicilio_departamento,domicilio_ciudad, domicilio_localidad_id, domicilio_codigoPostal) 
 	VALUES (@calle,@altura,@piso, @departamento, @ciudad, NULL, @codigoPostal)
@@ -552,6 +571,7 @@ AS BEGIN
 			VALUES(@idRol, @idUsuario)
 			DECLARE @idDomicilio int;
 			EXECUTE MESSI_MAS3.generarDomicilio @calle,@numero,@piso,@dpto,NULL,@codigoPostal,@ultimoIdInsertado = @idDomicilio OUTPUT;
+
 
 			INSERT INTO MESSI_MAS3.Cliente(
 				cliente_nombre,
