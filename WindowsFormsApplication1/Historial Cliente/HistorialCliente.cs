@@ -24,10 +24,20 @@ namespace MercadoEnvio.Historial_Cliente
 
         private void HistorialCliente_Load(object sender, EventArgs e)
         {
+            this.reload();
+        }
 
+        private void reload()
+        {
+            DAO.HistorialClienteSQL.getHistorial(historialGridView);
         }
 
         private void label5_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void filtroContieneEnDetalle_CheckedChanged(object sender, EventArgs e)
         {
 
         }

@@ -149,6 +149,7 @@
     </Compile>
     <Compile Include="Config\ConfiguracionVariable.cs" />
     <Compile Include="DAO\CalificacionSQL.cs" />
+    <Compile Include="DAO\HistorialClienteSQL.cs" />
     <Compile Include="DAO\LocalidadSQL.cs" />
     <Compile Include="DAO\LoginSQL.cs" />
     <Compile Include="DAO\RolSQl.cs" />

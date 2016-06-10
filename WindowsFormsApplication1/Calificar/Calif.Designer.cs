@@ -32,6 +32,10 @@
             this.cerrarCalificacion_button = new System.Windows.Forms.Button();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.historicoCalificacionesUltimas = new System.Windows.Forms.DataGridView();
+            this.idCalificacion = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.tipoPubli = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cantEstrellas = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.detalleCalificacion = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.comprasxEstrellas = new System.Windows.Forms.DataGridView();
             this.comprasEstrellas1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -42,10 +46,6 @@
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.calificar_button = new System.Windows.Forms.Button();
             this.calificacionesPendientes = new System.Windows.Forms.DataGridView();
-            this.idCalificacion = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.tipoPubli = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cantEstrellas = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.detalleCalificacion = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.idCalif = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.idCompra = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.idPublicacion = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -108,6 +108,31 @@
             this.historicoCalificacionesUltimas.Name = "historicoCalificacionesUltimas";
             this.historicoCalificacionesUltimas.Size = new System.Drawing.Size(752, 141);
             this.historicoCalificacionesUltimas.TabIndex = 2;
+            // 
+            // idCalificacion
+            // 
+            this.idCalificacion.HeaderText = "Calificacion ID";
+            this.idCalificacion.Name = "idCalificacion";
+            this.idCalificacion.ReadOnly = true;
+            // 
+            // tipoPubli
+            // 
+            this.tipoPubli.HeaderText = "Tipo";
+            this.tipoPubli.Name = "tipoPubli";
+            this.tipoPubli.ReadOnly = true;
+            // 
+            // cantEstrellas
+            // 
+            this.cantEstrellas.HeaderText = "Estrellas";
+            this.cantEstrellas.Name = "cantEstrellas";
+            this.cantEstrellas.ReadOnly = true;
+            // 
+            // detalleCalificacion
+            // 
+            this.detalleCalificacion.HeaderText = "Detalle calificacion";
+            this.detalleCalificacion.Name = "detalleCalificacion";
+            this.detalleCalificacion.ReadOnly = true;
+            this.detalleCalificacion.Width = 370;
             // 
             // groupBox4
             // 
@@ -176,6 +201,7 @@
             this.groupBox2.TabIndex = 1;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Calificaciones pendientes";
+            this.groupBox2.Enter += new System.EventHandler(this.groupBox2_Enter);
             // 
             // calificar_button
             // 
@@ -203,31 +229,6 @@
             this.calificacionesPendientes.Name = "calificacionesPendientes";
             this.calificacionesPendientes.Size = new System.Drawing.Size(771, 142);
             this.calificacionesPendientes.TabIndex = 0;
-            // 
-            // idCalificacion
-            // 
-            this.idCalificacion.HeaderText = "Calificacion ID";
-            this.idCalificacion.Name = "idCalificacion";
-            this.idCalificacion.ReadOnly = true;
-            // 
-            // tipoPubli
-            // 
-            this.tipoPubli.HeaderText = "Tipo";
-            this.tipoPubli.Name = "tipoPubli";
-            this.tipoPubli.ReadOnly = true;
-            // 
-            // cantEstrellas
-            // 
-            this.cantEstrellas.HeaderText = "Estrellas";
-            this.cantEstrellas.Name = "cantEstrellas";
-            this.cantEstrellas.ReadOnly = true;
-            // 
-            // detalleCalificacion
-            // 
-            this.detalleCalificacion.HeaderText = "Detalle calificacion";
-            this.detalleCalificacion.Name = "detalleCalificacion";
-            this.detalleCalificacion.ReadOnly = true;
-            this.detalleCalificacion.Width = 370;
             // 
             // idCalif
             // 
@@ -269,7 +270,7 @@
             this.detallePublicacion.ReadOnly = true;
             this.detallePublicacion.Width = 200;
             // 
-            // Calificar
+            // Calif
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -277,7 +278,7 @@
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.MaximizeBox = false;
-            this.Name = "Calificar";
+            this.Name = "Calif";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Calificacion";
             this.Load += new System.EventHandler(this.Calificar_Load);
