@@ -1,4 +1,4 @@
-﻿using MercadoEnvio.Modelo;
+﻿using MercadoEnvio.Utils;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -44,12 +44,12 @@ namespace MercadoEnvio.DAO
             return SqlConnector.retrieveList("get_funcionalidades", "funcionalidad_id", rolID).AsEnumerable().ToList().ConvertAll(x => Convert.ToDecimal(x));
         }
 
-        public static List<String> getFuncionalidadesQueNoTiene(Modelo.Rol rol)
+        public static List<String> getFuncionalidadesQueNoTiene(Utils.Rol rol)
         {
             return SqlConnector.retrieveList("get_funcionalidades_que_no_tiene", "funcionalidad_descripcion", rol.nombre);
         }
 
-        public static int getFuncionalidadesRol(Modelo.Rol rol, DataGridView dg)
+        public static int getFuncionalidadesRol(Utils.Rol rol, DataGridView dg)
         {
             return SqlConnector.retrieveDT("get_funcionalidades", dg, rol.nombre);
         }
@@ -59,17 +59,17 @@ namespace MercadoEnvio.DAO
         }
 
 
-        public static int agregarFuncionalidad(Modelo.Rol rol, String funcionalidad)
+        public static int agregarFuncionalidad(Utils.Rol rol, String funcionalidad)
         {
             return SqlConnector.executeProcedure("asignar_funcionalidad_a_rol", rol.nombre, funcionalidad);
         }
 
-        public static int eliminarFuncionalidad(Modelo.Rol rol, String funcionalidad)
+        public static int eliminarFuncionalidad(Utils.Rol rol, String funcionalidad)
         {
             return SqlConnector.executeProcedure("borrar_funcionalidad", rol.nombre, funcionalidad);
         }
 
-        public static int cambiarEstadoRol(Modelo.Rol rol)
+        public static int cambiarEstadoRol(Utils.Rol rol)
         {
             if (rol.habilitado)
             {
@@ -78,7 +78,7 @@ namespace MercadoEnvio.DAO
             return SqlConnector.executeProcedure("bajar_rol", rol.nombre);
         }
 
-        public static int modificarNombreRol(Modelo.Rol rol, String nuevoNombre)
+        public static int modificarNombreRol(Utils.Rol rol, String nuevoNombre)
         {
 
             return SqlConnector.executeProcedure("modificar_nombre_rol", rol.nombre, nuevoNombre);
@@ -90,7 +90,7 @@ namespace MercadoEnvio.DAO
             return SqlConnector.executeProcedure("existe_rol", nombre_nuevo);
         }
 
-        public static void crearNuevoRol(Modelo.Rol rol, DataGridView dg)
+        public static void crearNuevoRol(Utils.Rol rol, DataGridView dg)
         {
 
           rol.getid =  SqlConnector.executeProcedure("crear_rol", rol.nombre, rol.habilitado ? 1 : 0);

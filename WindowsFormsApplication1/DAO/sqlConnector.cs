@@ -9,6 +9,7 @@ using System.Text.RegularExpressions;
 using System.Configuration;
 using MercadoEnvio.Config;
 using System.Web;
+using MercadoEnvio.Utils;
 
 
 namespace MercadoEnvio.DAO
@@ -175,6 +176,19 @@ namespace MercadoEnvio.DAO
             bindNamesToDataTable(dt, dg);
             dg.DataSource = dt;
             return 1;
+        }
+
+     //Modificado para el SUPERGRID PAGINADO
+        public static DataTable retrieveDTPaginado(String sp, SuperGrid dg, params Object[] values)
+        {
+            DataTable dt = retrieveDTToBeConverted(sp, values);
+            if (dt == null)
+            {
+                return dt;
+            }
+            bindNamesToDataTable(dt, dg);
+            dg.DataSource = dt;
+            return dt;
         }
 
 

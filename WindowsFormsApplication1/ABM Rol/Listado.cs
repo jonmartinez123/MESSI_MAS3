@@ -64,9 +64,9 @@ namespace MercadoEnvio.ABM_Rol
                 this.Hide();
             }
         }
-        public Modelo.Rol getCurrentRol()
+        public Utils.Rol getCurrentRol()
         {
-            return new Modelo.Rol(Convert.ToDecimal(Extension.cellValue(ListadoRoles, "col_id")),
+            return new Utils.Rol(Convert.ToDecimal(Extension.cellValue(ListadoRoles, "col_id")),
                 Convert.ToString(Extension.cellValue(this.ListadoRoles, "col_rol")),
                 true,
                 Convert.ToInt32(Extension.cellValue(this.ListadoRoles, "col_habilitado")));

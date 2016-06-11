@@ -172,6 +172,9 @@
     </Compile>
     <Compile Include="Modelo\Administrador.cs" />
     <Compile Include="Modelo\Calificacion.cs" />
+    <Compile Include="Utils\SupergridPaginado.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Modelo\Cliente.cs" />
     <Compile Include="Modelo\Domicilio.cs" />
     <Compile Include="Modelo\Empresa.cs" />
@@ -293,6 +296,9 @@
     </Compile>
     <EmbeddedResource Include="Publicar\Publicar.resx">
       <DependentUpon>Publicar.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Utils\SupergridPaginado.resx">
+      <DependentUpon>SupergridPaginado.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="packages.config">
       <SubType>Designer</SubType>

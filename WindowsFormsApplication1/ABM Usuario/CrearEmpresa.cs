@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using MercadoEnvio.DAO;
 using MercadoEnvio.Utils;
-using MercadoEnvio.Modelo;
+using MercadoEnvio.Utils;
 using MaterialSkin;
 
 namespace MercadoEnvio.ABM_Usuario
@@ -18,8 +18,8 @@ namespace MercadoEnvio.ABM_Usuario
     public partial class CrearEmpresa : MaterialForm
     {
 
-        Modelo.Empresa empresaGlobal;
-        public CrearEmpresa(Modelo.Empresa unaEmpresa)
+        Utils.Empresa empresaGlobal;
+        public CrearEmpresa(Utils.Empresa unaEmpresa)
         {
             inicializar();
             empresaGlobal = unaEmpresa;
@@ -111,7 +111,7 @@ namespace MercadoEnvio.ABM_Usuario
 
                 #endregion
 
-                Modelo.Empresa empresaConDatos = cargarEmpresa();
+                Utils.Empresa empresaConDatos = cargarEmpresa();
                 if (empresaGlobal.tieneId()) {                            //Veo si es para modificar o crear
                     empresaConDatos.Id = empresaGlobal.Id;
                     DAO.UsuarioSQL.modificarEmpresa(empresaConDatos);
@@ -133,7 +133,7 @@ namespace MercadoEnvio.ABM_Usuario
 
         private Empresa cargarEmpresa()
         {
-            Modelo.Empresa e = new Modelo.Empresa();
+            Utils.Empresa e = new Utils.Empresa();
 
             e.RazonSocial = txtRazonSocial.Text;
             e.Cuit = txtCUIT.Text;
@@ -233,8 +233,8 @@ namespace MercadoEnvio.ABM_Usuario
             if (e.KeyChar != 8) this.allowMaxLenght(txtDepto, 254, e);
         }
 
-        private void cargarFormularioParaModoficacion(Modelo.Empresa unaEmpresa) {
-            Modelo.Empresa e = DAO.UsuarioSQL.getEmpresa(unaEmpresa.Id);
+        private void cargarFormularioParaModoficacion(Utils.Empresa unaEmpresa) {
+            Utils.Empresa e = DAO.UsuarioSQL.getEmpresa(unaEmpresa.Id);
 
             //ActiveForm.Text = "Modificar Usuario";
             btnOK.Text = "Modificar";

@@ -50,7 +50,7 @@ namespace MercadoEnvio.ABM_Usuario
                 MessageBox.Show("El DNI debe contener caracteres numericos", "Atención");
             }
             else {
-                DAO.UsuarioSQL.getClientesFiltadros(dgvClientes, txtNombre.Text, txtApellido.Text, txtMailCliente.Text, txtDni.Text, (Modelo.TipoDocumento)cmbTipoDocumento.SelectedItem);
+                DAO.UsuarioSQL.getClientesFiltadros(dgvClientes, txtNombre.Text, txtApellido.Text, txtMailCliente.Text, txtDni.Text, (Utils.TipoDocumento)cmbTipoDocumento.SelectedItem);
             }
         }
 
@@ -101,7 +101,7 @@ namespace MercadoEnvio.ABM_Usuario
             if (dgvClientes.SelectedRows.Count == 1){
                 DataGridViewRow row = this.dgvClientes.SelectedRows[0];
 
-                Modelo.Cliente unCliente = new Modelo.Cliente();
+                Utils.Cliente unCliente = new Utils.Cliente();
                 unCliente.Id = Convert.ToInt16(row.Cells["colId"].Value);
 
                 CrearCliente cCliente = new CrearCliente(unCliente);
@@ -115,7 +115,7 @@ namespace MercadoEnvio.ABM_Usuario
             {
                 DataGridViewRow row = this.dgvClientes.SelectedRows[0];
 
-                Modelo.Usuario unUsuario = new Modelo.Usuario();
+                Utils.Usuario unUsuario = new Utils.Usuario();
                 unUsuario.Id = Convert.ToInt16(row.Cells["colId"].Value);
                 unUsuario.NombreUsuario = row.Cells["colUsuario"].Value.ToString();
 
@@ -186,7 +186,7 @@ namespace MercadoEnvio.ABM_Usuario
             {
                 DataGridViewRow row = this.dgvEmpresas.SelectedRows[0];
 
-                Modelo.Usuario unUsuario = new Modelo.Usuario();
+                Utils.Usuario unUsuario = new Utils.Usuario();
                 unUsuario.Id = Convert.ToInt16(row.Cells["colIdEmpresa"].Value);
                 unUsuario.NombreUsuario = row.Cells["colUsuarioEmpresa"].Value.ToString();
 
@@ -201,7 +201,7 @@ namespace MercadoEnvio.ABM_Usuario
             {
                 DataGridViewRow row = this.dgvEmpresas.SelectedRows[0];
 
-                Modelo.Empresa unaEmpresa = new Modelo.Empresa();
+                Utils.Empresa unaEmpresa = new Utils.Empresa();
                 unaEmpresa.Id = Convert.ToInt16(row.Cells["colIdEmpresa"].Value);
 
                 CrearEmpresa cCliente = new CrearEmpresa(unaEmpresa);

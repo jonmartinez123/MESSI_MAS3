@@ -1,5 +1,5 @@
 ﻿using MercadoEnvio.Utils;
-using MercadoEnvio.Modelo;
+using MercadoEnvio.Utils;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -29,7 +29,7 @@ namespace MercadoEnvio.DAO
 
 
         //CLIENTE  
-        public static int getClientesFiltadros(DataGridView dg, string nombre, string apellido, string mail, string dni, Modelo.TipoDocumento tipo)
+        public static int getClientesFiltadros(DataGridView dg, string nombre, string apellido, string mail, string dni, Utils.TipoDocumento tipo)
         {
             if (dni == "")
             {
@@ -42,12 +42,12 @@ namespace MercadoEnvio.DAO
 
         }
 
-        public static void modificarCliente(Modelo.Cliente c)
+        public static void modificarCliente(Utils.Cliente c)
         {
             SqlConnector.executeProcedure("modificar_cliente", c.Id, c.Nombre, c.Apellido, c.Mail, c.DNI, c.FechaNacimiento, c.Telefono, c.TipoDocumento.Id, c.Domicilio.Localidad.Id, c.Domicilio.Calle, c.Domicilio.Altura, c.Domicilio.Piso, c.Domicilio.Departamento, c.Domicilio.CodigoPostal.ToString());
         }
 
-        public static void crearCliente(Modelo.Cliente c)
+        public static void crearCliente(Utils.Cliente c)
         { 
             SqlConnector.executeProcedure("modificar_cliente",c.NombreUsuario, EncriptadorSHA.encodear(c.Password), c.Nombre, c.Apellido, c.Mail, c.DNI, c.FechaNacimiento, c.Telefono, c.TipoDocumento.Id, c.Domicilio.Localidad.Id, c.Domicilio.Calle, c.Domicilio.Altura, c.Domicilio.Piso, c.Domicilio.Departamento, c.Domicilio.CodigoPostal.ToString());        
         }
@@ -56,7 +56,7 @@ namespace MercadoEnvio.DAO
             SqlCommand cmd = SqlConnector.generarComandoYAbrir("get_cliente", id);
             var reader = cmd.ExecuteReader();
 
-            Modelo.Cliente c = new Modelo.Cliente();
+            Utils.Cliente c = new Utils.Cliente();
 
             while (reader.Read())
             {
@@ -65,14 +65,14 @@ namespace MercadoEnvio.DAO
                 c.Apellido = reader["cliente_apellido"].ToString();
                 c.DNI = int.Parse(reader["cliente_DNI"].ToString());
 
-                Modelo.TipoDocumento tipo = new Modelo.TipoDocumento();
+                Utils.TipoDocumento tipo = new Utils.TipoDocumento();
                 tipo.Id = int.Parse(reader["cliente_tipoDocumento_id"].ToString());
                 c.TipoDocumento = tipo;
 
                 c.Mail = reader["cliente_mail"].ToString();
                 c.Telefono = int.Parse(reader["cliente_tel"].ToString());
 
-                Modelo.Localidad l = new Modelo.Localidad();
+                Utils.Localidad l = new Utils.Localidad();
 
                 int localidadId;
                 if(!Int32.TryParse(reader["domicilio_localidad_id"].ToString(), out localidadId)){
@@ -82,7 +82,7 @@ namespace MercadoEnvio.DAO
                     l.Id = localidadId;
                 }
 
-                Modelo.Domicilio d = new Domicilio();
+                Utils.Domicilio d = new Domicilio();
                 d.Calle = reader["domicilio_calle"].ToString();
                 d.Altura = int.Parse(reader["domicilio_altura"].ToString());
                 d.Piso = int.Parse(reader["domicilio_piso"].ToString());
@@ -109,7 +109,7 @@ namespace MercadoEnvio.DAO
             }
         }
 
-        public static void modificarEmpresa(Modelo.Empresa e)
+        public static void modificarEmpresa(Utils.Empresa e)
         {
             SqlConnector.executeProcedure("modificar_empresa", e.Id, e.RazonSocial, e.Mail, e.Cuit, e.Telefono, e.NombreContacto, e.Domicilio.Localidad.Id, e.Domicilio.Calle, e.Domicilio.Altura, e.Domicilio.Piso, e.Domicilio.Departamento, e.Domicilio.Ciudad, e.Domicilio.CodigoPostal.ToString(), e.RubroPrincipal.Id);
         }
@@ -119,7 +119,7 @@ namespace MercadoEnvio.DAO
             SqlCommand cmd = SqlConnector.generarComandoYAbrir("get_empresa", id);
             var reader = cmd.ExecuteReader();
 
-            Modelo.Empresa e = new Modelo.Empresa();
+            Utils.Empresa e = new Utils.Empresa();
 
             while (reader.Read())
             {
@@ -130,7 +130,7 @@ namespace MercadoEnvio.DAO
                 e.Mail = reader["empresa_mail"].ToString();
                 e.NombreContacto = reader["empresa_nombreContacto"].ToString();
 
-                Modelo.Localidad l = new Modelo.Localidad();
+                Utils.Localidad l = new Utils.Localidad();
 
                 int localidadId;
                 if (!Int32.TryParse(reader["domicilio_localidad_id"].ToString(), out localidadId))
@@ -142,7 +142,7 @@ namespace MercadoEnvio.DAO
                     l.Id = localidadId;
                 }
 
-                Modelo.Rubro r = new Modelo.Rubro();
+                Utils.Rubro r = new Utils.Rubro();
 
                 int rubroId;
                 if (!Int32.TryParse(reader["empresa_rubroId"].ToString(), out rubroId))
@@ -156,7 +156,7 @@ namespace MercadoEnvio.DAO
 
                 e.RubroPrincipal = r;
 
-                Modelo.Domicilio d = new Domicilio();
+                Utils.Domicilio d = new Domicilio();
                 d.Calle = reader["domicilio_calle"].ToString();
                 d.Altura = int.Parse(reader["domicilio_altura"].ToString());
                 d.Piso = int.Parse(reader["domicilio_piso"].ToString());
@@ -170,7 +170,7 @@ namespace MercadoEnvio.DAO
             return e;
         }
 
-        public static void crearEmpresa(Modelo.Empresa e)
+        public static void crearEmpresa(Utils.Empresa e)
         { 
             SqlConnector.executeProcedure("crear_empresa", e.NombreUsuario, EncriptadorSHA.encodear(e.Password), e.RazonSocial, e.Mail, e.Cuit, e.Telefono, e.NombreContacto, e.Domicilio.Localidad.Id, e.Domicilio.Calle, e.Domicilio.Altura, e.Domicilio.Piso, e.Domicilio.Departamento, e.Domicilio.Ciudad, e.Domicilio.CodigoPostal.ToString(), e.RubroPrincipal.Id);
         }

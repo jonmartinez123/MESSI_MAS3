@@ -16,13 +16,13 @@ namespace MercadoEnvio.ABM_Usuario
     public partial class CrearUsuario : MaterialForm
     {
 
-        private Modelo.Usuario usuarioGlobal;
+        private Utils.Usuario usuarioGlobal;
 
         public CrearUsuario()
         {
             inicializar();
             txtUsuario.Enabled = true;
-            usuarioGlobal = new Modelo.Usuario();
+            usuarioGlobal = new Utils.Usuario();
             usuarioGlobal.Id = -1;
         }
 
@@ -34,7 +34,7 @@ namespace MercadoEnvio.ABM_Usuario
             materialSkinManager.Theme = MaterialSkinManager.Themes.LIGHT;
         }
 
-        public CrearUsuario(Modelo.Usuario unUsuario)
+        public CrearUsuario(Utils.Usuario unUsuario)
         {
             inicializar();
             usuarioGlobal = unUsuario;
@@ -80,13 +80,13 @@ namespace MercadoEnvio.ABM_Usuario
 
                     if (cmbTipo.Text == "Cliente")
                     {
-                        Modelo.Cliente unCliente = new Modelo.Cliente(-1, txtUsuario.Text, txtPass.Text);
+                        Utils.Cliente unCliente = new Utils.Cliente(-1, txtUsuario.Text, txtPass.Text);
                         CrearCliente cCliente = new CrearCliente(unCliente);
                         cCliente.ShowDialog();
                     }
                     else if (cmbTipo.Text == "Empresa")
                     {
-                        CrearEmpresa cEmpresa = new CrearEmpresa(new Modelo.Empresa(-1, txtUsuario.Text, txtPass.Text));
+                        CrearEmpresa cEmpresa = new CrearEmpresa(new Utils.Empresa(-1, txtUsuario.Text, txtPass.Text));
                         cEmpresa.ShowDialog();
                     }
                     else {

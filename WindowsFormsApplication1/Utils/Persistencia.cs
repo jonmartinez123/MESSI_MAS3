@@ -8,6 +8,6 @@ namespace MercadoEnvio.Utils
 {
     public static class Persistencia
     {
-        public static Modelo.Usuario usuario;
+        public static Utils.Usuario usuario;
     }
 }

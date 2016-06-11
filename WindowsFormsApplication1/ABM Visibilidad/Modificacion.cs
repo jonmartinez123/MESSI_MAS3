@@ -15,7 +15,7 @@ namespace MercadoEnvio.ABM_Visibilidad
 {
     public partial class Modificacion : MaterialForm
     {
-        private Modelo.Visibilidad visibilidad { get; set; }
+        private Utils.Visibilidad visibilidad { get; set; }
 
         public Modificacion()
         {
@@ -25,7 +25,7 @@ namespace MercadoEnvio.ABM_Visibilidad
             materialSkinManager.Theme = MaterialSkinManager.Themes.LIGHT;
             setCamposDefault();
         }
-        public Modificacion(Modelo.Visibilidad vi)
+        public Modificacion(Utils.Visibilidad vi)
         {
             visibilidad = vi;
             InitializeComponent();

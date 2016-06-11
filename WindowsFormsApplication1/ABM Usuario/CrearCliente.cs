@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using MercadoEnvio.DAO;
 using MercadoEnvio.Utils;
-using MercadoEnvio.Modelo;
+using MercadoEnvio.Utils;
 using MaterialSkin;
 
 
@@ -18,9 +18,9 @@ namespace MercadoEnvio.ABM_Usuario
 {
     public partial class CrearCliente : MaterialForm
     {
-        Modelo.Cliente clienteGlobal;
+        Utils.Cliente clienteGlobal;
 
-        public CrearCliente(Modelo.Cliente unCliente)
+        public CrearCliente(Utils.Cliente unCliente)
         {
             inicializar();
             clienteGlobal = unCliente;
@@ -120,7 +120,7 @@ namespace MercadoEnvio.ABM_Usuario
 
                 #endregion
 
-                Modelo.Cliente clienteConDatos = cargarCliente();
+                Utils.Cliente clienteConDatos = cargarCliente();
                 if (clienteGlobal.tieneId()){                            //Veo si es para modificar o crear
                     clienteConDatos.Id = clienteGlobal.Id;
                     DAO.UsuarioSQL.modificarCliente(clienteConDatos);
@@ -142,7 +142,7 @@ namespace MercadoEnvio.ABM_Usuario
 
         private Cliente cargarCliente()
         {
-            Modelo.Cliente unCliente = new Modelo.Cliente();
+            Utils.Cliente unCliente = new Utils.Cliente();
 
             unCliente.Nombre = txtNombre.Text;
             unCliente.Apellido = txtApellido.Text;
@@ -184,9 +184,9 @@ namespace MercadoEnvio.ABM_Usuario
 
         }
 
-        private void cargarFormularioParaModoficacion(Modelo.Cliente c)
+        private void cargarFormularioParaModoficacion(Utils.Cliente c)
         {
-            Modelo.Cliente unCliente = DAO.UsuarioSQL.getCliente(c.Id);
+            Utils.Cliente unCliente = DAO.UsuarioSQL.getCliente(c.Id);
 
             //ActiveForm.Text = "Modificar Usuario";
             btnOK.Text = "Modificar";

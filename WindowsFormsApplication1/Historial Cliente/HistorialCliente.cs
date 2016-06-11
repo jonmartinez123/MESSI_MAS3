@@ -29,9 +29,14 @@ namespace MercadoEnvio.Historial_Cliente
 
         private void reload()
         {
-            DAO.HistorialClienteSQL.getHistorial(historialGridView);
+            
+            DataTable dt = DAO.HistorialClienteSQL.getHistorial(superGrid1);
+            superGrid1.SetPagedDataSource(dt, bindingNavigator1);
+            
             DAO.HistorialClienteSQL.getResumen(resumenGrid);
         }
+
+
 
     }
 }

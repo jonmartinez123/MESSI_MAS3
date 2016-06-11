@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MercadoEnvio.Modelo
+namespace MercadoEnvio.Utils
 {
-    public class Cliente : Modelo.Usuario{
+    public class Cliente : Utils.Usuario{
         private string nombre;
         private string apellido;
         private int dni;

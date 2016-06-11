@@ -44,9 +44,9 @@ namespace MercadoEnvio.Calificar
             Extension.openInNewWindow(this, (new darCalificacion(this, getCurrentCalificacion())));
         }
 
-        private Modelo.Calificacion getCurrentCalificacion()
+        private Utils.Calificacion getCurrentCalificacion()
         {
-            return new Modelo.Calificacion(Convert.ToDecimal(Extension.cellValue(this.calificacionesPendientes, "idCalif")));
+            return new Utils.Calificacion(Convert.ToDecimal(Extension.cellValue(this.calificacionesPendientes, "idCalif")));
         }
 
         private void groupBox2_Enter(object sender, EventArgs e)

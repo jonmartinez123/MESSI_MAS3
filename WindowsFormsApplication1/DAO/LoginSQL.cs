@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using MercadoEnvio.Utils;
-using MercadoEnvio.Modelo;
+using MercadoEnvio.Utils;
 using System.Data.SqlClient;
 namespace MercadoEnvio.DAO
 

@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using MercadoEnvio.DAO;
 
-namespace MercadoEnvio.Modelo
+namespace MercadoEnvio.Utils
 {
     public class Usuario
     {

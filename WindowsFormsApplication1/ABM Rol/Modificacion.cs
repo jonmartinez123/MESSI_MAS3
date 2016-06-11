@@ -16,11 +16,11 @@ namespace MercadoEnvio.ABM_Rol
     public partial class Modificacion : MaterialForm
     {
 
-        public Modelo.Rol rol { get; set; }
+        public Utils.Rol rol { get; set; }
         public ABM_Rol.Listado launcher { get; set; }
         public Boolean checkeadoPorUsuario { get; set; }
 
-        public Modificacion(ABM_Rol.Listado launcher, Modelo.Rol rol)
+        public Modificacion(ABM_Rol.Listado launcher, Utils.Rol rol)
         {
             checkeadoPorUsuario = false;
             InitializeComponent();

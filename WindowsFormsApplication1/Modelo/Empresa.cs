@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MercadoEnvio.Modelo
+namespace MercadoEnvio.Utils
 {
-    public class Empresa:Modelo.Usuario
+    public class Empresa:Utils.Usuario
     {
         private string razonSocial;
         private string cuit;

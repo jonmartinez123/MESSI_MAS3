@@ -56,7 +56,7 @@ namespace MercadoEnvio.ABM_Rol
 
             if (!(String.IsNullOrEmpty(Nombre.Text)))
             {
-                Modelo.Rol rol = new Modelo.Rol(this.Nombre.Text, this.Estado.Checked); //linea peligrosa
+                Utils.Rol rol = new Utils.Rol(this.Nombre.Text, this.Estado.Checked); //linea peligrosa
                 if (this.FuncionalidadesRol.Rows.Count == 0) { MessageBox.Show("El rol debe tener al menos una funcionalidad"); return; }
                 DAO.RolSQl.crearNuevoRol(rol, FuncionalidadesRol);
                 MessageBox.Show("Rol creado con éxito!");
