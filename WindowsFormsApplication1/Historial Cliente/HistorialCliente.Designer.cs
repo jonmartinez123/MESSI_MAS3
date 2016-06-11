@@ -36,7 +36,7 @@
             this.detalle = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.resumenGrid = new System.Windows.Forms.DataGridView();
             this.porCalificar = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.comprasCalificadas = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.totalEstrellas = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -44,7 +44,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.historialGridView)).BeginInit();
             this.groupBox2.SuspendLayout();
             this.groupBox1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.resumenGrid)).BeginInit();
             this.SuspendLayout();
             // 
             // historialGridView
@@ -110,7 +110,7 @@
             // groupBox1
             // 
             this.groupBox1.BackColor = System.Drawing.SystemColors.Window;
-            this.groupBox1.Controls.Add(this.dataGridView1);
+            this.groupBox1.Controls.Add(this.resumenGrid);
             this.groupBox1.Location = new System.Drawing.Point(12, 509);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(739, 171);
@@ -118,20 +118,20 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Resumen";
             // 
-            // dataGridView1
+            // resumenGrid
             // 
-            this.dataGridView1.AllowUserToAddRows = false;
-            this.dataGridView1.AllowUserToDeleteRows = false;
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.resumenGrid.AllowUserToAddRows = false;
+            this.resumenGrid.AllowUserToDeleteRows = false;
+            this.resumenGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.resumenGrid.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.porCalificar,
             this.comprasCalificadas,
             this.totalEstrellas,
             this.ofertasGanadoras});
-            this.dataGridView1.Location = new System.Drawing.Point(13, 31);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(710, 116);
-            this.dataGridView1.TabIndex = 7;
+            this.resumenGrid.Location = new System.Drawing.Point(13, 31);
+            this.resumenGrid.Name = "resumenGrid";
+            this.resumenGrid.Size = new System.Drawing.Size(710, 116);
+            this.resumenGrid.TabIndex = 7;
             // 
             // porCalificar
             // 
@@ -176,7 +176,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.historialGridView)).EndInit();
             this.groupBox2.ResumeLayout(false);
             this.groupBox1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.resumenGrid)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -186,7 +186,7 @@
         private System.Windows.Forms.DataGridView historialGridView;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.DataGridView resumenGrid;
         private System.Windows.Forms.DataGridViewTextBoxColumn idPubli;
         private System.Windows.Forms.DataGridViewTextBoxColumn fechaP;
         private System.Windows.Forms.DataGridViewTextBoxColumn tipoPubli;

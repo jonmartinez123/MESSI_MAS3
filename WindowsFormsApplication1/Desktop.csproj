@@ -158,10 +158,10 @@
     <Compile Include="DAO\TipoDocumentoSQL.cs" />
     <Compile Include="DAO\UsuarioSQL.cs" />
     <Compile Include="DAO\VisibilidadSQL.cs" />
-    <Compile Include="DAO\Facturas\ConsultarFacturas.cs">
+    <Compile Include="Facturas\ConsultarFacturas.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="DAO\Facturas\ConsultarFacturas.Designer.cs">
+    <Compile Include="Facturas\ConsultarFacturas.Designer.cs">
       <DependentUpon>ConsultarFacturas.cs</DependentUpon>
     </Compile>
     <Compile Include="Funcionalidades\MenuUsuario.cs">
@@ -263,7 +263,7 @@
     <EmbeddedResource Include="ComprarOfertar\ComprarOfertar.resx">
       <DependentUpon>ComprarOfertar.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="DAO\Facturas\ConsultarFacturas.resx">
+    <EmbeddedResource Include="Facturas\ConsultarFacturas.resx">
       <DependentUpon>ConsultarFacturas.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Funcionalidades\MenuUsuario.resx">
@@ -294,7 +294,9 @@
     <EmbeddedResource Include="Publicar\Publicar.resx">
       <DependentUpon>Publicar.cs</DependentUpon>
     </EmbeddedResource>
-    <None Include="packages.config" />
+    <None Include="packages.config">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -327,6 +329,7 @@
       <Install>false</Install>
     </BootstrapperPackage>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

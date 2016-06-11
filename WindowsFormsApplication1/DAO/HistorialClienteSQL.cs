@@ -12,5 +12,10 @@ namespace MercadoEnvio.DAO
         {
             SqlConnector.retrieveDT("get_historialClienteID", historialGridView, Utils.Persistencia.usuario.Id);
         }
+
+        internal static void getResumen(System.Windows.Forms.DataGridView historialGridView)
+        {
+            SqlConnector.retrieveDT("get_resumenComprasUsuario", historialGridView, Utils.Persistencia.usuario.Id);
+        }
     }
 }

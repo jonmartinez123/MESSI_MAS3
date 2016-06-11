@@ -30,16 +30,8 @@ namespace MercadoEnvio.Historial_Cliente
         private void reload()
         {
             DAO.HistorialClienteSQL.getHistorial(historialGridView);
+            DAO.HistorialClienteSQL.getResumen(resumenGrid);
         }
 
-        private void label5_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void filtroContieneEnDetalle_CheckedChanged(object sender, EventArgs e)
-        {
-
-        }
     }
 }
