@@ -6,6 +6,7 @@ INSERT INTO MESSI_MAS3.Funcionalidad_Rol(Rol_func_id, Funcionalidad_rol_id) VALU
 INSERT INTO MESSI_MAS3.Funcionalidad_Rol(Rol_func_id, Funcionalidad_rol_id) VALUES (2,6)
 INSERT INTO MESSI_MAS3.Funcionalidad_Rol(Rol_func_id, Funcionalidad_rol_id) VALUES (2,7)
 INSERT INTO MESSI_MAS3.Funcionalidad_Rol(Rol_func_id, Funcionalidad_rol_id) VALUES (2,8)
+INSERT INTO MESSI_MAS3.Funcionalidad_Rol(Rol_func_id, Funcionalidad_rol_id) VALUES (2,9)
 INSERT INTO MESSI_MAS3.Funcionalidad_Rol(Rol_func_id, Funcionalidad_rol_id) VALUES (2,10) --Listado estadistico, todos lo pueden ver?
 
 --inserto funcionalidades para Empresa
