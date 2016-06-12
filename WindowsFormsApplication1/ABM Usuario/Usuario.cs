@@ -209,6 +209,21 @@ namespace MercadoEnvio.ABM_Usuario
             }
         }
 
+        private void btnLimpiarEmpresa_Click(object sender, EventArgs e)
+        {
+            txtRazonSocial.Text = "";
+            txtMailEmpresa.Text = "";
+            txtCUIT.Text = "";
+        }
+
+        private void btnLimpiarCliente_Click(object sender, EventArgs e)
+        {
+            txtNombre.Text = "";
+            txtMailCliente.Text = "";
+            txtApellido.Text = "";
+            txtDni.Text = "";
+        }
+
 
 
     }

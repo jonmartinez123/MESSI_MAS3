@@ -40,6 +40,13 @@
             this.btnHabilitadoCliente = new System.Windows.Forms.Button();
             this.btnCambiarPassCliente = new System.Windows.Forms.Button();
             this.dgvClientes = new System.Windows.Forms.DataGridView();
+            this.colId = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colUsuario = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colNombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colApellido = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colDNI = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colMail = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colHabilitado = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.txtDni = new System.Windows.Forms.TextBox();
             this.txtMailCliente = new System.Windows.Forms.TextBox();
             this.txtApellido = new System.Windows.Forms.TextBox();
@@ -66,13 +73,8 @@
             this.txtRazonSocial = new System.Windows.Forms.TextBox();
             this.materialLabel1 = new MaterialSkin.Controls.MaterialLabel();
             this.btnCrearUsuario = new System.Windows.Forms.Button();
-            this.colId = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colUsuario = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colNombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colApellido = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colDNI = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colMail = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colHabilitado = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.btnLimpiarCliente = new System.Windows.Forms.Button();
+            this.btnLimpiarEmpresa = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvClientes)).BeginInit();
@@ -92,6 +94,7 @@
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.btnLimpiarCliente);
             this.tabPage1.Controls.Add(this.cmbTipoDocumento);
             this.tabPage1.Controls.Add(this.materialLabel5);
             this.tabPage1.Controls.Add(this.materialLabel6);
@@ -237,6 +240,49 @@
             this.dgvClientes.TabIndex = 103;
             this.dgvClientes.SelectionChanged += new System.EventHandler(this.dgvClientes_SelectionChanged);
             // 
+            // colId
+            // 
+            this.colId.HeaderText = "Id";
+            this.colId.Name = "colId";
+            this.colId.ReadOnly = true;
+            this.colId.Visible = false;
+            // 
+            // colUsuario
+            // 
+            this.colUsuario.HeaderText = "Usuario";
+            this.colUsuario.Name = "colUsuario";
+            this.colUsuario.ReadOnly = true;
+            // 
+            // colNombre
+            // 
+            this.colNombre.HeaderText = "Nombre";
+            this.colNombre.Name = "colNombre";
+            this.colNombre.ReadOnly = true;
+            // 
+            // colApellido
+            // 
+            this.colApellido.HeaderText = "Apellido";
+            this.colApellido.Name = "colApellido";
+            this.colApellido.ReadOnly = true;
+            // 
+            // colDNI
+            // 
+            this.colDNI.HeaderText = "Documento";
+            this.colDNI.Name = "colDNI";
+            this.colDNI.ReadOnly = true;
+            // 
+            // colMail
+            // 
+            this.colMail.HeaderText = "Mail";
+            this.colMail.Name = "colMail";
+            this.colMail.ReadOnly = true;
+            // 
+            // colHabilitado
+            // 
+            this.colHabilitado.HeaderText = "Habilitado";
+            this.colHabilitado.Name = "colHabilitado";
+            this.colHabilitado.ReadOnly = true;
+            // 
             // txtDni
             // 
             this.txtDni.Location = new System.Drawing.Point(574, 63);
@@ -280,6 +326,7 @@
             // 
             // tabPage2
             // 
+            this.tabPage2.Controls.Add(this.btnLimpiarEmpresa);
             this.tabPage2.Controls.Add(this.materialLabel9);
             this.tabPage2.Controls.Add(this.materialLabel8);
             this.tabPage2.Controls.Add(this.materialLabel7);
@@ -488,48 +535,25 @@
             this.btnCrearUsuario.UseVisualStyleBackColor = true;
             this.btnCrearUsuario.Click += new System.EventHandler(this.btnCrearUsuario_Click);
             // 
-            // colId
+            // btnLimpiarCliente
             // 
-            this.colId.HeaderText = "Id";
-            this.colId.Name = "colId";
-            this.colId.ReadOnly = true;
-            this.colId.Visible = false;
+            this.btnLimpiarCliente.Location = new System.Drawing.Point(135, 87);
+            this.btnLimpiarCliente.Name = "btnLimpiarCliente";
+            this.btnLimpiarCliente.Size = new System.Drawing.Size(109, 23);
+            this.btnLimpiarCliente.TabIndex = 113;
+            this.btnLimpiarCliente.Text = "Limpiar";
+            this.btnLimpiarCliente.UseVisualStyleBackColor = true;
+            this.btnLimpiarCliente.Click += new System.EventHandler(this.btnLimpiarCliente_Click);
             // 
-            // colUsuario
+            // btnLimpiarEmpresa
             // 
-            this.colUsuario.HeaderText = "Usuario";
-            this.colUsuario.Name = "colUsuario";
-            this.colUsuario.ReadOnly = true;
-            // 
-            // colNombre
-            // 
-            this.colNombre.HeaderText = "Nombre";
-            this.colNombre.Name = "colNombre";
-            this.colNombre.ReadOnly = true;
-            // 
-            // colApellido
-            // 
-            this.colApellido.HeaderText = "Apellido";
-            this.colApellido.Name = "colApellido";
-            this.colApellido.ReadOnly = true;
-            // 
-            // colDNI
-            // 
-            this.colDNI.HeaderText = "Documento";
-            this.colDNI.Name = "colDNI";
-            this.colDNI.ReadOnly = true;
-            // 
-            // colMail
-            // 
-            this.colMail.HeaderText = "Mail";
-            this.colMail.Name = "colMail";
-            this.colMail.ReadOnly = true;
-            // 
-            // colHabilitado
-            // 
-            this.colHabilitado.HeaderText = "Habilitado";
-            this.colHabilitado.Name = "colHabilitado";
-            this.colHabilitado.ReadOnly = true;
+            this.btnLimpiarEmpresa.Location = new System.Drawing.Point(135, 87);
+            this.btnLimpiarEmpresa.Name = "btnLimpiarEmpresa";
+            this.btnLimpiarEmpresa.Size = new System.Drawing.Size(109, 23);
+            this.btnLimpiarEmpresa.TabIndex = 114;
+            this.btnLimpiarEmpresa.Text = "Limpiar";
+            this.btnLimpiarEmpresa.UseVisualStyleBackColor = true;
+            this.btnLimpiarEmpresa.Click += new System.EventHandler(this.btnLimpiarEmpresa_Click);
             // 
             // Usuario
             // 
@@ -601,5 +625,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colDNI;
         private System.Windows.Forms.DataGridViewTextBoxColumn colMail;
         private System.Windows.Forms.DataGridViewTextBoxColumn colHabilitado;
+        private System.Windows.Forms.Button btnLimpiarCliente;
+        private System.Windows.Forms.Button btnLimpiarEmpresa;
     }
 }
