@@ -128,6 +128,7 @@
             this.btnSeleccionarRubros.TabIndex = 118;
             this.btnSeleccionarRubros.Text = "Seleccionar";
             this.btnSeleccionarRubros.UseVisualStyleBackColor = true;
+            this.btnSeleccionarRubros.Click += new System.EventHandler(this.btnSeleccionarRubros_Click);
             // 
             // btnFiltrar
             // 
@@ -174,6 +175,7 @@
             this.btnComprar.TabIndex = 122;
             this.btnComprar.Text = "Comprar";
             this.btnComprar.UseVisualStyleBackColor = true;
+            this.btnComprar.Click += new System.EventHandler(this.btnComprar_Click);
             // 
             // btnUltimaPag
             // 

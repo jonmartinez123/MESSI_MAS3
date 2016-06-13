@@ -93,12 +93,6 @@
     <Compile Include="ComprarOfertar\Ofertar.Designer.cs">
       <DependentUpon>Ofertar.cs</DependentUpon>
     </Compile>
-    <Compile Include="ComprarOfertar\SeleccionRubros.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="ComprarOfertar\SeleccionRubros.Designer.cs">
-      <DependentUpon>SeleccionRubros.cs</DependentUpon>
-    </Compile>
     <Compile Include="ABM Usuario\CrearCliente.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -158,6 +152,12 @@
     </Compile>
     <Compile Include="ComprarOfertar\ComprarOfertar.Designer.cs">
       <DependentUpon>ComprarOfertar.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ComprarOfertar\SeleccionRubros.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ComprarOfertar\SeleccionRubros.Designer.cs">
+      <DependentUpon>SeleccionRubros.cs</DependentUpon>
     </Compile>
     <Compile Include="Config\ConfiguracionVariable.cs" />
     <Compile Include="DAO\CalificacionSQL.cs" />

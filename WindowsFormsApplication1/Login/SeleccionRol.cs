@@ -10,7 +10,6 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using MercadoEnvio.DAO;
 using MercadoEnvio.Utils;
-using MercadoEnvio.Utils;
 using MaterialSkin;
 
 namespace MercadoEnvio.Login

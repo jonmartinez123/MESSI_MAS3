@@ -100,6 +100,7 @@
             this.btnOfertar.TabIndex = 121;
             this.btnOfertar.Text = "Ofertar";
             this.btnOfertar.UseVisualStyleBackColor = true;
+            this.btnOfertar.Click += new System.EventHandler(this.btnOfertar_Click);
             // 
             // Ofertar
             // 

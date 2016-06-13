@@ -21,5 +21,10 @@ namespace MercadoEnvio.ComprarOfertar
             materialSkinManager.AddFormToManage(this);
             materialSkinManager.Theme = MaterialSkinManager.Themes.LIGHT;
         }
+
+        private void btnOfertar_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

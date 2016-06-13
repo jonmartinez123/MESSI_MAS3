@@ -69,3 +69,6 @@ C:\Users\Familia\Dropbox\4 año\Gestion de datos\Trabajo Practico\repositorio\ME
 C:\Users\Familia\Dropbox\4 año\Gestion de datos\Trabajo Practico\repositorio\MESSI_MAS3\WindowsFormsApplication1\obj\Debug\MercadoEnvio.ABM_Visibilidad.Modificacion.resources
 C:\Users\Eric\Desktop\MESSI_MAS3\WindowsFormsApplication1\obj\Debug\MercadoEnvio.ABM_Visibilidad.Alta.resources
 C:\Users\Eric\Desktop\MESSI_MAS3\WindowsFormsApplication1\obj\Debug\MercadoEnvio.ABM_Visibilidad.Modificacion.resources
+C:\Users\Eric\Desktop\MESSI_MAS3\WindowsFormsApplication1\obj\Debug\MercadoEnvio.ComprarOfertar.Ofertar.resources
+C:\Users\Eric\Desktop\MESSI_MAS3\WindowsFormsApplication1\obj\Debug\MercadoEnvio.Utils.SuperGrid.resources
+C:\Users\Eric\Desktop\MESSI_MAS3\WindowsFormsApplication1\obj\Debug\MercadoEnvio.ComprarOfertar.SeleccionRubros.resources

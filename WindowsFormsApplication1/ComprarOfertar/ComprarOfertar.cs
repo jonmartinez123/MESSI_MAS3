@@ -15,7 +15,7 @@ namespace MercadoEnvio.ComprarOfertar
 {
     public partial class ComprarOfertar : MaterialForm
     {
-        List<Rubro> rubrosFiltrados;
+        public static List<Rubro> rubrosFiltrados;
 
         public ComprarOfertar()
         {
@@ -41,6 +41,17 @@ namespace MercadoEnvio.ComprarOfertar
         {
             txtDescripcion.Text = "";
             rubrosFiltrados.Clear();
+        }
+
+        private void btnComprar_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnSeleccionarRubros_Click(object sender, EventArgs e)
+        {
+            SeleccionRubros sR = new SeleccionRubros(rubrosFiltrados);
+            sR.Show();
         }
     }
 }
