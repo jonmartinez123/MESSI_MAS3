@@ -41,7 +41,15 @@ namespace MercadoEnvio.Calificar
 
         private void calificar_button_Click(object sender, EventArgs e)
         {
-            Extension.openInNewWindow(this, (new darCalificacion(this, getCurrentCalificacion())));
+            Int32 selectedCellCount =
+        calificacionesPendientes.GetCellCount(DataGridViewElementStates.Selected);
+            if (selectedCellCount == 1)
+            {
+
+                Extension.openInNewWindow(this, (new darCalificacion(this, getCurrentCalificacion())));
+            }
+
+
         }
 
         private Utils.Calificacion getCurrentCalificacion()

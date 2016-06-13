@@ -9,6 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using MaterialSkin;
+using MercadoEnvio.Utils;
 
 namespace MercadoEnvio.Facturas
 {
@@ -25,6 +26,10 @@ namespace MercadoEnvio.Facturas
         private void ConsultarFacturas_Load(object sender, EventArgs e)
         {
             this.reload();
+            fechaDesde.Format = DateTimePickerFormat.Custom;
+            fechaDesde.CustomFormat = "dd-MM-yyyy";
+            fechaHasta.Format = DateTimePickerFormat.Custom;
+            fechaHasta.CustomFormat = "dd-MM-yyyy";
         }
 
         private void reload()
@@ -37,32 +42,73 @@ namespace MercadoEnvio.Facturas
         {
             if (checkBox1.Checked)
             {
-                fechaDesdetxt.Enabled = true;
-                fechaHastatxt.Enabled = true;
+                fechaDesde.Enabled = true;
+                fechaHasta.Enabled = true;
             }
             if (!checkBox1.Checked)
             {
-                fechaDesdetxt.Enabled = false;
-                fechaHastatxt.Enabled = false;
+                fechaDesde.Enabled = false;
+                fechaHasta.Enabled = false;
             }
         }
 
         private void consultar_button_Click(object sender, EventArgs e)
         {
+            DateTime datedesde;
+            DateTime datehasta;
+            String dateDesde;
+            String dateHasta;
+            if (fechaDesde.Enabled & !importeBajotxt.Enabled & !detallePublitxt.Enabled) {
+                dateDesde = Convert.ToString(fechaDesde.Value.Day + "/" + fechaDesde.Value.Month + "/" + fechaDesde.Value.Year);
+                dateHasta = Convert.ToString(fechaHasta.Value.Day + "/" + fechaHasta.Value.Month + "/" + fechaHasta.Value.Year);
 
-            if (fechaDesdetxt.Enabled & !importeBajotxt.Enabled & !detallePublitxt.Enabled) { }
+            }
 
-            if (!fechaDesdetxt.Enabled & importeBajotxt.Enabled & !detallePublitxt.Enabled) { }
+            if (!fechaDesde.Enabled & importeBajotxt.Enabled & !detallePublitxt.Enabled) {
+                if (!String.IsNullOrEmpty(importeBajotxt.Text) & !String.IsNullOrEmpty(importeAltotxt.Text))
+                {
+                    //llamo al sp
+                }
+            }
 
-            if (!fechaDesdetxt.Enabled & !importeBajotxt.Enabled & detallePublitxt.Enabled) { }
+            if (!fechaDesde.Enabled & !importeBajotxt.Enabled & detallePublitxt.Enabled) {
+                if (!String.IsNullOrEmpty(detallePublitxt.Text))
+                {
+                    //llamo al sp
+                }
+            
+            }
 
-            if (fechaDesdetxt.Enabled & importeBajotxt.Enabled & !detallePublitxt.Enabled) { }
+            if (fechaDesde.Enabled & importeBajotxt.Enabled & !detallePublitxt.Enabled) {
+                dateDesde = Convert.ToString(fechaDesde.Value.Day + "/" + fechaDesde.Value.Month + "/" + fechaDesde.Value.Year);
+                dateHasta = Convert.ToString(fechaHasta.Value.Day + "/" + fechaHasta.Value.Month + "/" + fechaHasta.Value.Year);
 
-            if (fechaDesdetxt.Enabled & !importeBajotxt.Enabled & detallePublitxt.Enabled) { }
+                if (!String.IsNullOrEmpty(importeBajotxt.Text) & !String.IsNullOrEmpty(importeAltotxt.Text))
+                {
+                    //llamo al sp
+                }
+            }
 
-            if (!fechaDesdetxt.Enabled & importeBajotxt.Enabled & detallePublitxt.Enabled) { }
+            if (fechaDesde.Enabled & !importeBajotxt.Enabled & detallePublitxt.Enabled) {
+                dateDesde = Convert.ToString(fechaDesde.Value.Day + "/" + fechaDesde.Value.Month + "/" + fechaDesde.Value.Year);
+                dateHasta = Convert.ToString(fechaHasta.Value.Day + "/" + fechaHasta.Value.Month + "/" + fechaHasta.Value.Year);
+                if (!String.IsNullOrEmpty(detallePublitxt.Text))
+                {
+                    //llamo al sp
+                }
+            }
 
-            if (fechaDesdetxt.Enabled & importeBajotxt.Enabled & detallePublitxt.Enabled) { }
+            if (!fechaDesde.Enabled & importeBajotxt.Enabled & detallePublitxt.Enabled) { }
+
+            if (fechaDesde.Enabled & importeBajotxt.Enabled & detallePublitxt.Enabled) {
+                dateDesde = Convert.ToString(fechaDesde.Value.Day + "/" + fechaDesde.Value.Month + "/" + fechaDesde.Value.Year);
+                dateHasta = Convert.ToString(fechaHasta.Value.Day + "/" + fechaHasta.Value.Month + "/" + fechaHasta.Value.Year);
+
+                if (!String.IsNullOrEmpty(importeBajotxt.Text) & !String.IsNullOrEmpty(importeAltotxt.Text) & !String.IsNullOrEmpty(detallePublitxt.Text))
+                {
+                    //llamo al sp
+                }
+            }
 
             //tendria que tirar un if por cada una de las combinaciones posibles, y segun eso hacer lo sp con cada combinacion, 3!
             //son 6 combinaciones. Si esta la fecha,importe o detalle, luego fecha-importe, fecha-detalle o detalle-importe
@@ -97,5 +143,27 @@ namespace MercadoEnvio.Facturas
                 detallePublitxt.Enabled = false;
             }
         }
+
+        private void importeBajotxt_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void importeBajotxt_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            this.allowNumericOnly(e);
+        }
+
+        private void importeAltotxt_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            this.allowNumericOnly(e);
+        }
+
+        private void dateTimePicker1_ValueChanged(object sender, EventArgs e)
+        {
+
+        }
+
+       
     }
 }
