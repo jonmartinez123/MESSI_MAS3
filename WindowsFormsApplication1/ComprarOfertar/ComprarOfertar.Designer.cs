@@ -32,7 +32,6 @@
             this.materialLabel2 = new MaterialSkin.Controls.MaterialLabel();
             this.materialLabel3 = new MaterialSkin.Controls.MaterialLabel();
             this.txtDescripcion = new MaterialSkin.Controls.MaterialSingleLineTextField();
-            this.materialSingleLineTextField1 = new MaterialSkin.Controls.MaterialSingleLineTextField();
             this.btnSeleccionarRubros = new MaterialSkin.Controls.MaterialRaisedButton();
             this.btnFiltrar = new MaterialSkin.Controls.MaterialRaisedButton();
             this.btnLimpiar = new MaterialSkin.Controls.MaterialRaisedButton();
@@ -52,7 +51,7 @@
             this.materialLabel6.Depth = 0;
             this.materialLabel6.Font = new System.Drawing.Font("Roboto", 11F);
             this.materialLabel6.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.materialLabel6.Location = new System.Drawing.Point(475, 96);
+            this.materialLabel6.Location = new System.Drawing.Point(450, 96);
             this.materialLabel6.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialLabel6.Name = "materialLabel6";
             this.materialLabel6.Size = new System.Drawing.Size(56, 19);
@@ -101,26 +100,10 @@
             this.txtDescripcion.TabIndex = 116;
             this.txtDescripcion.UseSystemPasswordChar = false;
             // 
-            // materialSingleLineTextField1
-            // 
-            this.materialSingleLineTextField1.BackColor = System.Drawing.SystemColors.Menu;
-            this.materialSingleLineTextField1.Depth = 0;
-            this.materialSingleLineTextField1.Hint = "";
-            this.materialSingleLineTextField1.Location = new System.Drawing.Point(537, 96);
-            this.materialSingleLineTextField1.MouseState = MaterialSkin.MouseState.HOVER;
-            this.materialSingleLineTextField1.Name = "materialSingleLineTextField1";
-            this.materialSingleLineTextField1.PasswordChar = '\0';
-            this.materialSingleLineTextField1.SelectedText = "";
-            this.materialSingleLineTextField1.SelectionLength = 0;
-            this.materialSingleLineTextField1.SelectionStart = 0;
-            this.materialSingleLineTextField1.Size = new System.Drawing.Size(197, 23);
-            this.materialSingleLineTextField1.TabIndex = 117;
-            this.materialSingleLineTextField1.UseSystemPasswordChar = false;
-            // 
             // btnSeleccionarRubros
             // 
             this.btnSeleccionarRubros.Depth = 0;
-            this.btnSeleccionarRubros.Location = new System.Drawing.Point(740, 95);
+            this.btnSeleccionarRubros.Location = new System.Drawing.Point(512, 96);
             this.btnSeleccionarRubros.MouseState = MaterialSkin.MouseState.HOVER;
             this.btnSeleccionarRubros.Name = "btnSeleccionarRubros";
             this.btnSeleccionarRubros.Primary = true;
@@ -180,7 +163,7 @@
             // btnUltimaPag
             // 
             this.btnUltimaPag.Depth = 0;
-            this.btnUltimaPag.Location = new System.Drawing.Point(813, 335);
+            this.btnUltimaPag.Location = new System.Drawing.Point(810, 335);
             this.btnUltimaPag.MouseState = MaterialSkin.MouseState.HOVER;
             this.btnUltimaPag.Name = "btnUltimaPag";
             this.btnUltimaPag.Primary = true;
@@ -192,7 +175,7 @@
             // btnSiguientePag
             // 
             this.btnSiguientePag.Depth = 0;
-            this.btnSiguientePag.Location = new System.Drawing.Point(777, 335);
+            this.btnSiguientePag.Location = new System.Drawing.Point(774, 335);
             this.btnSiguientePag.MouseState = MaterialSkin.MouseState.HOVER;
             this.btnSiguientePag.Name = "btnSiguientePag";
             this.btnSiguientePag.Primary = true;
@@ -204,7 +187,7 @@
             // btnPrimeraPag
             // 
             this.btnPrimeraPag.Depth = 0;
-            this.btnPrimeraPag.Location = new System.Drawing.Point(656, 335);
+            this.btnPrimeraPag.Location = new System.Drawing.Point(653, 335);
             this.btnPrimeraPag.MouseState = MaterialSkin.MouseState.HOVER;
             this.btnPrimeraPag.Name = "btnPrimeraPag";
             this.btnPrimeraPag.Primary = true;
@@ -216,7 +199,7 @@
             // btnAtrasPagina
             // 
             this.btnAtrasPagina.Depth = 0;
-            this.btnAtrasPagina.Location = new System.Drawing.Point(692, 335);
+            this.btnAtrasPagina.Location = new System.Drawing.Point(689, 335);
             this.btnAtrasPagina.MouseState = MaterialSkin.MouseState.HOVER;
             this.btnAtrasPagina.Name = "btnAtrasPagina";
             this.btnAtrasPagina.Primary = true;
@@ -231,7 +214,7 @@
             this.lblNumeroPagina.Depth = 0;
             this.lblNumeroPagina.Font = new System.Drawing.Font("Roboto", 11F);
             this.lblNumeroPagina.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.lblNumeroPagina.Location = new System.Drawing.Point(744, 331);
+            this.lblNumeroPagina.Location = new System.Drawing.Point(741, 331);
             this.lblNumeroPagina.MouseState = MaterialSkin.MouseState.HOVER;
             this.lblNumeroPagina.Name = "lblNumeroPagina";
             this.lblNumeroPagina.Size = new System.Drawing.Size(17, 19);
@@ -253,7 +236,6 @@
             this.Controls.Add(this.btnLimpiar);
             this.Controls.Add(this.btnFiltrar);
             this.Controls.Add(this.btnSeleccionarRubros);
-            this.Controls.Add(this.materialSingleLineTextField1);
             this.Controls.Add(this.txtDescripcion);
             this.Controls.Add(this.materialLabel6);
             this.Controls.Add(this.materialLabel2);
@@ -275,7 +257,6 @@
         private MaterialSkin.Controls.MaterialLabel materialLabel2;
         private MaterialSkin.Controls.MaterialLabel materialLabel3;
         private MaterialSkin.Controls.MaterialSingleLineTextField txtDescripcion;
-        private MaterialSkin.Controls.MaterialSingleLineTextField materialSingleLineTextField1;
         private MaterialSkin.Controls.MaterialRaisedButton btnSeleccionarRubros;
         private MaterialSkin.Controls.MaterialRaisedButton btnFiltrar;
         private MaterialSkin.Controls.MaterialRaisedButton btnLimpiar;
