@@ -34,15 +34,15 @@ namespace MercadoEnvio.ComprarOfertar
 
         private void btnFiltrar_Click(object sender, EventArgs e)
         {
+            List<Modelo.Publicacion> pDeRubro = new List<Modelo.Publicacion>();
+
             if (rubrosFiltrados.Count() > 0) {
-                List<Modelo.Publicacion> pDeRubro = new List<Modelo.Publicacion>();
-                foreach (Rubro r in rubrosFiltrados)
-                {
+                foreach (Rubro r in rubrosFiltrados){
                     pDeRubro.Add(DAO.PublicacionSQL.filtrarPublicacionesPorRubro(r.Id, txtDescripcion.Text.ToString()));
                 }
             }
             else {
-
+                pDeRubro.Add(DAO.PublicacionSQL.filtrarPubliacionesPorDescripcion(txtDescripcion.Text.ToString()));
             }
         }
 

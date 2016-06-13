@@ -165,6 +165,7 @@
     <Compile Include="DAO\HistorialClienteSQL.cs" />
     <Compile Include="DAO\LocalidadSQL.cs" />
     <Compile Include="DAO\LoginSQL.cs" />
+    <Compile Include="DAO\PublicacionSQL.cs" />
     <Compile Include="DAO\RolSQl.cs" />
     <Compile Include="DAO\RubroSQL.cs" />
     <Compile Include="DAO\sqlConnector.cs" />
@@ -185,6 +186,8 @@
     </Compile>
     <Compile Include="Modelo\Administrador.cs" />
     <Compile Include="Modelo\Calificacion.cs" />
+    <Compile Include="Modelo\Oferta.cs" />
+    <Compile Include="Modelo\Publicacion.cs" />
     <Compile Include="Utils\SupergridPaginado.cs">
       <SubType>Component</SubType>
     </Compile>
