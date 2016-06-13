@@ -87,6 +87,18 @@
     <Compile Include="ABM Rubro\Rubro.Designer.cs">
       <DependentUpon>Rubro.cs</DependentUpon>
     </Compile>
+    <Compile Include="ComprarOfertar\Ofertar.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ComprarOfertar\Ofertar.Designer.cs">
+      <DependentUpon>Ofertar.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ComprarOfertar\SeleccionRubros.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ComprarOfertar\SeleccionRubros.Designer.cs">
+      <DependentUpon>SeleccionRubros.cs</DependentUpon>
+    </Compile>
     <Compile Include="ABM Usuario\CrearCliente.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -266,6 +278,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ComprarOfertar\ComprarOfertar.resx">
       <DependentUpon>ComprarOfertar.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ComprarOfertar\Ofertar.resx">
+      <DependentUpon>Ofertar.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ComprarOfertar\SeleccionRubros.resx">
+      <DependentUpon>SeleccionRubros.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Facturas\ConsultarFacturas.resx">
       <DependentUpon>ConsultarFacturas.cs</DependentUpon>

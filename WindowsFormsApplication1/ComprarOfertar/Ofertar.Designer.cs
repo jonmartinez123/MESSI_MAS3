@@ -32,6 +32,7 @@
             this.lblValorActual = new MaterialSkin.Controls.MaterialLabel();
             this.materialLabel3 = new MaterialSkin.Controls.MaterialLabel();
             this.txtValorOfertado = new MaterialSkin.Controls.MaterialSingleLineTextField();
+            this.btnOfertar = new MaterialSkin.Controls.MaterialRaisedButton();
             this.SuspendLayout();
             // 
             // materialLabel2
@@ -65,19 +66,19 @@
             this.materialLabel3.Depth = 0;
             this.materialLabel3.Font = new System.Drawing.Font("Roboto", 11F);
             this.materialLabel3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.materialLabel3.Location = new System.Drawing.Point(16, 117);
+            this.materialLabel3.Location = new System.Drawing.Point(12, 116);
             this.materialLabel3.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialLabel3.Name = "materialLabel3";
-            this.materialLabel3.Size = new System.Drawing.Size(89, 19);
+            this.materialLabel3.Size = new System.Drawing.Size(54, 19);
             this.materialLabel3.TabIndex = 117;
-            this.materialLabel3.Text = "Descripción";
+            this.materialLabel3.Text = "Oferta:";
             // 
             // txtValorOfertado
             // 
             this.txtValorOfertado.BackColor = System.Drawing.SystemColors.Menu;
             this.txtValorOfertado.Depth = 0;
             this.txtValorOfertado.Hint = "";
-            this.txtValorOfertado.Location = new System.Drawing.Point(111, 116);
+            this.txtValorOfertado.Location = new System.Drawing.Point(72, 116);
             this.txtValorOfertado.MouseState = MaterialSkin.MouseState.HOVER;
             this.txtValorOfertado.Name = "txtValorOfertado";
             this.txtValorOfertado.PasswordChar = '\0';
@@ -88,11 +89,24 @@
             this.txtValorOfertado.TabIndex = 118;
             this.txtValorOfertado.UseSystemPasswordChar = false;
             // 
+            // btnOfertar
+            // 
+            this.btnOfertar.Depth = 0;
+            this.btnOfertar.Location = new System.Drawing.Point(185, 145);
+            this.btnOfertar.MouseState = MaterialSkin.MouseState.HOVER;
+            this.btnOfertar.Name = "btnOfertar";
+            this.btnOfertar.Primary = true;
+            this.btnOfertar.Size = new System.Drawing.Size(105, 23);
+            this.btnOfertar.TabIndex = 121;
+            this.btnOfertar.Text = "Ofertar";
+            this.btnOfertar.UseVisualStyleBackColor = true;
+            // 
             // Ofertar
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(347, 168);
+            this.ClientSize = new System.Drawing.Size(305, 181);
+            this.Controls.Add(this.btnOfertar);
             this.Controls.Add(this.txtValorOfertado);
             this.Controls.Add(this.materialLabel3);
             this.Controls.Add(this.lblValorActual);
@@ -110,5 +124,6 @@
         private MaterialSkin.Controls.MaterialLabel lblValorActual;
         private MaterialSkin.Controls.MaterialLabel materialLabel3;
         private MaterialSkin.Controls.MaterialSingleLineTextField txtValorOfertado;
+        private MaterialSkin.Controls.MaterialRaisedButton btnOfertar;
     }
 }
