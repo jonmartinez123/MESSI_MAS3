@@ -48,7 +48,7 @@ namespace MercadoEnvio.DAO
 
         public static void crearCliente(Utils.Cliente c)
         { 
-            SqlConnector.executeProcedure("modificar_cliente",c.NombreUsuario, EncriptadorSHA.encodear(c.Password), c.Nombre, c.Apellido, c.Mail, c.DNI, c.FechaNacimiento, c.Telefono, c.TipoDocumento.Id, c.Domicilio.Localidad.Id, c.Domicilio.Calle, c.Domicilio.Altura, c.Domicilio.Piso, c.Domicilio.Departamento, c.Domicilio.CodigoPostal.ToString());        
+            SqlConnector.executeProcedure("crear_cliente",c.NombreUsuario, EncriptadorSHA.encodear(c.Password), c.Nombre, c.Apellido, c.Mail, c.DNI, c.FechaNacimiento, c.Telefono, c.TipoDocumento.Id, c.Domicilio.Localidad.Id, c.Domicilio.Calle, c.Domicilio.Altura, c.Domicilio.Piso, c.Domicilio.Departamento, c.Domicilio.CodigoPostal.ToString());        
         }
 
         public static Cliente getCliente(int id){
