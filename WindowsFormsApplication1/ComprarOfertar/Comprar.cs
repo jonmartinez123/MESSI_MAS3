@@ -35,6 +35,10 @@ namespace MercadoEnvio.ComprarOfertar
             lblPrecioTotal.Text = "ARS $" + pGlobal.Precio.ToString();
 
             for (int i = 1; i <= pGlobal.Stock; i++) cmbCantidad.Items.Add(i);
+
+            cmbMediosDePago.DataSource = DAO.FormaDePago.getFormasDePago();
+            cmbMediosDePago.DisplayMember = "Nombre";
+            cmbMediosDePago.ValueMember = "Id";
         }
 
         private void btnComprar_Click(object sender, EventArgs e)
@@ -43,8 +47,11 @@ namespace MercadoEnvio.ComprarOfertar
                 int valorOferta;
                 if (!int.TryParse(cmbCantidad.Text.ToString(), out valorOferta))
                     throw new Exception("Debe seleccionar la cantidad");
-                    
-                DAO.PublicacionSQL.crearComprar(pGlobal.Id, Persistencia.usuario.Id, int.Parse(cmbCantidad.Text));
+
+                Utils.FormaDePago f = new Utils.FormaDePago();
+                f = (Utils.FormaDePago)cmbMediosDePago.SelectedItem;
+
+                DAO.PublicacionSQL.crearComprar(pGlobal.Id, Persistencia.usuario.Id, int.Parse(cmbCantidad.Text), f.Id);
 
                 MessageBox.Show("La compra se realizo con exito", "Atención");
 
