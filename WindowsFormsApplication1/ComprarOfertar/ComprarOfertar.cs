@@ -92,19 +92,25 @@ namespace MercadoEnvio.ComprarOfertar
 
         private void superGrid1_SelectionChanged(object sender, EventArgs e)
         {
-            DataGridViewRow row = this.superGrid1.SelectedRows[0];
-            string tipo = row.Cells["colTipoPublicaion"].Value.ToString();
-            
-            if (tipo == "Subasta"){
-                btnComprar.Text = "Ofertar";
-            }else{
-                btnComprar.Text = "Compar";
+            if (superGrid1.SelectedRows.Count == 1)
+            {
+                DataGridViewRow row = this.superGrid1.SelectedRows[0];
+                string tipo = row.Cells["colTipoPublicaion"].Value.ToString();
+
+                if (tipo == "Subasta")
+                {
+                    btnComprar.Text = "Ofertar";
+                }
+                else
+                {
+                    btnComprar.Text = "Compar";
+                }
             }
         }
 
         private void txtDescripcion_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (e.KeyChar != 8) this.allowMaxLenght(txtDescripcion, 25, e);
+            if (e.KeyChar != 8) this.allowMaxLenght(txtDescripcion, 254, e);
         }
 
     }
