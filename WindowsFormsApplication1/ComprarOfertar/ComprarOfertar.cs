@@ -35,15 +35,25 @@ namespace MercadoEnvio.ComprarOfertar
         private void btnFiltrar_Click(object sender, EventArgs e)
         {
             List<Modelo.Publicacion> pDeRubro = new List<Modelo.Publicacion>();
+            DataTable dtAAcumular = new DataTable();
 
             if (rubrosFiltrados.Count() > 0) {
                 foreach (Rubro r in rubrosFiltrados){
-                    pDeRubro.Add(DAO.PublicacionSQL.filtrarPublicacionesPorRubro(r.Id, txtDescripcion.Text.ToString()));
+                   dtAAcumular = DAO.PublicacionSQL.filtrarPublicacionesPorRubro(dtAAcumular, r.Id, txtDescripcion.Text.ToString());
                 }
             }
             else {
                 pDeRubro.Add(DAO.PublicacionSQL.filtrarPubliacionesPorDescripcion(txtDescripcion.Text.ToString()));
             }
+
+            if (!(dtAAcumular == null))
+            {
+                DAO.SqlConnector.bindNamesToDataTable(dtAAcumular, superGrid1);
+                superGrid1.DataSource = dtAAcumular;
+                superGrid1.SetPagedDataSource(dtAAcumular, bindingNavigator1);
+            }
+
+
         }
 
         private void btnLimpiar_Click(object sender, EventArgs e)

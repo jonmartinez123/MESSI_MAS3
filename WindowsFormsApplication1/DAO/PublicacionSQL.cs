@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Data.SqlClient;
 using System.Windows.Forms;
+using System.Data;
 
 namespace MercadoEnvio.DAO
 {
@@ -31,9 +32,20 @@ namespace MercadoEnvio.DAO
             SqlConnector.executeProcedure("crear_oferta", oferta.Valor, oferta.Usuario.Id, oferta.Publicacion.Id);        
         }
 
-        internal static Modelo.Publicacion filtrarPublicacionesPorRubro(int idRubro, string descripcion)
+        
+        
+
+        internal static DataTable filtrarPublicacionesPorRubro(DataTable dtAAcumular, int idRubro, string descripcion)
         {
-            throw new NotImplementedException();
+
+            //DataTable dtNuevo;
+            return DAO.SqlConnector.retrieveDTToBeConvertedParaComprarYOfertar(dtAAcumular, "filtrarPublicacionPorDescripcion", idRubro, descripcion);
+           // dtAAcumular =DAO.SqlConnector.retrieveDTToBeConvertedParaComprarYOfertar(dtAAcumular, "get_publicacionesSegunRubroID", idRubro);
+           // dtAAcumular.Merge(dtNuevo, true);
+
+          // DAO.SqlConnector.bindNamesToDataTable(dtAAcumular, superGrid);
+          // superGrid.DataSource = dtAAcumular;
+             
         }
 
         internal static Modelo.Publicacion filtrarPubliacionesPorDescripcion(string descripcion)

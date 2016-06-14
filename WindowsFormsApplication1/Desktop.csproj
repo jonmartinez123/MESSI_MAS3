@@ -161,6 +161,7 @@
     </Compile>
     <Compile Include="Config\ConfiguracionVariable.cs" />
     <Compile Include="DAO\CalificacionSQL.cs" />
+    <Compile Include="DAO\ComprarOfertarSQL.cs" />
     <Compile Include="DAO\ConsultarFacturasSQL.cs" />
     <Compile Include="DAO\HistorialClienteSQL.cs" />
     <Compile Include="DAO\LocalidadSQL.cs" />

@@ -81,6 +81,14 @@ namespace MercadoEnvio.DAO
             }
         }
 
+        //
+        public static DataTable retrieveDTToBeConvertedParaComprarYOfertar(DataTable dtAUsar, String sp, params Object[] values)
+        {
+            SqlDataAdapter da = new SqlDataAdapter(generateCommand(sp, values));
+            da.Fill(dtAUsar);
+            return dtAUsar;
+        }
+
 
 
         public static int indexOfCellWithSuchName(DataGridView dg, String columnName)
@@ -189,6 +197,17 @@ namespace MercadoEnvio.DAO
             bindNamesToDataTable(dt, dg);
             dg.DataSource = dt;
             return dt;
+        }
+        public static int retrieveDTParaComprarYOfertar(DataTable dtLoco, String sp, DataGridView dg, params Object[] values)
+        {
+            DataTable dt = retrieveDTToBeConvertedParaComprarYOfertar(dtLoco, sp, values);
+            if (dt == null)
+            {
+                return -1;
+            }
+            bindNamesToDataTable(dt, dg);
+            dg.DataSource = dt;
+            return 1;
         }
 
 
@@ -384,5 +403,10 @@ namespace MercadoEnvio.DAO
             return "NULL";
         }
     }
+
+
+
+
+
 }
 
