@@ -89,6 +89,7 @@
             this.txtValorOfertado.Size = new System.Drawing.Size(163, 23);
             this.txtValorOfertado.TabIndex = 118;
             this.txtValorOfertado.UseSystemPasswordChar = false;
+            this.txtValorOfertado.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtValorOfertado_KeyPress);
             // 
             // btnOfertar
             // 

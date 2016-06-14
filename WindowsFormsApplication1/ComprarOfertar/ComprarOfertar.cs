@@ -25,20 +25,30 @@ namespace MercadoEnvio.ComprarOfertar
             materialSkinManager.Theme = MaterialSkinManager.Themes.LIGHT;
 
             rubrosFiltrados = new List<Rubro>();
+            filtrar();
         }
 
         private void btnFiltrar_Click(object sender, EventArgs e)
         {
+            filtrar();
+        }
+
+        private void filtrar()
+        {
             List<Modelo.Publicacion> pDeRubro = new List<Modelo.Publicacion>();
             DataTable dtAAcumular = new DataTable();
-            superGrid1.clean();
+            superGrid1.SelectAll();
+            superGrid1.ClearSelection();
 
-            if (rubrosFiltrados.Count() > 0) {
-                foreach (Rubro r in rubrosFiltrados){
-                   dtAAcumular = DAO.PublicacionSQL.filtrarPublicacionesPorRubro(dtAAcumular, r.Id, txtDescripcion.Text.ToString());
+            if (rubrosFiltrados.Count() > 0)
+            {
+                foreach (Rubro r in rubrosFiltrados)
+                {
+                    dtAAcumular = DAO.PublicacionSQL.filtrarPublicacionesPorRubro(dtAAcumular, r.Id, txtDescripcion.Text.ToString());
                 }
             }
-            else {
+            else
+            {
                 dtAAcumular = DAO.PublicacionSQL.filtrarPubliacionesPorDescripcion(dtAAcumular, txtDescripcion.Text.ToString());
             }
 
@@ -47,6 +57,7 @@ namespace MercadoEnvio.ComprarOfertar
                 DAO.SqlConnector.bindNamesToDataTable(dtAAcumular, superGrid1);
                 superGrid1.DataSource = dtAAcumular;
                 superGrid1.SetPagedDataSource(dtAAcumular, bindingNavigator1);
+                superGrid1.Sort(this.superGrid1.Columns["colVisibilidadId"], ListSortDirection.Ascending);
             }
         }
 
@@ -58,13 +69,42 @@ namespace MercadoEnvio.ComprarOfertar
 
         private void btnComprar_Click(object sender, EventArgs e)
         {
+            if (superGrid1.SelectedRows.Count == 1)
+            {
+                DataGridViewRow row = this.superGrid1.SelectedRows[0];
 
+                Modelo.Publicacion p = new Modelo.Publicacion();
+                p.Id = Convert.ToInt16(row.Cells["colPublicacionId"].Value);
+
+                Ofertar po = new Ofertar(p);
+                po.ShowDialog();
+            }
+            else {
+                MessageBox.Show("Debe seleccionar una publicacion", "Atención");
+            }
         }
 
         private void btnSeleccionarRubros_Click(object sender, EventArgs e)
         {
             SeleccionRubros sR = new SeleccionRubros(rubrosFiltrados);
             sR.Show();
+        }
+
+        private void superGrid1_SelectionChanged(object sender, EventArgs e)
+        {
+            DataGridViewRow row = this.superGrid1.SelectedRows[0];
+            string tipo = row.Cells["colTipoPublicaion"].Value.ToString();
+            
+            if (tipo == "Subasta"){
+                btnComprar.Text = "Ofertar";
+            }else{
+                btnComprar.Text = "Compar";
+            }
+        }
+
+        private void txtDescripcion_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar != 8) this.allowMaxLenght(txtDescripcion, 25, e);
         }
 
     }

@@ -49,7 +49,7 @@
             this.bindingNavigatorMoveLastItem = new System.Windows.Forms.ToolStripButton();
             this.bindingNavigatorSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.superGrid1 = new MercadoEnvio.Utils.SuperGrid();
-            this.colId = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colPublicacionId = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colCodigo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colTipoPublicaion = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colDescripcion = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -118,6 +118,7 @@
             this.txtDescripcion.Size = new System.Drawing.Size(307, 23);
             this.txtDescripcion.TabIndex = 116;
             this.txtDescripcion.UseSystemPasswordChar = false;
+            this.txtDescripcion.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtDescripcion_KeyPress);
             // 
             // btnSeleccionarRubros
             // 
@@ -271,7 +272,7 @@
             this.superGrid1.AllowUserToDeleteRows = false;
             this.superGrid1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.superGrid1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.colId,
+            this.colPublicacionId,
             this.colCodigo,
             this.colTipoPublicaion,
             this.colDescripcion,
@@ -286,13 +287,14 @@
             this.superGrid1.PageSize = 15;
             this.superGrid1.Size = new System.Drawing.Size(900, 213);
             this.superGrid1.TabIndex = 124;
+            this.superGrid1.SelectionChanged += new System.EventHandler(this.superGrid1_SelectionChanged);
             // 
-            // colId
+            // colPublicacionId
             // 
-            this.colId.HeaderText = "Id";
-            this.colId.Name = "colId";
-            this.colId.ReadOnly = true;
-            this.colId.Visible = false;
+            this.colPublicacionId.HeaderText = "Id";
+            this.colPublicacionId.Name = "colPublicacionId";
+            this.colPublicacionId.ReadOnly = true;
+            this.colPublicacionId.Visible = false;
             // 
             // colCodigo
             // 
@@ -319,7 +321,7 @@
             // 
             // colMinimo
             // 
-            this.colMinimo.HeaderText = "Minimo Subasta";
+            this.colMinimo.HeaderText = "Precio inicial Subasta";
             this.colMinimo.Name = "colMinimo";
             this.colMinimo.ReadOnly = true;
             this.colMinimo.Width = 150;
@@ -396,7 +398,7 @@
         private System.Windows.Forms.ToolStripButton bindingNavigatorMoveLastItem;
         private System.Windows.Forms.ToolStripSeparator bindingNavigatorSeparator2;
         private Utils.SuperGrid superGrid1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colId;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colPublicacionId;
         private System.Windows.Forms.DataGridViewTextBoxColumn colCodigo;
         private System.Windows.Forms.DataGridViewTextBoxColumn colTipoPublicaion;
         private System.Windows.Forms.DataGridViewTextBoxColumn colDescripcion;

@@ -22,6 +22,7 @@ namespace MercadoEnvio.Modelo
             this.Valor = valor;
             this.Usuario = new Utils.Usuario();
             this.Usuario.Id = idUsuario;
+            this.Publicacion = new Modelo.Publicacion();
             this.Publicacion.Id = idPublicacion;
         }
 

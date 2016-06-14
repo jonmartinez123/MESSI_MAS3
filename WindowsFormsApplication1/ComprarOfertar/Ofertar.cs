@@ -9,12 +9,12 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using MaterialSkin;
 using MaterialSkin.Controls;
+using MercadoEnvio.Utils;
 
 namespace MercadoEnvio.ComprarOfertar
 {
     public partial class Ofertar : MaterialForm
     {
-        //Utils.Usuario usuarioGobal;
         Modelo.Publicacion publicacionGlobal;
         Modelo.Oferta ultimaOferta;
 
@@ -24,9 +24,9 @@ namespace MercadoEnvio.ComprarOfertar
             materialSkinManager.AddFormToManage(this);
             materialSkinManager.Theme = MaterialSkinManager.Themes.LIGHT;
 
-            //usuarioGobal = usuario;
             ultimaOferta = DAO.PublicacionSQL.getUltimoValorOferta(p.Id);
-            lblValorActual.Text = "ARS $ " + ultimaOferta.Id.ToString();
+            lblValorActual.Text = "ARS $ " + ultimaOferta.Valor.ToString();
+            publicacionGlobal = p;
         }
 
         private void btnOfertar_Click(object sender, EventArgs e)
@@ -35,8 +35,8 @@ namespace MercadoEnvio.ComprarOfertar
                 if (string.IsNullOrEmpty(txtValorOfertado.Text))
                     throw new Exception("Debe completar el nombre");
 
-                double valorOferta;
-                if(!double.TryParse(txtValorOfertado.Text.ToString(), out valorOferta))
+                int valorOferta;
+                if(!int.TryParse(txtValorOfertado.Text.ToString(), out valorOferta))
                     throw new Exception("El valor ingresado debe ser numerico");
 
                 if(ultimaOferta.Valor >= valorOferta){
@@ -53,6 +53,11 @@ namespace MercadoEnvio.ComprarOfertar
             {
                 MessageBox.Show(ex.Message, "Atención");
             }
+        }
+
+        private void txtValorOfertado_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar != 8) this.allowMaxLenght(txtValorOfertado, 17, e);
         }
 
     }

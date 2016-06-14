@@ -25,7 +25,7 @@ namespace MercadoEnvio.DAO
 
             while (reader.Read())
             {      
-                oferta.Valor = int.Parse(reader["valorMax"].ToString());
+                oferta.Valor = double.Parse(reader["valorMax"].ToString());
             }
             return oferta;
         }
@@ -33,7 +33,7 @@ namespace MercadoEnvio.DAO
 
         internal static void crearOferta(Modelo.Oferta oferta)
         {
-            SqlConnector.executeProcedure("crear_oferta", oferta.Valor, oferta.Usuario.Id, oferta.Publicacion.Id);        
+            SqlConnector.executeProcedure("crearOferta", oferta.Valor, oferta.Usuario.Id, oferta.Publicacion.Id);        
         }
 
         
