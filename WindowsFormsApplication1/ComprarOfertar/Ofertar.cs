@@ -14,18 +14,17 @@ namespace MercadoEnvio.ComprarOfertar
 {
     public partial class Ofertar : MaterialForm
     {
-        Utils.Usuario usuarioGobal;
+        //Utils.Usuario usuarioGobal;
         Modelo.Publicacion publicacionGlobal;
         Modelo.Oferta ultimaOferta;
 
-        public Ofertar(Modelo.Publicacion p, Utils.Usuario usuario)
-        {
+        public Ofertar(Modelo.Publicacion p){
             InitializeComponent();
             var materialSkinManager = MaterialSkinManager.Instance;
             materialSkinManager.AddFormToManage(this);
             materialSkinManager.Theme = MaterialSkinManager.Themes.LIGHT;
 
-            usuarioGobal = usuario;
+            //usuarioGobal = usuario;
             ultimaOferta = DAO.PublicacionSQL.getUltimoValorOferta(p.Id);
             lblValorActual.Text = "ARS $ " + ultimaOferta.Id.ToString();
         }
@@ -43,7 +42,7 @@ namespace MercadoEnvio.ComprarOfertar
                 if(ultimaOferta.Valor >= valorOferta){
                     throw new Exception("El valor ofertado debe ser mayor al valor minimo");
                 }else{
-                    Modelo.Oferta oferta = new Modelo.Oferta(double.Parse(txtValorOfertado.Text.ToString()), usuarioGobal.Id, publicacionGlobal.Id);
+                    Modelo.Oferta oferta = new Modelo.Oferta(double.Parse(txtValorOfertado.Text.ToString()), Utils.Persistencia.usuario.Id, publicacionGlobal.Id);
                     DAO.PublicacionSQL.crearOferta(oferta);
                     MessageBox.Show("La oferta se creo con exito", "Atención");
                 }

@@ -43,7 +43,7 @@ namespace MercadoEnvio.DAO
         {
 
             //DataTable dtNuevo;
-            return DAO.SqlConnector.retrieveDTToBeConvertedParaComprarYOfertar(dtAAcumular, "filtrarPublicacionPorDescripcion", idRubro, descripcion);
+            return DAO.SqlConnector.retrieveDTToBeConvertedParaComprarYOfertar(dtAAcumular, "filtrarPublicacionPorRubro", idRubro, descripcion);
            // dtAAcumular =DAO.SqlConnector.retrieveDTToBeConvertedParaComprarYOfertar(dtAAcumular, "get_publicacionesSegunRubroID", idRubro);
            // dtAAcumular.Merge(dtNuevo, true);
 
@@ -52,9 +52,9 @@ namespace MercadoEnvio.DAO
              
         }
 
-        internal static Modelo.Publicacion filtrarPubliacionesPorDescripcion(string descripcion)
+        internal static DataTable filtrarPubliacionesPorDescripcion(DataTable dtAAcumular, string descripcion)
         {
-            throw new NotImplementedException();
+            return DAO.SqlConnector.retrieveDTToBeConvertedParaComprarYOfertar(dtAAcumular, "filtrarPublicacionPorDescripcion", descripcion);
         }
     }
 }

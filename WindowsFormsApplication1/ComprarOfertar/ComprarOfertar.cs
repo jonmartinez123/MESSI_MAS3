@@ -27,15 +27,11 @@ namespace MercadoEnvio.ComprarOfertar
             rubrosFiltrados = new List<Rubro>();
         }
 
-        private void ComprarOfertar_Load(object sender, EventArgs e)
-        {
-
-        }
-
         private void btnFiltrar_Click(object sender, EventArgs e)
         {
             List<Modelo.Publicacion> pDeRubro = new List<Modelo.Publicacion>();
             DataTable dtAAcumular = new DataTable();
+            superGrid1.clean();
 
             if (rubrosFiltrados.Count() > 0) {
                 foreach (Rubro r in rubrosFiltrados){
@@ -43,17 +39,15 @@ namespace MercadoEnvio.ComprarOfertar
                 }
             }
             else {
-                pDeRubro.Add(DAO.PublicacionSQL.filtrarPubliacionesPorDescripcion(txtDescripcion.Text.ToString()));
+                dtAAcumular = DAO.PublicacionSQL.filtrarPubliacionesPorDescripcion(dtAAcumular, txtDescripcion.Text.ToString());
             }
 
-            if (!(dtAAcumular == null))
+            if (dtAAcumular.Rows.Count > 0)
             {
                 DAO.SqlConnector.bindNamesToDataTable(dtAAcumular, superGrid1);
                 superGrid1.DataSource = dtAAcumular;
                 superGrid1.SetPagedDataSource(dtAAcumular, bindingNavigator1);
             }
-
-
         }
 
         private void btnLimpiar_Click(object sender, EventArgs e)
@@ -72,5 +66,6 @@ namespace MercadoEnvio.ComprarOfertar
             SeleccionRubros sR = new SeleccionRubros(rubrosFiltrados);
             sR.Show();
         }
+
     }
 }

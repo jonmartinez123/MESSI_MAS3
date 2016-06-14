@@ -15,26 +15,29 @@ BEGIN
 END
 GO
 
-CREATE PROCEDURE MESSI_MAS3.filtrarPublicacionPorRubro(@idRubro INT)
+CREATE PROCEDURE MESSI_MAS3.filtrarPublicacionPorDescripcion(@descripcion NVARCHAR(255))
 AS
 BEGIN
-	SELECT publicacion_id, publicacion_codigo, publicacion_descripcion, publicacion_precio, publicacion_minimoSubasta, publicacion_stock, visibilidad_descripcion
-	FROM MESSI_MAS3.Publicacion, MESSI_MAS3.Visibilidad
-	WHERE (publicacion_idEstado = 2 
+	SELECT publicacion_id, publicacion_codigo, tipoPublicacion_nombre, publicacion_descripcion, publicacion_precio, publicacion_minimoSubasta, publicacion_stock, rubro_descripcionCorta, visibilidad_id, visibilidad_descripcion
+	FROM MESSI_MAS3.Publicacion, MESSI_MAS3.Visibilidad, MESSI_MAS3.tipoPublicacion, MESSI_MAS3.Rubro
+	WHERE (publicacion_idEstado = 2
+		AND publicacion_idRubro = rubro_id 
+		AND publicacion_tipoPublicacionId = tipoPublicacion_id 
 		AND publicacion_idVisibilidad = visibilidad_id
-		AND publicacion_idRubro = @idRubro)
+		AND publicacion_descripcion LIKE CONCAT('%', @descripcion, '%'))
 END
 GO
 
-CREATE PROCEDURE MESSI_MAS3.filtrarPublicacionPorDescripcion(@idRubro INT, @descripcion NVARCHAR(255))
+CREATE PROCEDURE MESSI_MAS3.filtrarPublicacionPorRubro(@idRubro INT, @descripcion NVARCHAR(255))
 AS
 BEGIN
-	SELECT publicacion_id, publicacion_codigo, publicacion_descripcion, publicacion_precio, publicacion_minimoSubasta, publicacion_stock, visibilidad_descripcion
-	FROM MESSI_MAS3.Publicacion, MESSI_MAS3.Visibilidad
-	WHERE publicacion_idEstado = 2 
+	SELECT publicacion_id, publicacion_codigo, tipoPublicacion_nombre, publicacion_descripcion, publicacion_precio, publicacion_minimoSubasta, publicacion_stock, rubro_descripcionCorta, visibilidad_id, visibilidad_descripcion
+	FROM MESSI_MAS3.Publicacion, MESSI_MAS3.Visibilidad, MESSI_MAS3.tipoPublicacion, MESSI_MAS3.Rubro
+	WHERE (publicacion_idEstado = 2
+		AND publicacion_tipoPublicacionId = tipoPublicacion_id 
 		AND publicacion_idVisibilidad = visibilidad_id
 		AND publicacion_idRubro = @idRubro
-		AND publicacion_descripcion LIKE CONCAT('%', @descripcion, '%')
+		AND publicacion_descripcion LIKE CONCAT('%', @descripcion, '%'))
 END
 GO
 

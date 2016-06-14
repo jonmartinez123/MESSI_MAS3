@@ -52,6 +52,7 @@ namespace MercadoEnvio.ComprarOfertar
 
         private void guardarItemsSeleccionados()
         {
+            rSeleccionados.Clear();
             foreach (object itemChecked in clbRubros.CheckedItems)
             {
                 rSeleccionados.Add((Rubro)itemChecked);
