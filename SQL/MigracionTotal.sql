@@ -1814,7 +1814,7 @@ BEGIN
 END
 GO
 
-CREATE PROCEDURE MESSI_MAS3.crearCompra(@idPublicacion INT, @idUsuario INT, @cantidad INT)
+CREATE PROCEDURE MESSI_MAS3.crearCompra(@idPublicacion INT, @idUsuario INT, @cantidad INT, @idFormaDePago INT)
 AS
 BEGIN
 	INSERT INTO MESSI_MAS3.Compra(compras_publicacion_id, compras_fecha, compras_personaComprador_id, compras_cantidad)
@@ -1823,6 +1823,19 @@ BEGIN
 	UPDATE MESSI_MAS3.Publicacion
 	SET publicacion_stock = (SELECT publicacion_stock FROM MESSI_MAS3.Publicacion WHERE publicacion_id = @idPublicacion) - @cantidad
 	WHERE publicacion_id = @idPublicacion
+
+	DECLARE @precioPublicacion INT
+	SELECT @precioPublicacion = publicacion_precio FROM MESSI_MAS3.Publicacion WHERE publicacion_id = @idPublicacion
+
+	DECLARE @numeroFactura INT
+	SELECT @numeroFactura = MAX(factura_numero) FROM MESSI_MAS3.Factura
+
+	INSERT INTO MESSI_MAS3.Factura(factura_fecha, factura_importeTotal, factura_idVendedor, factura_numero, factura_formaDePago, factura_publicacionId)
+	VALUES(GETDATE(), @precioPublicacion * @cantidad, @idUsuario, @numeroFactura + 1 , @idFormaDePago, @idPublicacion)
+
+	INSERT INTO MESSI_MAS3.Factura_detalle(FacturaDetalle_valorItem, facturaDetalle_numero, facturaDetalle_item, facturaDetall_cantidadItems)
+	VALUES(@precioPublicacion, @numeroFactura, (SELECT publicacion_descripcion FROM MESSI_MAS3.Publicacion WHERE publicacion_id = @idPublicacion), @cantidad)
+
 END
 GO
 
@@ -1852,7 +1865,13 @@ BEGIN
 END
 GO
 
-
+CREATE PROCEDURE MESSI_MAS3.get_formasDePago
+AS
+BEGIN
+	SELECT formaDePago_id, formaDePago_nombre
+	FROM MESSI_MAS3.FormaDePago
+END
+GO
 
 
 
