@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 namespace MercadoEnvio.Utils
@@ -38,6 +39,11 @@ namespace MercadoEnvio.Utils
             return false;
         }
 
+        public static Boolean esAlfaNumerico(string strToCheck)
+        {
+            Regex rg = new Regex(@"^[a-zA-Z0-9\s,]*$");
+            return rg.IsMatch(strToCheck);
+        }
 
        /* // try catchea una excepcion proviniente de campos vacios
         public static Boolean validateNotNullForAll(this Form aForm, Control.ControlCollection controls)

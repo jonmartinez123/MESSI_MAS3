@@ -187,8 +187,21 @@
     </Compile>
     <Compile Include="Modelo\Administrador.cs" />
     <Compile Include="Modelo\Calificacion.cs" />
+    <Compile Include="Modelo\Estado.cs" />
     <Compile Include="Modelo\Oferta.cs" />
     <Compile Include="Modelo\Publicacion.cs" />
+    <Compile Include="Publicar\Detalles.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Publicar\Detalles.Designer.cs">
+      <DependentUpon>Detalles.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Publicar\Listado.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Publicar\Listado.Designer.cs">
+      <DependentUpon>Listado.cs</DependentUpon>
+    </Compile>
     <Compile Include="Utils\SupergridPaginado.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -317,6 +330,12 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="Publicar\Detalles.resx">
+      <DependentUpon>Detalles.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Publicar\Listado.resx">
+      <DependentUpon>Listado.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Publicar\Publicar.resx">
       <DependentUpon>Publicar.cs</DependentUpon>
     </EmbeddedResource>

@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using MercadoEnvio.Modelo;
 using MercadoEnvio.Utils;
 
 using MaterialSkin;
@@ -83,7 +84,7 @@ namespace MercadoEnvio.Funcionalidades
                         listadoEstadistico=true;
                     break;
                     case Funcionalidad.Funcionalidades.Publicar:
-                        publicarToolStripMenuItem.Visible = true;
+                        publicacionesToolStripMenuItem.Visible = true;
                         publicar=true;
                     break;
                 }
@@ -94,7 +95,7 @@ namespace MercadoEnvio.Funcionalidades
 
             //Si no posee ninguna funcionalidad de administración borro el menu item
             if (!administracion) menuHome.Items.Remove(administracionToolStripMenuItem);
-            if (!publicar) menuHome.Items.Remove(publicarToolStripMenuItem);
+            if (!publicar) menuHome.Items.Remove(publicacionesToolStripMenuItem);
             if (!historialDeCliente) menuHome.Items.Remove(historialDeClienteToolStripMenuItem);
             if (!consultarFacturas) menuHome.Items.Remove(consultarFacturasToolStripMenuItem);
             if (!comprarOfertar) menuHome.Items.Remove(comprarOfertarToolStripMenuItem);
@@ -128,8 +129,6 @@ namespace MercadoEnvio.Funcionalidades
 
         private void publicarToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Publicar.Publicar pub = new Publicar.Publicar();
-            pub.ShowDialog();
         }
 
         private void comprarOfertarToolStripMenuItem_Click(object sender, EventArgs e)
@@ -168,6 +167,18 @@ namespace MercadoEnvio.Funcionalidades
             this.Hide();
             Login.Login lg = new Login.Login();
             lg.ShowDialog();
+        }
+
+        private void listadoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Publicar.Listado lis = new Publicar.Listado();
+            lis.Show();
+        }
+
+        private void generarPublicacionToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Publicar.Publicar pub = new Publicar.Publicar();
+            pub.ShowDialog();
         }
     }
 }

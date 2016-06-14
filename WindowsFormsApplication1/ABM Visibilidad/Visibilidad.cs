@@ -32,9 +32,9 @@ namespace MercadoEnvio.ABM_Visibilidad
             DAO.VisibilidadSQL.getVisibilidades(ListadoVisibilidades);
         }
 
-        private Utils.Visibilidad getSeleccionado()
+        private Modelo.Visibilidad getSeleccionado()
         {
-            return new Utils.Visibilidad((Convert.ToInt32(Extension.cellValue(this.ListadoVisibilidades, "Id"))),
+            return new Modelo.Visibilidad((Convert.ToInt32(Extension.cellValue(this.ListadoVisibilidades, "Id"))),
                 Convert.ToInt32(Extension.cellValue(this.ListadoVisibilidades, "Codigo")),
            Convert.ToString(Extension.cellValue(this.ListadoVisibilidades, "Descripcion")),
            Convert.ToDouble(Extension.cellValue(this.ListadoVisibilidades, "Precio")),

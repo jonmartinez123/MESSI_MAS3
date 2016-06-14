@@ -12,6 +12,10 @@ namespace MercadoEnvio.DAO
 {
     class PublicacionSQL
     {
+		public static int getPublicaciones(DataGridView dg,int idUsuario)
+        {
+            return SqlConnector.retrieveDT("getPublicaciones", dg, idUsuario);
+        }
         public static Modelo.Oferta getUltimoValorOferta(int idPublicacion)
         {
             SqlCommand cmd = SqlConnector.generarComandoYAbrir("get_ultimaOferta", idPublicacion);
