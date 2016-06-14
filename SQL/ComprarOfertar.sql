@@ -15,6 +15,18 @@ BEGIN
 END
 GO
 
+CREATE PROCEDURE MESSI_MAS3.crearCompra(@idPublicacion INT, @idUsuario INT, @cantidad INT)
+AS
+BEGIN
+	INSERT INTO MESSI_MAS3.Compra(compras_publicacion_id, compras_fecha, compras_personaComprador_id, compras_cantidad)
+	VALUES(@idPublicacion, GETDATE(), @idUsuario, @cantidad)
+
+	UPDATE MESSI_MAS3.Publicacion
+	SET publicacion_stock = (SELECT publicacion_stock FROM MESSI_MAS3.Publicacion WHERE publicacion_id = @idPublicacion) - @cantidad
+	WHERE publicacion_id = @idPublicacion
+END
+GO
+
 CREATE PROCEDURE MESSI_MAS3.filtrarPublicacionPorDescripcion(@descripcion NVARCHAR(255))
 AS
 BEGIN
@@ -40,4 +52,5 @@ BEGIN
 		AND publicacion_descripcion LIKE CONCAT('%', @descripcion, '%'))
 END
 GO
+
 

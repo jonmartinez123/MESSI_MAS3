@@ -74,3 +74,4 @@ C:\Users\Eric\Desktop\MESSI_MAS3\WindowsFormsApplication1\obj\Debug\MercadoEnvio
 C:\Users\Eric\Desktop\MESSI_MAS3\WindowsFormsApplication1\obj\Debug\MercadoEnvio.ComprarOfertar.SeleccionRubros.resources
 C:\Users\Eric\Desktop\MESSI_MAS3\WindowsFormsApplication1\obj\Debug\MercadoEnvio.Publicar.Detalles.resources
 C:\Users\Eric\Desktop\MESSI_MAS3\WindowsFormsApplication1\obj\Debug\MercadoEnvio.Publicar.Listado.resources
+C:\Users\Eric\Desktop\MESSI_MAS3\WindowsFormsApplication1\obj\Debug\MercadoEnvio.ComprarOfertar.Comprar.resources

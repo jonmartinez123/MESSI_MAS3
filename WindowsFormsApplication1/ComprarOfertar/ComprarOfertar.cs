@@ -76,8 +76,24 @@ namespace MercadoEnvio.ComprarOfertar
                 Modelo.Publicacion p = new Modelo.Publicacion();
                 p.Id = Convert.ToInt16(row.Cells["colPublicacionId"].Value);
 
-                Ofertar po = new Ofertar(p);
-                po.ShowDialog();
+                if (row.Cells["colTipoPublicaion"].Value.ToString() == "Subasta"){
+                    Ofertar po = new Ofertar(p);
+                    po.ShowDialog();
+                }else{
+                    int stock = int.Parse(row.Cells["colStock"].Value.ToString());
+                    if (stock > 0){
+                        p.Stock = stock;
+                        p.Descripcion = row.Cells["colDescripcion"].Value.ToString();
+                        p.Precio = double.Parse(row.Cells["colPrecio"].Value.ToString());
+                        Comprar po = new Comprar(p);
+                        po.ShowDialog();
+                    }
+                    else {
+                        MessageBox.Show("La publicacion seleccionda no tiene stock", "Atención");
+                    }
+
+                }
+
             }
             else {
                 MessageBox.Show("Debe seleccionar una publicacion", "Atención");
@@ -103,7 +119,7 @@ namespace MercadoEnvio.ComprarOfertar
                 }
                 else
                 {
-                    btnComprar.Text = "Compar";
+                    btnComprar.Text = "Comprar";
                 }
             }
         }
