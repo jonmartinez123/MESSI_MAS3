@@ -60,5 +60,30 @@ namespace MercadoEnvio.ComprarOfertar
             if (e.KeyChar != 8) this.allowMaxLenght(txtValorOfertado, 17, e);
         }
 
+        private void materialLabel1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txtValorOfertado_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void materialLabel3_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void lblValorActual_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void materialLabel2_Click(object sender, EventArgs e)
+        {
+
+        }
+
     }
 }

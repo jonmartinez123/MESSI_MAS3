@@ -48,6 +48,7 @@
             this.materialLabel2.Size = new System.Drawing.Size(104, 19);
             this.materialLabel2.TabIndex = 115;
             this.materialLabel2.Text = "Valor minimo:";
+            this.materialLabel2.Click += new System.EventHandler(this.materialLabel2_Click);
             // 
             // lblValorActual
             // 
@@ -60,6 +61,7 @@
             this.lblValorActual.Name = "lblValorActual";
             this.lblValorActual.Size = new System.Drawing.Size(0, 19);
             this.lblValorActual.TabIndex = 116;
+            this.lblValorActual.Click += new System.EventHandler(this.lblValorActual_Click);
             // 
             // materialLabel3
             // 
@@ -73,6 +75,7 @@
             this.materialLabel3.Size = new System.Drawing.Size(54, 19);
             this.materialLabel3.TabIndex = 117;
             this.materialLabel3.Text = "Oferta:";
+            this.materialLabel3.Click += new System.EventHandler(this.materialLabel3_Click);
             // 
             // txtValorOfertado
             // 
@@ -89,6 +92,7 @@
             this.txtValorOfertado.Size = new System.Drawing.Size(163, 23);
             this.txtValorOfertado.TabIndex = 118;
             this.txtValorOfertado.UseSystemPasswordChar = false;
+            this.txtValorOfertado.Click += new System.EventHandler(this.txtValorOfertado_Click);
             this.txtValorOfertado.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtValorOfertado_KeyPress);
             // 
             // btnOfertar
@@ -116,6 +120,7 @@
             this.materialLabel1.Size = new System.Drawing.Size(49, 19);
             this.materialLabel1.TabIndex = 122;
             this.materialLabel1.Text = "ARS $";
+            this.materialLabel1.Click += new System.EventHandler(this.materialLabel1_Click);
             // 
             // Ofertar
             // 
