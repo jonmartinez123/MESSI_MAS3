@@ -136,6 +136,9 @@ BEGIN
 
 	INSERT INTO MESSI_MAS3.Cliente(cliente_id, cliente_nombre, cliente_apellido, cliente_mail, cliente_DNI, cliente_fechaNacimiento, cliente_tel, cliente_tipoDocumento_id, cliente_idDomicilio, cliente_fechaCreacion, cliente_calificacionPromedio)
 	VALUES (@idUsuario, @nombre, @apellido, @mail, @dni, @fechaNacimiento, @telefono, @idTipoDocumento, @idDomicilio, GETDATE(), 0)
+
+	INSERT INTO MESSI_MAS3.Rol_Usuario(Rol_id,Usuario_id)
+	VALUES(2, @idUsuario)
 END
 GO
 
@@ -205,6 +208,9 @@ BEGIN
 
 	INSERT INTO MESSI_MAS3.Empresa(empresa_id, empresa_razonSocial, empresa_mail, empresa_cuit, empresa_telefono, empresa_nombreContacto, empresa_rubroId, empresa_fechaCreacion, empresa_idDomicilio)
 	VALUES (@idUsuario, @razonSocial, @mail, @cuit, @telefono, @nombreContacto, @idRubro, GETDATE(), @idDomicilio)
+
+	INSERT INTO MESSI_MAS3.Rol_Usuario(Rol_id,Usuario_id)
+	VALUES(3, @idUsuario)
 END
 GO
 
