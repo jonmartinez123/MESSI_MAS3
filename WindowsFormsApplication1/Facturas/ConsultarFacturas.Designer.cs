@@ -44,6 +44,9 @@
             this.bindingNavigatorMoveLastItem = new System.Windows.Forms.ToolStripButton();
             this.bindingNavigatorSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.fechaHasta = new System.Windows.Forms.DateTimePicker();
+            this.consultar_button = new System.Windows.Forms.Button();
+            this.fechaDesde = new System.Windows.Forms.DateTimePicker();
             this.detallePublitxt = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.importeBajotxt = new System.Windows.Forms.TextBox();
@@ -55,9 +58,9 @@
             this.checkBox3 = new System.Windows.Forms.CheckBox();
             this.checkBox2 = new System.Windows.Forms.CheckBox();
             this.checkBox1 = new System.Windows.Forms.CheckBox();
-            this.consultar_button = new System.Windows.Forms.Button();
-            this.fechaDesde = new System.Windows.Forms.DateTimePicker();
-            this.fechaHasta = new System.Windows.Forms.DateTimePicker();
+            this.dirigidotxt = new System.Windows.Forms.TextBox();
+            this.label6 = new System.Windows.Forms.Label();
+            this.checkBox4 = new System.Windows.Forms.CheckBox();
             this.superGrid1 = new MercadoEnvio.Utils.SuperGrid();
             this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -76,7 +79,7 @@
             this.groupBox1.BackColor = System.Drawing.SystemColors.Window;
             this.groupBox1.Controls.Add(this.bindingNavigator1);
             this.groupBox1.Controls.Add(this.superGrid1);
-            this.groupBox1.Location = new System.Drawing.Point(18, 265);
+            this.groupBox1.Location = new System.Drawing.Point(12, 318);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(673, 281);
             this.groupBox1.TabIndex = 1;
@@ -205,7 +208,9 @@
             this.groupBox2.Controls.Add(this.fechaHasta);
             this.groupBox2.Controls.Add(this.consultar_button);
             this.groupBox2.Controls.Add(this.fechaDesde);
+            this.groupBox2.Controls.Add(this.dirigidotxt);
             this.groupBox2.Controls.Add(this.detallePublitxt);
+            this.groupBox2.Controls.Add(this.label6);
             this.groupBox2.Controls.Add(this.label3);
             this.groupBox2.Controls.Add(this.importeBajotxt);
             this.groupBox2.Controls.Add(this.label2);
@@ -213,15 +218,45 @@
             this.groupBox2.Controls.Add(this.label5);
             this.groupBox2.Controls.Add(this.label4);
             this.groupBox2.Controls.Add(this.label1);
+            this.groupBox2.Controls.Add(this.checkBox4);
             this.groupBox2.Controls.Add(this.checkBox3);
             this.groupBox2.Controls.Add(this.checkBox2);
             this.groupBox2.Controls.Add(this.checkBox1);
             this.groupBox2.Location = new System.Drawing.Point(18, 86);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(691, 147);
+            this.groupBox2.Size = new System.Drawing.Size(691, 181);
             this.groupBox2.TabIndex = 2;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Filtros";
+            // 
+            // fechaHasta
+            // 
+            this.fechaHasta.Enabled = false;
+            this.fechaHasta.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.fechaHasta.Location = new System.Drawing.Point(411, 19);
+            this.fechaHasta.Name = "fechaHasta";
+            this.fechaHasta.Size = new System.Drawing.Size(85, 20);
+            this.fechaHasta.TabIndex = 5;
+            // 
+            // consultar_button
+            // 
+            this.consultar_button.Location = new System.Drawing.Point(396, 132);
+            this.consultar_button.Name = "consultar_button";
+            this.consultar_button.Size = new System.Drawing.Size(100, 27);
+            this.consultar_button.TabIndex = 3;
+            this.consultar_button.Text = "Consultar facturas";
+            this.consultar_button.UseVisualStyleBackColor = true;
+            this.consultar_button.Click += new System.EventHandler(this.consultar_button_Click);
+            // 
+            // fechaDesde
+            // 
+            this.fechaDesde.Enabled = false;
+            this.fechaDesde.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.fechaDesde.Location = new System.Drawing.Point(234, 19);
+            this.fechaDesde.Name = "fechaDesde";
+            this.fechaDesde.Size = new System.Drawing.Size(85, 20);
+            this.fechaDesde.TabIndex = 4;
+            this.fechaDesde.ValueChanged += new System.EventHandler(this.dateTimePicker1_ValueChanged);
             // 
             // detallePublitxt
             // 
@@ -328,34 +363,33 @@
             this.checkBox1.UseVisualStyleBackColor = true;
             this.checkBox1.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
             // 
-            // consultar_button
+            // dirigidotxt
             // 
-            this.consultar_button.Location = new System.Drawing.Point(387, 100);
-            this.consultar_button.Name = "consultar_button";
-            this.consultar_button.Size = new System.Drawing.Size(100, 27);
-            this.consultar_button.TabIndex = 3;
-            this.consultar_button.Text = "Consultar facturas";
-            this.consultar_button.UseVisualStyleBackColor = true;
-            this.consultar_button.Click += new System.EventHandler(this.consultar_button_Click);
+            this.dirigidotxt.Enabled = false;
+            this.dirigidotxt.Location = new System.Drawing.Point(234, 139);
+            this.dirigidotxt.Name = "dirigidotxt";
+            this.dirigidotxt.Size = new System.Drawing.Size(100, 20);
+            this.dirigidotxt.TabIndex = 2;
             // 
-            // fechaDesde
+            // label6
             // 
-            this.fechaDesde.Enabled = false;
-            this.fechaDesde.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.fechaDesde.Location = new System.Drawing.Point(234, 19);
-            this.fechaDesde.Name = "fechaDesde";
-            this.fechaDesde.Size = new System.Drawing.Size(85, 20);
-            this.fechaDesde.TabIndex = 4;
-            this.fechaDesde.ValueChanged += new System.EventHandler(this.dateTimePicker1_ValueChanged);
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(174, 142);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(59, 13);
+            this.label6.TabIndex = 1;
+            this.label6.Text = "DNI/CUIT:";
             // 
-            // fechaHasta
+            // checkBox4
             // 
-            this.fechaHasta.Enabled = false;
-            this.fechaHasta.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.fechaHasta.Location = new System.Drawing.Point(411, 19);
-            this.fechaHasta.Name = "fechaHasta";
-            this.fechaHasta.Size = new System.Drawing.Size(85, 20);
-            this.fechaHasta.TabIndex = 5;
+            this.checkBox4.AutoSize = true;
+            this.checkBox4.Location = new System.Drawing.Point(20, 138);
+            this.checkBox4.Name = "checkBox4";
+            this.checkBox4.Size = new System.Drawing.Size(121, 17);
+            this.checkBox4.TabIndex = 0;
+            this.checkBox4.Text = "A quien esta dirigida";
+            this.checkBox4.UseVisualStyleBackColor = true;
+            this.checkBox4.CheckedChanged += new System.EventHandler(this.checkBox4_CheckedChanged);
             // 
             // superGrid1
             // 
@@ -466,6 +500,9 @@
         private System.Windows.Forms.Button consultar_button;
         private System.Windows.Forms.DateTimePicker fechaDesde;
         private System.Windows.Forms.DateTimePicker fechaHasta;
+        private System.Windows.Forms.TextBox dirigidotxt;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.CheckBox checkBox4;
 
     }
 }

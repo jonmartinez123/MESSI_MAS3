@@ -736,7 +736,7 @@ DECLARE @califOrig INT, @califConver INT
 SET @califOrig = @calificacion
 SET @califConver = @califOrig/2
 
---SELECT @calificacionConvertida = @calificacion /2 
+--SELECT @calificacFionConvertida = @calificacion /2 
 IF( @califConver = 0 )
 	BEGIN
 		SET @califConver = 1

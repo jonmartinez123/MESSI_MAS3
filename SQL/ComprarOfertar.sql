@@ -20,9 +20,9 @@ AS
 BEGIN
 	SELECT publicacion_id, publicacion_codigo, publicacion_descripcion, publicacion_precio, publicacion_minimoSubasta, publicacion_stock, visibilidad_descripcion
 	FROM MESSI_MAS3.Publicacion, MESSI_MAS3.Visibilidad
-	WHERE publicacion_idEstado = 2 
+	WHERE (publicacion_idEstado = 2 
 		AND publicacion_idVisibilidad = visibilidad_id
-		AND publicacion_idRubro = @idRubro
+		AND publicacion_idRubro = @idRubro)
 END
 GO
 

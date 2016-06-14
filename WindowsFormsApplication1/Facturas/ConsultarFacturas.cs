@@ -57,78 +57,186 @@ namespace MercadoEnvio.Facturas
 
             String dateDesde;
             String dateHasta;
-            if (fechaDesde.Enabled & !importeBajotxt.Enabled & !detallePublitxt.Enabled) {
+            if (fechaDesde.Enabled & !importeBajotxt.Enabled & !detallePublitxt.Enabled & !dirigidotxt.Enabled) {
                 dateDesde = Convert.ToString(fechaDesde.Value.Year + "-" + fechaDesde.Value.Month + "-" + fechaDesde.Value.Day);
                 dateHasta = Convert.ToString(fechaHasta.Value.Year + "-" + fechaHasta.Value.Month + "-" + fechaHasta.Value.Day);
                
                 DataTable dt = DAO.ConsultarFacturasSQL.getFacturasEntreFechas(superGrid1, dateDesde, dateHasta);
-               superGrid1.SetPagedDataSource(dt, bindingNavigator1);
+                if (dt.Rows.Count > 0) { superGrid1.SetPagedDataSource(dt, bindingNavigator1); }
 
             }
 
-            if (!fechaDesde.Enabled & importeBajotxt.Enabled & !detallePublitxt.Enabled) {
+            if (!fechaDesde.Enabled & importeBajotxt.Enabled & !detallePublitxt.Enabled & !dirigidotxt.Enabled)
+            {
                 if (!String.IsNullOrEmpty(importeBajotxt.Text) & !String.IsNullOrEmpty(importeAltotxt.Text))
                 {
                     DataTable dt = DAO.ConsultarFacturasSQL.getFacturasEntreImporte(superGrid1, Convert.ToInt32(importeBajotxt.Text),  Convert.ToInt32(importeAltotxt.Text));
-                    superGrid1.SetPagedDataSource(dt, bindingNavigator1);
+
+                    if (dt.Rows.Count > 0) { superGrid1.SetPagedDataSource(dt, bindingNavigator1); }
+                    
 
                     
                 }
             }
             //hasta aca
-            if (!fechaDesde.Enabled & !importeBajotxt.Enabled & detallePublitxt.Enabled) {
+            if (!fechaDesde.Enabled & !importeBajotxt.Enabled & detallePublitxt.Enabled & !dirigidotxt.Enabled)
+            {
                 if (!String.IsNullOrEmpty(detallePublitxt.Text))
                 {
                     DataTable dt = DAO.ConsultarFacturasSQL.getFacturasConPalabraEnDetalle(superGrid1, detallePublitxt.Text);
-                    superGrid1.SetPagedDataSource(dt, bindingNavigator1);
+                    if (dt.Rows.Count > 0) { superGrid1.SetPagedDataSource(dt, bindingNavigator1); }
                    
                 }
             
             }
 
-            if (fechaDesde.Enabled & importeBajotxt.Enabled & !detallePublitxt.Enabled) {
+            if (!fechaDesde.Enabled & !importeBajotxt.Enabled & !detallePublitxt.Enabled & dirigidotxt.Enabled)
+            {
+                if (!String.IsNullOrEmpty(dirigidotxt.Text))
+                {
+                    DataTable dt = DAO.ConsultarFacturasSQL.getFacturasHacia(superGrid1, dirigidotxt.Text);
+                    if (dt.Rows.Count > 0) { superGrid1.SetPagedDataSource(dt, bindingNavigator1); }
+
+                }
+
+            }
+
+            if (fechaDesde.Enabled & importeBajotxt.Enabled & !detallePublitxt.Enabled & !dirigidotxt.Enabled)
+            {
                 dateDesde = Convert.ToString(fechaDesde.Value.Year + "-" + fechaDesde.Value.Month + "-" + fechaDesde.Value.Day);
                 dateHasta = Convert.ToString(fechaHasta.Value.Year + "-" + fechaHasta.Value.Month + "-" + fechaHasta.Value.Day);
 
                 if (!String.IsNullOrEmpty(importeBajotxt.Text) & !String.IsNullOrEmpty(importeAltotxt.Text))
                 {
                     DataTable dt = DAO.ConsultarFacturasSQL.getFacturasEntreFechaEImporte(superGrid1, dateDesde, dateHasta, Convert.ToDouble(importeBajotxt.Text),Convert.ToDouble(importeAltotxt.Text));
-                    superGrid1.SetPagedDataSource(dt, bindingNavigator1);
+                    if (dt.Rows.Count > 0) { superGrid1.SetPagedDataSource(dt, bindingNavigator1); }
+
                 }
             }
 
 
 
-            if (fechaDesde.Enabled & !importeBajotxt.Enabled & detallePublitxt.Enabled) {
+            if (fechaDesde.Enabled & !importeBajotxt.Enabled & detallePublitxt.Enabled & !dirigidotxt.Enabled)
+            {
                 dateDesde = Convert.ToString(fechaDesde.Value.Year + "-" + fechaDesde.Value.Month + "-" + fechaDesde.Value.Day);
                 dateHasta = Convert.ToString(fechaHasta.Value.Year + "-" + fechaHasta.Value.Month + "-" + fechaHasta.Value.Day);
                 if (!String.IsNullOrEmpty(detallePublitxt.Text))
                 {
                     DataTable dt = DAO.ConsultarFacturasSQL.getFacturasEntreFechasYDetalle(superGrid1, dateDesde, dateHasta, detallePublitxt.Text);
-                    superGrid1.SetPagedDataSource(dt, bindingNavigator1);
+                    if (dt.Rows.Count > 0) { superGrid1.SetPagedDataSource(dt, bindingNavigator1); }
                 }
             }
 
-            if (!fechaDesde.Enabled & importeBajotxt.Enabled & detallePublitxt.Enabled) {
+            if (fechaDesde.Enabled & !importeBajotxt.Enabled & !detallePublitxt.Enabled & dirigidotxt.Enabled)
+            {
+                dateDesde = Convert.ToString(fechaDesde.Value.Year + "-" + fechaDesde.Value.Month + "-" + fechaDesde.Value.Day);
+                dateHasta = Convert.ToString(fechaHasta.Value.Year + "-" + fechaHasta.Value.Month + "-" + fechaHasta.Value.Day);
+                if (!String.IsNullOrEmpty(dirigidotxt.Text))
+                {
+                    DataTable dt = DAO.ConsultarFacturasSQL.getFacturasEntreFechasYDirigido(superGrid1, dateDesde, dateHasta, dirigidotxt.Text);
+                    if (dt.Rows.Count > 0) { superGrid1.SetPagedDataSource(dt, bindingNavigator1); }
+                }
+            }
+
+            if (!fechaDesde.Enabled & importeBajotxt.Enabled & detallePublitxt.Enabled & !dirigidotxt.Enabled)
+            {
                 if (!String.IsNullOrEmpty(detallePublitxt.Text) & !String.IsNullOrEmpty(importeBajotxt.Text) & !String.IsNullOrEmpty(importeAltotxt.Text)) {
                     DataTable dt = DAO.ConsultarFacturasSQL.getFacturasEntreImporteYDetalle(superGrid1, Convert.ToDouble(importeBajotxt.Text),Convert.ToDouble(importeAltotxt.Text), detallePublitxt.Text);
-                    superGrid1.SetPagedDataSource(dt, bindingNavigator1);
+                    if (dt.Rows.Count > 0) { superGrid1.SetPagedDataSource(dt, bindingNavigator1); }
                 
                 
                 }
              }
 
+            if (!fechaDesde.Enabled & importeBajotxt.Enabled & !detallePublitxt.Enabled & dirigidotxt.Enabled)
+            {
+                if (!String.IsNullOrEmpty(dirigidotxt.Text) & !String.IsNullOrEmpty(importeBajotxt.Text) & !String.IsNullOrEmpty(importeAltotxt.Text))
+                {
+                    DataTable dt = DAO.ConsultarFacturasSQL.getFacturasEntreImporteYDirigido(superGrid1, Convert.ToDouble(importeBajotxt.Text), Convert.ToDouble(importeAltotxt.Text), dirigidotxt.Text);
+                    if (dt.Rows.Count > 0) { superGrid1.SetPagedDataSource(dt, bindingNavigator1); }
 
 
-            if (fechaDesde.Enabled & importeBajotxt.Enabled & detallePublitxt.Enabled) {
+                }
+            }
+
+            if (!fechaDesde.Enabled & !importeBajotxt.Enabled & detallePublitxt.Enabled & dirigidotxt.Enabled)
+            {
+                if (!String.IsNullOrEmpty(detallePublitxt.Text) & !String.IsNullOrEmpty(dirigidotxt.Text))
+                {
+                    DataTable dt = DAO.ConsultarFacturasSQL.getFacturasEntreDetalleyDirigido(superGrid1, dirigidotxt.Text , detallePublitxt.Text);
+                    if (dt.Rows.Count > 0) { superGrid1.SetPagedDataSource(dt, bindingNavigator1); }
+
+
+                }
+            }
+
+
+
+            if (fechaDesde.Enabled & importeBajotxt.Enabled & detallePublitxt.Enabled & !dirigidotxt.Enabled)
+            {
                 dateDesde = Convert.ToString(fechaDesde.Value.Year + "-" + fechaDesde.Value.Month + "-" + fechaDesde.Value.Day);
                 dateHasta = Convert.ToString(fechaHasta.Value.Year + "-" + fechaHasta.Value.Month + "-" + fechaHasta.Value.Day);
 
                 if (!String.IsNullOrEmpty(importeBajotxt.Text) & !String.IsNullOrEmpty(importeAltotxt.Text) & !String.IsNullOrEmpty(detallePublitxt.Text))
                 {
                     DataTable dt = DAO.ConsultarFacturasSQL.getFacturasConTodoLosFiltro(superGrid1, dateDesde, dateHasta, Convert.ToDouble(importeBajotxt.Text), Convert.ToDouble(importeAltotxt.Text), detallePublitxt.Text);
-                    superGrid1.SetPagedDataSource(dt, bindingNavigator1);
-                
+                    if (dt.Rows.Count > 0) { superGrid1.SetPagedDataSource(dt, bindingNavigator1); }
+
+                }
+            }
+
+            if (fechaDesde.Enabled & importeBajotxt.Enabled & !detallePublitxt.Enabled & dirigidotxt.Enabled)
+            {
+                dateDesde = Convert.ToString(fechaDesde.Value.Year + "-" + fechaDesde.Value.Month + "-" + fechaDesde.Value.Day);
+                dateHasta = Convert.ToString(fechaHasta.Value.Year + "-" + fechaHasta.Value.Month + "-" + fechaHasta.Value.Day);
+
+                if (!String.IsNullOrEmpty(importeBajotxt.Text) & !String.IsNullOrEmpty(importeAltotxt.Text) & !String.IsNullOrEmpty(dirigidotxt.Text))
+                {
+                    DataTable dt = DAO.ConsultarFacturasSQL.getFacturasConFechaImporteYDirigido(superGrid1, dateDesde, dateHasta, Convert.ToDouble(importeBajotxt.Text), Convert.ToDouble(importeAltotxt.Text), dirigidotxt.Text);
+                    if (dt.Rows.Count > 0) { superGrid1.SetPagedDataSource(dt, bindingNavigator1); }
+
+                }
+            }
+
+
+
+            if (fechaDesde.Enabled & !importeBajotxt.Enabled & detallePublitxt.Enabled & dirigidotxt.Enabled)
+            {
+                dateDesde = Convert.ToString(fechaDesde.Value.Year + "-" + fechaDesde.Value.Month + "-" + fechaDesde.Value.Day);
+                dateHasta = Convert.ToString(fechaHasta.Value.Year + "-" + fechaHasta.Value.Month + "-" + fechaHasta.Value.Day);
+
+                if (!String.IsNullOrEmpty(detallePublitxt.Text) & !String.IsNullOrEmpty(dirigidotxt.Text))
+                {
+                    DataTable dt = DAO.ConsultarFacturasSQL.getFacturasConFechaDetalleyDirigido(superGrid1, dateDesde, dateHasta, detallePublitxt.Text, dirigidotxt.Text);
+                    if (dt.Rows.Count > 0) { superGrid1.SetPagedDataSource(dt, bindingNavigator1); }
+
+                }
+            }
+
+            if (!fechaDesde.Enabled & importeBajotxt.Enabled & detallePublitxt.Enabled & dirigidotxt.Enabled)
+            {
+
+                if (!String.IsNullOrEmpty(importeBajotxt.Text) & !String.IsNullOrEmpty(importeAltotxt.Text) & !String.IsNullOrEmpty(detallePublitxt.Text) & !String.IsNullOrEmpty(dirigidotxt.Text))
+                {
+                    DataTable dt = DAO.ConsultarFacturasSQL.getFacturasConDetalleImporteYDirigido(superGrid1, Convert.ToDouble(importeBajotxt.Text), Convert.ToDouble(importeAltotxt.Text), detallePublitxt.Text, dirigidotxt.Text);
+                    if (dt.Rows.Count > 0) { superGrid1.SetPagedDataSource(dt, bindingNavigator1); }
+
+                }
+            }
+
+
+
+
+            if (fechaDesde.Enabled & importeBajotxt.Enabled & detallePublitxt.Enabled & dirigidotxt.Enabled)
+            {
+                dateDesde = Convert.ToString(fechaDesde.Value.Year + "-" + fechaDesde.Value.Month + "-" + fechaDesde.Value.Day);
+                dateHasta = Convert.ToString(fechaHasta.Value.Year + "-" + fechaHasta.Value.Month + "-" + fechaHasta.Value.Day);
+
+                if (!String.IsNullOrEmpty(importeBajotxt.Text) & !String.IsNullOrEmpty(importeAltotxt.Text) & !String.IsNullOrEmpty(detallePublitxt.Text) & !String.IsNullOrEmpty(dirigidotxt.Text))
+                {
+                    DataTable dt = DAO.ConsultarFacturasSQL.getFacturasConTodoLosFiltrosMasDirigido(superGrid1, dateDesde, dateHasta, Convert.ToDouble(importeBajotxt.Text), Convert.ToDouble(importeAltotxt.Text), detallePublitxt.Text, dirigidotxt.Text);
+                    if (dt.Rows.Count > 0) { superGrid1.SetPagedDataSource(dt, bindingNavigator1); }
+
                 }
             }
 
@@ -180,6 +288,12 @@ namespace MercadoEnvio.Facturas
         private void dateTimePicker1_ValueChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void checkBox4_CheckedChanged(object sender, EventArgs e)
+        {
+            if (checkBox4.Checked) { dirigidotxt.Enabled = true;}
+            if (!checkBox4.Checked) { dirigidotxt.Enabled = false; }
         }
 
        
