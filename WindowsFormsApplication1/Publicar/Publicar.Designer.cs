@@ -57,18 +57,26 @@
             this.txtSubastaMinima = new MaterialSkin.Controls.MaterialSingleLineTextField();
             this.label4 = new System.Windows.Forms.Label();
             this.gbSubasta = new System.Windows.Forms.GroupBox();
+            this.btnGuardar = new MaterialSkin.Controls.MaterialRaisedButton();
+            this.cbEnvio = new MaterialSkin.Controls.MaterialCheckBox();
+            this.txtPrecio = new MaterialSkin.Controls.MaterialSingleLineTextField();
+            this.label5 = new System.Windows.Forms.Label();
+            this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.label6 = new System.Windows.Forms.Label();
+            this.txtStock = new MaterialSkin.Controls.MaterialSingleLineTextField();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.listadoRubro)).BeginInit();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ListadoVisibilidades)).BeginInit();
             this.gbSubasta.SuspendLayout();
+            this.groupBox4.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnGenerar
             // 
             this.btnGenerar.Depth = 0;
-            this.btnGenerar.Location = new System.Drawing.Point(34, 568);
+            this.btnGenerar.Location = new System.Drawing.Point(150, 622);
             this.btnGenerar.MouseState = MaterialSkin.MouseState.HOVER;
             this.btnGenerar.Name = "btnGenerar";
             this.btnGenerar.Primary = true;
@@ -76,11 +84,12 @@
             this.btnGenerar.TabIndex = 0;
             this.btnGenerar.Text = "Generar";
             this.btnGenerar.UseVisualStyleBackColor = true;
+            this.btnGenerar.Click += new System.EventHandler(this.btnGenerar_Click);
             // 
             // btnVolver
             // 
             this.btnVolver.Depth = 0;
-            this.btnVolver.Location = new System.Drawing.Point(627, 568);
+            this.btnVolver.Location = new System.Drawing.Point(664, 622);
             this.btnVolver.MouseState = MaterialSkin.MouseState.HOVER;
             this.btnVolver.Name = "btnVolver";
             this.btnVolver.Primary = true;
@@ -95,7 +104,7 @@
             this.rbSubasta.AutoSize = true;
             this.rbSubasta.Depth = 0;
             this.rbSubasta.Font = new System.Drawing.Font("Roboto", 10F);
-            this.rbSubasta.Location = new System.Drawing.Point(21, 16);
+            this.rbSubasta.Location = new System.Drawing.Point(21, 37);
             this.rbSubasta.Margin = new System.Windows.Forms.Padding(0);
             this.rbSubasta.MouseLocation = new System.Drawing.Point(-1, -1);
             this.rbSubasta.MouseState = MaterialSkin.MouseState.HOVER;
@@ -112,9 +121,9 @@
             // 
             this.groupBox1.Controls.Add(this.rbCompra);
             this.groupBox1.Controls.Add(this.rbSubasta);
-            this.groupBox1.Location = new System.Drawing.Point(478, 278);
+            this.groupBox1.Location = new System.Drawing.Point(592, 226);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(233, 78);
+            this.groupBox1.Size = new System.Drawing.Size(220, 135);
             this.groupBox1.TabIndex = 6;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Tipo";
@@ -124,7 +133,7 @@
             this.rbCompra.AutoSize = true;
             this.rbCompra.Depth = 0;
             this.rbCompra.Font = new System.Drawing.Font("Roboto", 10F);
-            this.rbCompra.Location = new System.Drawing.Point(21, 44);
+            this.rbCompra.Location = new System.Drawing.Point(21, 77);
             this.rbCompra.Margin = new System.Windows.Forms.Padding(0);
             this.rbCompra.MouseLocation = new System.Drawing.Point(-1, -1);
             this.rbCompra.MouseState = MaterialSkin.MouseState.HOVER;
@@ -153,7 +162,7 @@
             this.listadoRubro.Location = new System.Drawing.Point(7, 46);
             this.listadoRubro.Name = "listadoRubro";
             this.listadoRubro.ReadOnly = true;
-            this.listadoRubro.Size = new System.Drawing.Size(398, 86);
+            this.listadoRubro.Size = new System.Drawing.Size(506, 86);
             this.listadoRubro.TabIndex = 7;
             // 
             // Id
@@ -186,7 +195,7 @@
             // btnAgregarRubro
             // 
             this.btnAgregarRubro.Depth = 0;
-            this.btnAgregarRubro.Location = new System.Drawing.Point(316, 19);
+            this.btnAgregarRubro.Location = new System.Drawing.Point(433, 17);
             this.btnAgregarRubro.MouseState = MaterialSkin.MouseState.HOVER;
             this.btnAgregarRubro.Name = "btnAgregarRubro";
             this.btnAgregarRubro.Primary = true;
@@ -200,9 +209,9 @@
             this.groupBox2.Controls.Add(this.cmbRubro);
             this.groupBox2.Controls.Add(this.btnAgregarRubro);
             this.groupBox2.Controls.Add(this.listadoRubro);
-            this.groupBox2.Location = new System.Drawing.Point(60, 391);
+            this.groupBox2.Location = new System.Drawing.Point(67, 367);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(411, 137);
+            this.groupBox2.Size = new System.Drawing.Size(519, 137);
             this.groupBox2.TabIndex = 10;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Rubro";
@@ -210,9 +219,9 @@
             // groupBox3
             // 
             this.groupBox3.Controls.Add(this.ListadoVisibilidades);
-            this.groupBox3.Location = new System.Drawing.Point(60, 250);
+            this.groupBox3.Location = new System.Drawing.Point(67, 226);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(411, 135);
+            this.groupBox3.Size = new System.Drawing.Size(519, 135);
             this.groupBox3.TabIndex = 11;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Visibilidad";
@@ -236,7 +245,7 @@
             this.ListadoVisibilidades.Location = new System.Drawing.Point(7, 19);
             this.ListadoVisibilidades.Name = "ListadoVisibilidades";
             this.ListadoVisibilidades.ReadOnly = true;
-            this.ListadoVisibilidades.Size = new System.Drawing.Size(398, 98);
+            this.ListadoVisibilidades.Size = new System.Drawing.Size(506, 110);
             this.ListadoVisibilidades.TabIndex = 1;
             // 
             // dataGridViewTextBoxColumn1
@@ -343,7 +352,7 @@
             this.txtSubastaMinima.SelectedText = "";
             this.txtSubastaMinima.SelectionLength = 0;
             this.txtSubastaMinima.SelectionStart = 0;
-            this.txtSubastaMinima.Size = new System.Drawing.Size(127, 23);
+            this.txtSubastaMinima.Size = new System.Drawing.Size(123, 23);
             this.txtSubastaMinima.TabIndex = 20;
             this.txtSubastaMinima.UseSystemPasswordChar = false;
             // 
@@ -360,19 +369,113 @@
             // 
             this.gbSubasta.Controls.Add(this.txtSubastaMinima);
             this.gbSubasta.Controls.Add(this.label4);
-            this.gbSubasta.Location = new System.Drawing.Point(481, 380);
+            this.gbSubasta.Location = new System.Drawing.Point(592, 367);
             this.gbSubasta.Name = "gbSubasta";
-            this.gbSubasta.Size = new System.Drawing.Size(230, 66);
+            this.gbSubasta.Size = new System.Drawing.Size(220, 66);
             this.gbSubasta.TabIndex = 22;
             this.gbSubasta.TabStop = false;
             this.gbSubasta.Text = "Subasta";
+            // 
+            // btnGuardar
+            // 
+            this.btnGuardar.Depth = 0;
+            this.btnGuardar.Location = new System.Drawing.Point(55, 622);
+            this.btnGuardar.MouseState = MaterialSkin.MouseState.HOVER;
+            this.btnGuardar.Name = "btnGuardar";
+            this.btnGuardar.Primary = true;
+            this.btnGuardar.Size = new System.Drawing.Size(75, 23);
+            this.btnGuardar.TabIndex = 23;
+            this.btnGuardar.Text = "Guardar";
+            this.btnGuardar.UseVisualStyleBackColor = true;
+            this.btnGuardar.Click += new System.EventHandler(this.btnGuardar_Click);
+            // 
+            // cbEnvio
+            // 
+            this.cbEnvio.AutoSize = true;
+            this.cbEnvio.Depth = 0;
+            this.cbEnvio.Font = new System.Drawing.Font("Roboto", 10F);
+            this.cbEnvio.Location = new System.Drawing.Point(592, 447);
+            this.cbEnvio.Margin = new System.Windows.Forms.Padding(0);
+            this.cbEnvio.MouseLocation = new System.Drawing.Point(-1, -1);
+            this.cbEnvio.MouseState = MaterialSkin.MouseState.HOVER;
+            this.cbEnvio.Name = "cbEnvio";
+            this.cbEnvio.Ripple = true;
+            this.cbEnvio.Size = new System.Drawing.Size(63, 30);
+            this.cbEnvio.TabIndex = 24;
+            this.cbEnvio.Text = "Envio";
+            this.cbEnvio.UseVisualStyleBackColor = true;
+            // 
+            // txtPrecio
+            // 
+            this.txtPrecio.Depth = 0;
+            this.txtPrecio.Hint = "Ingrese Precio";
+            this.txtPrecio.Location = new System.Drawing.Point(58, 19);
+            this.txtPrecio.MouseState = MaterialSkin.MouseState.HOVER;
+            this.txtPrecio.Name = "txtPrecio";
+            this.txtPrecio.PasswordChar = '\0';
+            this.txtPrecio.SelectedText = "";
+            this.txtPrecio.SelectionLength = 0;
+            this.txtPrecio.SelectionStart = 0;
+            this.txtPrecio.Size = new System.Drawing.Size(101, 23);
+            this.txtPrecio.TabIndex = 25;
+            this.txtPrecio.UseSystemPasswordChar = false;
+            this.txtPrecio.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtPrecio_KeyPress);
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(6, 19);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(37, 13);
+            this.label5.TabIndex = 26;
+            this.label5.Text = "Precio";
+            // 
+            // groupBox4
+            // 
+            this.groupBox4.Controls.Add(this.txtStock);
+            this.groupBox4.Controls.Add(this.label6);
+            this.groupBox4.Controls.Add(this.txtPrecio);
+            this.groupBox4.Controls.Add(this.label5);
+            this.groupBox4.Location = new System.Drawing.Point(67, 510);
+            this.groupBox4.Name = "groupBox4";
+            this.groupBox4.Size = new System.Drawing.Size(211, 87);
+            this.groupBox4.TabIndex = 27;
+            this.groupBox4.TabStop = false;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(6, 59);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(35, 13);
+            this.label6.TabIndex = 27;
+            this.label6.Text = "Stock";
+            // 
+            // txtStock
+            // 
+            this.txtStock.Depth = 0;
+            this.txtStock.Hint = "Ingrese Stock";
+            this.txtStock.Location = new System.Drawing.Point(57, 58);
+            this.txtStock.MouseState = MaterialSkin.MouseState.HOVER;
+            this.txtStock.Name = "txtStock";
+            this.txtStock.PasswordChar = '\0';
+            this.txtStock.SelectedText = "";
+            this.txtStock.SelectionLength = 0;
+            this.txtStock.SelectionStart = 0;
+            this.txtStock.Size = new System.Drawing.Size(101, 23);
+            this.txtStock.TabIndex = 28;
+            this.txtStock.UseSystemPasswordChar = false;
+            this.txtStock.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtStock_KeyPress);
             // 
             // Publicar
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.ClientSize = new System.Drawing.Size(723, 603);
+            this.ClientSize = new System.Drawing.Size(824, 657);
+            this.Controls.Add(this.groupBox4);
+            this.Controls.Add(this.cbEnvio);
+            this.Controls.Add(this.btnGuardar);
             this.Controls.Add(this.gbSubasta);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.dtFin);
@@ -398,6 +501,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.ListadoVisibilidades)).EndInit();
             this.gbSubasta.ResumeLayout(false);
             this.gbSubasta.PerformLayout();
+            this.groupBox4.ResumeLayout(false);
+            this.groupBox4.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -434,5 +539,12 @@
         private MaterialSkin.Controls.MaterialSingleLineTextField txtSubastaMinima;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.GroupBox gbSubasta;
+        private MaterialSkin.Controls.MaterialRaisedButton btnGuardar;
+        private MaterialSkin.Controls.MaterialCheckBox cbEnvio;
+        private MaterialSkin.Controls.MaterialSingleLineTextField txtPrecio;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.GroupBox groupBox4;
+        private MaterialSkin.Controls.MaterialSingleLineTextField txtStock;
+        private System.Windows.Forms.Label label6;
     }
 }
