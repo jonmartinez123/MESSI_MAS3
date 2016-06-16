@@ -79,5 +79,11 @@ namespace MercadoEnvio.Publicar
             this.allowNumericOnly(e);
             this.allowMaxLenght(txtPrecio, 18, e);
         }
+
+        private void txtDescripcion_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            this.allowAlphanumericOnly(e);
+            this.allowMaxLenght(txtDescripcion, 255, e);
+        }
     }
 }

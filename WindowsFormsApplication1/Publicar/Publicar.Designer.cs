@@ -48,7 +48,7 @@
             this.Precio = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Porcentaje = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.CostoEnvio = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.materialSingleLineTextField1 = new MaterialSkin.Controls.MaterialSingleLineTextField();
+            this.txtDescripcion = new MaterialSkin.Controls.MaterialSingleLineTextField();
             this.label1 = new System.Windows.Forms.Label();
             this.dtInicio = new System.Windows.Forms.DateTimePicker();
             this.label2 = new System.Windows.Forms.Label();
@@ -62,8 +62,8 @@
             this.txtPrecio = new MaterialSkin.Controls.MaterialSingleLineTextField();
             this.label5 = new System.Windows.Forms.Label();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
-            this.label6 = new System.Windows.Forms.Label();
             this.txtStock = new MaterialSkin.Controls.MaterialSingleLineTextField();
+            this.label6 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.listadoRubro)).BeginInit();
             this.groupBox2.SuspendLayout();
@@ -89,7 +89,7 @@
             // btnVolver
             // 
             this.btnVolver.Depth = 0;
-            this.btnVolver.Location = new System.Drawing.Point(664, 622);
+            this.btnVolver.Location = new System.Drawing.Point(747, 622);
             this.btnVolver.MouseState = MaterialSkin.MouseState.HOVER;
             this.btnVolver.Name = "btnVolver";
             this.btnVolver.Primary = true;
@@ -123,7 +123,7 @@
             this.groupBox1.Controls.Add(this.rbSubasta);
             this.groupBox1.Location = new System.Drawing.Point(592, 226);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(220, 135);
+            this.groupBox1.Size = new System.Drawing.Size(230, 135);
             this.groupBox1.TabIndex = 6;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Tipo";
@@ -285,20 +285,21 @@
             this.CostoEnvio.Name = "CostoEnvio";
             this.CostoEnvio.ReadOnly = true;
             // 
-            // materialSingleLineTextField1
+            // txtDescripcion
             // 
-            this.materialSingleLineTextField1.Depth = 0;
-            this.materialSingleLineTextField1.Hint = "Ingrese la descripcion";
-            this.materialSingleLineTextField1.Location = new System.Drawing.Point(153, 108);
-            this.materialSingleLineTextField1.MouseState = MaterialSkin.MouseState.HOVER;
-            this.materialSingleLineTextField1.Name = "materialSingleLineTextField1";
-            this.materialSingleLineTextField1.PasswordChar = '\0';
-            this.materialSingleLineTextField1.SelectedText = "";
-            this.materialSingleLineTextField1.SelectionLength = 0;
-            this.materialSingleLineTextField1.SelectionStart = 0;
-            this.materialSingleLineTextField1.Size = new System.Drawing.Size(152, 23);
-            this.materialSingleLineTextField1.TabIndex = 12;
-            this.materialSingleLineTextField1.UseSystemPasswordChar = false;
+            this.txtDescripcion.Depth = 0;
+            this.txtDescripcion.Hint = "Ingrese la descripcion";
+            this.txtDescripcion.Location = new System.Drawing.Point(153, 108);
+            this.txtDescripcion.MouseState = MaterialSkin.MouseState.HOVER;
+            this.txtDescripcion.Name = "txtDescripcion";
+            this.txtDescripcion.PasswordChar = '\0';
+            this.txtDescripcion.SelectedText = "";
+            this.txtDescripcion.SelectionLength = 0;
+            this.txtDescripcion.SelectionStart = 0;
+            this.txtDescripcion.Size = new System.Drawing.Size(152, 23);
+            this.txtDescripcion.TabIndex = 12;
+            this.txtDescripcion.UseSystemPasswordChar = false;
+            this.txtDescripcion.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtDescripcion_KeyPress);
             // 
             // label1
             // 
@@ -371,7 +372,7 @@
             this.gbSubasta.Controls.Add(this.label4);
             this.gbSubasta.Location = new System.Drawing.Point(592, 367);
             this.gbSubasta.Name = "gbSubasta";
-            this.gbSubasta.Size = new System.Drawing.Size(220, 66);
+            this.gbSubasta.Size = new System.Drawing.Size(230, 66);
             this.gbSubasta.TabIndex = 22;
             this.gbSubasta.TabStop = false;
             this.gbSubasta.Text = "Subasta";
@@ -416,7 +417,7 @@
             this.txtPrecio.SelectedText = "";
             this.txtPrecio.SelectionLength = 0;
             this.txtPrecio.SelectionStart = 0;
-            this.txtPrecio.Size = new System.Drawing.Size(101, 23);
+            this.txtPrecio.Size = new System.Drawing.Size(138, 23);
             this.txtPrecio.TabIndex = 25;
             this.txtPrecio.UseSystemPasswordChar = false;
             this.txtPrecio.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtPrecio_KeyPress);
@@ -438,9 +439,25 @@
             this.groupBox4.Controls.Add(this.label5);
             this.groupBox4.Location = new System.Drawing.Point(67, 510);
             this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(211, 87);
+            this.groupBox4.Size = new System.Drawing.Size(513, 87);
             this.groupBox4.TabIndex = 27;
             this.groupBox4.TabStop = false;
+            // 
+            // txtStock
+            // 
+            this.txtStock.Depth = 0;
+            this.txtStock.Hint = "Ingrese Stock";
+            this.txtStock.Location = new System.Drawing.Point(58, 58);
+            this.txtStock.MouseState = MaterialSkin.MouseState.HOVER;
+            this.txtStock.Name = "txtStock";
+            this.txtStock.PasswordChar = '\0';
+            this.txtStock.SelectedText = "";
+            this.txtStock.SelectionLength = 0;
+            this.txtStock.SelectionStart = 0;
+            this.txtStock.Size = new System.Drawing.Size(138, 23);
+            this.txtStock.TabIndex = 28;
+            this.txtStock.UseSystemPasswordChar = false;
+            this.txtStock.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtStock_KeyPress);
             // 
             // label6
             // 
@@ -451,28 +468,12 @@
             this.label6.TabIndex = 27;
             this.label6.Text = "Stock";
             // 
-            // txtStock
-            // 
-            this.txtStock.Depth = 0;
-            this.txtStock.Hint = "Ingrese Stock";
-            this.txtStock.Location = new System.Drawing.Point(57, 58);
-            this.txtStock.MouseState = MaterialSkin.MouseState.HOVER;
-            this.txtStock.Name = "txtStock";
-            this.txtStock.PasswordChar = '\0';
-            this.txtStock.SelectedText = "";
-            this.txtStock.SelectionLength = 0;
-            this.txtStock.SelectionStart = 0;
-            this.txtStock.Size = new System.Drawing.Size(101, 23);
-            this.txtStock.TabIndex = 28;
-            this.txtStock.UseSystemPasswordChar = false;
-            this.txtStock.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtStock_KeyPress);
-            // 
             // Publicar
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.ClientSize = new System.Drawing.Size(824, 657);
+            this.ClientSize = new System.Drawing.Size(830, 657);
             this.Controls.Add(this.groupBox4);
             this.Controls.Add(this.cbEnvio);
             this.Controls.Add(this.btnGuardar);
@@ -482,7 +483,7 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.dtInicio);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.materialSingleLineTextField1);
+            this.Controls.Add(this.txtDescripcion);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
@@ -530,7 +531,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Precio;
         private System.Windows.Forms.DataGridViewTextBoxColumn Porcentaje;
         private System.Windows.Forms.DataGridViewTextBoxColumn CostoEnvio;
-        private MaterialSkin.Controls.MaterialSingleLineTextField materialSingleLineTextField1;
+        private MaterialSkin.Controls.MaterialSingleLineTextField txtDescripcion;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.DateTimePicker dtInicio;
         private System.Windows.Forms.Label label2;
