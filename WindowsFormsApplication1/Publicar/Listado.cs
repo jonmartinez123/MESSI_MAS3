@@ -128,6 +128,7 @@ namespace MercadoEnvio.Publicar
                 Convert.ToDateTime(Extension.cellValue(listadoPublicaciones, "FechaInicio")),
                 Convert.ToDateTime(Extension.cellValue(listadoPublicaciones, "FechaFin")),
                 Convert.ToString(Extension.cellValue(listadoPublicaciones, "Descripcion")),
+                Convert.ToDouble(Extension.cellValue(listadoPublicaciones, "MinimoSubasta")),
                 Convert.ToDouble(Extension.cellValue(listadoPublicaciones, "Precio")),
                 Convert.ToInt32(Extension.cellValue(listadoPublicaciones, "Stock")));
         }
@@ -139,7 +140,8 @@ namespace MercadoEnvio.Publicar
 
         private void btnAgregar_Click(object sender, EventArgs e)
         {
-           
+            Publicar p = new Publicar();
+            p.Show();
         }
 
         private void listadoPublicaciones_RowLeave(object sender, DataGridViewCellEventArgs e)

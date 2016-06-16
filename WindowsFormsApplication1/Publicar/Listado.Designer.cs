@@ -52,6 +52,7 @@
             this.FechaInicio = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.FechaFin = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Descripcion = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.MinimoSubasta = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Precio = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Stock = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupBox1.SuspendLayout();
@@ -204,12 +205,13 @@
             this.FechaInicio,
             this.FechaFin,
             this.Descripcion,
+            this.MinimoSubasta,
             this.Precio,
             this.Stock});
             this.listadoPublicaciones.Location = new System.Drawing.Point(38, 59);
             this.listadoPublicaciones.Name = "listadoPublicaciones";
             this.listadoPublicaciones.ReadOnly = true;
-            this.listadoPublicaciones.Size = new System.Drawing.Size(851, 169);
+            this.listadoPublicaciones.Size = new System.Drawing.Size(862, 169);
             this.listadoPublicaciones.TabIndex = 1;
             this.listadoPublicaciones.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.listadoPublicaciones_CellClick);
             this.listadoPublicaciones.RowLeave += new System.Windows.Forms.DataGridViewCellEventHandler(this.listadoPublicaciones_RowLeave);
@@ -305,6 +307,12 @@
             this.Descripcion.Name = "Descripcion";
             this.Descripcion.ReadOnly = true;
             // 
+            // MinimoSubasta
+            // 
+            this.MinimoSubasta.HeaderText = "Minimo Subasta";
+            this.MinimoSubasta.Name = "MinimoSubasta";
+            this.MinimoSubasta.ReadOnly = true;
+            // 
             // Precio
             // 
             this.Precio.HeaderText = "Precio";
@@ -321,6 +329,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.ClientSize = new System.Drawing.Size(959, 461);
             this.Controls.Add(this.groupBox1);
             this.MaximizeBox = false;
@@ -361,6 +370,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn FechaInicio;
         private System.Windows.Forms.DataGridViewTextBoxColumn FechaFin;
         private System.Windows.Forms.DataGridViewTextBoxColumn Descripcion;
+        private System.Windows.Forms.DataGridViewTextBoxColumn MinimoSubasta;
         private System.Windows.Forms.DataGridViewTextBoxColumn Precio;
         private System.Windows.Forms.DataGridViewTextBoxColumn Stock;
 

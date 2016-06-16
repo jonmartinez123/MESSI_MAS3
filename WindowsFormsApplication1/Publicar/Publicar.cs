@@ -17,6 +17,8 @@ namespace MercadoEnvio.Publicar
         public Publicar()
         {
             InitializeComponent();
+            dtFin.MinDate = Config.ConfiguracionVariable.FechaSistema;
+            dtInicio.MinDate = Config.ConfiguracionVariable.FechaSistema;
             var materialSkinManager = MaterialSkinManager.Instance;
             materialSkinManager.AddFormToManage(this);
             materialSkinManager.Theme = MaterialSkinManager.Themes.LIGHT;
@@ -31,5 +33,22 @@ namespace MercadoEnvio.Publicar
         {
             this.Close();
         }
+
+        private void btnAplicar_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void rbCompra_CheckedChanged(object sender, EventArgs e)
+        {
+            gbSubasta.Visible = false;
+        }
+
+        private void rbSubasta_CheckedChanged(object sender, EventArgs e)
+        {
+            gbSubasta.Visible = true;
+        }
+
+
     }
 }
