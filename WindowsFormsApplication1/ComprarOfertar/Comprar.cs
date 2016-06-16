@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using MaterialSkin;
 using MaterialSkin.Controls;
-using MercadoEnvio.Utils;
+using MercadoEnvio.Modelo;
 
 namespace MercadoEnvio.ComprarOfertar
 {
@@ -48,8 +48,8 @@ namespace MercadoEnvio.ComprarOfertar
                 if (!int.TryParse(cmbCantidad.Text.ToString(), out valorOferta))
                     throw new Exception("Debe seleccionar la cantidad");
 
-                Utils.FormaDePago f = new Utils.FormaDePago();
-                f = (Utils.FormaDePago)cmbMediosDePago.SelectedItem;
+                Modelo.FormaDePago f = new Modelo.FormaDePago();
+                f = (Modelo.FormaDePago)cmbMediosDePago.SelectedItem;
 
                 DAO.PublicacionSQL.crearComprar(pGlobal.Id, Persistencia.usuario.Id, int.Parse(cmbCantidad.Text), f.Id);
 

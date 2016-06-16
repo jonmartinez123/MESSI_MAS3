@@ -48,7 +48,7 @@
             this.bindingNavigatorMoveNextItem = new System.Windows.Forms.ToolStripButton();
             this.bindingNavigatorMoveLastItem = new System.Windows.Forms.ToolStripButton();
             this.bindingNavigatorSeparator2 = new System.Windows.Forms.ToolStripSeparator();
-            this.superGrid1 = new MercadoEnvio.Utils.SuperGrid();
+            this.superGrid1 = new MercadoEnvio.Modelo.SuperGrid();
             this.colPublicacionId = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colCodigo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colTipoPublicaion = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -397,7 +397,7 @@
         private System.Windows.Forms.ToolStripButton bindingNavigatorMoveNextItem;
         private System.Windows.Forms.ToolStripButton bindingNavigatorMoveLastItem;
         private System.Windows.Forms.ToolStripSeparator bindingNavigatorSeparator2;
-        private Utils.SuperGrid superGrid1;
+        private Modelo.SuperGrid superGrid1;
         private System.Windows.Forms.DataGridViewTextBoxColumn colPublicacionId;
         private System.Windows.Forms.DataGridViewTextBoxColumn colCodigo;
         private System.Windows.Forms.DataGridViewTextBoxColumn colTipoPublicaion;

@@ -49,7 +49,7 @@
             this.bindingNavigatorSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.bindingNavigatorAddNewItem = new System.Windows.Forms.ToolStripButton();
             this.bindingNavigatorDeleteItem = new System.Windows.Forms.ToolStripButton();
-            this.superGrid1 = new MercadoEnvio.Utils.SuperGrid();
+            this.superGrid1 = new MercadoEnvio.Modelo.SuperGrid();
             this.pubid = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -328,7 +328,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn comprasCalificadas;
         private System.Windows.Forms.DataGridViewTextBoxColumn totalEstrellas;
         private System.Windows.Forms.DataGridViewTextBoxColumn ofertasGanadoras;
-        private Utils.SuperGrid superGrid1;
+        private Modelo.SuperGrid superGrid1;
         private System.Windows.Forms.DataGridViewTextBoxColumn pubid;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column2;

@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MercadoEnvio.Utils
+namespace MercadoEnvio.Modelo
 {
-    public class Administrador:Utils.Usuario
+    public class Administrador:Modelo.Usuario
     {
     }
 }

@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using MaterialSkin;
 using MaterialSkin.Controls;
-using MercadoEnvio.Utils;
+using MercadoEnvio.Modelo;
 
 namespace MercadoEnvio.ComprarOfertar
 {
@@ -42,7 +42,7 @@ namespace MercadoEnvio.ComprarOfertar
                 if(ultimaOferta.Valor >= valorOferta){
                     throw new Exception("El valor ofertado debe ser mayor al valor minimo");
                 }else{
-                    Modelo.Oferta oferta = new Modelo.Oferta(double.Parse(txtValorOfertado.Text.ToString()), Utils.Persistencia.usuario.Id, publicacionGlobal.Id);
+                    Modelo.Oferta oferta = new Modelo.Oferta(double.Parse(txtValorOfertado.Text.ToString()), Modelo.Persistencia.usuario.Id, publicacionGlobal.Id);
                     DAO.PublicacionSQL.crearOferta(oferta);
                     MessageBox.Show("La oferta se creo con exito", "Atención");
                 }

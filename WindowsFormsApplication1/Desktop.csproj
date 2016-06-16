@@ -192,11 +192,16 @@
     <Compile Include="Funcionalidades\MenuUsuario.Designer.cs">
       <DependentUpon>MenuUsuario.cs</DependentUpon>
     </Compile>
+    <Compile Include="Modelo\Activa.cs" />
     <Compile Include="Modelo\Administrador.cs" />
+    <Compile Include="Modelo\Borrador.cs" />
     <Compile Include="Modelo\Calificacion.cs" />
     <Compile Include="Modelo\Estado.cs" />
+    <Compile Include="Modelo\Finalizada.cs" />
     <Compile Include="Modelo\Oferta.cs" />
+    <Compile Include="Modelo\Pausada.cs" />
     <Compile Include="Modelo\Publicacion.cs" />
+    <Compile Include="Modelo\TipoPublicacion.cs" />
     <Compile Include="Publicar\Detalles.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -262,33 +267,43 @@
     <Compile Include="Utils\Validaciones.cs" />
     <EmbeddedResource Include="ABM Rol\AltaRol.resx">
       <DependentUpon>AltaRol.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="ABM Rol\Listado.resx">
       <DependentUpon>Listado.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="ABM Rol\Modificacion.resx">
       <DependentUpon>Modificacion.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="ABM Rubro\Rubro.resx">
       <DependentUpon>Rubro.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="ABM Usuario\CrearCliente.resx">
       <DependentUpon>CrearCliente.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="ABM Usuario\CrearEmpresa.resx">
       <DependentUpon>CrearEmpresa.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="ABM Usuario\CrearUsuario.resx">
       <DependentUpon>CrearUsuario.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="ABM Usuario\Usuario.resx">
       <DependentUpon>Usuario.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="ABM Visibilidad\Alta.resx">
       <DependentUpon>Alta.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="ABM Visibilidad\Modificacion.resx">
       <DependentUpon>Modificacion.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="ABM Visibilidad\Visibilidad.resx">
       <DependentUpon>Visibilidad.cs</DependentUpon>
@@ -296,21 +311,27 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Calificar\Calif.resx">
       <DependentUpon>Calif.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Calificar\darCalificacion.resx">
       <DependentUpon>darCalificacion.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="ComprarOfertar\Comprar.resx">
       <DependentUpon>Comprar.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="ComprarOfertar\ComprarOfertar.resx">
       <DependentUpon>ComprarOfertar.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="ComprarOfertar\Ofertar.resx">
       <DependentUpon>Ofertar.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="ComprarOfertar\SeleccionRubros.resx">
       <DependentUpon>SeleccionRubros.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Facturas\ConsultarFacturas.resx">
       <DependentUpon>ConsultarFacturas.cs</DependentUpon>

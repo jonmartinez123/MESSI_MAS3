@@ -7,7 +7,7 @@ using System.Windows.Forms;
 using System.Reflection;
 using System.Data;
 
-namespace MercadoEnvio.Utils
+namespace MercadoEnvio.Modelo
 {
     static class Extension
     {

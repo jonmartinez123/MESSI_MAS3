@@ -1,4 +1,4 @@
-﻿using MercadoEnvio.Utils;
+﻿using MercadoEnvio.Modelo;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,16 +11,16 @@ namespace MercadoEnvio.DAO
 {
     class FormaDePago
     {
-        public static List<Utils.FormaDePago> getFormasDePago()
+        public static List<Modelo.FormaDePago> getFormasDePago()
         {
             SqlCommand cmd = SqlConnector.generarComandoYAbrir("get_formasDePago");
             var reader = cmd.ExecuteReader();
 
-            List<Utils.FormaDePago> formas = new List<Utils.FormaDePago>();
-            Utils.FormaDePago f;
+            List<Modelo.FormaDePago> formas = new List<Modelo.FormaDePago>();
+            Modelo.FormaDePago f;
             while (reader.Read())
             {
-                f = new Utils.FormaDePago();
+                f = new Modelo.FormaDePago();
                 f.Id = int.Parse(reader["formaDePago_id"].ToString());
                 f.Nombre = reader["formaDePago_nombre"].ToString();
                 formas.Add(f);

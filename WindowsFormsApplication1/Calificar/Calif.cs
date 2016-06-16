@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using MaterialSkin;
 using MaterialSkin.Controls;
-using MercadoEnvio.Utils;
+using MercadoEnvio.Modelo;
 
 namespace MercadoEnvio.Calificar
 {
@@ -52,9 +52,9 @@ namespace MercadoEnvio.Calificar
 
         }
 
-        private Utils.Calificacion getCurrentCalificacion()
+        private Modelo.Calificacion getCurrentCalificacion()
         {
-            return new Utils.Calificacion(Convert.ToDecimal(Extension.cellValue(this.calificacionesPendientes, "idCalif")));
+            return new Modelo.Calificacion(Convert.ToDecimal(Extension.cellValue(this.calificacionesPendientes, "idCalif")));
         }
 
         private void groupBox2_Enter(object sender, EventArgs e)

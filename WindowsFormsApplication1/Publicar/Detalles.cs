@@ -14,8 +14,10 @@ namespace MercadoEnvio.Publicar
 {
     public partial class Detalles : MaterialForm
     {
-        public Detalles()
+        Modelo.Publicacion publicacion;
+        public Detalles(Modelo.Publicacion publi)
         {
+            this.publicacion = publi;
             InitializeComponent();
             var materialSkinManager = MaterialSkinManager.Instance;
             materialSkinManager.AddFormToManage(this);

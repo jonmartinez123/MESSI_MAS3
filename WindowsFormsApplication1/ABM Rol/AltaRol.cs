@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using MaterialSkin.Controls;
 using MaterialSkin;
-using MercadoEnvio.Utils;
+using MercadoEnvio.Modelo;
 
 namespace MercadoEnvio.ABM_Rol
 {
@@ -56,7 +56,7 @@ namespace MercadoEnvio.ABM_Rol
 
             if (!(String.IsNullOrEmpty(Nombre.Text)))
             {
-                Utils.Rol rol = new Utils.Rol(this.Nombre.Text, this.Estado.Checked); //linea peligrosa
+                Modelo.Rol rol = new Modelo.Rol(this.Nombre.Text, this.Estado.Checked); //linea peligrosa
                 if (this.FuncionalidadesRol.Rows.Count == 0) { MessageBox.Show("El rol debe tener al menos una funcionalidad"); return; }
                 DAO.RolSQl.crearNuevoRol(rol, FuncionalidadesRol);
                 MessageBox.Show("Rol creado con éxito!");

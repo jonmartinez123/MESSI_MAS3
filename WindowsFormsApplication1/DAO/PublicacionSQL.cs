@@ -1,4 +1,4 @@
-﻿using MercadoEnvio.Utils;
+﻿using MercadoEnvio.Modelo;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -36,7 +36,22 @@ namespace MercadoEnvio.DAO
             SqlConnector.executeProcedure("crearOferta", oferta.Valor, oferta.Usuario.Id, oferta.Publicacion.Id);        
         }
 
-        
+        public static List<Rubro> getRubrosPorPublicacion(int idPublicacion)
+        {
+            SqlCommand cmd = SqlConnector.generarComandoYAbrir("getRubrosPorPublicacion", idPublicacion);
+            var reader = cmd.ExecuteReader();
+            List<Rubro> rubros = new List<Rubro>();
+            Rubro r;
+            while (reader.Read())
+            {
+                r = new Rubro();
+                r.Id = int.Parse(reader["rubro_id"].ToString());
+                r.DescripcionCorta = reader["rubro_descripcionCorta"].ToString();
+                r.DescripcionLarga = reader["rubro_descripcionLarga"].ToString();
+                rubros.Add(r);
+            }
+            return rubros;
+        }
         
 
         internal static DataTable filtrarPublicacionesPorRubro(DataTable dtAAcumular, int idRubro, string descripcion)
@@ -60,6 +75,11 @@ namespace MercadoEnvio.DAO
         internal static void crearComprar(int idPublicacion, int idCliente, int cantidad, int idFormaDePago)
         {
             SqlConnector.executeProcedure("crearCompra", idPublicacion, idCliente, cantidad, idFormaDePago);  
+        }
+
+        internal static void getRubrosDePublicacion(int idPublicaciones)
+        {
+            throw new NotImplementedException();
         }
     }
 }

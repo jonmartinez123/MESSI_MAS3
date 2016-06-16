@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using MaterialSkin.Controls;
-using MercadoEnvio.Utils;
+using MercadoEnvio.Modelo;
 using MaterialSkin;
 namespace MercadoEnvio.ABM_Visibilidad
 {
@@ -44,7 +44,7 @@ namespace MercadoEnvio.ABM_Visibilidad
         }
         private void modificar_Click(object sender, EventArgs e)
         {
-            if (ListadoVisibilidades.Rows.Count > 0)
+            if (ListadoVisibilidades.SelectedRows.Count != 0)
             {
                 Modificacion mod = new Modificacion(getSeleccionado());
                 mod.Show();

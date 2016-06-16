@@ -9,7 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using MaterialSkin;
-using MercadoEnvio.Utils;
+using MercadoEnvio.Modelo;
 
 namespace MercadoEnvio.Facturas
 {

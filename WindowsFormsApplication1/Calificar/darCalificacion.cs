@@ -15,7 +15,7 @@ namespace MercadoEnvio.Calificar
     public partial class darCalificacion : MaterialForm
     {
 
-        Utils.Calificacion calificacionADar { get; set; }
+        Modelo.Calificacion calificacionADar { get; set; }
         MercadoEnvio.Calificar.Calif launcher { get; set; }
         
        
@@ -34,7 +34,7 @@ namespace MercadoEnvio.Calificar
         }
 
 
-        public darCalificacion(Calif launcher, Utils.Calificacion calificacionActual)
+        public darCalificacion(Calif launcher, Modelo.Calificacion calificacionActual)
         {
             InitializeComponent();
             this.launcher = launcher;

@@ -9,7 +9,7 @@ using System.Text.RegularExpressions;
 using System.Configuration;
 using MercadoEnvio.Config;
 using System.Web;
-using MercadoEnvio.Utils;
+using MercadoEnvio.Modelo;
 
 
 namespace MercadoEnvio.DAO

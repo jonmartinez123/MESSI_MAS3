@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using MaterialSkin.Controls;
 using MaterialSkin;
-using MercadoEnvio.Utils;
+using MercadoEnvio.Modelo;
 
 namespace MercadoEnvio.ABM_Rol
 {
@@ -64,9 +64,9 @@ namespace MercadoEnvio.ABM_Rol
                 this.Hide();
             }
         }
-        public Utils.Rol getCurrentRol()
+        public Modelo.Rol getCurrentRol()
         {
-            return new Utils.Rol(Convert.ToDecimal(Extension.cellValue(ListadoRoles, "col_id")),
+            return new Modelo.Rol(Convert.ToDecimal(Extension.cellValue(ListadoRoles, "col_id")),
                 Convert.ToString(Extension.cellValue(this.ListadoRoles, "col_rol")),
                 true,
                 Convert.ToInt32(Extension.cellValue(this.ListadoRoles, "col_habilitado")));

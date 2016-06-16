@@ -9,18 +9,18 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using MaterialSkin.Controls;
 using MaterialSkin;
-using MercadoEnvio.Utils;
+using MercadoEnvio.Modelo;
 
 namespace MercadoEnvio.ABM_Rol
 {
     public partial class Modificacion : MaterialForm
     {
 
-        public Utils.Rol rol { get; set; }
+        public Modelo.Rol rol { get; set; }
         public ABM_Rol.Listado launcher { get; set; }
         public Boolean checkeadoPorUsuario { get; set; }
 
-        public Modificacion(ABM_Rol.Listado launcher, Utils.Rol rol)
+        public Modificacion(ABM_Rol.Listado launcher, Modelo.Rol rol)
         {
             checkeadoPorUsuario = false;
             InitializeComponent();

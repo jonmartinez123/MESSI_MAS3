@@ -4,10 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MercadoEnvio.Utils
+namespace MercadoEnvio.Modelo
 {
     public static class Persistencia
     {
-        public static Utils.Usuario usuario;
+        public static Modelo.Usuario usuario;
     }
 }

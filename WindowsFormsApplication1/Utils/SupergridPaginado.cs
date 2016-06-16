@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-namespace MercadoEnvio.Utils
+namespace MercadoEnvio.Modelo
 {
         public class SuperGrid : DataGridView
     {

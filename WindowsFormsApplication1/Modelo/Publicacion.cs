@@ -20,8 +20,8 @@ namespace MercadoEnvio.Modelo
         private int tipoPublicidad;
         public Estado Estado;
         public Visibilidad Visibilidad;
-        public Rubro Rubro;
-
+        public List<Modelo.Rubro> Rubro;
+        public TipoPublicacion tipoPublicacion;
         public int Id { get { return id; } set { id = value; } }
         public DateTime FechaInicio { get { return fechaInicio; } set { fechaInicio = value; } }
         public DateTime FechaFin { get { return fechaFin; } set { fechaFin = value; } }
@@ -31,12 +31,14 @@ namespace MercadoEnvio.Modelo
         public int Stock { get { return stock; } set { stock = value; } }
         public int TipoPublicidad { get { return tipoPublicidad; } set { tipoPublicidad = value; } }
         
-        public Publicacion(int publicacion_id, Estado estado, Visibilidad visibilidad, DateTime publicacion_fechaInicio, DateTime publicacion_fechaFin, string publicacion_descripcion, double publicacion_precio, Rubro rubro, int publicacion_stock)
+        public Publicacion(int publicacion_id,TipoPublicacion tipo, Estado estado, Visibilidad visibilidad,List<Modelo.Rubro>rubro, DateTime publicacion_fechaInicio, DateTime publicacion_fechaFin, string publicacion_descripcion, double publicacion_precio, int publicacion_stock)
         {
             this.Id = publicacion_id;
+            this.tipoPublicacion = tipo;
             this.Estado = estado;
             this.Visibilidad = visibilidad;
-            this.fechaInicio = publicacion_fechaInicio; this.FechaFin = publicacion_fechaFin; this.Descripcion = publicacion_descripcion; this.Precio = publicacion_precio; this.Rubro = rubro; this.stock = publicacion_stock;
+            this.Rubro = rubro;
+            this.fechaInicio = publicacion_fechaInicio; this.FechaFin = publicacion_fechaFin; this.Descripcion = publicacion_descripcion; this.Precio = publicacion_precio; this.stock = publicacion_stock;
         }
 
         public Publicacion() { }

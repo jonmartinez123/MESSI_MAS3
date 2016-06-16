@@ -1,4 +1,4 @@
-/*--------------------------Migro roles contra funcionalidades - atado a cambios---------------------------*/
+	/*--------------------------Migro roles contra funcionalidades - atado a cambios---------------------------*/
 BEGIN TRANSACTION
 
 --inserto funcionalidades para Cliente
@@ -21,7 +21,7 @@ COMMIT
 /*--------------------------Migro publicaciones de clientes---------------------------*/
 BEGIN TRANSACTION
 INSERT INTO MESSI_MAS3.Publicacion(publicacion_idUsuario,publicacion_codigo, publicacion_descripcion, publicacion_tipoPublicacionId,
-									publicacion_fechaInicio,publicacion_fechaFin, publicacion_idEstado, publicacion_idRubro,
+									publicacion_fechaInicio,publicacion_fechaFin, publicacion_idEstado,
 									 publicacion_idVisibilidad, publicacion_precio, publicacion_stock)
 (SELECT DISTINCT (SELECT cliente_id FROM MESSI_MAS3.cliente 
 			WHERE cliente_DNI = Publ_Cli_Dni AND cliente_apellido = Publ_Cli_Apeliido AND cliente_nombre = Publ_Cli_Nombre ),
@@ -31,40 +31,19 @@ INSERT INTO MESSI_MAS3.Publicacion(publicacion_idUsuario,publicacion_codigo, pub
 		Publicacion_Fecha,
 		Publicacion_Fecha_Venc,
 		4,
-		(SELECT rubro_id FROM MESSI_MAS3.Rubro WHERE rubro_descripcionCorta = Publicacion_Rubro_Descripcion),
 		(SELECT visibilidad_id FROM MESSI_MAS3.Visibilidad WHERE visibilidad_codigo = Publicacion_Visibilidad_Cod),
 		Publicacion_Precio,
 		Publicacion_Stock
 FROM gd_esquema.Maestra WHERE (Publicacion_Fecha_Venc is NOT NULL) AND (Publicacion_Fecha is NOT NULL) AND (Publ_Cli_Dni IS NOT NULL ) 	AND Publicacion_Stock IS NOT NULL AND Publicacion_Tipo = 'Compra Inmediata')
+
 COMMIT
-
-
-BEGIN TRANSACTION
-INSERT INTO MESSI_MAS3.Publicacion(publicacion_idUsuario,publicacion_codigo, publicacion_descripcion, publicacion_tipoPublicacionId,
-									publicacion_fechaInicio,publicacion_fechaFin, publicacion_idEstado, publicacion_idRubro,
-									 publicacion_idVisibilidad, publicacion_precio, publicacion_stock)
-(SELECT DISTINCT (SELECT cliente_id FROM MESSI_MAS3.cliente 
-			WHERE cliente_DNI = Publ_Cli_Dni AND cliente_apellido = Publ_Cli_Apeliido AND cliente_nombre = Publ_Cli_Nombre ),
-		Publicacion_Cod ,	
-		Publicacion_Descripcion, 
-		1,
-		Publicacion_Fecha,
-		Publicacion_Fecha_Venc,
-		4,
-		(SELECT rubro_id FROM MESSI_MAS3.Rubro WHERE rubro_descripcionCorta = Publicacion_Rubro_Descripcion),
-		(SELECT visibilidad_id FROM MESSI_MAS3.Visibilidad WHERE visibilidad_codigo = Publicacion_Visibilidad_Cod),
-		Publicacion_Precio,
-		Publicacion_Stock
-FROM gd_esquema.Maestra WHERE (Publicacion_Fecha_Venc is NOT NULL) AND (Publicacion_Fecha is NOT NULL) AND (Publ_Cli_Dni IS NOT NULL ) 	AND Publicacion_Stock IS NOT NULL AND Publicacion_Tipo = 'Subasta')
-COMMIT
-
 
 
 /*--------------------------Migro publicaciones de Empresas---------------------------*/
 --Publicaciones de Empresas
 BEGIN TRANSACTION
 INSERT INTO MESSI_MAS3.Publicacion(publicacion_idUsuario,publicacion_codigo, publicacion_descripcion, publicacion_tipoPublicacionId,
-									publicacion_fechaInicio,publicacion_fechaFin, publicacion_idEstado, publicacion_idRubro,
+									publicacion_fechaInicio,publicacion_fechaFin, publicacion_idEstado,
 									 publicacion_idVisibilidad, publicacion_precio, publicacion_stock)
 (SELECT DISTINCT (SELECT empresa_id FROM MESSI_MAS3.Empresa 
 			WHERE empresa_cuit = Publ_Empresa_Cuit),
@@ -74,42 +53,26 @@ INSERT INTO MESSI_MAS3.Publicacion(publicacion_idUsuario,publicacion_codigo, pub
 		Publicacion_Fecha,
 		Publicacion_Fecha_Venc,
 		4,
-		(SELECT rubro_id FROM MESSI_MAS3.Rubro WHERE rubro_descripcionCorta = Publicacion_Rubro_Descripcion),
 		(SELECT visibilidad_id FROM MESSI_MAS3.Visibilidad WHERE visibilidad_codigo = Publicacion_Visibilidad_Cod),
 		Publicacion_Precio,
 		Publicacion_Stock
 FROM gd_esquema.Maestra WHERE (Publicacion_Fecha_Venc is NOT NULL) AND (Publicacion_Fecha is NOT NULL) AND (Publ_Empresa_Cuit IS NOT NULL ) AND Publicacion_Stock IS NOT NULL AND Publicacion_Tipo = 'Compra Inmediata')	
-COMMIT
 
 
-BEGIN TRANSACTION
-INSERT INTO MESSI_MAS3.Publicacion(publicacion_idUsuario,publicacion_codigo, publicacion_descripcion, publicacion_tipoPublicacionId,
-									publicacion_fechaInicio,publicacion_fechaFin, publicacion_idEstado, publicacion_idRubro,
-									 publicacion_idVisibilidad, publicacion_precio, publicacion_stock)
-(SELECT DISTINCT (SELECT empresa_id FROM MESSI_MAS3.Empresa 
-			WHERE empresa_cuit = Publ_Empresa_Cuit),
-		Publicacion_Cod ,	
-		Publicacion_Descripcion, 
-		1,
-		Publicacion_Fecha,
-		Publicacion_Fecha_Venc,
-		4,
-		(SELECT rubro_id FROM MESSI_MAS3.Rubro WHERE rubro_descripcionCorta = Publicacion_Rubro_Descripcion),
-		(SELECT visibilidad_id FROM MESSI_MAS3.Visibilidad WHERE visibilidad_codigo = Publicacion_Visibilidad_Cod),
-		Publicacion_Precio,
-		Publicacion_Stock
-FROM gd_esquema.Maestra WHERE (Publicacion_Fecha_Venc is NOT NULL) AND (Publicacion_Fecha is NOT NULL) AND (Publ_Empresa_Cuit IS NOT NULL ) AND Publicacion_Stock IS NOT NULL AND Publicacion_Tipo = 'Subasta')	
+
 COMMIT
 
 
 /*--------------------------Migro rubros_x_publicaciones---------------------------*/
-BEGIN TRANSACTION
-INSERT INTO MESSI_MAS3.Rubro_x_Publicacion(idPublicacion,idRubro)
-(SELECT publicacion_id, 
-		publicacion_idRubro
 
-FROM MESSI_MAS3.Publicacion)
-COMMIT
+INSERT INTO MESSI_MAS3.Rubro_x_Publicacion(idPublicacion,idRubro)
+
+(SELECT DISTINCT 
+
+(SELECT TOP 1 publicacion_id FROM MESSI_MAS3.Publicacion WHERE publicacion_codigo = Publicacion_Cod), 
+ (SELECT TOP 1 rubro_id FROM MESSI_MAS3.Rubro WHERE rubro_descripcionCorta = Publicacion_Rubro_Descripcion)
+
+FROM GD1C2016.gd_esquema.Maestra WHERE Publicacion_Rubro_Descripcion IS NOT NULL AND Publicacion_Cod IS NOT NULL)
 
 /*--------------------------Migro Compras---------------------------*/
 
