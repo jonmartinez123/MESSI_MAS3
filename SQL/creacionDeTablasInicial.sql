@@ -270,7 +270,8 @@ CREATE TABLE MESSI_MAS3.Publicacion (
   publicacion_tipoPublicacionId INT REFERENCES MESSI_MAS3.tipoPublicacion(tipoPublicacion_id),
   publicacion_minimoSubasta NUMERIC(10,2) NULL,			--DUDA MIRAR KOIFFO EL TIPO DE LA VARIABLE
   publicacion_precio NUMERIC(18,2),
-  publicacion_stock NUMERIC(18,0) NULL)
+  publicacion_stock NUMERIC(18,0) NULL,
+  publicacion_seCobraEnvio INT DEFAULT 0)
 
 -- -----------------------------------------------------
 -- Table MESSI_MAS3.Rubro_x_Publicacion
