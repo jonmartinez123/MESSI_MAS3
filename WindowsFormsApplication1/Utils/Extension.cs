@@ -65,6 +65,11 @@ namespace MercadoEnvio.Modelo
             catch { return null; }
         }
 
+        public static double cellValueParaNumeros(this DataGridView dg, String column)
+        {
+            try { return Convert.ToDouble(dg.CurrentRow.Cells[column].Value); }
+            catch { return 0.0; }
+        }
 
         public static void clean(this DataGridView dg)
         {

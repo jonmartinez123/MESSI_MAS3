@@ -77,9 +77,10 @@ namespace MercadoEnvio.DAO
             SqlConnector.executeProcedure("crearCompra", idPublicacion, idCliente, cantidad, idFormaDePago);  
         }
 
-        internal static void getRubrosDePublicacion(int idPublicaciones)
+
+        internal static void insertarPublicacion(int idEstado,int idVisibilidad,int idUsuario,int idTipoPublicacion,string descripcion,DateTime fechaInicio,DateTime fechaFin,double minimoSubasta,double precio,int stock,int seCobraEnvio)
         {
-            throw new NotImplementedException();
+            SqlConnector.executeProcedure("insertarPublicacion", idEstado, idVisibilidad, idUsuario, idTipoPublicacion, descripcion, fechaInicio, fechaFin, minimoSubasta, precio, stock,seCobraEnvio);  
         }
     }
 }

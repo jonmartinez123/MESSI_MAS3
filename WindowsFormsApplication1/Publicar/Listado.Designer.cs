@@ -54,6 +54,7 @@
             this.Descripcion = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.MinimoSubasta = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Precio = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.QuisoEnvio = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Stock = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -207,6 +208,7 @@
             this.Descripcion,
             this.MinimoSubasta,
             this.Precio,
+            this.QuisoEnvio,
             this.Stock});
             this.listadoPublicaciones.Location = new System.Drawing.Point(38, 59);
             this.listadoPublicaciones.Name = "listadoPublicaciones";
@@ -319,6 +321,12 @@
             this.Precio.Name = "Precio";
             this.Precio.ReadOnly = true;
             // 
+            // QuisoEnvio
+            // 
+            this.QuisoEnvio.HeaderText = "Quiso Envio";
+            this.QuisoEnvio.Name = "QuisoEnvio";
+            this.QuisoEnvio.ReadOnly = true;
+            // 
             // Stock
             // 
             this.Stock.HeaderText = "Stock";
@@ -372,6 +380,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Descripcion;
         private System.Windows.Forms.DataGridViewTextBoxColumn MinimoSubasta;
         private System.Windows.Forms.DataGridViewTextBoxColumn Precio;
+        private System.Windows.Forms.DataGridViewTextBoxColumn QuisoEnvio;
         private System.Windows.Forms.DataGridViewTextBoxColumn Stock;
 
     }

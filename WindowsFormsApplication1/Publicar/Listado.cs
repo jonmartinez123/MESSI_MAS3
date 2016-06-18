@@ -124,12 +124,16 @@ namespace MercadoEnvio.Publicar
         }
         private Modelo.Publicacion getSeleccionado() {
             int id = Convert.ToInt32(Extension.cellValue(this.listadoPublicaciones, "Id"));
-            return new Modelo.Publicacion(id,crearTipoPublicacion(),crearEstado(), crearVisibilidad(), crearRubros(id),
+            return new Modelo.Publicacion(id,crearTipoPublicacion(),
+                crearEstado(), 
+                crearVisibilidad(), 
+                crearRubros(id),
                 Convert.ToDateTime(Extension.cellValue(listadoPublicaciones, "FechaInicio")),
                 Convert.ToDateTime(Extension.cellValue(listadoPublicaciones, "FechaFin")),
                 Convert.ToString(Extension.cellValue(listadoPublicaciones, "Descripcion")),
-                Convert.ToDouble(Extension.cellValue(listadoPublicaciones, "MinimoSubasta")),
+                Extension.cellValueParaNumeros(listadoPublicaciones, "MinimoSubasta"),
                 Convert.ToDouble(Extension.cellValue(listadoPublicaciones, "Precio")),
+                Convert.ToInt32(Extension.cellValue(listadoPublicaciones, "QuisoEnvio")),
                 Convert.ToInt32(Extension.cellValue(listadoPublicaciones, "Stock")));
         }
         private void listadoPublicaciones_CellClick(object sender, DataGridViewCellEventArgs e)
