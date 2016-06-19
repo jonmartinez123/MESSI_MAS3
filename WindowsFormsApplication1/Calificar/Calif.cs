@@ -61,5 +61,15 @@ namespace MercadoEnvio.Calificar
         {
 
         }
+
+        private void Calif_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (calificacionesPendientes.Rows.Count > 2)
+            {
+                var window = MessageBox.Show(this, "Existen mas de 3 calificaciones pendientes, califique para proseguir", "Calificaciones pendientes", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                if (window == DialogResult.OK)
+                { e.Cancel = true; }
+            }
+        }
     }
 }

@@ -26,6 +26,14 @@ namespace MercadoEnvio.Funcionalidades
         private void MenuUsuario_Load(object sender, EventArgs e)
         {
             asignarFuncionalidades();
+            int tieneMasDe3Calificaciones;
+            tieneMasDe3Calificaciones = DAO.SqlConnector.executeProcedure("tieneMasde3calificacionesPendientesSegun", Persistencia.usuario.Id);
+            if (tieneMasDe3Calificaciones == 1) {
+                var window = MessageBox.Show(this, "Existen mas de 3 calificaciones pendientes, califique para proseguir", "Calificaciones pendientes", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Calificar.Calif cal = new Calificar.Calif();
+                cal.ShowDialog();
+                                                
+            }
         }
         private void asignarFuncionalidades() { 
             var administracion = false;

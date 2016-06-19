@@ -281,6 +281,7 @@
             this.Name = "Calif";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Calificacion";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Calif_FormClosing);
             this.Load += new System.EventHandler(this.Calificar_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox3.ResumeLayout(false);

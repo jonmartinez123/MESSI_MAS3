@@ -30,7 +30,7 @@ DECLARE @idCasteado int
 SET @idCasteado = CAST(@idUsuario AS INT)
 SELECT DISTINCT calificacion_id, calificacion_compraId, compras_publicacion_id, tipoPublicacion_nombre, publicacion_fechaFin, publicacion_descripcion  FROM MESSI_MAS3.Calificacion, MESSI_MAS3.Compra, MESSI_MAS3.Publicacion, MESSI_MAS3.tipoPublicacion 
 
-WHERE calificacion_pendiente = 1 AND (compra_id = calificacion_compraId AND calificacion_idPersonaCalificador = @idCasteado) AND (publicacion_id = compras_publicacion_id AND tipoPublicacion_id = publicacion_tipoPublicacionId) 
+WHERE calificacion_pendiente = 1 AND (compra_id = calificacion_compraId AND calificacion_compraId IS NOT NULL AND calificacion_idPersonaCalificador = @idCasteado) AND (publicacion_id = compras_publicacion_id AND tipoPublicacion_id = publicacion_tipoPublicacionId) 
 
 END
 GO
@@ -71,3 +71,23 @@ UPDATE MESSI_MAS3.Calificacion SET calificacion_pendiente = 0, calificacion_cant
 
 END
 GO
+
+CREATE PROCEDURE [MESSI_MAS3].[tieneMasde3calificacionesPendientesSegun](@idUsuario int)
+AS BEGIN
+DECLARE @cant int
+
+SELECT @cant = COUNT(*) FROM MESSI_MAS3.Calificacion WHERE (calificacion_idPersonaCalificador = @idUsuario AND calificacion_pendiente = 1)
+
+IF (@cant > 2)
+BEGIN
+	RETURN 1
+END
+ELSE
+BEGIN
+	RETURN 0
+END
+
+
+END 
+GO
+
