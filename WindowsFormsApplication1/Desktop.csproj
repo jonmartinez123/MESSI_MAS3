@@ -178,6 +178,7 @@
     <Compile Include="DAO\RubroSQL.cs" />
     <Compile Include="DAO\sqlConnector.cs" />
     <Compile Include="DAO\TipoDocumentoSQL.cs" />
+    <Compile Include="DAO\TipoPublicacionSQL.cs" />
     <Compile Include="DAO\UsuarioSQL.cs" />
     <Compile Include="DAO\VisibilidadSQL.cs" />
     <Compile Include="Facturas\ConsultarFacturas.cs">

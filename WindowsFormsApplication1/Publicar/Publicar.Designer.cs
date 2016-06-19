@@ -28,11 +28,10 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.btnGenerar = new MaterialSkin.Controls.MaterialRaisedButton();
             this.btnVolver = new MaterialSkin.Controls.MaterialRaisedButton();
             this.rbSubasta = new MaterialSkin.Controls.MaterialRadioButton();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.rbCompra = new MaterialSkin.Controls.MaterialRadioButton();
+            this.gbRadio = new System.Windows.Forms.GroupBox();
+            this.rbOferta = new MaterialSkin.Controls.MaterialRadioButton();
             this.listadoRubro = new System.Windows.Forms.DataGridView();
             this.Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.DescripcionCorta = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -40,6 +39,7 @@
             this.cmbRubro = new System.Windows.Forms.ComboBox();
             this.btnAgregarRubro = new MaterialSkin.Controls.MaterialRaisedButton();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.btnQuitar = new MaterialSkin.Controls.MaterialRaisedButton();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.ListadoVisibilidades = new System.Windows.Forms.DataGridView();
             this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -64,7 +64,7 @@
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.txtStock = new MaterialSkin.Controls.MaterialSingleLineTextField();
             this.label6 = new System.Windows.Forms.Label();
-            this.groupBox1.SuspendLayout();
+            this.gbRadio.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.listadoRubro)).BeginInit();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -72,19 +72,6 @@
             this.gbSubasta.SuspendLayout();
             this.groupBox4.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // btnGenerar
-            // 
-            this.btnGenerar.Depth = 0;
-            this.btnGenerar.Location = new System.Drawing.Point(150, 622);
-            this.btnGenerar.MouseState = MaterialSkin.MouseState.HOVER;
-            this.btnGenerar.Name = "btnGenerar";
-            this.btnGenerar.Primary = true;
-            this.btnGenerar.Size = new System.Drawing.Size(75, 23);
-            this.btnGenerar.TabIndex = 0;
-            this.btnGenerar.Text = "Generar";
-            this.btnGenerar.UseVisualStyleBackColor = true;
-            this.btnGenerar.Click += new System.EventHandler(this.btnGenerar_Click);
             // 
             // btnVolver
             // 
@@ -112,39 +99,37 @@
             this.rbSubasta.Ripple = true;
             this.rbSubasta.Size = new System.Drawing.Size(79, 30);
             this.rbSubasta.TabIndex = 3;
-            this.rbSubasta.TabStop = true;
             this.rbSubasta.Text = "Subasta";
             this.rbSubasta.UseVisualStyleBackColor = true;
             this.rbSubasta.CheckedChanged += new System.EventHandler(this.rbSubasta_CheckedChanged);
             // 
-            // groupBox1
+            // gbRadio
             // 
-            this.groupBox1.Controls.Add(this.rbCompra);
-            this.groupBox1.Controls.Add(this.rbSubasta);
-            this.groupBox1.Location = new System.Drawing.Point(592, 226);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(230, 135);
-            this.groupBox1.TabIndex = 6;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Tipo";
+            this.gbRadio.Controls.Add(this.rbOferta);
+            this.gbRadio.Controls.Add(this.rbSubasta);
+            this.gbRadio.Location = new System.Drawing.Point(592, 226);
+            this.gbRadio.Name = "gbRadio";
+            this.gbRadio.Size = new System.Drawing.Size(230, 135);
+            this.gbRadio.TabIndex = 6;
+            this.gbRadio.TabStop = false;
+            this.gbRadio.Text = "Tipo";
             // 
-            // rbCompra
+            // rbOferta
             // 
-            this.rbCompra.AutoSize = true;
-            this.rbCompra.Depth = 0;
-            this.rbCompra.Font = new System.Drawing.Font("Roboto", 10F);
-            this.rbCompra.Location = new System.Drawing.Point(21, 77);
-            this.rbCompra.Margin = new System.Windows.Forms.Padding(0);
-            this.rbCompra.MouseLocation = new System.Drawing.Point(-1, -1);
-            this.rbCompra.MouseState = MaterialSkin.MouseState.HOVER;
-            this.rbCompra.Name = "rbCompra";
-            this.rbCompra.Ripple = true;
-            this.rbCompra.Size = new System.Drawing.Size(143, 30);
-            this.rbCompra.TabIndex = 4;
-            this.rbCompra.TabStop = true;
-            this.rbCompra.Text = "Compra Inmediata";
-            this.rbCompra.UseVisualStyleBackColor = true;
-            this.rbCompra.CheckedChanged += new System.EventHandler(this.rbCompra_CheckedChanged);
+            this.rbOferta.AutoSize = true;
+            this.rbOferta.Depth = 0;
+            this.rbOferta.Font = new System.Drawing.Font("Roboto", 10F);
+            this.rbOferta.Location = new System.Drawing.Point(21, 77);
+            this.rbOferta.Margin = new System.Windows.Forms.Padding(0);
+            this.rbOferta.MouseLocation = new System.Drawing.Point(-1, -1);
+            this.rbOferta.MouseState = MaterialSkin.MouseState.HOVER;
+            this.rbOferta.Name = "rbOferta";
+            this.rbOferta.Ripple = true;
+            this.rbOferta.Size = new System.Drawing.Size(67, 30);
+            this.rbOferta.TabIndex = 4;
+            this.rbOferta.Text = "Oferta";
+            this.rbOferta.UseVisualStyleBackColor = true;
+            this.rbOferta.CheckedChanged += new System.EventHandler(this.rbCompra_CheckedChanged);
             // 
             // listadoRubro
             // 
@@ -191,11 +176,12 @@
             this.cmbRubro.Name = "cmbRubro";
             this.cmbRubro.Size = new System.Drawing.Size(303, 21);
             this.cmbRubro.TabIndex = 8;
+            this.cmbRubro.Text = "Agregue los Rubros que desee";
             // 
             // btnAgregarRubro
             // 
             this.btnAgregarRubro.Depth = 0;
-            this.btnAgregarRubro.Location = new System.Drawing.Point(433, 17);
+            this.btnAgregarRubro.Location = new System.Drawing.Point(345, 17);
             this.btnAgregarRubro.MouseState = MaterialSkin.MouseState.HOVER;
             this.btnAgregarRubro.Name = "btnAgregarRubro";
             this.btnAgregarRubro.Primary = true;
@@ -203,9 +189,11 @@
             this.btnAgregarRubro.TabIndex = 9;
             this.btnAgregarRubro.Text = "Agregar";
             this.btnAgregarRubro.UseVisualStyleBackColor = true;
+            this.btnAgregarRubro.Click += new System.EventHandler(this.btnAgregarRubro_Click);
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.btnQuitar);
             this.groupBox2.Controls.Add(this.cmbRubro);
             this.groupBox2.Controls.Add(this.btnAgregarRubro);
             this.groupBox2.Controls.Add(this.listadoRubro);
@@ -215,6 +203,19 @@
             this.groupBox2.TabIndex = 10;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Rubro";
+            // 
+            // btnQuitar
+            // 
+            this.btnQuitar.Depth = 0;
+            this.btnQuitar.Location = new System.Drawing.Point(433, 17);
+            this.btnQuitar.MouseState = MaterialSkin.MouseState.HOVER;
+            this.btnQuitar.Name = "btnQuitar";
+            this.btnQuitar.Primary = true;
+            this.btnQuitar.Size = new System.Drawing.Size(80, 23);
+            this.btnQuitar.TabIndex = 10;
+            this.btnQuitar.Text = "Quitar";
+            this.btnQuitar.UseVisualStyleBackColor = true;
+            this.btnQuitar.Click += new System.EventHandler(this.btnQuitar_Click);
             // 
             // groupBox3
             // 
@@ -486,16 +487,15 @@
             this.Controls.Add(this.txtDescripcion);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox2);
-            this.Controls.Add(this.groupBox1);
+            this.Controls.Add(this.gbRadio);
             this.Controls.Add(this.btnVolver);
-            this.Controls.Add(this.btnGenerar);
             this.MaximizeBox = false;
             this.Name = "Publicar";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Generar Publicacion";
             this.Load += new System.EventHandler(this.Publicar_Load);
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
+            this.gbRadio.ResumeLayout(false);
+            this.gbRadio.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.listadoRubro)).EndInit();
             this.groupBox2.ResumeLayout(false);
             this.groupBox3.ResumeLayout(false);
@@ -511,11 +511,10 @@
 
         #endregion
 
-        private MaterialSkin.Controls.MaterialRaisedButton btnGenerar;
         private MaterialSkin.Controls.MaterialRaisedButton btnVolver;
         private MaterialSkin.Controls.MaterialRadioButton rbSubasta;
-        private System.Windows.Forms.GroupBox groupBox1;
-        private MaterialSkin.Controls.MaterialRadioButton rbCompra;
+        private System.Windows.Forms.GroupBox gbRadio;
+        private MaterialSkin.Controls.MaterialRadioButton rbOferta;
         private System.Windows.Forms.DataGridView listadoRubro;
         private System.Windows.Forms.DataGridViewTextBoxColumn Id;
         private System.Windows.Forms.DataGridViewTextBoxColumn DescripcionCorta;
@@ -547,5 +546,6 @@
         private System.Windows.Forms.GroupBox groupBox4;
         private MaterialSkin.Controls.MaterialSingleLineTextField txtStock;
         private System.Windows.Forms.Label label6;
+        private MaterialSkin.Controls.MaterialRaisedButton btnQuitar;
     }
 }
