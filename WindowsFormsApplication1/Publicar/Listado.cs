@@ -31,6 +31,8 @@ namespace MercadoEnvio.Publicar
 
         private void btnVolver_Click(object sender, EventArgs e)
         {
+            Funcionalidades.MenuUsuario f = new Funcionalidades.MenuUsuario();
+            f.Show();
             this.Close();
         }
 

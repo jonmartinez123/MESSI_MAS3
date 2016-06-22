@@ -30,6 +30,7 @@
         {
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.btnLimpiarCliente = new System.Windows.Forms.Button();
             this.cmbTipoDocumento = new System.Windows.Forms.ComboBox();
             this.materialLabel5 = new MaterialSkin.Controls.MaterialLabel();
             this.materialLabel6 = new MaterialSkin.Controls.MaterialLabel();
@@ -53,6 +54,7 @@
             this.txtNombre = new System.Windows.Forms.TextBox();
             this.materialLabel3 = new MaterialSkin.Controls.MaterialLabel();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.btnLimpiarEmpresa = new System.Windows.Forms.Button();
             this.materialLabel9 = new MaterialSkin.Controls.MaterialLabel();
             this.materialLabel8 = new MaterialSkin.Controls.MaterialLabel();
             this.materialLabel7 = new MaterialSkin.Controls.MaterialLabel();
@@ -73,8 +75,7 @@
             this.txtRazonSocial = new System.Windows.Forms.TextBox();
             this.materialLabel1 = new MaterialSkin.Controls.MaterialLabel();
             this.btnCrearUsuario = new System.Windows.Forms.Button();
-            this.btnLimpiarCliente = new System.Windows.Forms.Button();
-            this.btnLimpiarEmpresa = new System.Windows.Forms.Button();
+            this.btnVolver = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvClientes)).BeginInit();
@@ -117,6 +118,16 @@
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Clientes";
             this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // btnLimpiarCliente
+            // 
+            this.btnLimpiarCliente.Location = new System.Drawing.Point(135, 87);
+            this.btnLimpiarCliente.Name = "btnLimpiarCliente";
+            this.btnLimpiarCliente.Size = new System.Drawing.Size(109, 23);
+            this.btnLimpiarCliente.TabIndex = 113;
+            this.btnLimpiarCliente.Text = "Limpiar";
+            this.btnLimpiarCliente.UseVisualStyleBackColor = true;
+            this.btnLimpiarCliente.Click += new System.EventHandler(this.btnLimpiarCliente_Click);
             // 
             // cmbTipoDocumento
             // 
@@ -347,6 +358,16 @@
             this.tabPage2.Text = "Empresas";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
+            // btnLimpiarEmpresa
+            // 
+            this.btnLimpiarEmpresa.Location = new System.Drawing.Point(135, 87);
+            this.btnLimpiarEmpresa.Name = "btnLimpiarEmpresa";
+            this.btnLimpiarEmpresa.Size = new System.Drawing.Size(109, 23);
+            this.btnLimpiarEmpresa.TabIndex = 114;
+            this.btnLimpiarEmpresa.Text = "Limpiar";
+            this.btnLimpiarEmpresa.UseVisualStyleBackColor = true;
+            this.btnLimpiarEmpresa.Click += new System.EventHandler(this.btnLimpiarEmpresa_Click);
+            // 
             // materialLabel9
             // 
             this.materialLabel9.AutoSize = true;
@@ -527,7 +548,7 @@
             // 
             // btnCrearUsuario
             // 
-            this.btnCrearUsuario.Location = new System.Drawing.Point(624, 425);
+            this.btnCrearUsuario.Location = new System.Drawing.Point(509, 425);
             this.btnCrearUsuario.Name = "btnCrearUsuario";
             this.btnCrearUsuario.Size = new System.Drawing.Size(109, 23);
             this.btnCrearUsuario.TabIndex = 1;
@@ -535,31 +556,22 @@
             this.btnCrearUsuario.UseVisualStyleBackColor = true;
             this.btnCrearUsuario.Click += new System.EventHandler(this.btnCrearUsuario_Click);
             // 
-            // btnLimpiarCliente
+            // btnVolver
             // 
-            this.btnLimpiarCliente.Location = new System.Drawing.Point(135, 87);
-            this.btnLimpiarCliente.Name = "btnLimpiarCliente";
-            this.btnLimpiarCliente.Size = new System.Drawing.Size(109, 23);
-            this.btnLimpiarCliente.TabIndex = 113;
-            this.btnLimpiarCliente.Text = "Limpiar";
-            this.btnLimpiarCliente.UseVisualStyleBackColor = true;
-            this.btnLimpiarCliente.Click += new System.EventHandler(this.btnLimpiarCliente_Click);
-            // 
-            // btnLimpiarEmpresa
-            // 
-            this.btnLimpiarEmpresa.Location = new System.Drawing.Point(135, 87);
-            this.btnLimpiarEmpresa.Name = "btnLimpiarEmpresa";
-            this.btnLimpiarEmpresa.Size = new System.Drawing.Size(109, 23);
-            this.btnLimpiarEmpresa.TabIndex = 114;
-            this.btnLimpiarEmpresa.Text = "Limpiar";
-            this.btnLimpiarEmpresa.UseVisualStyleBackColor = true;
-            this.btnLimpiarEmpresa.Click += new System.EventHandler(this.btnLimpiarEmpresa_Click);
+            this.btnVolver.Location = new System.Drawing.Point(624, 425);
+            this.btnVolver.Name = "btnVolver";
+            this.btnVolver.Size = new System.Drawing.Size(109, 23);
+            this.btnVolver.TabIndex = 2;
+            this.btnVolver.Text = "Volver";
+            this.btnVolver.UseVisualStyleBackColor = true;
+            this.btnVolver.Click += new System.EventHandler(this.btnVolver_Click);
             // 
             // Usuario
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(749, 471);
+            this.Controls.Add(this.btnVolver);
             this.Controls.Add(this.btnCrearUsuario);
             this.Controls.Add(this.tabControl1);
             this.MaximizeBox = false;
@@ -627,5 +639,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colHabilitado;
         private System.Windows.Forms.Button btnLimpiarCliente;
         private System.Windows.Forms.Button btnLimpiarEmpresa;
+        private System.Windows.Forms.Button btnVolver;
     }
 }

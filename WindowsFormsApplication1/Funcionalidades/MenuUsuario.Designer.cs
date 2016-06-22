@@ -207,7 +207,6 @@
             this.Sizable = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Menu De Usuario";
-            this.Load += new System.EventHandler(this.MenuUsuario_Load);
             this.menuHome.ResumeLayout(false);
             this.menuHome.PerformLayout();
             this.ResumeLayout(false);

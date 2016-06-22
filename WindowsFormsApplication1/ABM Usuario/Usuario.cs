@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using MaterialSkin;
 using MaterialSkin.Controls;
+using MercadoEnvio.Funcionalidades;
 
 namespace MercadoEnvio.ABM_Usuario
 {
@@ -224,7 +225,11 @@ namespace MercadoEnvio.ABM_Usuario
             txtDni.Text = "";
         }
 
-
-
+        private void btnVolver_Click(object sender, EventArgs e)
+        {
+            Funcionalidades.MenuUsuario f = new Funcionalidades.MenuUsuario();
+            f.Show();
+            this.Close();
+        }
     }
 }

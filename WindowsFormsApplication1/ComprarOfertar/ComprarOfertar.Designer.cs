@@ -59,6 +59,7 @@
             this.colRubro = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colVisibilidadId = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.btnVolver = new MaterialSkin.Controls.MaterialRaisedButton();
             ((System.ComponentModel.ISupportInitialize)(this.bindingNavigator1)).BeginInit();
             this.bindingNavigator1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.superGrid1)).BeginInit();
@@ -188,22 +189,22 @@
             this.bindingNavigatorMoveNextItem,
             this.bindingNavigatorMoveLastItem,
             this.bindingNavigatorSeparator2});
-            this.bindingNavigator1.Location = new System.Drawing.Point(717, 373);
+            this.bindingNavigator1.Location = new System.Drawing.Point(454, 370);
             this.bindingNavigator1.MoveFirstItem = this.bindingNavigatorMoveFirstItem;
             this.bindingNavigator1.MoveLastItem = this.bindingNavigatorMoveLastItem;
             this.bindingNavigator1.MoveNextItem = this.bindingNavigatorMoveNextItem;
             this.bindingNavigator1.MovePreviousItem = this.bindingNavigatorMovePreviousItem;
             this.bindingNavigator1.Name = "bindingNavigator1";
             this.bindingNavigator1.PositionItem = this.bindingNavigatorPositionItem;
-            this.bindingNavigator1.Size = new System.Drawing.Size(209, 25);
+            this.bindingNavigator1.Size = new System.Drawing.Size(211, 25);
             this.bindingNavigator1.TabIndex = 123;
             this.bindingNavigator1.Text = "bindingNavigator1";
             // 
             // bindingNavigatorCountItem
             // 
             this.bindingNavigatorCountItem.Name = "bindingNavigatorCountItem";
-            this.bindingNavigatorCountItem.Size = new System.Drawing.Size(35, 22);
-            this.bindingNavigatorCountItem.Text = "of {0}";
+            this.bindingNavigatorCountItem.Size = new System.Drawing.Size(37, 22);
+            this.bindingNavigatorCountItem.Text = "de {0}";
             this.bindingNavigatorCountItem.ToolTipText = "Número total de elementos";
             // 
             // bindingNavigatorMoveFirstItem
@@ -349,11 +350,25 @@
             this.Column7.Name = "Column7";
             this.Column7.ReadOnly = true;
             // 
+            // btnVolver
+            // 
+            this.btnVolver.Depth = 0;
+            this.btnVolver.Location = new System.Drawing.Point(821, 373);
+            this.btnVolver.MouseState = MaterialSkin.MouseState.HOVER;
+            this.btnVolver.Name = "btnVolver";
+            this.btnVolver.Primary = true;
+            this.btnVolver.Size = new System.Drawing.Size(105, 23);
+            this.btnVolver.TabIndex = 125;
+            this.btnVolver.Text = "Volver";
+            this.btnVolver.UseVisualStyleBackColor = true;
+            this.btnVolver.Click += new System.EventHandler(this.btnVolver_Click);
+            // 
             // ComprarOfertar
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(951, 417);
+            this.ClientSize = new System.Drawing.Size(960, 436);
+            this.Controls.Add(this.btnVolver);
             this.Controls.Add(this.superGrid1);
             this.Controls.Add(this.bindingNavigator1);
             this.Controls.Add(this.btnComprar);
@@ -408,5 +423,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colRubro;
         private System.Windows.Forms.DataGridViewTextBoxColumn colVisibilidadId;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column7;
+        private MaterialSkin.Controls.MaterialRaisedButton btnVolver;
     }
 }

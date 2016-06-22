@@ -43,11 +43,19 @@
             this.bindingNavigatorMoveNextItem = new System.Windows.Forms.ToolStripButton();
             this.bindingNavigatorMoveLastItem = new System.Windows.Forms.ToolStripButton();
             this.bindingNavigatorSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            this.superGrid1 = new MercadoEnvio.Modelo.SuperGrid();
+            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.fechaHasta = new System.Windows.Forms.DateTimePicker();
             this.consultar_button = new System.Windows.Forms.Button();
             this.fechaDesde = new System.Windows.Forms.DateTimePicker();
+            this.dirigidotxt = new System.Windows.Forms.TextBox();
             this.detallePublitxt = new System.Windows.Forms.TextBox();
+            this.label6 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.importeBajotxt = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
@@ -55,23 +63,16 @@
             this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
+            this.checkBox4 = new System.Windows.Forms.CheckBox();
             this.checkBox3 = new System.Windows.Forms.CheckBox();
             this.checkBox2 = new System.Windows.Forms.CheckBox();
             this.checkBox1 = new System.Windows.Forms.CheckBox();
-            this.dirigidotxt = new System.Windows.Forms.TextBox();
-            this.label6 = new System.Windows.Forms.Label();
-            this.checkBox4 = new System.Windows.Forms.CheckBox();
-            this.superGrid1 = new MercadoEnvio.Modelo.SuperGrid();
-            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.btnVolver = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.bindingNavigator1)).BeginInit();
             this.bindingNavigator1.SuspendLayout();
-            this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.superGrid1)).BeginInit();
+            this.groupBox2.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox1
@@ -202,6 +203,55 @@
             this.bindingNavigatorSeparator2.Name = "bindingNavigatorSeparator2";
             this.bindingNavigatorSeparator2.Size = new System.Drawing.Size(6, 25);
             // 
+            // superGrid1
+            // 
+            this.superGrid1.AllowUserToAddRows = false;
+            this.superGrid1.AllowUserToDeleteRows = false;
+            this.superGrid1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.superGrid1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.Column1,
+            this.Column2,
+            this.Column3,
+            this.Column4,
+            this.Column5});
+            this.superGrid1.Location = new System.Drawing.Point(6, 19);
+            this.superGrid1.Name = "superGrid1";
+            this.superGrid1.PageSize = 20;
+            this.superGrid1.Size = new System.Drawing.Size(647, 225);
+            this.superGrid1.TabIndex = 0;
+            // 
+            // Column1
+            // 
+            this.Column1.HeaderText = "Factura ID";
+            this.Column1.Name = "Column1";
+            this.Column1.ReadOnly = true;
+            // 
+            // Column2
+            // 
+            this.Column2.HeaderText = "Fecha";
+            this.Column2.Name = "Column2";
+            this.Column2.ReadOnly = true;
+            // 
+            // Column3
+            // 
+            this.Column3.HeaderText = "Publicacion ID";
+            this.Column3.Name = "Column3";
+            this.Column3.ReadOnly = true;
+            this.Column3.Width = 150;
+            // 
+            // Column4
+            // 
+            this.Column4.HeaderText = "Importe";
+            this.Column4.Name = "Column4";
+            this.Column4.ReadOnly = true;
+            // 
+            // Column5
+            // 
+            this.Column5.HeaderText = "Forma de Pago";
+            this.Column5.Name = "Column5";
+            this.Column5.ReadOnly = true;
+            this.Column5.Width = 150;
+            // 
             // groupBox2
             // 
             this.groupBox2.BackColor = System.Drawing.SystemColors.Window;
@@ -258,6 +308,14 @@
             this.fechaDesde.TabIndex = 4;
             this.fechaDesde.ValueChanged += new System.EventHandler(this.dateTimePicker1_ValueChanged);
             // 
+            // dirigidotxt
+            // 
+            this.dirigidotxt.Enabled = false;
+            this.dirigidotxt.Location = new System.Drawing.Point(234, 139);
+            this.dirigidotxt.Name = "dirigidotxt";
+            this.dirigidotxt.Size = new System.Drawing.Size(100, 20);
+            this.dirigidotxt.TabIndex = 2;
+            // 
             // detallePublitxt
             // 
             this.detallePublitxt.Enabled = false;
@@ -265,6 +323,15 @@
             this.detallePublitxt.Name = "detallePublitxt";
             this.detallePublitxt.Size = new System.Drawing.Size(100, 20);
             this.detallePublitxt.TabIndex = 2;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(174, 142);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(59, 13);
+            this.label6.TabIndex = 1;
+            this.label6.Text = "DNI/CUIT:";
             // 
             // label3
             // 
@@ -330,6 +397,17 @@
             this.label1.TabIndex = 1;
             this.label1.Text = "Desde:";
             // 
+            // checkBox4
+            // 
+            this.checkBox4.AutoSize = true;
+            this.checkBox4.Location = new System.Drawing.Point(20, 138);
+            this.checkBox4.Name = "checkBox4";
+            this.checkBox4.Size = new System.Drawing.Size(121, 17);
+            this.checkBox4.TabIndex = 0;
+            this.checkBox4.Text = "A quien esta dirigida";
+            this.checkBox4.UseVisualStyleBackColor = true;
+            this.checkBox4.CheckedChanged += new System.EventHandler(this.checkBox4_CheckedChanged);
+            // 
             // checkBox3
             // 
             this.checkBox3.AutoSize = true;
@@ -363,88 +441,22 @@
             this.checkBox1.UseVisualStyleBackColor = true;
             this.checkBox1.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
             // 
-            // dirigidotxt
+            // btnVolver
             // 
-            this.dirigidotxt.Enabled = false;
-            this.dirigidotxt.Location = new System.Drawing.Point(234, 139);
-            this.dirigidotxt.Name = "dirigidotxt";
-            this.dirigidotxt.Size = new System.Drawing.Size(100, 20);
-            this.dirigidotxt.TabIndex = 2;
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(174, 142);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(59, 13);
-            this.label6.TabIndex = 1;
-            this.label6.Text = "DNI/CUIT:";
-            // 
-            // checkBox4
-            // 
-            this.checkBox4.AutoSize = true;
-            this.checkBox4.Location = new System.Drawing.Point(20, 138);
-            this.checkBox4.Name = "checkBox4";
-            this.checkBox4.Size = new System.Drawing.Size(121, 17);
-            this.checkBox4.TabIndex = 0;
-            this.checkBox4.Text = "A quien esta dirigida";
-            this.checkBox4.UseVisualStyleBackColor = true;
-            this.checkBox4.CheckedChanged += new System.EventHandler(this.checkBox4_CheckedChanged);
-            // 
-            // superGrid1
-            // 
-            this.superGrid1.AllowUserToAddRows = false;
-            this.superGrid1.AllowUserToDeleteRows = false;
-            this.superGrid1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.superGrid1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.Column1,
-            this.Column2,
-            this.Column3,
-            this.Column4,
-            this.Column5});
-            this.superGrid1.Location = new System.Drawing.Point(6, 19);
-            this.superGrid1.Name = "superGrid1";
-            this.superGrid1.PageSize = 20;
-            this.superGrid1.Size = new System.Drawing.Size(647, 225);
-            this.superGrid1.TabIndex = 0;
-            // 
-            // Column1
-            // 
-            this.Column1.HeaderText = "Factura ID";
-            this.Column1.Name = "Column1";
-            this.Column1.ReadOnly = true;
-            // 
-            // Column2
-            // 
-            this.Column2.HeaderText = "Fecha";
-            this.Column2.Name = "Column2";
-            this.Column2.ReadOnly = true;
-            // 
-            // Column3
-            // 
-            this.Column3.HeaderText = "Publicacion ID";
-            this.Column3.Name = "Column3";
-            this.Column3.ReadOnly = true;
-            this.Column3.Width = 150;
-            // 
-            // Column4
-            // 
-            this.Column4.HeaderText = "Importe";
-            this.Column4.Name = "Column4";
-            this.Column4.ReadOnly = true;
-            // 
-            // Column5
-            // 
-            this.Column5.HeaderText = "Forma de Pago";
-            this.Column5.Name = "Column5";
-            this.Column5.ReadOnly = true;
-            this.Column5.Width = 150;
+            this.btnVolver.Location = new System.Drawing.Point(594, 616);
+            this.btnVolver.Name = "btnVolver";
+            this.btnVolver.Size = new System.Drawing.Size(100, 27);
+            this.btnVolver.TabIndex = 6;
+            this.btnVolver.Text = "Volver";
+            this.btnVolver.UseVisualStyleBackColor = true;
+            this.btnVolver.Click += new System.EventHandler(this.btnVolver_Click);
             // 
             // ConsultarFacturas
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(721, 627);
+            this.ClientSize = new System.Drawing.Size(721, 644);
+            this.Controls.Add(this.btnVolver);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.groupBox2);
             this.MaximizeBox = false;
@@ -457,9 +469,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.bindingNavigator1)).EndInit();
             this.bindingNavigator1.ResumeLayout(false);
             this.bindingNavigator1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.superGrid1)).EndInit();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.superGrid1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -503,6 +515,7 @@
         private System.Windows.Forms.TextBox dirigidotxt;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.CheckBox checkBox4;
+        private System.Windows.Forms.Button btnVolver;
 
     }
 }

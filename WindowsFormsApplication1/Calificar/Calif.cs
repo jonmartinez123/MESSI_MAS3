@@ -30,6 +30,8 @@ namespace MercadoEnvio.Calificar
 
         private void cerrarCalificacion_button_Click(object sender, EventArgs e)
         {
+            Funcionalidades.MenuUsuario f = new Funcionalidades.MenuUsuario();
+            f.Show();
             this.Close();
         }
 

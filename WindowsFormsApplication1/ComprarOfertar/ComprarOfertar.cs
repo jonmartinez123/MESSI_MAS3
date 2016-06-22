@@ -129,5 +129,12 @@ namespace MercadoEnvio.ComprarOfertar
             if (e.KeyChar != 8) this.allowMaxLenght(txtDescripcion, 254, e);
         }
 
+        private void btnVolver_Click(object sender, EventArgs e)
+        {
+            Funcionalidades.MenuUsuario f = new Funcionalidades.MenuUsuario();
+            f.Show();
+            this.Close();
+        }
+
     }
 }

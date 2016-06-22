@@ -79,5 +79,10 @@ namespace MercadoEnvio.ComprarOfertar
             }
             return false;
         }
+
+        private void SeleccionRubros_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

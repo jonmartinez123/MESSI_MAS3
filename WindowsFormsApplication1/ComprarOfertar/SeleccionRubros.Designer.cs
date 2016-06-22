@@ -92,6 +92,7 @@
             this.Controls.Add(this.clbRubros);
             this.Name = "SeleccionRubros";
             this.Text = "Seleccionar Rubros";
+            this.Load += new System.EventHandler(this.SeleccionRubros_Load);
             this.ResumeLayout(false);
 
         }

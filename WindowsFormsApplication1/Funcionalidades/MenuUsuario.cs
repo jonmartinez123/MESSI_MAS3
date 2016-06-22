@@ -11,6 +11,7 @@ using System.Windows.Forms;
 using MercadoEnvio.Modelo;
 
 using MaterialSkin;
+using MercadoEnvio.DAO;
 
 namespace MercadoEnvio.Funcionalidades
 {
@@ -22,9 +23,6 @@ namespace MercadoEnvio.Funcionalidades
             var materialSkinManager = MaterialSkinManager.Instance;
             materialSkinManager.AddFormToManage(this);
             materialSkinManager.Theme = MaterialSkinManager.Themes.LIGHT;
-        }
-        private void MenuUsuario_Load(object sender, EventArgs e)
-        {
             asignarFuncionalidades();
             int tieneMasDe3Calificaciones;
             tieneMasDe3Calificaciones = DAO.SqlConnector.executeProcedure("tieneMasde3calificacionesPendientesSegun", Persistencia.usuario.Id);
@@ -32,6 +30,7 @@ namespace MercadoEnvio.Funcionalidades
                 var window = MessageBox.Show(this, "Existen mas de 3 calificaciones pendientes, califique para proseguir", "Calificaciones pendientes", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 Calificar.Calif cal = new Calificar.Calif();
                 cal.ShowDialog();
+                this.Close();
                                                 
             }
         }
@@ -43,7 +42,7 @@ namespace MercadoEnvio.Funcionalidades
             var calificarVendedor = false;
             var consultarFacturas = false;
             var listadoEstadistico = false;
-
+            Persistencia.usuario.Rol.getFuncionalidades = RolSQl.getFuncionalidades(Persistencia.usuario.Rol);
             //Obtengo todas las funcionalidades asignadas al rol del usuario logueado
             foreach (Funcionalidad fun in Persistencia.usuario.Rol.getFuncionalidades)
             {
@@ -114,22 +113,26 @@ namespace MercadoEnvio.Funcionalidades
         {
             ABM_Rol.Listado rol = new ABM_Rol.Listado();
             rol.ShowDialog();
+            this.Close();
         }
 
         private void abm_usuarioToolStripMenuItem_Click(object sender, EventArgs e)
         {
             ABM_Usuario.Usuario usuario = new ABM_Usuario.Usuario();
             usuario.ShowDialog();
+            this.Close();
         }
 
         private void abm_rubroToolStripMenuItem_Click(object sender, EventArgs e)
         {
             ABM_Rubro.Rubro rub = new ABM_Rubro.Rubro();
             rub.ShowDialog();
+            this.Close();
         }
 
         private void abm_visibilidadToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            this.Hide();
             ABM_Visibilidad.Visibilidad visibilidad = new ABM_Visibilidad.Visibilidad();
             visibilidad.ShowDialog();
         }
@@ -142,36 +145,41 @@ namespace MercadoEnvio.Funcionalidades
         {
             ComprarOfertar.ComprarOfertar comp = new ComprarOfertar.ComprarOfertar();
             comp.ShowDialog();
+            this.Close();
         }
 
         private void historialDeClienteToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Historial_Cliente.HistorialCliente historial = new Historial_Cliente.HistorialCliente();
             historial.ShowDialog();
+            this.Close();
         }
 
         private void calificarAlVendedorToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Calificar.Calif cal = new Calificar.Calif();
             cal.ShowDialog();
+            this.Close();
         }
 
         private void consultarFacturasToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Facturas.ConsultarFacturas facturas = new Facturas.ConsultarFacturas();
             facturas.ShowDialog();
+            this.Close();
         }
 
         private void listadoEstadisticoToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Listado_Estadistico.ListadoEstadistico listado = new Listado_Estadistico.ListadoEstadistico();
             listado.ShowDialog();
+            this.Close();
         }
 
         private void cerrarSesiontoolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Persistencia.usuario = null;
             this.Hide();
+            Persistencia.usuario = null;
             Login.Login lg = new Login.Login();
             lg.ShowDialog();
         }
@@ -180,12 +188,14 @@ namespace MercadoEnvio.Funcionalidades
         {
             Publicar.Listado lis = new Publicar.Listado();
             lis.Show();
+            this.Close();
         }
 
         private void generarPublicacionToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Publicar.Publicar pub = new Publicar.Publicar();
             pub.ShowDialog();
+            this.Close();
         }
     }
 }

@@ -86,6 +86,8 @@ namespace MercadoEnvio.ABM_Rol
 
         private void button_Cerrar_Click(object sender, EventArgs e)
         {
+            Funcionalidades.MenuUsuario f = new Funcionalidades.MenuUsuario();
+            f.Show();
             this.Close();
         }
     }

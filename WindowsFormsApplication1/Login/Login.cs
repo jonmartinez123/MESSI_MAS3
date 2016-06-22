@@ -59,7 +59,6 @@ namespace MercadoEnvio.Login
                                     Persistencia.usuario.Rol.getFuncionalidades = funcionalidades;
                                     Funcionalidades.MenuUsuario menuUsuario = new Funcionalidades.MenuUsuario();
                                     menuUsuario.ShowDialog();
-                                    Close();
                                 }
                                 else
                                 {
