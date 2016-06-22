@@ -248,6 +248,7 @@
             this.ListadoVisibilidades.ReadOnly = true;
             this.ListadoVisibilidades.Size = new System.Drawing.Size(506, 110);
             this.ListadoVisibilidades.TabIndex = 1;
+            this.ListadoVisibilidades.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.ListadoVisibilidades_CellContentClick);
             // 
             // dataGridViewTextBoxColumn1
             // 

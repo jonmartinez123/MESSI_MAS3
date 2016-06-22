@@ -37,6 +37,7 @@ namespace MercadoEnvio.Publicar
             dtInicio.MinDate = minInicio;
             dtInicio.Value = minInicio;
             rbOferta.Select();
+            reload();
         }
         private void Publicar_Load(object sender, EventArgs e)
         {
@@ -88,25 +89,33 @@ namespace MercadoEnvio.Publicar
         }
         private void guardar() {
             var checkedButton = gbRadio.Controls.OfType<RadioButton>().FirstOrDefault(r => r.Checked);
+            int rowindex = ListadoVisibilidades.CurrentCell.RowIndex;
             int idTipoPublicacion = DAO.TipoPublicacionSQL.getId(checkedButton.Text);
-            int idVisibilidad = Convert.ToInt32(Extension.cellValue(this.ListadoVisibilidades, "Id"));
+            int idVisibilidad = Convert.ToInt32(ListadoVisibilidades.Rows[rowindex].Cells[0].Value);
             int seCobraEnvio;
             if(cbEnvio.Checked==true){
                 seCobraEnvio = 1;
             }else{
                 seCobraEnvio = 0;
             }
-            DAO.PublicacionSQL.insertarPublicacion(1, idVisibilidad, Persistencia.usuario.Id, idTipoPublicacion,txtDescripcion.Text,dtInicio.Value,dtFin.Value,Convert.ToDouble(txtSubastaMinima.Text),Convert.ToDouble(txtPrecio.Text),Convert.ToInt32(txtStock.Text),seCobraEnvio);
+            double subastaMinima;
+            if (string.IsNullOrEmpty(txtSubastaMinima.Text))
+            {
+                subastaMinima = -1;
+            }
+            else { subastaMinima = Convert.ToDouble(txtSubastaMinima.Text); } 
+            DAO.PublicacionSQL.insertarPublicacion(1, idVisibilidad, Persistencia.usuario.Id, idTipoPublicacion,txtDescripcion.Text,dtInicio.Value,dtFin.Value,subastaMinima,Convert.ToDouble(txtPrecio.Text),Convert.ToInt32(txtStock.Text),seCobraEnvio);
+            MessageBox.Show("Se ha guardado la publicacion con exito", "Exito");
         }
         private void btnGuardar_Click(object sender, EventArgs e)
         {
-            if (Extension.anySelected(listadoRubro, "un rubro") && !string.IsNullOrWhiteSpace(txtDescripcion.Text) && !string.IsNullOrWhiteSpace(txtPrecio.Text) && !string.IsNullOrWhiteSpace(txtStock.Text)){
+            if (Extension.anySelected(ListadoVisibilidades, "una visibilidad") && listadoRubro.Rows.Count > 0 && !string.IsNullOrWhiteSpace(txtDescripcion.Text) && !string.IsNullOrWhiteSpace(txtPrecio.Text) && !string.IsNullOrWhiteSpace(txtStock.Text)){
                 if(rbSubasta.Checked && !string.IsNullOrWhiteSpace(txtSubastaMinima.Text)){
                     guardar();
                 }
                 guardar();
             }else{
-                MessageBox.Show("Se ha guardado la publicacion con exito","Exito");
+                MessageBox.Show("Por favor complete todos los campos","Error");
             }
         }
 
@@ -125,24 +134,21 @@ namespace MercadoEnvio.Publicar
         {
             
         }
-
         private void btnAgregarRubro_Click(object sender, EventArgs e)
         {
-            if (cmbRubro.SelectedItem == null){
+            if (cmbRubro.SelectedIndex != -1){
                 Rubro r = (Rubro)cmbRubro.SelectedItem;
                 if (r != null)
                 {
                     foreach (DataGridViewRow row in listadoRubro.Rows)
                     {
-                        if (Convert.ToInt32(Extension.cellValue(listadoRubro, "Id")) == r.Id)
+                        if (Convert.ToInt32(row.Cells[0].Value) == r.Id)
                         {
                             MessageBox.Show("Ya agregó este rubro!");
-                        }
-                        else
-                        {
-                            listadoRubro.Rows.Add(row);
+                            return;
                         }
                     }
+                    listadoRubro.Rows.Add(r.Id, r.DescripcionCorta, r.DescripcionLarga);
                 }
             }else{
                 MessageBox.Show("Debe seleccionar al menos un rubro","Error");
@@ -155,6 +161,11 @@ namespace MercadoEnvio.Publicar
             {
                 listadoRubro.Rows.RemoveAt(listadoRubro.CurrentRow.Index);
             }
+        }
+
+        private void ListadoVisibilidades_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
         }
     }
 }

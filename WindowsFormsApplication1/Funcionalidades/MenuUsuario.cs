@@ -197,5 +197,10 @@ namespace MercadoEnvio.Funcionalidades
             pub.ShowDialog();
             this.Close();
         }
+
+        private void salirtoolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            System.Windows.Forms.Application.Exit();
+        }
     }
 }
