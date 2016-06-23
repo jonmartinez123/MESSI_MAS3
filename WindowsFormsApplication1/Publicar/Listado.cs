@@ -36,10 +36,6 @@ namespace MercadoEnvio.Publicar
             this.Close();
         }
 
-        private void rbTodas_CheckedChanged(object sender, EventArgs e)
-        {
-            //listadoPublicaciones.Sort(Salida, System.ComponentModel.ListSortDirection.Ascending);
-        }
         private void reload() {
             DAO.PublicacionSQL.getPublicaciones(listadoPublicaciones, Persistencia.usuario.Id);
         }
@@ -55,17 +51,20 @@ namespace MercadoEnvio.Publicar
         {
             if (listadoPublicaciones.SelectedRows.Count != 0)
             {
-                Detalles d = new Detalles(getSeleccionado());
-                d.Show();
+                Detalles d = new Detalles();
+                d.publicacion = getSeleccionado();
+                d.ShowDialog();
             }
+            else { MessageBox.Show("Debe seleccionar una publicacion para ver mas detalles", "Error"); }
         }
 
         private void btnModificar_Click(object sender, EventArgs e)
         {
-            if (listadoPublicaciones.Rows.Count > 0)
+            if (listadoPublicaciones.SelectedRows.Count != 0)
             {
-                //abrir form modificar
-                this.Close();
+                Publicar p = new Publicar();
+                p.pub = getSeleccionado();
+                p.ShowDialog();
             }
         }
         private List<Rubro> crearRubros(int idPublicacion) {
@@ -109,7 +108,8 @@ namespace MercadoEnvio.Publicar
         #endregion 
         private Modelo.Visibilidad crearVisibilidad()
         {
-            return new Modelo.Visibilidad((Convert.ToInt32(Extension.cellValue(listadoPublicaciones, "VisiblidadId"))),
+            int idVisibilidad = Convert.ToInt32(Extension.cellValue(listadoPublicaciones, "VisibilidadId"));
+            return new Modelo.Visibilidad(idVisibilidad,
                 Convert.ToInt32(Extension.cellValue(listadoPublicaciones, "VisibilidadCodigo")),
            Convert.ToString(Extension.cellValue(listadoPublicaciones, "VisibilidadDescripcion")),
            Convert.ToDouble(Extension.cellValue(listadoPublicaciones, "VisibilidadPrecio")),

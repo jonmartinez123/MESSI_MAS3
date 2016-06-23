@@ -16,20 +16,49 @@ namespace MercadoEnvio.Publicar
 {
     public partial class Publicar : MaterialForm
     {
+        public Publicacion pub;
+        private int indice = 0;
         public Publicar()
         {
             InitializeComponent();
-            aplicarDefault();
             var materialSkinManager = MaterialSkinManager.Instance;
             materialSkinManager.AddFormToManage(this);
             materialSkinManager.Theme = MaterialSkinManager.Themes.LIGHT;
-        }
-        private void aplicarDefault()
-        {
             listadoRubro.MultiSelect = false;
             listadoRubro.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             ListadoVisibilidades.MultiSelect = false;
             ListadoVisibilidades.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+        }
+
+        private void traerPublicacion()
+        {
+            txtDescripcion.Text = pub.Descripcion;
+            txtPrecio.Text = Convert.ToString(pub.Precio);
+            txtStock.Text =  Convert.ToString(pub.Stock);
+            dtInicio.Value= pub.FechaInicio;
+            dtFin.Value=pub.FechaFin;
+            foreach(Rubro r in pub.Rubros){
+                listadoRubro.Rows.Add(r.Id, r.DescripcionCorta, r.DescripcionLarga);
+            }
+            Visibilidad v = pub.Visibilidad;
+            foreach (DataGridViewRow row in ListadoVisibilidades.Rows)
+            {
+                if (Convert.ToInt32(row.Cells[0].Value)==v.Id)
+                {
+                    indice =row.Index;
+                    break;
+                }
+            }
+            if (pub.QuisoEnvio == 1) { cbEnvio.Checked = true; } else { cbEnvio.Checked = false; }
+            if(pub.tipoPublicacion.nombre=="Subasta"){
+                 txtSubastaMinima.Text=pub.MinimoSubasta.ToString();
+                 rbSubasta.Checked = true;
+            }else{
+                rbOferta.Checked = true;
+            }
+        }
+        private void aplicarDefault()
+        {
             DateTime minFin = ConfiguracionVariable.FechaSistema.AddDays(1);
             dtFin.MinDate=minFin;
             dtFin.Value = minFin;
@@ -37,17 +66,11 @@ namespace MercadoEnvio.Publicar
             dtInicio.MinDate = minInicio;
             dtInicio.Value = minInicio;
             rbOferta.Select();
-            reload();
         }
-        private void Publicar_Load(object sender, EventArgs e)
-        {
-
-        }
-
         private void btnVolver_Click(object sender, EventArgs e)
         {
-            Funcionalidades.MenuUsuario f = new Funcionalidades.MenuUsuario();
-            f.Show();
+            Listado l = new Listado();
+            l.Show();
             this.Close();
         }
 
@@ -103,9 +126,15 @@ namespace MercadoEnvio.Publicar
             {
                 subastaMinima = -1;
             }
-            else { subastaMinima = Convert.ToDouble(txtSubastaMinima.Text); } 
-            DAO.PublicacionSQL.insertarPublicacion(1, idVisibilidad, Persistencia.usuario.Id, idTipoPublicacion,txtDescripcion.Text,dtInicio.Value,dtFin.Value,subastaMinima,Convert.ToDouble(txtPrecio.Text),Convert.ToInt32(txtStock.Text),seCobraEnvio);
-            MessageBox.Show("Se ha guardado la publicacion con exito", "Exito");
+            else { subastaMinima = Convert.ToDouble(txtSubastaMinima.Text); }
+            if (pub != null)
+            {
+                DAO.PublicacionSQL.insertarPublicacion(1, idVisibilidad, Persistencia.usuario.Id, idTipoPublicacion, txtDescripcion.Text, dtInicio.Value, dtFin.Value, subastaMinima, Convert.ToDouble(txtPrecio.Text), Convert.ToInt32(txtStock.Text), seCobraEnvio);
+                MessageBox.Show("Se ha guardado la publicacion con exito", "Exito");
+            }
+            else {
+                //HHACER UPDATE
+            }
         }
         private void btnGuardar_Click(object sender, EventArgs e)
         {
@@ -166,6 +195,28 @@ namespace MercadoEnvio.Publicar
         private void ListadoVisibilidades_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
 
+        }
+
+
+        public void seleccionarGrilla()
+        {
+            ListadoVisibilidades.FirstDisplayedScrollingRowIndex = indice;
+            ListadoVisibilidades.Rows[indice].Selected = true;
+        }
+
+        private void Publicar_Load(object sender, EventArgs e)
+        {
+            reload();
+            if (pub == null)
+            {
+                aplicarDefault();
+            }
+            else
+            {
+                traerPublicacion();
+                seleccionarGrilla();
+                //cargo lista de rubros ya elegidos
+            }
         }
     }
 }

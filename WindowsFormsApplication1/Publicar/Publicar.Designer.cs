@@ -244,6 +244,7 @@
             this.Porcentaje,
             this.CostoEnvio});
             this.ListadoVisibilidades.Location = new System.Drawing.Point(7, 19);
+            this.ListadoVisibilidades.MultiSelect = false;
             this.ListadoVisibilidades.Name = "ListadoVisibilidades";
             this.ListadoVisibilidades.ReadOnly = true;
             this.ListadoVisibilidades.Size = new System.Drawing.Size(506, 110);

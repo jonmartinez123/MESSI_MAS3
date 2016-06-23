@@ -64,7 +64,6 @@
             // btnActivar
             // 
             this.btnActivar.Depth = 0;
-            this.btnActivar.Enabled = false;
             this.btnActivar.Location = new System.Drawing.Point(105, 24);
             this.btnActivar.MouseState = MaterialSkin.MouseState.HOVER;
             this.btnActivar.Name = "btnActivar";
@@ -90,7 +89,6 @@
             // btnFinalizar
             // 
             this.btnFinalizar.Depth = 0;
-            this.btnFinalizar.Enabled = false;
             this.btnFinalizar.Location = new System.Drawing.Point(267, 24);
             this.btnFinalizar.MouseState = MaterialSkin.MouseState.HOVER;
             this.btnFinalizar.Name = "btnFinalizar";
@@ -104,7 +102,6 @@
             // 
             this.btnModificar.BackColor = System.Drawing.SystemColors.Control;
             this.btnModificar.Depth = 0;
-            this.btnModificar.Enabled = false;
             this.btnModificar.Location = new System.Drawing.Point(12, 24);
             this.btnModificar.MouseState = MaterialSkin.MouseState.HOVER;
             this.btnModificar.Name = "btnModificar";
@@ -131,7 +128,6 @@
             // btnVerMas
             // 
             this.btnVerMas.Depth = 0;
-            this.btnVerMas.Enabled = false;
             this.btnVerMas.Location = new System.Drawing.Point(823, 234);
             this.btnVerMas.MouseState = MaterialSkin.MouseState.HOVER;
             this.btnVerMas.Name = "btnVerMas";
@@ -173,7 +169,6 @@
             // btnPausar
             // 
             this.btnPausar.Depth = 0;
-            this.btnPausar.Enabled = false;
             this.btnPausar.Location = new System.Drawing.Point(186, 24);
             this.btnPausar.MouseState = MaterialSkin.MouseState.HOVER;
             this.btnPausar.Name = "btnPausar";

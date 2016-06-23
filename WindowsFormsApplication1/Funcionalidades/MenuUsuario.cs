@@ -195,7 +195,6 @@ namespace MercadoEnvio.Funcionalidades
         {
             Publicar.Publicar pub = new Publicar.Publicar();
             pub.ShowDialog();
-            this.Close();
         }
 
         private void salirtoolStripMenuItem_Click(object sender, EventArgs e)
