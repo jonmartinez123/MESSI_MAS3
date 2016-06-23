@@ -12,9 +12,17 @@ SELECT rubro_id,rubro_descripcionCorta,rubro_descripcionLarga FROM Publicacion,R
 END
 GO
 
-CREATE PROCEDURE [MESSI_MAS3].insertarPublicacion @idEstado int, @idVisibilidad int,@idUsuario int,@idTipoPublicacion int, @descripcion nvarchar(255),@fechaInicio dateTime, @fechaFin dateTime,@minimoSubasta numeric(10,2),@precio numeric(18,2),@stock numeric(18,0),@seCobraEnvio int
+
+CREATE TYPE Rubros AS TABLE 
+(
+idRubro INT NOT NULL
+PRIMARY KEY (idRubro)
+)
+GO
+CREATE PROCEDURE [MESSI_MAS3].insertarPublicacion (@idEstado int, @idVisibilidad int,@idUsuario int,@idTipoPublicacion int, @descripcion nvarchar(255),@fechaInicio dateTime, @fechaFin dateTime,@minimoSubasta numeric(10,2),@precio numeric(18,2),@stock numeric(18,0),@seCobraEnvio int, @Rubros Rubros READONLY)
 AS
 BEGIN
 INSERT INTO Publicacion(publicacion_idEstado,publicacion_idVisibilidad,publicacion_idUsuario,publicacion_fechaInicio,publicacion_fechaFin,publicacion_descripcion,publicacion_tipoPublicacionId,publicacion_minimoSubasta,publicacion_precio,publicacion_stock,publicacion_seCobraEnvio) VALUES(@idEstado,@idVisibilidad,@idUsuario,@fechaInicio,@fechaFin,@descripcion,@idTipoPublicacion,@minimoSubasta,@precio,@stock,@seCobraEnvio)
+INSERT INTO Rubro_x_Publicacion(idRubro,idPublicacion) (select idRubro,SCOPE_IDENTITY() from @Rubros)
 END
 GO

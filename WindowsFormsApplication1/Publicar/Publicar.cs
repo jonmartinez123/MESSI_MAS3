@@ -115,6 +115,12 @@ namespace MercadoEnvio.Publicar
             int rowindex = ListadoVisibilidades.CurrentCell.RowIndex;
             int idTipoPublicacion = DAO.TipoPublicacionSQL.getId(checkedButton.Text);
             int idVisibilidad = Convert.ToInt32(ListadoVisibilidades.Rows[rowindex].Cells[0].Value);
+            DataTable idRubros = new DataTable("Rubros");
+            idRubros.Columns.Add("idRubro", typeof(Int32));
+            foreach (DataGridViewRow row in listadoRubro.Rows)
+            {
+                idRubros.Rows.Add(Convert.ToInt32(row.Cells[0].Value));
+            }
             int seCobraEnvio;
             if(cbEnvio.Checked==true){
                 seCobraEnvio = 1;
@@ -127,9 +133,9 @@ namespace MercadoEnvio.Publicar
                 subastaMinima = -1;
             }
             else { subastaMinima = Convert.ToDouble(txtSubastaMinima.Text); }
-            if (pub != null)
+            if (pub == null)
             {
-                DAO.PublicacionSQL.insertarPublicacion(1, idVisibilidad, Persistencia.usuario.Id, idTipoPublicacion, txtDescripcion.Text, dtInicio.Value, dtFin.Value, subastaMinima, Convert.ToDouble(txtPrecio.Text), Convert.ToInt32(txtStock.Text), seCobraEnvio);
+                DAO.PublicacionSQL.insertarPublicacion(1, idVisibilidad,idRubros, Persistencia.usuario.Id, idTipoPublicacion, txtDescripcion.Text, dtInicio.Value, dtFin.Value, subastaMinima, Convert.ToDouble(txtPrecio.Text), Convert.ToInt32(txtStock.Text), seCobraEnvio);
                 MessageBox.Show("Se ha guardado la publicacion con exito", "Exito");
             }
             else {
