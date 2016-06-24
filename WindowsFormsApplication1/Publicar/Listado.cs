@@ -65,6 +65,7 @@ namespace MercadoEnvio.Publicar
                 Publicar p = new Publicar();
                 p.pub = getSeleccionado();
                 p.ShowDialog();
+                this.Close();
             }
         }
         private List<Rubro> crearRubros(int idPublicacion) {
@@ -148,6 +149,7 @@ namespace MercadoEnvio.Publicar
         {
             Publicar p = new Publicar();
             p.Show();
+            this.Close();
         }
 
         private void listadoPublicaciones_RowLeave(object sender, DataGridViewCellEventArgs e)

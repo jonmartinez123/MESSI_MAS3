@@ -139,7 +139,8 @@ namespace MercadoEnvio.Publicar
                 MessageBox.Show("Se ha guardado la publicacion con exito", "Exito");
             }
             else {
-                //HHACER UPDATE
+                DAO.PublicacionSQL.updatearPublicacion(pub.Id,1, idVisibilidad, idRubros, Persistencia.usuario.Id, idTipoPublicacion, txtDescripcion.Text, dtInicio.Value, dtFin.Value, subastaMinima, Convert.ToDouble(txtPrecio.Text), Convert.ToInt32(txtStock.Text), seCobraEnvio);
+                MessageBox.Show("Se ha modificado la publicacion con exito", "Exito");
             }
         }
         private void btnGuardar_Click(object sender, EventArgs e)
@@ -223,6 +224,12 @@ namespace MercadoEnvio.Publicar
                 seleccionarGrilla();
                 //cargo lista de rubros ya elegidos
             }
+        }
+
+        private void dtInicio_ValueChanged(object sender, EventArgs e)
+        {
+            dtFin.MinDate = dtInicio.Value.AddDays(1);
+            dtFin.Value = dtInicio.Value.AddDays(1);
         }
     }
 }

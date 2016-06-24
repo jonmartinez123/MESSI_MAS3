@@ -90,5 +90,18 @@ namespace MercadoEnvio.DAO
 
             }
         }
+
+        internal static void updatearPublicacion(int idPublicacion ,int idEstado, int idVisibilidad, DataTable idRubros, int idUsuario, int idTipoPublicacion, string descripcion, DateTime fechaInicio, DateTime fechaFin, double minimoSubasta, double precio, int stock, int seCobraEnvio)
+        {
+            if (minimoSubasta != -1)
+            {
+                SqlConnector.executeProcedure("updatearPublicacion", idPublicacion, idEstado, idVisibilidad, idUsuario, idTipoPublicacion, descripcion, fechaInicio, fechaFin, minimoSubasta, precio, stock, seCobraEnvio, idRubros);
+            }
+            else
+            {
+                SqlConnector.executeProcedure("updatearPublicacion", idPublicacion, idEstado, idVisibilidad, idUsuario, idTipoPublicacion, descripcion, fechaInicio, fechaFin, null, precio, stock, seCobraEnvio, idRubros);
+
+            }
+        }
     }
 }

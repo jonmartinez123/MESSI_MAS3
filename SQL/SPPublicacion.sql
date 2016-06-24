@@ -19,6 +19,22 @@ idRubro INT NOT NULL
 PRIMARY KEY (idRubro)
 )
 GO
+
+CREATE PROCEDURE [MESSI_MAS3].updatearPublicacion (@idPublicacion int, @idEstado int, @idVisibilidad int,@idUsuario int,@idTipoPublicacion int, @descripcion nvarchar(255),@fechaInicio dateTime, @fechaFin dateTime,@minimoSubasta numeric(10,2),@precio numeric(18,2),@stock numeric(18,0),@seCobraEnvio int, @Rubros Rubros READONLY)
+AS
+BEGIN
+UPDATE Publicacion SET publicacion_idEstado=@idEstado,publicacion_idVisibilidad=@idVisibilidad,
+	publicacion_idUsuario=@idUsuario,publicacion_fechaInicio=@fechaInicio,
+	publicacion_fechaFin=@fechaFin
+	,publicacion_descripcion=@descripcion,
+	publicacion_tipoPublicacionId=@idTipoPublicacion
+	,publicacion_minimoSubasta=@minimoSubasta,publicacion_precio=@precio,publicacion_stock=@stock,publicacion_seCobraEnvio=@seCobraEnvio
+	 where @idPublicacion = publicacion_id
+DELETE FROM Rubro_x_Publicacion WHERE idPublicacion = @idPublicacion
+INSERT INTO Rubro_x_Publicacion(idRubro,idPublicacion) (select idRubro,@idPublicacion from @Rubros)
+END
+GO
+
 CREATE PROCEDURE [MESSI_MAS3].insertarPublicacion (@idEstado int, @idVisibilidad int,@idUsuario int,@idTipoPublicacion int, @descripcion nvarchar(255),@fechaInicio dateTime, @fechaFin dateTime,@minimoSubasta numeric(10,2),@precio numeric(18,2),@stock numeric(18,0),@seCobraEnvio int, @Rubros Rubros READONLY)
 AS
 BEGIN
