@@ -49,6 +49,7 @@
             this.bindingNavigatorMoveLastItem = new System.Windows.Forms.ToolStripButton();
             this.bindingNavigatorSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.superGrid1 = new MercadoEnvio.Modelo.SuperGrid();
+            this.btnVolver = new MaterialSkin.Controls.MaterialRaisedButton();
             this.colPublicacionId = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colCodigo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colTipoPublicaion = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -56,10 +57,8 @@
             this.colPrecio = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colMinimo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colStock = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colRubro = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colVisibilidadId = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.btnVolver = new MaterialSkin.Controls.MaterialRaisedButton();
             ((System.ComponentModel.ISupportInitialize)(this.bindingNavigator1)).BeginInit();
             this.bindingNavigator1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.superGrid1)).BeginInit();
@@ -189,22 +188,22 @@
             this.bindingNavigatorMoveNextItem,
             this.bindingNavigatorMoveLastItem,
             this.bindingNavigatorSeparator2});
-            this.bindingNavigator1.Location = new System.Drawing.Point(454, 370);
+            this.bindingNavigator1.Location = new System.Drawing.Point(722, 370);
             this.bindingNavigator1.MoveFirstItem = this.bindingNavigatorMoveFirstItem;
             this.bindingNavigator1.MoveLastItem = this.bindingNavigatorMoveLastItem;
             this.bindingNavigator1.MoveNextItem = this.bindingNavigatorMoveNextItem;
             this.bindingNavigator1.MovePreviousItem = this.bindingNavigatorMovePreviousItem;
             this.bindingNavigator1.Name = "bindingNavigator1";
             this.bindingNavigator1.PositionItem = this.bindingNavigatorPositionItem;
-            this.bindingNavigator1.Size = new System.Drawing.Size(211, 25);
+            this.bindingNavigator1.Size = new System.Drawing.Size(209, 25);
             this.bindingNavigator1.TabIndex = 123;
             this.bindingNavigator1.Text = "bindingNavigator1";
             // 
             // bindingNavigatorCountItem
             // 
             this.bindingNavigatorCountItem.Name = "bindingNavigatorCountItem";
-            this.bindingNavigatorCountItem.Size = new System.Drawing.Size(37, 22);
-            this.bindingNavigatorCountItem.Text = "de {0}";
+            this.bindingNavigatorCountItem.Size = new System.Drawing.Size(35, 22);
+            this.bindingNavigatorCountItem.Text = "of {0}";
             this.bindingNavigatorCountItem.ToolTipText = "Número total de elementos";
             // 
             // bindingNavigatorMoveFirstItem
@@ -280,7 +279,6 @@
             this.colPrecio,
             this.colMinimo,
             this.colStock,
-            this.colRubro,
             this.colVisibilidadId,
             this.Column7});
             this.superGrid1.Location = new System.Drawing.Point(26, 154);
@@ -289,6 +287,19 @@
             this.superGrid1.Size = new System.Drawing.Size(900, 213);
             this.superGrid1.TabIndex = 124;
             this.superGrid1.SelectionChanged += new System.EventHandler(this.superGrid1_SelectionChanged);
+            // 
+            // btnVolver
+            // 
+            this.btnVolver.Depth = 0;
+            this.btnVolver.Location = new System.Drawing.Point(821, 401);
+            this.btnVolver.MouseState = MaterialSkin.MouseState.HOVER;
+            this.btnVolver.Name = "btnVolver";
+            this.btnVolver.Primary = true;
+            this.btnVolver.Size = new System.Drawing.Size(105, 23);
+            this.btnVolver.TabIndex = 125;
+            this.btnVolver.Text = "Volver";
+            this.btnVolver.UseVisualStyleBackColor = true;
+            this.btnVolver.Click += new System.EventHandler(this.btnVolver_Click);
             // 
             // colPublicacionId
             // 
@@ -333,11 +344,6 @@
             this.colStock.Name = "colStock";
             this.colStock.ReadOnly = true;
             // 
-            // colRubro
-            // 
-            this.colRubro.HeaderText = "Rubro";
-            this.colRubro.Name = "colRubro";
-            // 
             // colVisibilidadId
             // 
             this.colVisibilidadId.HeaderText = "Visibilidad Id";
@@ -349,19 +355,6 @@
             this.Column7.HeaderText = "Visibilidad";
             this.Column7.Name = "Column7";
             this.Column7.ReadOnly = true;
-            // 
-            // btnVolver
-            // 
-            this.btnVolver.Depth = 0;
-            this.btnVolver.Location = new System.Drawing.Point(821, 373);
-            this.btnVolver.MouseState = MaterialSkin.MouseState.HOVER;
-            this.btnVolver.Name = "btnVolver";
-            this.btnVolver.Primary = true;
-            this.btnVolver.Size = new System.Drawing.Size(105, 23);
-            this.btnVolver.TabIndex = 125;
-            this.btnVolver.Text = "Volver";
-            this.btnVolver.UseVisualStyleBackColor = true;
-            this.btnVolver.Click += new System.EventHandler(this.btnVolver_Click);
             // 
             // ComprarOfertar
             // 
@@ -413,6 +406,7 @@
         private System.Windows.Forms.ToolStripButton bindingNavigatorMoveLastItem;
         private System.Windows.Forms.ToolStripSeparator bindingNavigatorSeparator2;
         private Modelo.SuperGrid superGrid1;
+        private MaterialSkin.Controls.MaterialRaisedButton btnVolver;
         private System.Windows.Forms.DataGridViewTextBoxColumn colPublicacionId;
         private System.Windows.Forms.DataGridViewTextBoxColumn colCodigo;
         private System.Windows.Forms.DataGridViewTextBoxColumn colTipoPublicaion;
@@ -420,9 +414,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colPrecio;
         private System.Windows.Forms.DataGridViewTextBoxColumn colMinimo;
         private System.Windows.Forms.DataGridViewTextBoxColumn colStock;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colRubro;
         private System.Windows.Forms.DataGridViewTextBoxColumn colVisibilidadId;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column7;
-        private MaterialSkin.Controls.MaterialRaisedButton btnVolver;
     }
 }
