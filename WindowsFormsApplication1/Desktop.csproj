@@ -171,6 +171,7 @@
     <Compile Include="DAO\ConsultarFacturasSQL.cs" />
     <Compile Include="DAO\FormaDePago.cs" />
     <Compile Include="DAO\HistorialClienteSQL.cs" />
+    <Compile Include="DAO\ListadoSQL.cs" />
     <Compile Include="DAO\LocalidadSQL.cs" />
     <Compile Include="DAO\LoginSQL.cs" />
     <Compile Include="DAO\PublicacionSQL.cs" />
