@@ -14,8 +14,14 @@ namespace MercadoEnvio.Modelo
         {
             e.Handled = !(char.IsDigit(e.KeyChar) || e.KeyChar == (char)Keys.Back);
         }
-
-
+        public static void allowNumericOnlyParaDouble(this Form aForm, KeyPressEventArgs e)
+        {
+            e.Handled = !(char.IsNumber(e.KeyChar) || e.KeyChar == ',' || e.KeyChar == (char)Keys.Back);
+        }
+        public static bool tieneMasDeUnaComa(string texto) { 
+            var ch = ',';
+            return texto.IndexOf(ch) != texto.LastIndexOf(ch);
+        }
         public static void allowAlphaOnly(this Form aForm, KeyPressEventArgs e)
         {
             e.Handled = !(char.IsLetter(e.KeyChar) || e.KeyChar == (char)Keys.Back);

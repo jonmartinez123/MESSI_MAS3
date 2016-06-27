@@ -20,13 +20,30 @@ GO
 CREATE PROCEDURE [MESSI_MAS3].agregarVisibilidad @visibilidad_codigo int,@visibilidad_des nvarchar(255),@visibilidad_porc numeric(18,2),@visibilidad_precio numeric(18,2),@visibilidad_costoEnvio numeric(18,2)
 AS
 BEGIN
-INSERT INTO [MESSI_MAS3].Visibilidad(visibilidad_codigo,visibilidad_descripcion,visibilidad_porcentaje,visibilidad_precio,visibilidad_costoEnvio) VALUES (@visibilidad_codigo,@visibilidad_des,@visibilidad_porc,@visibilidad_precio,@visibilidad_costoEnvio)
+	IF NOT EXISTS(SELECT * from Visibilidad where visibilidad_codigo=@visibilidad_codigo)
+		BEGIN
+			INSERT INTO [MESSI_MAS3].Visibilidad(visibilidad_codigo,visibilidad_descripcion,visibilidad_porcentaje,visibilidad_precio,visibilidad_costoEnvio) 
+			VALUES (@visibilidad_codigo,@visibilidad_des,@visibilidad_porc,@visibilidad_precio,@visibilidad_costoEnvio)
+			RETURN 1
+		END
+	ELSE
+		BEGIN
+			RETURN -1
+		END
 END
 GO
 
 CREATE PROCEDURE [MESSI_MAS3].modificarVisibilidad @visibilidad_id int, @visibilidad_codigo int,@visibilidad_des nvarchar(255),@visibilidad_porc numeric(18,2),@visibilidad_precio numeric(18,2),@visibilidad_costoEnvio numeric(18,2)
 AS
 BEGIN
-UPDATE [MESSI_MAS3].Visibilidad SET visibilidad_codigo=@visibilidad_codigo,visibilidad_descripcion=@visibilidad_des,visibilidad_porcentaje=@visibilidad_porc,visibilidad_precio=@visibilidad_precio,visibilidad_costoEnvio=@visibilidad_costoEnvio WHERE @visibilidad_id = visibilidad_id
+	IF NOT EXISTS(SELECT * from Visibilidad where visibilidad_codigo=@visibilidad_codigo and @visibilidad_id<>visibilidad_id) 
+		BEGIN
+			UPDATE [MESSI_MAS3].Visibilidad SET visibilidad_codigo=@visibilidad_codigo,visibilidad_descripcion=@visibilidad_des,visibilidad_porcentaje=@visibilidad_porc,visibilidad_precio=@visibilidad_precio,visibilidad_costoEnvio=@visibilidad_costoEnvio WHERE @visibilidad_id = visibilidad_id
+			RETURN 1
+		END
+	ELSE
+		BEGIN
+			RETURN -1
+		END
 END
 GO

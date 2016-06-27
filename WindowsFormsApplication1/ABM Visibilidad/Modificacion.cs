@@ -51,7 +51,10 @@ namespace MercadoEnvio.ABM_Visibilidad
         {
             if (!string.IsNullOrWhiteSpace(txtDescripcion.Text) && !string.IsNullOrWhiteSpace(txtCodigo.Text) && !string.IsNullOrWhiteSpace(txtPrecio.Text) && !string.IsNullOrWhiteSpace(txtPorcentaje.Text) && !string.IsNullOrWhiteSpace(txtCostoEnvio.Text))
             {
-                actualizarGrilla();
+                if (seteoCampos())
+                {
+                    actualizarGrilla();
+                }
             }
             else
             {
@@ -61,25 +64,25 @@ namespace MercadoEnvio.ABM_Visibilidad
         private void actualizarGrilla()
         {
             ListadoVisibilidades.Rows.Clear();
-            ListadoVisibilidades.Rows.Add(txtCodigo.Text, txtDescripcion.Text, txtPrecio.Text, txtPorcentaje.Text, txtCostoEnvio.Text);
+            ListadoVisibilidades.Rows.Add(visibilidad.Codigo, visibilidad.Descripcion, visibilidad.Precio, visibilidad.Porcentaje,visibilidad.CostoEnvio);
         }
         #region Validaciones
 
         private void txtCostoEnvio_KeyPress(object sender, KeyPressEventArgs e)
         {
-            this.allowNumericOnly(e);
+            this.allowNumericOnlyParaDouble(e);
             this.allowMaxLenght(txtCostoEnvio, 18, e);
         }
 
         private void txtPorcentaje_KeyPress(object sender, KeyPressEventArgs e)
         {
-            this.allowNumericOnly(e);
+            this.allowNumericOnlyParaDouble(e);
             this.allowMaxLenght(txtPorcentaje, 18, e);
         }
 
         private void txtPrecio_KeyPress(object sender, KeyPressEventArgs e)
         {
-            this.allowNumericOnly(e);
+            this.allowNumericOnlyParaDouble(e);
             this.allowMaxLenght(txtPrecio, 18, e);
         }
 
@@ -95,18 +98,45 @@ namespace MercadoEnvio.ABM_Visibilidad
             this.allowMaxLenght(txtDescripcion, 255, e);
         }
         #endregion
+        private bool seteoCampos()
+        {
+            visibilidad.Descripcion = txtDescripcion.Text;
+            visibilidad.Codigo = Convert.ToInt32(txtCodigo.Text);
+            try
+            {
+                visibilidad.Porcentaje = Convert.ToDouble(txtPorcentaje.Text);
+            }
+            catch { MessageBox.Show("Escriba en formato apropiado el porcentaje", "Validacion"); return false; }
+            try
+            {
+                visibilidad.Precio = Convert.ToDouble(txtPrecio.Text);
+            }
+            catch { MessageBox.Show("Escriba en formato apropiado el precio", "Validacion"); return false; }
+            try
+            {
+                visibilidad.CostoEnvio = Convert.ToDouble(txtCostoEnvio.Text);
+            }
+            catch { MessageBox.Show("Escriba en formato apropiado el costo de envio", "Validacion"); return false; }
+            return true;
+        }
         private void btnGuardar_Click(object sender, EventArgs e)
         {
             if (!string.IsNullOrWhiteSpace(txtDescripcion.Text) && !string.IsNullOrWhiteSpace(txtCodigo.Text) && !string.IsNullOrWhiteSpace(txtPrecio.Text) && !string.IsNullOrWhiteSpace(txtPorcentaje.Text) && !string.IsNullOrWhiteSpace(txtCostoEnvio.Text))
             {
-                visibilidad.Descripcion = txtDescripcion.Text;
-                visibilidad.Codigo = Convert.ToInt32(txtCodigo.Text);
-                visibilidad.Porcentaje = Convert.ToDouble(txtPorcentaje.Text);
-                visibilidad.Precio = Convert.ToDouble(txtPrecio.Text);
-                visibilidad.CostoEnvio = Convert.ToDouble(txtCostoEnvio.Text);
-                DAO.VisibilidadSQL.modificarVisibilidad(visibilidad.Id, visibilidad.Codigo, visibilidad.Descripcion, visibilidad.Porcentaje, visibilidad.Precio, visibilidad.CostoEnvio);
-                MessageBox.Show("Se ha guardado la visibilidad con la informacion de la grilla", "Exito");
-                actualizarGrilla();
+                if (seteoCampos())
+                {
+                    actualizarGrilla();
+                    int error = DAO.VisibilidadSQL.modificarVisibilidad(visibilidad.Id, visibilidad.Codigo, visibilidad.Descripcion, visibilidad.Porcentaje, visibilidad.Precio, visibilidad.CostoEnvio);
+                    if (error == -1)
+                    {
+                        MessageBox.Show("Ingrese otro codigo, el " + visibilidad.Codigo + " ya se encuentra utilizado", "Error");
+                    }
+                    else
+                    {
+                        MessageBox.Show("Se ha guardado la visibilidad con la informacion de la grilla", "Exito");
+                    }
+                   
+                }
             }
             else
             {

@@ -152,6 +152,7 @@
             this.txtCostoEnvio.Size = new System.Drawing.Size(195, 23);
             this.txtCostoEnvio.TabIndex = 48;
             this.txtCostoEnvio.UseSystemPasswordChar = false;
+            this.txtCostoEnvio.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtCostoEnvio_KeyPress);
             // 
             // label5
             // 
@@ -178,6 +179,7 @@
             this.txtPorcentaje.Size = new System.Drawing.Size(195, 23);
             this.txtPorcentaje.TabIndex = 46;
             this.txtPorcentaje.UseSystemPasswordChar = false;
+            this.txtPorcentaje.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtPorcentaje_KeyPress);
             // 
             // label4
             // 
@@ -204,6 +206,7 @@
             this.txtPrecio.Size = new System.Drawing.Size(195, 23);
             this.txtPrecio.TabIndex = 44;
             this.txtPrecio.UseSystemPasswordChar = false;
+            this.txtPrecio.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtPrecio_KeyPress);
             // 
             // label3
             // 
@@ -230,6 +233,7 @@
             this.txtDescripcion.Size = new System.Drawing.Size(195, 23);
             this.txtDescripcion.TabIndex = 42;
             this.txtDescripcion.UseSystemPasswordChar = false;
+            this.txtDescripcion.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtDescripcion_KeyPress);
             // 
             // txtCodigo
             // 
@@ -246,6 +250,7 @@
             this.txtCodigo.Size = new System.Drawing.Size(195, 23);
             this.txtCodigo.TabIndex = 0;
             this.txtCodigo.UseSystemPasswordChar = false;
+            this.txtCodigo.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtCodigo_KeyPress);
             // 
             // label2
             // 

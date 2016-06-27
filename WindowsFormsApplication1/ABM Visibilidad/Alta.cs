@@ -38,19 +38,19 @@ namespace MercadoEnvio.ABM_Visibilidad
         }
         private void txtCostoEnvio_KeyPress(object sender, KeyPressEventArgs e)
         {
-            this.allowNumericOnly(e);
+            this.allowNumericOnlyParaDouble(e);
             this.allowMaxLenght(txtCostoEnvio, 18, e);
         }
 
         private void txtPorcentaje_KeyPress(object sender, KeyPressEventArgs e)
         {
-            this.allowNumericOnly(e);
+            this.allowNumericOnlyParaDouble(e);
             this.allowMaxLenght(txtPorcentaje, 18, e);
         }
 
         private void txtPrecio_KeyPress(object sender, KeyPressEventArgs e)
         {
-            this.allowNumericOnly(e);
+            this.allowNumericOnlyParaDouble(e);
             this.allowMaxLenght(txtPrecio, 18, e);
         }
 
@@ -74,8 +74,10 @@ namespace MercadoEnvio.ABM_Visibilidad
         {
             if (!string.IsNullOrWhiteSpace(txtDescripcion.Text) && !string.IsNullOrWhiteSpace(txtCodigo.Text) && !string.IsNullOrWhiteSpace(txtPrecio.Text) && !string.IsNullOrWhiteSpace(txtPorcentaje.Text) && !string.IsNullOrWhiteSpace(txtCostoEnvio.Text))
             {
-                seteoCampos();
-                actualizarGrilla();
+                if (seteoCampos())
+                {
+                    actualizarGrilla();
+                }
             }
             else
             {
@@ -89,22 +91,42 @@ namespace MercadoEnvio.ABM_Visibilidad
             vis.ShowDialog();
             this.Close();
         }
-        private void seteoCampos()
+        private bool seteoCampos()
         {
             descripcion = txtDescripcion.Text;
             codigo = Convert.ToInt32(txtCodigo.Text);
+            try{
             porcentaje = Convert.ToDouble(txtPorcentaje.Text);
-            precio = Convert.ToDouble(txtPrecio.Text); ;
-            costoEnvio = Convert.ToDouble(txtCostoEnvio.Text);
+            }
+            catch { MessageBox.Show("Escriba en formato apropiado el porcentaje","Validacion"); return false; }
+             try{
+            precio = Convert.ToDouble(txtPrecio.Text);
+             }
+             catch { MessageBox.Show("Escriba en formato apropiado el precio", "Validacion"); return false; }
+             try
+             {
+                 costoEnvio = Convert.ToDouble(txtCostoEnvio.Text);
+             }
+             catch { MessageBox.Show("Escriba en formato apropiado el costo de envio", "Validacion"); return false; }
+            return true;
         }
         private void btnAgregar_Click(object sender, EventArgs e)
         {
             if (!string.IsNullOrWhiteSpace(txtDescripcion.Text) && !string.IsNullOrWhiteSpace(txtCodigo.Text) && !string.IsNullOrWhiteSpace(txtPrecio.Text) && !string.IsNullOrWhiteSpace(txtPorcentaje.Text) && !string.IsNullOrWhiteSpace(txtCostoEnvio.Text))
             {
-                seteoCampos();
-                actualizarGrilla();
-                DAO.VisibilidadSQL.agregarVisibilidad(codigo, descripcion, porcentaje, precio, costoEnvio);
-                MessageBox.Show("Se ha agregado correctamente la visibilidad", "Exito");
+                if (seteoCampos())
+                {
+                    actualizarGrilla();
+                    int error = DAO.VisibilidadSQL.agregarVisibilidad(codigo, descripcion, porcentaje, precio, costoEnvio);
+                    if (error == -1)
+                    {
+                        MessageBox.Show("Ingrese otro codigo, el "+codigo + " ya se encuentra utilizado","Error");
+                    }
+                    else
+                    {
+                        MessageBox.Show("Se ha agregado correctamente la visibilidad", "Exito");
+                    }
+                }
             }
             else
             {
