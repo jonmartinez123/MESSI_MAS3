@@ -360,6 +360,7 @@
             this.txtSubastaMinima.Size = new System.Drawing.Size(123, 23);
             this.txtSubastaMinima.TabIndex = 20;
             this.txtSubastaMinima.UseSystemPasswordChar = false;
+            this.txtSubastaMinima.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtSubastaMinima_KeyPress);
             // 
             // label4
             // 

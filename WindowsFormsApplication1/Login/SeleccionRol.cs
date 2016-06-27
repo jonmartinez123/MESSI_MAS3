@@ -44,12 +44,11 @@ namespace MercadoEnvio.Login
                 List<Funcionalidad> funcionalidades = RolSQl.getFuncionalidades(rolSeleccionado);
                 if (funcionalidades.Count() > 0)
                 {
+                    this.Hide();
                     Persistencia.usuario.Rol = rolSeleccionado;
                     Persistencia.usuario.Rol.getFuncionalidades = funcionalidades;
-                    this.Hide();
                     Funcionalidades.MenuUsuario menuUsuario = new Funcionalidades.MenuUsuario();
                     menuUsuario.ShowDialog();
-                    Close();
                 }
                 else {
                     MessageBox.Show("El rol " + rolSeleccionado + " no tiene funcionalidades, elija otro");

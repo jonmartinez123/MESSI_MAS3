@@ -186,9 +186,9 @@ namespace MercadoEnvio.Funcionalidades
 
         private void listadoToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            this.Hide();
             Publicar.Listado lis = new Publicar.Listado();
             lis.Show();
-            this.Close();
         }
 
         private void generarPublicacionToolStripMenuItem_Click(object sender, EventArgs e)
@@ -200,6 +200,11 @@ namespace MercadoEnvio.Funcionalidades
         private void salirtoolStripMenuItem_Click(object sender, EventArgs e)
         {
             System.Windows.Forms.Application.Exit();
+        }
+
+        private void MenuUsuario_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

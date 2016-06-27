@@ -27,5 +27,10 @@ namespace MercadoEnvio.DAO
             }
             return formas;
         }
+
+        internal static string getFormasDePago(int idForma)
+        {
+            return SqlConnector.ejecutarYDevolverString("getFormasDePago", idForma); 
+        }
     }
 }

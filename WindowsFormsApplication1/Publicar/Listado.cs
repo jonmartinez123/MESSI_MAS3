@@ -141,6 +141,7 @@ namespace MercadoEnvio.Publicar
         }
         private void listadoPublicaciones_CellClick(object sender, DataGridViewCellEventArgs e)
         {
+            publicacion = null;
             publicacion= this.getSeleccionado();
             publicacion.Estado.aplicarAccion(this,publicacion.tipoPublicacion);
         }
@@ -152,17 +153,10 @@ namespace MercadoEnvio.Publicar
             this.Close();
         }
 
-        private void listadoPublicaciones_RowLeave(object sender, DataGridViewCellEventArgs e)
-        {
-            publicacion = null;
-        }
-
         private void btnActivar_Click(object sender, EventArgs e)
         {
-            PagoFactura p = new PagoFactura();
-            p.publicacion = publicacion;
+            PagoFactura p = new PagoFactura(publicacion);
             p.ShowDialog();
-            //CREAR FACTURACION
         }
     }
 }

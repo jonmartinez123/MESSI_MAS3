@@ -93,12 +93,6 @@ namespace MercadoEnvio.Publicar
         {
             MessageBox.Show("Se ha creado la publicacion con exito, ahora esta visible a todos","Exito");
         }
-
-        private void txtStock_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            this.allowNumericOnly(e);
-            this.allowMaxLenght(txtPrecio, 18, e);
-        }
         private void cargarCLB()
         {
             cmbRubro.DataSource = DAO.RubroSQL.getRubros();
@@ -143,22 +137,40 @@ namespace MercadoEnvio.Publicar
                 MessageBox.Show("Se ha modificado la publicacion con exito", "Exito");
             }
         }
+        private bool sePuedeConvertirADouble() {
+            try {
+                Convert.ToDouble(txtPrecio.Text);
+                if(!string.IsNullOrEmpty(txtSubastaMinima.Text)){
+                    Convert.ToDouble(txtSubastaMinima.Text);
+                }
+            }
+            catch { MessageBox.Show("Debe usar el formato correcto para el tipo double","Validacion"); return false; }
+            return true;
+        }
         private void btnGuardar_Click(object sender, EventArgs e)
         {
-            if (Extension.anySelected(ListadoVisibilidades, "una visibilidad") && listadoRubro.Rows.Count > 0 && !string.IsNullOrWhiteSpace(txtDescripcion.Text) && !string.IsNullOrWhiteSpace(txtPrecio.Text) && !string.IsNullOrWhiteSpace(txtStock.Text)){
-                if(rbSubasta.Checked && !string.IsNullOrWhiteSpace(txtSubastaMinima.Text)){
+            if (Extension.anySelected(ListadoVisibilidades, "una visibilidad") && listadoRubro.Rows.Count > 0 && !string.IsNullOrWhiteSpace(txtDescripcion.Text) && !string.IsNullOrWhiteSpace(txtPrecio.Text) && !string.IsNullOrWhiteSpace(txtStock.Text) && sePuedeConvertirADouble()){
+                if (rbSubasta.Checked && !string.IsNullOrWhiteSpace(txtSubastaMinima.Text))
+                {
                     guardar();
                 }
+                else { MessageBox.Show("Complete la subasta minima", "Validacion"); }
                 guardar();
             }else{
-                MessageBox.Show("Por favor complete todos los campos","Error");
+                MessageBox.Show("Por favor complete todos los campos", "Validacion");
             }
         }
-
+        #region validaciones
         private void txtPrecio_KeyPress(object sender, KeyPressEventArgs e)
         {
-            this.allowNumericOnly(e);
+            this.allowNumericOnlyParaDouble(e);
             this.allowMaxLenght(txtPrecio, 18, e);
+        }
+
+        private void txtSubastaMinima_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            this.allowNumericOnlyParaDouble(e);
+            this.allowMaxLenght(txtPrecio, 10, e);
         }
 
         private void txtDescripcion_KeyPress(object sender, KeyPressEventArgs e)
@@ -166,6 +178,18 @@ namespace MercadoEnvio.Publicar
             this.allowAlphanumericOnly(e);
             this.allowMaxLenght(txtDescripcion, 255, e);
         }
+
+        private void dtInicio_ValueChanged(object sender, EventArgs e)
+        {
+            dtFin.MinDate = dtInicio.Value.AddDays(1);
+            dtFin.Value = dtInicio.Value.AddDays(1);
+        }
+        private void txtStock_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            this.allowNumericOnly(e);
+            this.allowMaxLenght(txtPrecio, 18, e);
+        }
+        #endregion
         private void ComboBox1_SelectedIndexChanged(object sender, System.EventArgs e)
         {
             
@@ -226,10 +250,7 @@ namespace MercadoEnvio.Publicar
             }
         }
 
-        private void dtInicio_ValueChanged(object sender, EventArgs e)
-        {
-            dtFin.MinDate = dtInicio.Value.AddDays(1);
-            dtFin.Value = dtInicio.Value.AddDays(1);
-        }
+
+
     }
 }

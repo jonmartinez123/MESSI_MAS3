@@ -212,7 +212,6 @@
             this.listadoPublicaciones.Size = new System.Drawing.Size(862, 169);
             this.listadoPublicaciones.TabIndex = 1;
             this.listadoPublicaciones.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.listadoPublicaciones_CellClick);
-            this.listadoPublicaciones.RowLeave += new System.Windows.Forms.DataGridViewCellEventHandler(this.listadoPublicaciones_RowLeave);
             // 
             // Id
             // 
