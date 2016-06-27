@@ -26,7 +26,12 @@ namespace MercadoEnvio.Publicar
 
         private void VisualizadorFactura_Load(object sender, EventArgs e)
         {
+           // DAO.VisualizarFacturaSQL.getFactura(idFactura);
+        }
 
+        private void btnVolver_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }

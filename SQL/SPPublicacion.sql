@@ -48,11 +48,13 @@ AS
 BEGIN
 	--GENERA FACTURA
 	DECLARE @ultimoNumero int
+	DECLARE @idFactura int
 	select top 1 @ultimoNumero=factura_numero from Factura order by factura_numero desc
 	SET @ultimoNumero = @ultimoNumero + 1
 	INSERT INTO Factura(factura_fecha,factura_formaDePago,factura_idVendedor,factura_publicacionId,factura_numero,factura_importeTotal) values(@fechaActiva,@formaDePago,@idUsuario,@idPublicacion,@ultimoNumero,@importeTotal)
+	SET @idFactura = SCOPE_IDENTITY()
 	INSERT INTO Factura_detalle(facturaDetalle_id,facturaDetalle_numero,facturaDetall_cantidadItems,FacturaDetalle_valorItem,facturaDetalle_item)
-	VALUES (SCOPE_IDENTITY(),@ultimoNumero,1,@importeTotal,'Activo de publicacion')
-	RETURN @ultimoNumero
+	VALUES (@idFactura,@ultimoNumero,1,@importeTotal,'Activo de publicacion')
+	RETURN @idFactura
 END
 GO

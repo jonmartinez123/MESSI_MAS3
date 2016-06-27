@@ -24,7 +24,7 @@ namespace MercadoEnvio.Modelo
             if (func == "HISTORIAL DE CLIENTE") return Funcionalidades.Historial_De_Cliente;
             if (func == "CALIFICAR AL VENDEDOR") return Funcionalidades.Calificar_Al_Vendedor;
             if (func == "CONSULTAR FACTURAS") return Funcionalidades.Consultar_Facturas;
-            if (func == "Listado Estadistico") return Funcionalidades.Listado_Estadistico;
+            if (func == "LISTADO ESTADISTICO") return Funcionalidades.Listado_Estadistico;
             return null;
         }
         public enum Funcionalidades

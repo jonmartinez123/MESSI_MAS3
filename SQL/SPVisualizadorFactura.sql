@@ -1,0 +1,34 @@
+CREATE PROCEDURE [MESSI_MAS3].getFacturas (@idFactura int)
+as
+begin
+declare @clienteId int
+if exists (select @clienteId=cliente_id from Factura,Cliente where @idFactura = factura_id and factura_idVendedor = cliente_id)
+	begin
+		select factura_fecha,factura_numero,factura_importeTotal,formaDePago_nombre,cliente_DNI,
+		domicilio_altura,domicilio_calle,domicilio_ciudad,
+		domicilio_codigoPostal,domicilio_departamento,domicilio_piso,domicilio_ciudad,
+		localidad_nombre,facturaDetalle_item,FacturaDetalle_valorItem,facturaDetall_cantidadItems
+		from MESSI_MAS3.Factura,MESSI_MAS3.Factura_detalle,MESSI_MAS3.Cliente
+		,MESSI_MAS3.FormaDePago,MESSI_MAS3.Domicilio,MESSI_MAS3.Localidad
+
+		where factura_id = @idFactura and facturaDetalle_id=@idFactura and 
+		factura_idVendedor=@clienteId
+		and  factura_formaDePago=formaDePago_id
+		and domicilio_localidad_id=localidad_id 
+		and cliente_idDomicilio=domicilio_idDomicilio
+	end
+else
+	begin
+	select factura_fecha,factura_numero,factura_importeTotal,formaDePago_nombre,cliente_DNI,empresa_cuit,
+	domicilio_altura,domicilio_calle,domicilio_ciudad,
+	domicilio_codigoPostal,domicilio_departamento,domicilio_piso,domicilio_ciudad,
+	localidad_nombre,facturaDetalle_item,FacturaDetalle_valorItem,facturaDetall_cantidadItems
+	from MESSI_MAS3.Factura,MESSI_MAS3.Factura_detalle,MESSI_MAS3.Cliente,MESSI_MAS3.Empresa,MESSI_MAS3.FormaDePago,MESSI_MAS3.Domicilio,MESSI_MAS3.Localidad
+	where factura_id = @idFactura and facturaDetalle_id=@idFactura and 
+	factura_idVendedor=cliente_id or factura_idVendedor = empresa_id 
+	and  factura_formaDePago=formaDePago_id
+	and domicilio_localidad_id=localidad_id 
+	and cliente_idDomicilio=domicilio_idDomicilio or empresa_idDomicilio = domicilio_idDomicilio
+	end
+end
+go
