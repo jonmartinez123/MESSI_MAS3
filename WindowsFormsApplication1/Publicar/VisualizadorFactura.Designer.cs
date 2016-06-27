@@ -42,7 +42,7 @@
             this.materialLabel8 = new MaterialSkin.Controls.MaterialLabel();
             this.lblIdUsuario = new MaterialSkin.Controls.MaterialLabel();
             this.materialLabel7 = new MaterialSkin.Controls.MaterialLabel();
-            this.lblDomicilio = new MaterialSkin.Controls.MaterialLabel();
+            this.lblCalleYAltura = new MaterialSkin.Controls.MaterialLabel();
             this.materialLabel6 = new MaterialSkin.Controls.MaterialLabel();
             this.lblCliente = new MaterialSkin.Controls.MaterialLabel();
             this.materialLabel5 = new MaterialSkin.Controls.MaterialLabel();
@@ -50,6 +50,12 @@
             this.Item = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Valor = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Cantidad = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.materialLabel9 = new MaterialSkin.Controls.MaterialLabel();
+            this.lblCiudad = new MaterialSkin.Controls.MaterialLabel();
+            this.materialLabel10 = new MaterialSkin.Controls.MaterialLabel();
+            this.lblCodigoPostal = new MaterialSkin.Controls.MaterialLabel();
+            this.materialLabel11 = new MaterialSkin.Controls.MaterialLabel();
+            this.lblLocalidad = new MaterialSkin.Controls.MaterialLabel();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.listadoItems)).BeginInit();
@@ -114,7 +120,7 @@
             this.btnVolver.Primary = true;
             this.btnVolver.Size = new System.Drawing.Size(75, 23);
             this.btnVolver.TabIndex = 5;
-            this.btnVolver.Text = "Volver";
+            this.btnVolver.Text = "Aceptar";
             this.btnVolver.UseVisualStyleBackColor = true;
             this.btnVolver.Click += new System.EventHandler(this.btnVolver_Click);
             // 
@@ -171,17 +177,23 @@
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.lblLocalidad);
+            this.groupBox2.Controls.Add(this.materialLabel11);
+            this.groupBox2.Controls.Add(this.lblCodigoPostal);
+            this.groupBox2.Controls.Add(this.materialLabel10);
+            this.groupBox2.Controls.Add(this.lblCiudad);
+            this.groupBox2.Controls.Add(this.materialLabel9);
             this.groupBox2.Controls.Add(this.lblFormaDePago);
             this.groupBox2.Controls.Add(this.materialLabel8);
             this.groupBox2.Controls.Add(this.lblIdUsuario);
             this.groupBox2.Controls.Add(this.materialLabel7);
-            this.groupBox2.Controls.Add(this.lblDomicilio);
+            this.groupBox2.Controls.Add(this.lblCalleYAltura);
             this.groupBox2.Controls.Add(this.materialLabel6);
             this.groupBox2.Controls.Add(this.lblCliente);
             this.groupBox2.Controls.Add(this.materialLabel5);
             this.groupBox2.Location = new System.Drawing.Point(12, 154);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(773, 100);
+            this.groupBox2.Size = new System.Drawing.Size(773, 135);
             this.groupBox2.TabIndex = 8;
             this.groupBox2.TabStop = false;
             // 
@@ -191,7 +203,7 @@
             this.lblFormaDePago.Depth = 0;
             this.lblFormaDePago.Font = new System.Drawing.Font("Roboto", 11F);
             this.lblFormaDePago.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.lblFormaDePago.Location = new System.Drawing.Point(573, 61);
+            this.lblFormaDePago.Location = new System.Drawing.Point(645, 96);
             this.lblFormaDePago.MouseState = MaterialSkin.MouseState.HOVER;
             this.lblFormaDePago.Name = "lblFormaDePago";
             this.lblFormaDePago.Size = new System.Drawing.Size(0, 19);
@@ -203,7 +215,7 @@
             this.materialLabel8.Depth = 0;
             this.materialLabel8.Font = new System.Drawing.Font("Roboto", 11F);
             this.materialLabel8.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.materialLabel8.Location = new System.Drawing.Point(455, 61);
+            this.materialLabel8.Location = new System.Drawing.Point(527, 96);
             this.materialLabel8.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialLabel8.Name = "materialLabel8";
             this.materialLabel8.Size = new System.Drawing.Size(112, 19);
@@ -226,26 +238,26 @@
             // 
             this.materialLabel7.AutoSize = true;
             this.materialLabel7.Depth = 0;
-            this.materialLabel7.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.materialLabel7.Font = new System.Drawing.Font("Roboto", 11F);
             this.materialLabel7.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.materialLabel7.Location = new System.Drawing.Point(408, 27);
+            this.materialLabel7.Location = new System.Drawing.Point(349, 27);
             this.materialLabel7.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialLabel7.Name = "materialLabel7";
-            this.materialLabel7.Size = new System.Drawing.Size(150, 15);
+            this.materialLabel7.Size = new System.Drawing.Size(187, 19);
             this.materialLabel7.TabIndex = 4;
             this.materialLabel7.Text = "DNI/CUIT/LC/PASAPORTE";
             // 
-            // lblDomicilio
+            // lblCalleYAltura
             // 
-            this.lblDomicilio.AutoSize = true;
-            this.lblDomicilio.Depth = 0;
-            this.lblDomicilio.Font = new System.Drawing.Font("Roboto", 11F);
-            this.lblDomicilio.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.lblDomicilio.Location = new System.Drawing.Point(91, 61);
-            this.lblDomicilio.MouseState = MaterialSkin.MouseState.HOVER;
-            this.lblDomicilio.Name = "lblDomicilio";
-            this.lblDomicilio.Size = new System.Drawing.Size(0, 19);
-            this.lblDomicilio.TabIndex = 3;
+            this.lblCalleYAltura.AutoSize = true;
+            this.lblCalleYAltura.Depth = 0;
+            this.lblCalleYAltura.Font = new System.Drawing.Font("Roboto", 11F);
+            this.lblCalleYAltura.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.lblCalleYAltura.Location = new System.Drawing.Point(91, 61);
+            this.lblCalleYAltura.MouseState = MaterialSkin.MouseState.HOVER;
+            this.lblCalleYAltura.Name = "lblCalleYAltura";
+            this.lblCalleYAltura.Size = new System.Drawing.Size(0, 19);
+            this.lblCalleYAltura.TabIndex = 3;
             // 
             // materialLabel6
             // 
@@ -321,6 +333,81 @@
             this.Cantidad.Name = "Cantidad";
             this.Cantidad.ReadOnly = true;
             // 
+            // materialLabel9
+            // 
+            this.materialLabel9.AutoSize = true;
+            this.materialLabel9.Depth = 0;
+            this.materialLabel9.Font = new System.Drawing.Font("Roboto", 11F);
+            this.materialLabel9.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.materialLabel9.Location = new System.Drawing.Point(10, 96);
+            this.materialLabel9.MouseState = MaterialSkin.MouseState.HOVER;
+            this.materialLabel9.Name = "materialLabel9";
+            this.materialLabel9.Size = new System.Drawing.Size(55, 19);
+            this.materialLabel9.TabIndex = 8;
+            this.materialLabel9.Text = "Ciudad";
+            // 
+            // lblCiudad
+            // 
+            this.lblCiudad.AutoSize = true;
+            this.lblCiudad.Depth = 0;
+            this.lblCiudad.Font = new System.Drawing.Font("Roboto", 11F);
+            this.lblCiudad.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.lblCiudad.Location = new System.Drawing.Point(91, 96);
+            this.lblCiudad.MouseState = MaterialSkin.MouseState.HOVER;
+            this.lblCiudad.Name = "lblCiudad";
+            this.lblCiudad.Size = new System.Drawing.Size(0, 19);
+            this.lblCiudad.TabIndex = 9;
+            // 
+            // materialLabel10
+            // 
+            this.materialLabel10.AutoSize = true;
+            this.materialLabel10.Depth = 0;
+            this.materialLabel10.Font = new System.Drawing.Font("Roboto", 11F);
+            this.materialLabel10.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.materialLabel10.Location = new System.Drawing.Point(149, 96);
+            this.materialLabel10.MouseState = MaterialSkin.MouseState.HOVER;
+            this.materialLabel10.Name = "materialLabel10";
+            this.materialLabel10.Size = new System.Drawing.Size(28, 19);
+            this.materialLabel10.TabIndex = 10;
+            this.materialLabel10.Text = "CP";
+            // 
+            // lblCodigoPostal
+            // 
+            this.lblCodigoPostal.AutoSize = true;
+            this.lblCodigoPostal.Depth = 0;
+            this.lblCodigoPostal.Font = new System.Drawing.Font("Roboto", 11F);
+            this.lblCodigoPostal.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.lblCodigoPostal.Location = new System.Drawing.Point(183, 96);
+            this.lblCodigoPostal.MouseState = MaterialSkin.MouseState.HOVER;
+            this.lblCodigoPostal.Name = "lblCodigoPostal";
+            this.lblCodigoPostal.Size = new System.Drawing.Size(0, 19);
+            this.lblCodigoPostal.TabIndex = 11;
+            // 
+            // materialLabel11
+            // 
+            this.materialLabel11.AutoSize = true;
+            this.materialLabel11.Depth = 0;
+            this.materialLabel11.Font = new System.Drawing.Font("Roboto", 11F);
+            this.materialLabel11.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.materialLabel11.Location = new System.Drawing.Point(224, 96);
+            this.materialLabel11.MouseState = MaterialSkin.MouseState.HOVER;
+            this.materialLabel11.Name = "materialLabel11";
+            this.materialLabel11.Size = new System.Drawing.Size(74, 19);
+            this.materialLabel11.TabIndex = 12;
+            this.materialLabel11.Text = "Localidad";
+            // 
+            // lblLocalidad
+            // 
+            this.lblLocalidad.AutoSize = true;
+            this.lblLocalidad.Depth = 0;
+            this.lblLocalidad.Font = new System.Drawing.Font("Roboto", 11F);
+            this.lblLocalidad.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.lblLocalidad.Location = new System.Drawing.Point(304, 96);
+            this.lblLocalidad.MouseState = MaterialSkin.MouseState.HOVER;
+            this.lblLocalidad.Name = "lblLocalidad";
+            this.lblLocalidad.Size = new System.Drawing.Size(0, 19);
+            this.lblLocalidad.TabIndex = 13;
+            // 
             // VisualizadorFactura
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -363,7 +450,7 @@
         private MaterialSkin.Controls.MaterialLabel materialLabel5;
         private MaterialSkin.Controls.MaterialLabel lblIdUsuario;
         private MaterialSkin.Controls.MaterialLabel materialLabel7;
-        private MaterialSkin.Controls.MaterialLabel lblDomicilio;
+        private MaterialSkin.Controls.MaterialLabel lblCalleYAltura;
         private MaterialSkin.Controls.MaterialLabel materialLabel6;
         private MaterialSkin.Controls.MaterialLabel lblCliente;
         private MaterialSkin.Controls.MaterialLabel lblFormaDePago;
@@ -372,5 +459,11 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Item;
         private System.Windows.Forms.DataGridViewTextBoxColumn Valor;
         private System.Windows.Forms.DataGridViewTextBoxColumn Cantidad;
+        private MaterialSkin.Controls.MaterialLabel lblCiudad;
+        private MaterialSkin.Controls.MaterialLabel materialLabel9;
+        private MaterialSkin.Controls.MaterialLabel lblCodigoPostal;
+        private MaterialSkin.Controls.MaterialLabel materialLabel10;
+        private MaterialSkin.Controls.MaterialLabel lblLocalidad;
+        private MaterialSkin.Controls.MaterialLabel materialLabel11;
     }
 }

@@ -16,8 +16,9 @@ namespace MercadoEnvio.Publicar
     public partial class PagoFactura : MaterialForm
     {
         public Publicacion publicacion;
-        public PagoFactura()
+        public PagoFactura(Publicacion publicacion)
         {
+            this.publicacion = publicacion;
             InitializeComponent();
             var materialSkinManager = MaterialSkinManager.Instance;
             materialSkinManager.AddFormToManage(this);
@@ -29,6 +30,7 @@ namespace MercadoEnvio.Publicar
             lblDescripcion.Text = publicacion.Descripcion;
             lblPrecio.Text = publicacion.Visibilidad.Precio.ToString();
             lblVisibilidad.Text = publicacion.Visibilidad.Descripcion;
+            cargarMediosDePago();
         }
         private void cargarMediosDePago() {
             cmbMedioDePago.DataSource = DAO.FormaDePago.getFormasDePago();
@@ -48,6 +50,8 @@ namespace MercadoEnvio.Publicar
                 if (f != null) {
                     int idFactura = DAO.PublicacionSQL.activarPublicacion(publicacion.Id,publicacion.FechaInicio,Persistencia.usuario.Id,f.Id,publicacion.Visibilidad.Precio);
                     VisualizadorFactura vis = new VisualizadorFactura(idFactura);
+                    vis.Show();
+                    this.Close();
                 }
             }
         }

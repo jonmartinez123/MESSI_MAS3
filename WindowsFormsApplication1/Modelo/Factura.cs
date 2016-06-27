@@ -10,9 +10,13 @@ namespace MercadoEnvio.Modelo
     {
         private DateTime fecha;
         private double importeTotal;
-        private Usuario vendedor;
+        private int idVendedor;
         private int numero;
-        private FormaDePago formaDePago;
-
+        private int idFormaDePago;
+        public DateTime Fecha { get { return fecha; } set { fecha = value; } }
+        public double ImporteTotal { get { return importeTotal; } set { importeTotal = value; } }
+        public int IdVendedor { get { return idVendedor; } set { idVendedor = value; } }
+        public int Numero { get { return numero; } set { numero = value; } }
+        public int IdFormaDePago { get { return idFormaDePago; } set { idFormaDePago = value; } }
     }
 }

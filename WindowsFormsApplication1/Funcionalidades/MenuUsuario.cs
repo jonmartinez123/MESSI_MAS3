@@ -186,6 +186,7 @@ namespace MercadoEnvio.Funcionalidades
 
         private void listadoToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            this.Hide();
             Publicar.Listado lis = new Publicar.Listado();
             lis.Show();
         }

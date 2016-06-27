@@ -6,8 +6,33 @@ begin
 	where factura_id = @IdFactura and facturaDetalle_id=@idFactura 
 end
 go
+CREATE PROCEDURE [MESSI_MAS3].getFacturaDetallesCabecera (@idFactura int)
+as
+begin
+	select factura_fecha,factura_formaDePago,factura_numero,factura_idVendedor,factura_importeTotal from Factura where factura_id = @idFactura
+end
+go
+CREATE PROCEDURE [MESSI_MAS3].esCliente (@idUsuario int)
+as
+begin
+	if exists ( select * from Cliente where @idUsuario = cliente_id)
+		begin
+			return 1
+		end
+		else
+		begin
+			return -1
+		end
+end
+go
 
---CREATE PROCEDURE [MESSI_MAS3].getFacturas (@idFactura int)
+CREATE PROCEDURE [MESSI_MAS3].getFormasDePago (@idForma int)
+as
+begin
+	select formadePago_nombre from FormaDePago where @idForma=formaDePago_id
+end
+go
+--CREATE PROCEDURE [MESSI_MAS3].getFacturaDetallesCabecera (@idFactura int)
 --as
 --begin
 --declare @clienteId int
