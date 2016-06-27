@@ -9,9 +9,9 @@ namespace MercadoEnvio.DAO
 {
     class VisualizarFacturaSQL
     {
-        public static int getPublicaciones(DataGridView dg, int idUsuario)
+        public static int getFacturaDetalles(DataGridView dg, int idFactura)
         {
-            return SqlConnector.retrieveDT("getPublicaciones", dg, idUsuario);
+            return SqlConnector.retrieveDT("getFacturaDetalles", dg, idFactura);
         }
     }
 }

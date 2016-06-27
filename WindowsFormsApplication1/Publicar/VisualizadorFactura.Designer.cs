@@ -46,13 +46,13 @@
             this.materialLabel6 = new MaterialSkin.Controls.MaterialLabel();
             this.lblCliente = new MaterialSkin.Controls.MaterialLabel();
             this.materialLabel5 = new MaterialSkin.Controls.MaterialLabel();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.listadoItems = new System.Windows.Forms.DataGridView();
             this.Item = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ValorItem = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Valor = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Cantidad = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.listadoItems)).BeginInit();
             this.SuspendLayout();
             // 
             // lblFecha
@@ -216,7 +216,7 @@
             this.lblIdUsuario.Depth = 0;
             this.lblIdUsuario.Font = new System.Drawing.Font("Roboto", 11F);
             this.lblIdUsuario.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.lblIdUsuario.Location = new System.Drawing.Point(535, 32);
+            this.lblIdUsuario.Location = new System.Drawing.Point(567, 27);
             this.lblIdUsuario.MouseState = MaterialSkin.MouseState.HOVER;
             this.lblIdUsuario.Name = "lblIdUsuario";
             this.lblIdUsuario.Size = new System.Drawing.Size(0, 19);
@@ -226,14 +226,14 @@
             // 
             this.materialLabel7.AutoSize = true;
             this.materialLabel7.Depth = 0;
-            this.materialLabel7.Font = new System.Drawing.Font("Roboto", 11F);
+            this.materialLabel7.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.materialLabel7.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.materialLabel7.Location = new System.Drawing.Point(455, 32);
+            this.materialLabel7.Location = new System.Drawing.Point(408, 27);
             this.materialLabel7.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialLabel7.Name = "materialLabel7";
-            this.materialLabel7.Size = new System.Drawing.Size(73, 19);
+            this.materialLabel7.Size = new System.Drawing.Size(150, 15);
             this.materialLabel7.TabIndex = 4;
-            this.materialLabel7.Text = "DNI/CUIT";
+            this.materialLabel7.Text = "DNI/CUIT/LC/PASAPORTE";
             // 
             // lblDomicilio
             // 
@@ -285,33 +285,41 @@
             this.materialLabel5.TabIndex = 0;
             this.materialLabel5.Text = "Cliente";
             // 
-            // dataGridView1
+            // listadoItems
             // 
-            this.dataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.listadoItems.AllowUserToAddRows = false;
+            this.listadoItems.AllowUserToDeleteRows = false;
+            this.listadoItems.AllowUserToResizeRows = false;
+            this.listadoItems.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.listadoItems.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.DisplayedCells;
+            this.listadoItems.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.listadoItems.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Item,
-            this.ValorItem,
+            this.Valor,
             this.Cantidad});
-            this.dataGridView1.Location = new System.Drawing.Point(12, 278);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(773, 195);
-            this.dataGridView1.TabIndex = 9;
+            this.listadoItems.Location = new System.Drawing.Point(12, 295);
+            this.listadoItems.Name = "listadoItems";
+            this.listadoItems.ReadOnly = true;
+            this.listadoItems.Size = new System.Drawing.Size(773, 169);
+            this.listadoItems.TabIndex = 10;
             // 
             // Item
             // 
             this.Item.HeaderText = "Item";
             this.Item.Name = "Item";
+            this.Item.ReadOnly = true;
             // 
-            // ValorItem
+            // Valor
             // 
-            this.ValorItem.HeaderText = "Valor Item";
-            this.ValorItem.Name = "ValorItem";
+            this.Valor.HeaderText = "Valor";
+            this.Valor.Name = "Valor";
+            this.Valor.ReadOnly = true;
             // 
             // Cantidad
             // 
             this.Cantidad.HeaderText = "Cantidad";
             this.Cantidad.Name = "Cantidad";
+            this.Cantidad.ReadOnly = true;
             // 
             // VisualizadorFactura
             // 
@@ -319,7 +327,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.ClientSize = new System.Drawing.Size(797, 572);
-            this.Controls.Add(this.dataGridView1);
+            this.Controls.Add(this.listadoItems);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.btnVolver);
@@ -334,7 +342,7 @@
             this.groupBox1.PerformLayout();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.listadoItems)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -358,11 +366,11 @@
         private MaterialSkin.Controls.MaterialLabel lblDomicilio;
         private MaterialSkin.Controls.MaterialLabel materialLabel6;
         private MaterialSkin.Controls.MaterialLabel lblCliente;
-        private System.Windows.Forms.DataGridView dataGridView1;
         private MaterialSkin.Controls.MaterialLabel lblFormaDePago;
         private MaterialSkin.Controls.MaterialLabel materialLabel8;
+        private System.Windows.Forms.DataGridView listadoItems;
         private System.Windows.Forms.DataGridViewTextBoxColumn Item;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ValorItem;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Valor;
         private System.Windows.Forms.DataGridViewTextBoxColumn Cantidad;
     }
 }

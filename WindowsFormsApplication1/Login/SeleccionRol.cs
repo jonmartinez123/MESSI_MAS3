@@ -46,10 +46,10 @@ namespace MercadoEnvio.Login
                 {
                     Persistencia.usuario.Rol = rolSeleccionado;
                     Persistencia.usuario.Rol.getFuncionalidades = funcionalidades;
-                    this.Hide();
+                    
                     Funcionalidades.MenuUsuario menuUsuario = new Funcionalidades.MenuUsuario();
                     menuUsuario.ShowDialog();
-                    Close();
+                    this.Close();
                 }
                 else {
                     MessageBox.Show("El rol " + rolSeleccionado + " no tiene funcionalidades, elija otro");
