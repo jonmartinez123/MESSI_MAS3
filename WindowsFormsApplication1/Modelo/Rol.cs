@@ -18,7 +18,7 @@ namespace MercadoEnvio.Modelo
         public List<String> getFuncionalidadesString { get { return funcionalidadesString; } set { funcionalidadesString = value; } }
         public String Nombre { get { return nombre; } set { nombre = value; } }
         public int getid { get { return id; } set { id = value; } }
-
+        public int Id { get { return id; } set { id = value; } }
         //constructores
 
         public Rol() { }

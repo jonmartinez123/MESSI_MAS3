@@ -23,14 +23,8 @@ namespace MercadoEnvio.Login
           materialSkinManager.AddFormToManage(this);
           materialSkinManager.Theme = MaterialSkinManager.Themes.LIGHT;
         }
-
-         private void iniciarSesion_Click(object sender, EventArgs e)
-         {
-            string username = txtUsuario.Text;
-            string pass = txtPass.Text;
-            if (!string.IsNullOrEmpty(pass) && !string.IsNullOrEmpty(username))
-            {
-                if (DAO.LoginSQL.existeUsuario(username))
+        private void loguear(string username,string pass){
+           if (DAO.LoginSQL.existeUsuario(username))
                 {
                     int idUsuario = DAO.LoginSQL.getID(username);
                     int cantidadIntentos = DAO.LoginSQL.traerIntentos(idUsuario);
@@ -81,11 +75,37 @@ namespace MercadoEnvio.Login
                 {
                     MessageBox.Show("El usuario no existe","Validacion");
                 }
+        }
+         private void iniciarSesion_Click(object sender, EventArgs e)
+         {
+            string username = txtUsuario.Text;
+            string pass = txtPass.Text;
+            if (!string.IsNullOrEmpty(pass) && !string.IsNullOrEmpty(username))
+            {
+                if (username.Contains('-'))
+                {
+                    if (Validaciones.tieneDosGuiones(username))
+                    {
+                        if (username.Length == 14)
+                        {
+                            loguear(username, pass);
+                        }
+                        else {
+                            MessageBox.Show("El cuit debe tener 12 digitos", "Error");
+                        }
+                    }
+                    else
+                    {
+                        MessageBox.Show("El cuit debe contener dos guiones", "Error");
+                    }
+                }
+                else {
+                    loguear(username, pass);
+                } 
             }else {
                 MessageBox.Show("Los campos usuario y contraseña deben estar completos","Validacion");
             }
          }
-
          private void cargarDatosUsuarioLogueado()
          {
              int id=  DAO.LoginSQL.getID(Persistencia.usuario.NombreUsuario);
@@ -101,7 +121,7 @@ namespace MercadoEnvio.Login
 
          private void txtUsuario_KeyPress(object sender, KeyPressEventArgs e)
          {
-             this.allowAlphanumericOnly(e);
+             this.allowAlphanumericOnlyYGuion(e);
          }
 
          private void txtPass_KeyPress(object sender, KeyPressEventArgs e)
