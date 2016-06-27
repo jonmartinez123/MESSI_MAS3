@@ -46,7 +46,8 @@ namespace MercadoEnvio.Publicar
             if (cmbMedioDePago.SelectedIndex != -1) {
                 Modelo.FormaDePago f = (Modelo.FormaDePago)cmbMedioDePago.SelectedItem;
                 if (f != null) {
-                    int facturaNumero = DAO.PublicacionSQL.activarPublicacion(publicacion.Id,publicacion.FechaInicio,Persistencia.usuario.Id,f.Id,publicacion.Visibilidad.Precio);
+                    int idFactura = DAO.PublicacionSQL.activarPublicacion(publicacion.Id,publicacion.FechaInicio,Persistencia.usuario.Id,f.Id,publicacion.Visibilidad.Precio);
+                    VisualizadorFactura vis = new VisualizadorFactura(idFactura);
                 }
             }
         }

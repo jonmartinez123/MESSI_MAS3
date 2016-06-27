@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
@@ -171,7 +171,7 @@
     <Compile Include="DAO\ConsultarFacturasSQL.cs" />
     <Compile Include="DAO\FormaDePago.cs" />
     <Compile Include="DAO\HistorialClienteSQL.cs" />
-	<Compile Include="DAO\ListadoSQL.cs" />
+    <Compile Include="DAO\ListadoSQL.cs" />
     <Compile Include="DAO\LocalidadSQL.cs" />
     <Compile Include="DAO\LoginSQL.cs" />
     <Compile Include="DAO\PublicacionSQL.cs" />
@@ -182,6 +182,7 @@
     <Compile Include="DAO\TipoPublicacionSQL.cs" />
     <Compile Include="DAO\UsuarioSQL.cs" />
     <Compile Include="DAO\VisibilidadSQL.cs" />
+    <Compile Include="DAO\VisualizarFacturaSQL.cs" />
     <Compile Include="Facturas\ConsultarFacturas.cs">
       <SubType>Form</SubType>
     </Compile>
