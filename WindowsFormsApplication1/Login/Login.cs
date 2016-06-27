@@ -34,7 +34,7 @@ namespace MercadoEnvio.Login
                 {
                     int idUsuario = DAO.LoginSQL.getID(username);
                     int cantidadIntentos = DAO.LoginSQL.traerIntentos(idUsuario);
-                    if (cantidadIntentos <= 3)
+                    if (cantidadIntentos <= 4)
                     {
                         if (DAO.LoginSQL.validarUsuario(username, pass) == 1)
                         {
