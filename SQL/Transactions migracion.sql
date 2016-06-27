@@ -209,15 +209,21 @@ COMMIT
 --Migro a la factura detalle todo
 BEGIN TRANSACTION
 INSERT INTO MESSI_MAS3.Factura_detalle(facturaDetalle_id, facturaDetall_cantidadItems, facturaDetalle_item , facturaDetalle_numero,FacturaDetalle_valorItem)
-(SELECT DISTINCT (SELECT TOP 1 factura_id FROM MESSI_MAS3.Factura 
-			WHERE factura_numero = Factura_Nro AND factura_fecha = Factura_Fecha AND factura_importeTotal = Factura_Total AND Factura_Fecha IS NOT NULL AND Oferta_Fecha IS NULL AND Item_Factura_Cantidad IS NOT NULL ),
-		Item_Factura_Cantidad ,
-		NULL, 
-		Factura_Nro,
-		Item_Factura_Monto
+(SELECT 
 
-
-FROM gd_esquema.Maestra WHERE Publicacion_Tipo = 'Compra Inmediata' AND Oferta_Monto IS NULL AND Item_Factura_Cantidad IS NOT NULL AND Factura_Fecha IS NOT NULL AND  Forma_Pago_Desc IS NOT NULL)
+				(SELECT factura_id FROM MESSI_MAS3.Factura f WHERE f.factura_numero = Factura_Nro)				AS idFactura,
+				Item_Factura_Cantidad																	AS cantidad,
+				CASE 
+					WHEN Item_Factura_Monto = Publicacion_Visibilidad_Precio THEN 'Costo Publicacion '+Publicacion_Visibilidad_Desc
+					ELSE 'Comision Publicacion '+Publicacion_Visibilidad_Desc
+				END																						AS nombre,
+				Factura_Nro																				AS nroFactura,
+				Item_Factura_Monto																		AS precio
+				
+			FROM 
+				gd_esquema.Maestra
+			WHERE
+				Item_Factura_Monto IS NOT NULL			)
 COMMIT
 
 
