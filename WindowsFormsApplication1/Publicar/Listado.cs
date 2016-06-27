@@ -156,5 +156,13 @@ namespace MercadoEnvio.Publicar
         {
             publicacion = null;
         }
+
+        private void btnActivar_Click(object sender, EventArgs e)
+        {
+            PagoFactura p = new PagoFactura();
+            p.publicacion = publicacion;
+            p.ShowDialog();
+            //CREAR FACTURACION
+        }
     }
 }

@@ -42,3 +42,17 @@ INSERT INTO Publicacion(publicacion_idEstado,publicacion_idVisibilidad,publicaci
 INSERT INTO Rubro_x_Publicacion(idRubro,idPublicacion) (select idRubro,SCOPE_IDENTITY() from @Rubros)
 END
 GO
+
+CREATE PROCEDURE [MESSI_MAS3].activarPublicacion (@idPublicacion int,@fechaActiva dateTime,@idUsuario int,@formaDePago int,@importeTotal numeric(18,2))
+AS
+BEGIN
+	--GENERA FACTURA
+	DECLARE @ultimoNumero int
+	select top 1 @ultimoNumero=factura_numero from Factura order by factura_numero desc
+	SET @ultimoNumero = @ultimoNumero + 1
+	INSERT INTO Factura(factura_fecha,factura_formaDePago,factura_idVendedor,factura_publicacionId,factura_numero,factura_importeTotal) values(@fechaActiva,@formaDePago,@idUsuario,@idPublicacion,@ultimoNumero,@importeTotal)
+	INSERT INTO Factura_detalle(facturaDetalle_id,facturaDetalle_numero,facturaDetall_cantidadItems,FacturaDetalle_valorItem,facturaDetalle_item)
+	VALUES (SCOPE_IDENTITY(),@ultimoNumero,1,@importeTotal,'Activo de publicacion')
+	RETURN @ultimoNumero
+END
+GO

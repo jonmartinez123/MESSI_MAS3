@@ -171,6 +171,7 @@
     <Compile Include="DAO\ConsultarFacturasSQL.cs" />
     <Compile Include="DAO\FormaDePago.cs" />
     <Compile Include="DAO\HistorialClienteSQL.cs" />
+	<Compile Include="DAO\ListadoSQL.cs" />
     <Compile Include="DAO\LocalidadSQL.cs" />
     <Compile Include="DAO\LoginSQL.cs" />
     <Compile Include="DAO\PublicacionSQL.cs" />
@@ -214,6 +215,18 @@
     </Compile>
     <Compile Include="Publicar\Listado.Designer.cs">
       <DependentUpon>Listado.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Publicar\PagoFactura.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Publicar\PagoFactura.Designer.cs">
+      <DependentUpon>PagoFactura.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Publicar\VisualizadorFactura.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Publicar\VisualizadorFactura.Designer.cs">
+      <DependentUpon>VisualizadorFactura.cs</DependentUpon>
     </Compile>
     <Compile Include="Utils\SupergridPaginado.cs">
       <SubType>Component</SubType>
@@ -368,8 +381,14 @@
     <EmbeddedResource Include="Publicar\Listado.resx">
       <DependentUpon>Listado.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Publicar\PagoFactura.resx">
+      <DependentUpon>PagoFactura.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Publicar\Publicar.resx">
       <DependentUpon>Publicar.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Publicar\VisualizadorFactura.resx">
+      <DependentUpon>VisualizadorFactura.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Utils\SupergridPaginado.resx">
       <DependentUpon>SupergridPaginado.cs</DependentUpon>

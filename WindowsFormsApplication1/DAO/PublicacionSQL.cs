@@ -103,5 +103,9 @@ namespace MercadoEnvio.DAO
 
             }
         }
+        internal static int activarPublicacion(int idPublicacion, DateTime fechaActivo, int idUsuario, int idFormaDePago, double monto)
+        {
+            return SqlConnector.executeProcedure("activarPublicacion", idPublicacion, fechaActivo, idUsuario, idFormaDePago,monto);  
+        }
     }
 }

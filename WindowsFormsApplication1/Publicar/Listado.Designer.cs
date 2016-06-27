@@ -72,6 +72,7 @@
             this.btnActivar.TabIndex = 2;
             this.btnActivar.Text = "Activar";
             this.btnActivar.UseVisualStyleBackColor = true;
+            this.btnActivar.Click += new System.EventHandler(this.btnActivar_Click);
             // 
             // btnAgregar
             // 
