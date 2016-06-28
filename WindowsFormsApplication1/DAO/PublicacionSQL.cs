@@ -107,5 +107,9 @@ namespace MercadoEnvio.DAO
         {
             return SqlConnector.executeProcedure("activarPublicacion", idPublicacion, fechaActivo, idUsuario, idFormaDePago,monto);  
         }
+        internal static void updetearEstado(int idPublicacion, int idEstado)
+        {
+            SqlConnector.executeProcedure("updetearEstado", idPublicacion, idEstado);
+        }
     }
 }

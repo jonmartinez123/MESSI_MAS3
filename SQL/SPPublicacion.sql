@@ -20,6 +20,13 @@ PRIMARY KEY (idRubro)
 )
 GO
 
+CREATE PROCEDURE [MESSI_MAS3].updetearEstado @idPublicacion int,@idEstado int
+AS
+BEGIN
+UPDATE Publicacion SET publicacion_idEstado = @idEstado where @idPublicacion = publicacion_id
+END
+GO
+
 CREATE PROCEDURE [MESSI_MAS3].updatearPublicacion (@idPublicacion int, @idEstado int, @idVisibilidad int,@idUsuario int,@idTipoPublicacion int, @descripcion nvarchar(255),@fechaInicio dateTime, @fechaFin dateTime,@minimoSubasta numeric(10,2),@precio numeric(18,2),@stock numeric(18,0),@seCobraEnvio int, @Rubros Rubros READONLY)
 AS
 BEGIN

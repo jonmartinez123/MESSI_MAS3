@@ -67,7 +67,7 @@ namespace MercadoEnvio.Login
                     }
                     else
                     {
-                        MessageBox.Show("Contactar al ADMIN por superacion de " + cantidadIntentos + " intentos","Atención");
+                        MessageBox.Show("Contactar al ADMIN por superacion de 4 intentos","Atención");
                     }
 
                 }

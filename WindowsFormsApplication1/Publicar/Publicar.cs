@@ -150,11 +150,15 @@ namespace MercadoEnvio.Publicar
         private void btnGuardar_Click(object sender, EventArgs e)
         {
             if (Extension.anySelected(ListadoVisibilidades, "una visibilidad") && listadoRubro.Rows.Count > 0 && !string.IsNullOrWhiteSpace(txtDescripcion.Text) && !string.IsNullOrWhiteSpace(txtPrecio.Text) && !string.IsNullOrWhiteSpace(txtStock.Text) && sePuedeConvertirADouble()){
-                if (rbSubasta.Checked && !string.IsNullOrWhiteSpace(txtSubastaMinima.Text))
+                if (gbSubasta.Visible == true)
                 {
-                    guardar();
+                    if (rbSubasta.Checked && !string.IsNullOrWhiteSpace(txtSubastaMinima.Text))
+                    {
+                        guardar();
+                        return;
+                    }
+                    else { MessageBox.Show("Complete la subasta minima", "Validacion"); return; }
                 }
-                else { MessageBox.Show("Complete la subasta minima", "Validacion"); }
                 guardar();
             }else{
                 MessageBox.Show("Por favor complete todos los campos", "Validacion");

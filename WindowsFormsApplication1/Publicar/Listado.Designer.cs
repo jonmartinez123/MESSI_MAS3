@@ -98,6 +98,7 @@
             this.btnFinalizar.TabIndex = 4;
             this.btnFinalizar.Text = "Finalizar";
             this.btnFinalizar.UseVisualStyleBackColor = true;
+            this.btnFinalizar.Click += new System.EventHandler(this.btnFinalizar_Click);
             // 
             // btnModificar
             // 
@@ -178,6 +179,7 @@
             this.btnPausar.TabIndex = 9;
             this.btnPausar.Text = "Pausar";
             this.btnPausar.UseVisualStyleBackColor = true;
+            this.btnPausar.Click += new System.EventHandler(this.btnPausar_Click);
             // 
             // listadoPublicaciones
             // 

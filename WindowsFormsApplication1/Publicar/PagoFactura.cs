@@ -49,6 +49,7 @@ namespace MercadoEnvio.Publicar
                 Modelo.FormaDePago f = (Modelo.FormaDePago)cmbMedioDePago.SelectedItem;
                 if (f != null) {
                     int idFactura = DAO.PublicacionSQL.activarPublicacion(publicacion.Id,publicacion.FechaInicio,Persistencia.usuario.Id,f.Id,publicacion.Visibilidad.Precio);
+                    DAO.PublicacionSQL.updetearEstado(publicacion.Id,2);
                     VisualizadorFactura vis = new VisualizadorFactura(idFactura);
                     vis.Show();
                     this.Close();
