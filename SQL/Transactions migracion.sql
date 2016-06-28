@@ -27,15 +27,15 @@ INSERT INTO MESSI_MAS3.Publicacion(publicacion_idUsuario,publicacion_codigo, pub
 			WHERE cliente_DNI = Publ_Cli_Dni AND cliente_apellido = Publ_Cli_Apeliido AND cliente_nombre = Publ_Cli_Nombre ),
 		Publicacion_Cod ,	
 		Publicacion_Descripcion, 
-		2,
+		(SELECT estado_id FROM MESSI_MAS3.Estado WHERE estado_nombre = Publicacion_Tipo),
 		Publicacion_Fecha,
 		Publicacion_Fecha_Venc,
 		4,
 		(SELECT visibilidad_id FROM MESSI_MAS3.Visibilidad WHERE visibilidad_codigo = Publicacion_Visibilidad_Cod),
 		Publicacion_Precio,
 		Publicacion_Stock
-FROM gd_esquema.Maestra WHERE (Publicacion_Fecha_Venc is NOT NULL) AND (Publicacion_Fecha is NOT NULL) AND (Publ_Cli_Dni IS NOT NULL ) 	AND Publicacion_Stock IS NOT NULL AND Publicacion_Tipo = 'Compra Inmediata')
 
+FROM gd_esquema.Maestra WHERE (Publicacion_Fecha_Venc is NOT NULL) AND (Publicacion_Fecha is NOT NULL) AND Oferta_Fecha IS NULL AND (Publ_Cli_Dni IS NOT NULL ) AND Factura_Nro IS NULL AND Publicacion_Stock IS NOT NULL AND Calificacion_Codigo IS NULL AND Compra_Cantidad IS NULL)
 COMMIT
 
 
@@ -49,14 +49,14 @@ INSERT INTO MESSI_MAS3.Publicacion(publicacion_idUsuario,publicacion_codigo, pub
 			WHERE empresa_cuit = Publ_Empresa_Cuit),
 		Publicacion_Cod ,	
 		Publicacion_Descripcion, 
-		2,
+		(SELECT estado_id FROM MESSI_MAS3.Estado WHERE estado_nombre = Publicacion_Tipo),
 		Publicacion_Fecha,
 		Publicacion_Fecha_Venc,
 		4,
 		(SELECT visibilidad_id FROM MESSI_MAS3.Visibilidad WHERE visibilidad_codigo = Publicacion_Visibilidad_Cod),
 		Publicacion_Precio,
 		Publicacion_Stock
-FROM gd_esquema.Maestra WHERE (Publicacion_Fecha_Venc is NOT NULL) AND (Publicacion_Fecha is NOT NULL) AND (Publ_Empresa_Cuit IS NOT NULL ) AND Publicacion_Stock IS NOT NULL AND Publicacion_Tipo = 'Compra Inmediata')	
+FROM gd_esquema.Maestra WHERE (Publicacion_Fecha_Venc is NOT NULL) AND (Publicacion_Fecha is NOT NULL) AND Oferta_Fecha IS NULL AND (Publ_Empresa_Cuit IS NOT NULL ) AND Factura_Nro IS NULL AND Publicacion_Stock IS NOT NULL AND Calificacion_Codigo IS NULL AND Compra_Cantidad IS NULL)	
 
 
 
@@ -78,16 +78,17 @@ FROM GD1C2016.gd_esquema.Maestra WHERE Publicacion_Rubro_Descripcion IS NOT NULL
 
 BEGIN TRANSACTION
 INSERT INTO MESSI_MAS3.Compra(compras_personaComprador_id, compras_cantidad, compras_fecha , compras_publicacion_id)
-(SELECT DISTINCT (SELECT cliente_id FROM MESSI_MAS3.cliente 
-			WHERE cliente_DNI = Cli_Dni AND Compra_Fecha IS NOT NULL AND Oferta_Fecha IS NULL ),
+(SELECT (SELECT cliente_id FROM MESSI_MAS3.cliente 
+			WHERE cliente_DNI = Cli_Dni),
 		Compra_Cantidad ,
 		Compra_Fecha, 
-		(SELECT TOP 1 publicacion_id FROM MESSI_MAS3.Publicacion WHERE Publicacion_Cod = publicacion_codigo)
+		(SELECT 1 publicacion_id FROM MESSI_MAS3.Publicacion WHERE Publicacion_Cod = publicacion_codigo)
 
 
-FROM gd_esquema.Maestra WHERE Compra_Cantidad IS NOT NULL AND Compra_Fecha IS NOT NULL)
-
+FROM gd_esquema.Maestra m JOIN MESSI_MAS3.Cliente u ON (m.Cli_Mail=u.cliente_mail)
+	WHERE Compra_Fecha IS NOT NULL AND Calificacion_Codigo IS NOT NULL)
 COMMIT
+
 
 /*--------------------------Migro Calificaciones de clientes---------------------------*/
 BEGIN TRANSACTION
@@ -177,7 +178,7 @@ COMMIT
 BEGIN TRANSACTION
 INSERT INTO MESSI_MAS3.Factura(factura_idVendedor, factura_formaDePago, factura_fecha , factura_importeTotal,factura_numero,factura_publicacionId)
 (SELECT DISTINCT (SELECT cliente_id FROM MESSI_MAS3.cliente 
-			WHERE cliente_DNI = Publ_Cli_Dni AND Factura_Fecha IS NOT NULL AND Oferta_Fecha IS NULL AND Item_Factura_Cantidad IS NOT NULL ),
+			WHERE cliente_DNI = Publ_Cli_Dni),
 		(SELECT formaDePago_id FROM MESSI_MAS3.FormaDePago WHERE formadePago_nombre = Forma_Pago_Desc) ,
 		Factura_Fecha, 
 		Factura_Total,
@@ -185,7 +186,7 @@ INSERT INTO MESSI_MAS3.Factura(factura_idVendedor, factura_formaDePago, factura_
 		(SELECT TOP 1 publicacion_id FROM MESSI_MAS3.Publicacion WHERE publicacion_codigo = Publicacion_Cod)
 
 
-FROM gd_esquema.Maestra WHERE Publicacion_Tipo = 'Compra Inmediata' AND Oferta_Monto IS NULL AND Item_Factura_Cantidad IS NOT NULL AND Factura_Fecha IS NOT NULL AND  Forma_Pago_Desc IS NOT NULL AND Publ_Cli_Dni IS NOT NULL)
+FROM gd_esquema.Maestra WHERE Oferta_Monto IS NULL AND Factura_Nro IS NOT NULL AND Publ_Cli_Dni IS NOT NULL)
 COMMIT
 
 /*--------------------------Migro Facturas de Empresas---------------------------*/
@@ -193,7 +194,7 @@ COMMIT
 BEGIN TRANSACTION
 INSERT INTO MESSI_MAS3.Factura(factura_idVendedor, factura_formaDePago, factura_fecha , factura_importeTotal,factura_numero, factura_publicacionId)
 (SELECT DISTINCT (SELECT empresa_id FROM MESSI_MAS3.Empresa 
-			WHERE empresa_cuit = Publ_Empresa_Cuit AND Factura_Fecha IS NOT NULL AND Oferta_Fecha IS NULL AND Item_Factura_Cantidad IS NOT NULL ),
+			WHERE empresa_cuit = Publ_Empresa_Cuit),
 		(SELECT formaDePago_id FROM MESSI_MAS3.FormaDePago WHERE formadePago_nombre = Forma_Pago_Desc) ,
 		Factura_Fecha, 
 		Factura_Total,
@@ -201,9 +202,14 @@ INSERT INTO MESSI_MAS3.Factura(factura_idVendedor, factura_formaDePago, factura_
 		(SELECT TOP 1 publicacion_id FROM MESSI_MAS3.Publicacion WHERE publicacion_codigo = Publicacion_Cod)
 
 
-FROM gd_esquema.Maestra WHERE Publicacion_Tipo = 'Compra Inmediata' AND Oferta_Monto IS NULL AND Item_Factura_Cantidad IS NOT NULL AND Factura_Fecha IS NOT NULL AND  Forma_Pago_Desc IS NOT NULL AND Publ_Empresa_Cuit IS NOT NULL)
+FROM gd_esquema.Maestra WHERE Oferta_Monto IS NULL AND Factura_Nro IS NOT NULL AND Publ_Empresa_Cuit IS NOT NULL)
 
 COMMIT
+
+
+
+
+
 /*--------------------------Migro el detalle de Facturas---------------------------*/
 
 --Migro a la factura detalle todo
