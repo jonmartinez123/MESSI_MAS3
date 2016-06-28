@@ -123,7 +123,7 @@ CREATE PROCEDURE MESSI_MAS3.crear_cliente(@username nvarchar(255), @password nva
 AS
 BEGIN
 	INSERT INTO MESSI_MAS3.Usuario(usuario_nombreUsuario, usuario_contrasenia, usuario_deleted, usuario_intentos, usuario_primeraPublicacion)
-	VALUES(@username, @password, 0, 0, 0)
+	VALUES(@username, @password, 0, 0, 1) --cambio a uno esta linea, ya que es la primera publicacoin, luego de la primera se pasa a 0
 
 	DECLARE @idUsuario INT
 	SELECT @idUsuario = SCOPE_IDENTITY()
@@ -195,7 +195,7 @@ CREATE PROCEDURE MESSI_MAS3.crear_empresa(@username nvarchar(255), @password nva
 AS
 BEGIN
 	INSERT INTO MESSI_MAS3.Usuario(usuario_nombreUsuario, usuario_contrasenia, usuario_deleted, usuario_intentos, usuario_primeraPublicacion)
-	VALUES(@username, @password, 0, 0, 0)
+	VALUES(@username, @password, 0, 0, 1)
 
 	DECLARE @idUsuario INT
 	SELECT @idUsuario = SCOPE_IDENTITY()

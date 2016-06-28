@@ -37,8 +37,11 @@ namespace MercadoEnvio.ComprarOfertar
         {
             List<Modelo.Publicacion> pDeRubro = new List<Modelo.Publicacion>();
             DataTable dtAAcumular = new DataTable();
-            superGrid1.SelectAll();
-            superGrid1.ClearSelection();
+
+
+            DataTable dtNull = new DataTable(); //esto fue lo que cambie messi
+            superGrid1.LimpiarPagedDataSource(dtNull, bindingNavigator1);
+            superGrid1.Refresh();
 
             if (rubrosFiltrados.Count() > 0)
             {

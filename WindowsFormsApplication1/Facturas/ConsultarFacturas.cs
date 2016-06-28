@@ -57,6 +57,16 @@ namespace MercadoEnvio.Facturas
 
             String dateDesde;
             String dateHasta;
+
+                DataTable dtNull = new DataTable();
+
+                superGrid1.LimpiarPagedDataSource(dtNull,bindingNavigator1);
+                superGrid1.Refresh();
+            
+           
+           
+            
+            
             if (fechaDesde.Enabled & !importeBajotxt.Enabled & !detallePublitxt.Enabled & !dirigidotxt.Enabled) {
                 dateDesde = Convert.ToString(fechaDesde.Value.Year + "-" + fechaDesde.Value.Month + "-" + fechaDesde.Value.Day);
                 dateHasta = Convert.ToString(fechaHasta.Value.Year + "-" + fechaHasta.Value.Month + "-" + fechaHasta.Value.Day);

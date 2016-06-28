@@ -58,10 +58,28 @@ BEGIN
 	DECLARE @idFactura int
 	select top 1 @ultimoNumero=factura_numero from Factura order by factura_numero desc
 	SET @ultimoNumero = @ultimoNumero + 1
+	
+	IF((SELECT usuario_primeraPublicacion FROM MESSI_MAS3.Usuario WHERE usuario_id = @idUsuario) = 1)
+
+	BEGIN
+	INSERT INTO Factura(factura_fecha,factura_formaDePago,factura_idVendedor,factura_publicacionId,factura_numero,factura_importeTotal) values(@fechaActiva,@formaDePago,@idUsuario,@idPublicacion,@ultimoNumero,0)
+	SET @idFactura = SCOPE_IDENTITY()
+	INSERT INTO Factura_detalle(facturaDetalle_id,facturaDetalle_numero,facturaDetall_cantidadItems,FacturaDetalle_valorItem,facturaDetalle_item)
+	VALUES (@idFactura,@ultimoNumero,1,0,'Primera publicacion gratis')
+	UPDATE MESSI_MAS3.Usuario SET usuario_primeraPublicacion = 0 WHERE usuario_id = @idUsuario --seteamos en 0, ya no es mas usuario nuevo
+	RETURN @idFactura
+	END
+
+		IF((SELECT usuario_primeraPublicacion FROM MESSI_MAS3.Usuario WHERE usuario_id = @idUsuario) = 0)
+
+	BEGIN
+
 	INSERT INTO Factura(factura_fecha,factura_formaDePago,factura_idVendedor,factura_publicacionId,factura_numero,factura_importeTotal) values(@fechaActiva,@formaDePago,@idUsuario,@idPublicacion,@ultimoNumero,@importeTotal)
 	SET @idFactura = SCOPE_IDENTITY()
 	INSERT INTO Factura_detalle(facturaDetalle_id,facturaDetalle_numero,facturaDetall_cantidadItems,FacturaDetalle_valorItem,facturaDetalle_item)
 	VALUES (@idFactura,@ultimoNumero,1,@importeTotal,'Activo de publicacion')
 	RETURN @idFactura
+
+	END
 END
 GO

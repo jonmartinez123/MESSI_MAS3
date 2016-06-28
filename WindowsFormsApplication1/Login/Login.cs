@@ -28,7 +28,7 @@ namespace MercadoEnvio.Login
                 {
                     int idUsuario = DAO.LoginSQL.getID(username);
                     int cantidadIntentos = DAO.LoginSQL.traerIntentos(idUsuario);
-                    if (cantidadIntentos <= 4)
+                    if (cantidadIntentos < 3)
                     {
                         if (DAO.LoginSQL.validarUsuario(username, pass) == 1)
                         {
@@ -67,7 +67,7 @@ namespace MercadoEnvio.Login
                     }
                     else
                     {
-                        MessageBox.Show("Contactar al ADMIN por superacion de 4 intentos","Atención");
+                        MessageBox.Show("Contactar al ADMIN por superacion de 3 intentos","Atención");
                     }
 
                 }

@@ -25,6 +25,7 @@ namespace MercadoEnvio.Modelo
         public int _pageSize = 10;
         BindingSource bs = new BindingSource();
         BindingList<DataTable> tables = new BindingList<DataTable>();
+        
         public void SetPagedDataSource(DataTable dataTable, BindingNavigator bnav)
         {
             DataTable dt = null;
@@ -49,8 +50,34 @@ namespace MercadoEnvio.Modelo
         }
         void bs_PositionChanged(object sender, EventArgs e)
         {
-            this.DataSource = tables[bs.Position];
+            if (tables.Count != 0)
+            {
+                this.DataSource = tables[bs.Position];
+
+            }
+            if (tables.Count == 0)
+            {
+                this.DataSource = null;
+
+            }
         }
+        
+
+        public void LimpiarPagedDataSource(DataTable dataTable, BindingNavigator bnav)
+        {
+            this.DataSource = null;
+            //bs.Position = -1;
+            BindingList<DataTable> tables2 = new BindingList<DataTable>();
+            tables = tables2;
+            //tables.Add(dataTable);
+            //bs.Position = 0;
+            bs.DataSource = tables;
+            bnav.BindingSource = bs;
+            
+
+
+        }
+
     
 
            

@@ -22,25 +22,25 @@ DECLARE @mes3 INT
 DECLARE @anioCasteado int
 SET @anioCasteado = CONVERT(INT, @anio)
 
-IF @nroTrimestre = 1 
+IF @nroTrimestre = 0 
 BEGIN
 	SET @mes1 = 1
 	SET @mes2 = 2 
 	SET @mes3 = 3
 END
-IF @nroTrimestre = 2
+IF @nroTrimestre = 1
 BEGIN
 	SET @mes1 = 4
 	SET @mes2 = 5 
 	SET @mes3 = 6
 END
-IF @nroTrimestre = 3
+IF @nroTrimestre = 2
 BEGIN
 	SET @mes1 = 7
 	SET @mes2 = 8 
 	SET @mes3 = 9
 END
-IF @nroTrimestre = 4
+IF @nroTrimestre = 3
 BEGIN
 	SET @mes1 = 10
 	SET @mes2 = 11
@@ -64,7 +64,7 @@ ORDER BY cantidadDeFacturas DESC
 
 
 END
-GO  
+GO 
 
 
 
@@ -78,25 +78,25 @@ DECLARE @mes3 INT
 DECLARE @anioCasteado int
 SET @anioCasteado = CONVERT(INT,@anio)
 
-IF @nroTrimestre = 1 
+IF @nroTrimestre = 0 
 BEGIN
 	SET @mes1 = 1
 	SET @mes2 = 2 
 	SET @mes3 = 3
 END
-IF @nroTrimestre = 2
+IF @nroTrimestre = 1
 BEGIN
 	SET @mes1 = 4
 	SET @mes2 = 5 
 	SET @mes3 = 6
 END
-IF @nroTrimestre = 3
+IF @nroTrimestre = 2
 BEGIN
 	SET @mes1 = 7
 	SET @mes2 = 8 
 	SET @mes3 = 9
 END
-IF @nroTrimestre = 4
+IF @nroTrimestre = 3
 BEGIN
 	SET @mes1 = 10
 	SET @mes2 = 11
@@ -135,25 +135,25 @@ DECLARE @anioCasteado int
 
 SET @anioCasteado = CONVERT(INT,@anio)
 
-IF @nroTrimestre = 1 
+IF @nroTrimestre = 0 
 BEGIN
 	SET @mes1 = 1
 	SET @mes2 = 2 
 	SET @mes3 = 3
 END
-IF @nroTrimestre = 2
+IF @nroTrimestre = 1
 BEGIN
 	SET @mes1 = 4
 	SET @mes2 = 5 
 	SET @mes3 = 6
 END
-IF @nroTrimestre = 3
+IF @nroTrimestre = 2
 BEGIN
 	SET @mes1 = 7
 	SET @mes2 = 8 
 	SET @mes3 = 9
 END
-IF @nroTrimestre = 4
+IF @nroTrimestre = 3
 BEGIN
 	SET @mes1 = 10
 	SET @mes2 = 11
@@ -190,25 +190,25 @@ DECLARE @mes2 INT
 DECLARE @mes3 INT
 DECLARE @idVisibilidad INT
 SELECT @idVisibilidad = visibilidad_id FROM MESSI_MAS3.Visibilidad WHERE @visibilidad = visibilidad_descripcion
-IF @trimestre = 1 
+IF @trimestre = 0 
 BEGIN
 	SET @mes1 = 1
 	SET @mes2 = 2 
 	SET @mes3 = 3
 END
-IF @trimestre = 2
+IF @trimestre = 1
 BEGIN
 	SET @mes1 = 4
 	SET @mes2 = 5 
 	SET @mes3 = 6
 END
-IF @trimestre = 3
+IF @trimestre = 2
 BEGIN
 	SET @mes1 = 7
 	SET @mes2 = 8 
 	SET @mes3 = 9
 END
-IF @trimestre = 4
+IF @trimestre = 3
 BEGIN
 	SET @mes1 = 10
 	SET @mes2 = 11
