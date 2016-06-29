@@ -7,6 +7,47 @@ BEGIN
 END
 GO
 
+CREATE PROCEDURE MESSI_MAS3.existe_mailCliente(@mail nvarchar(255))
+AS
+BEGIN
+	IF(EXISTS(SELECT * FROM MESSI_MAS3.Cliente WHERE cliente_mail = @mail)) 
+	
+	BEGIN RETURN 1 END RETURN -1
+END
+GO
+
+
+CREATE PROCEDURE MESSI_MAS3.existe_documentoCliente(@documento nvarchar(255))
+AS
+BEGIN
+	IF(EXISTS(SELECT * FROM MESSI_MAS3.Cliente WHERE cliente_DNI = @documento)) 
+	
+	BEGIN RETURN 1 END RETURN -1
+END
+GO
+
+--existe_mailEmpresa
+
+CREATE PROCEDURE MESSI_MAS3.existe_mailEmpresa(@mail nvarchar(255))
+AS
+BEGIN
+	IF(EXISTS(SELECT * FROM MESSI_MAS3.Empresa WHERE empresa_mail = @mail)) 
+	
+	BEGIN RETURN 1 END RETURN -1
+END
+GO
+
+--existe_cuitEmpresa
+
+CREATE PROCEDURE MESSI_MAS3.existe_cuitEmpresa(@cuit nvarchar(255))
+AS
+BEGIN
+	IF(EXISTS(SELECT * FROM MESSI_MAS3.Empresa WHERE empresa_cuit = @cuit)) 
+	
+	BEGIN RETURN 1 END RETURN -1
+END
+GO
+
 CREATE PROCEDURE MESSI_MAS3.cambiarPassword(@id INT, @password nvarchar(255))
 AS
 BEGIN

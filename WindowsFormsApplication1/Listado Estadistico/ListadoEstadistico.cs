@@ -152,6 +152,7 @@ namespace MercadoEnvio.Listado_Estadistico
             }
 
             dataGridView1.Columns.Add("column1", "Usuario ID");
+            dataGridView1.Columns.Add("column1", "Nombre de usuario");
             dataGridView1.Columns.Add("column2", "Nombre/Razon social");
             dataGridView1.Columns.Add("column3", "Monto facturado");
             string anio = comboBox1.SelectedItem.ToString();

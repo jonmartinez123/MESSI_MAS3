@@ -83,17 +83,29 @@ namespace MercadoEnvio.ABM_Usuario
                     string.IsNullOrEmpty(txtCodigoPostal.Text))
                     throw new Exception("No puede haber campos vacíos");
 
-                if (string.IsNullOrEmpty(txtNombre.Text))
-                    throw new Exception("Debe completar el nombre");
+                if (string.IsNullOrEmpty(txtNombre.Text) | !Validaciones.IsAllLetters(txtNombre.Text))
+                    throw new Exception("El campo Nombre se encuentra vacio o no es un texto valido, recuerde que debe ser solo letras");
 
-                if (string.IsNullOrEmpty(txtApellido.Text))
-                    throw new Exception("Debe completar el apellido");
+                if (string.IsNullOrEmpty(txtApellido.Text) | !Validaciones.IsAllLetters(txtNombre.Text))
+                    throw new Exception("El campo Apellido se encuentra vacio o no es un texto valido, recuerde que debe ser solo letras");
 
                 if (string.IsNullOrEmpty(txtDocumento.Text))
                     throw new Exception("Debe completar el número de documento");
 
                 if (string.IsNullOrEmpty(txtMail.Text))
                     throw new Exception("Debe completar el mail");
+
+                if (DAO.UsuarioSQL.existeMailCliente(txtMail.Text)) {
+
+                    throw new Exception("Ya existe un usuario con ese mail");
+                }
+
+                if (DAO.UsuarioSQL.existeDocumento(txtDocumento.Text))
+                {
+
+                    throw new Exception("Ya existe un usuario con ese documento");
+                }
+
 
                 if (esInvalidoMail(txtMail.Text))
                     throw new Exception("El mail ingresado no es válido");
@@ -135,7 +147,7 @@ namespace MercadoEnvio.ABM_Usuario
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Atención");
+                MessageBox.Show(ex.Message, "Atención", MessageBoxButtons.OK);
             }
         }
 

@@ -183,5 +183,25 @@ namespace MercadoEnvio.DAO
         {
             return SqlConnector.executeProcedure("existe_cuit", cuit) == 1 ? true : false;
         }
+
+        internal static bool existeMailCliente(string p)
+        {
+           return SqlConnector.executeProcedure("existe_mailCliente", p) == 1 ? true : false; 
+        }
+
+        internal static bool existeDocumento(string p)
+        {
+            return SqlConnector.executeProcedure("existe_documentoCliente", p) == 1 ? true : false; 
+        }
+
+        internal static bool existeMailEmpresa(string p)
+        {
+            return SqlConnector.executeProcedure("existe_mailEmpresa", p) == 1 ? true : false; 
+        }
+
+        internal static bool existeCuit(string p)
+        {
+            return SqlConnector.executeProcedure("existe_cuitEmpresa", p) == 1 ? true : false; 
+        }
     }
 }

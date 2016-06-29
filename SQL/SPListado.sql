@@ -106,7 +106,7 @@ END
 SELECT TOP 5	cliempresa.cliente_id,			
 				users.usuario_nombreUsuario,				
 				cliempresa.cliente_nombre,		
-				SUM(factura.factura_importeTotal)	AS montoTotalFacturado
+				SUM(factura.factura_importeTotal)
 FROM				MESSI_MAS3.Factura factura
 		LEFT JOIN	MESSI_MAS3.Publicacion pub ON factura_publicacionId = pub.publicacion_id
 		LEFT JOIN  (SELECT cliente_id, cliente_nombre FROM MESSI_MAS3.Cliente
@@ -116,7 +116,7 @@ FROM				MESSI_MAS3.Factura factura
 WHERE	
 		(MONTH(factura.factura_fecha) = @mes1 OR MONTH(factura.factura_fecha) = @mes2 OR MONTH(factura.factura_fecha) = @mes3)	AND YEAR(factura.factura_fecha) = @anioCasteado
 GROUP BY cliempresa.cliente_id, cliempresa.cliente_nombre, users.usuario_nombreUsuario
-ORDER BY montoTotalFacturado DESC
+ORDER BY SUM(factura.factura_importeTotal) DESC
 
 
 

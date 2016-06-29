@@ -61,6 +61,16 @@ namespace MercadoEnvio.Modelo
             return rg.IsMatch(strToCheck);
         }
 
+        public static bool IsAllLetters(string s)
+        {
+            foreach (char c in s)
+            {
+                if (!Char.IsLetter(c))
+                    return false;
+            }
+            return true;
+        }
+
        /* // try catchea una excepcion proviniente de campos vacios
         public static Boolean validateNotNullForAll(this Form aForm, Control.ControlCollection controls)
         {

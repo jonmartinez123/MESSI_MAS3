@@ -100,13 +100,24 @@ namespace MercadoEnvio.ABM_Usuario
                 if (string.IsNullOrEmpty(txtCodigoPostal.Text))
                     throw new Exception("Debe completar el código postal");
 
-                if (string.IsNullOrEmpty(txtNombreContacto.Text))
-                    throw new Exception("Debe completar el nombre del contacto");
+                if (string.IsNullOrEmpty(txtNombreContacto.Text) | !Validaciones.IsAllLetters(txtNombreContacto.Text))
+                    throw new Exception("El campo Nombre del contacto se encuentra vacio o no es un texto valido, recuerde que debe ser solo letras");
 
-                if (string.IsNullOrEmpty(txtCiudad.Text))
-                    throw new Exception("Debe comppletar la ciudad");
+                if (string.IsNullOrEmpty(txtCiudad.Text) | !Validaciones.IsAllLetters(txtCiudad.Text))
+                    throw new Exception("El campo Ciudad se encuentra vacio o no es un texto valido, recuerde que debe ser solo letras");
 
-                
+                if (DAO.UsuarioSQL.existeMailEmpresa(txtMail.Text))
+                {
+
+                    throw new Exception("Ya existe una empresa con ese mail");
+                }
+
+                if (DAO.UsuarioSQL.existeCuit(txtCUIT.Text))
+                {
+
+                    throw new Exception("Ya existe una empresa con ese CUIT");
+                }
+
 
                 #endregion
 
