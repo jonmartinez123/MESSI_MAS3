@@ -27,7 +27,7 @@ INSERT INTO MESSI_MAS3.Publicacion(publicacion_idUsuario,publicacion_codigo, pub
 			WHERE cliente_DNI = Publ_Cli_Dni AND cliente_apellido = Publ_Cli_Apeliido AND cliente_nombre = Publ_Cli_Nombre ),
 		Publicacion_Cod ,	
 		Publicacion_Descripcion, 
-		(SELECT estado_id FROM MESSI_MAS3.Estado WHERE estado_nombre = Publicacion_Tipo),
+		(CASE Publicacion_Tipo WHEN 'Compra Inmediata' THEN 2 ELSE 1 END),
 		Publicacion_Fecha,
 		Publicacion_Fecha_Venc,
 		4,
@@ -49,7 +49,7 @@ INSERT INTO MESSI_MAS3.Publicacion(publicacion_idUsuario,publicacion_codigo, pub
 			WHERE empresa_cuit = Publ_Empresa_Cuit),
 		Publicacion_Cod ,	
 		Publicacion_Descripcion, 
-		(SELECT estado_id FROM MESSI_MAS3.Estado WHERE estado_nombre = Publicacion_Tipo),
+		(CASE Publicacion_Tipo WHEN 'Compra Inmediata' THEN 2 ELSE 1 END),
 		Publicacion_Fecha,
 		Publicacion_Fecha_Venc,
 		4,
@@ -82,7 +82,7 @@ INSERT INTO MESSI_MAS3.Compra(compras_personaComprador_id, compras_cantidad, com
 			WHERE cliente_DNI = Cli_Dni),
 		Compra_Cantidad ,
 		Compra_Fecha, 
-		(SELECT 1 publicacion_id FROM MESSI_MAS3.Publicacion WHERE Publicacion_Cod = publicacion_codigo)
+		(SELECT TOP 1 publicacion_id FROM MESSI_MAS3.Publicacion WHERE Publicacion_Cod = publicacion_codigo)
 
 
 FROM gd_esquema.Maestra m JOIN MESSI_MAS3.Cliente u ON (m.Cli_Mail=u.cliente_mail)

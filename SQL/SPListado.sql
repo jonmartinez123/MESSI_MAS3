@@ -223,9 +223,9 @@ SELECT TOP 5 publicacionQueNoFiguraEnCompras.cliente_id,
 								UNION
 								SELECT empresa_id, empresa_razonSocial FROM MESSI_MAS3.Empresa) as cliempresa ON cliempresa.cliente_id = publi.publicacion_idUsuario
 					LEFT JOIN  MESSI_MAS3.Usuario usu ON cliempresa.cliente_id = usu.usuario_id
-				WHERE	publi.publicacion_id NOT IN(SELECT compra.compras_publicacion_id FROM MESSI_MAS3.Compra compra) 
+				WHERE	 NOT EXISTS(SELECT * FROM MESSI_MAS3.Compra compra where publi.publicacion_id = compra.compras_publicacion_id) 
 						AND 
-						publi.publicacion_idEstado = (select estado_id from MESSI_MAS3.Estado e where e.estado_nombre LIKE 'Finalizada')
+						publi.publicacion_idEstado = 4
 						AND
 						(MONTH(publi.publicacion_fechaFin) = @mes1 OR MONTH(publi.publicacion_fechaFin) = @mes2 OR MONTH(publi.publicacion_fechaFin) = @mes3)
 						AND
