@@ -25,7 +25,10 @@ namespace MercadoEnvio.ComprarOfertar
             materialSkinManager.Theme = MaterialSkinManager.Themes.LIGHT;
 
             rubrosFiltrados = new List<Rubro>();
-            filtrar();
+
+            DataTable dtAAcumular = new DataTable();
+            dtAAcumular = obtenerTodasPublicaciones();
+            volcarDatosASuperGrid(dtAAcumular);
         }
 
         private void btnFiltrar_Click(object sender, EventArgs e)
@@ -43,24 +46,27 @@ namespace MercadoEnvio.ComprarOfertar
             superGrid1.LimpiarPagedDataSource(dtNull, bindingNavigator1);
             superGrid1.Refresh();
 
-            if (rubrosFiltrados.Count() > 0)
-            {
-                foreach (Rubro r in rubrosFiltrados)
-                {
-                    dtAAcumular = DAO.PublicacionSQL.filtrarPublicacionesPorRubro(dtAAcumular, r.Id, txtDescripcion.Text.ToString());
-                }
-            }
-            else
-            {
-                dtAAcumular = DAO.PublicacionSQL.filtrarPubliacionesPorDescripcion(dtAAcumular, txtDescripcion.Text.ToString());
+            foreach (Rubro r in rubrosFiltrados){
+                dtAAcumular = DAO.PublicacionSQL.filtrarPublicacionesPorRubro(dtAAcumular, r.Id, txtDescripcion.Text.ToString());
             }
 
+            volcarDatosASuperGrid(dtAAcumular);
+        }
+
+        private static DataTable obtenerTodasPublicaciones()
+        {
+            return DAO.PublicacionSQL.obtenerPublicacionesActivas();
+        }
+
+        private void volcarDatosASuperGrid(DataTable dtAAcumular)
+        {
             if (dtAAcumular.Rows.Count > 0)
             {
                 DAO.SqlConnector.bindNamesToDataTable(dtAAcumular, superGrid1);
                 superGrid1.DataSource = dtAAcumular;
                 superGrid1.SetPagedDataSource(dtAAcumular, bindingNavigator1);
-                superGrid1.Sort(this.superGrid1.Columns["colVisibilidadId"], ListSortDirection.Ascending);
+                superGrid1.Refresh();
+                //superGrid1.Sort(this.superGrid1.Columns["colVisibilidadId"], ListSortDirection.Ascending);
             }
         }
 
@@ -77,7 +83,7 @@ namespace MercadoEnvio.ComprarOfertar
                 DataGridViewRow row = this.superGrid1.SelectedRows[0];
 
                 Modelo.Publicacion p = new Modelo.Publicacion();
-                p.Id = Convert.ToInt16(row.Cells["colPublicacionId"].Value);
+                p.Id = int.Parse(row.Cells["colPublicacionId"].Value.ToString());
 
                 if (row.Cells["colTipoPublicaion"].Value.ToString() == "Subasta"){
                     Ofertar po = new Ofertar(p);

@@ -73,19 +73,11 @@ namespace MercadoEnvio.Modelo
             //bs.Position = 0;
             bs.DataSource = tables;
             bnav.BindingSource = bs;
-            
-
 
         }
 
-    
+    }
 
-           
-            
-
-            }
-
-
-        }
+}
     
 
