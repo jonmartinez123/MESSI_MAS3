@@ -35,7 +35,7 @@
             this.btnVolver = new MaterialSkin.Controls.MaterialRaisedButton();
             this.btnVerMas = new MaterialSkin.Controls.MaterialRaisedButton();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.gbControles = new System.Windows.Forms.GroupBox();
             this.btnPausar = new MaterialSkin.Controls.MaterialRaisedButton();
             this.listadoPublicaciones = new System.Windows.Forms.DataGridView();
             this.Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -57,7 +57,7 @@
             this.QuisoEnvio = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Stock = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupBox1.SuspendLayout();
-            this.groupBox2.SuspendLayout();
+            this.gbControles.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.listadoPublicaciones)).BeginInit();
             this.SuspendLayout();
             // 
@@ -142,7 +142,7 @@
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.groupBox2);
+            this.groupBox1.Controls.Add(this.gbControles);
             this.groupBox1.Controls.Add(this.btnVerMas);
             this.groupBox1.Controls.Add(this.btnVolver);
             this.groupBox1.Controls.Add(this.btnAgregar);
@@ -155,18 +155,18 @@
             this.groupBox1.Text = "Publicaciones";
             this.groupBox1.Enter += new System.EventHandler(this.groupBox1_Enter);
             // 
-            // groupBox2
+            // gbControles
             // 
-            this.groupBox2.Controls.Add(this.btnFinalizar);
-            this.groupBox2.Controls.Add(this.btnPausar);
-            this.groupBox2.Controls.Add(this.btnActivar);
-            this.groupBox2.Controls.Add(this.btnModificar);
-            this.groupBox2.Location = new System.Drawing.Point(38, 234);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(351, 53);
-            this.groupBox2.TabIndex = 10;
-            this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "Controles de Estado";
+            this.gbControles.Controls.Add(this.btnFinalizar);
+            this.gbControles.Controls.Add(this.btnPausar);
+            this.gbControles.Controls.Add(this.btnActivar);
+            this.gbControles.Controls.Add(this.btnModificar);
+            this.gbControles.Location = new System.Drawing.Point(38, 234);
+            this.gbControles.Name = "gbControles";
+            this.gbControles.Size = new System.Drawing.Size(351, 53);
+            this.gbControles.TabIndex = 10;
+            this.gbControles.TabStop = false;
+            this.gbControles.Text = "Controles de Estado";
             // 
             // btnPausar
             // 
@@ -209,12 +209,11 @@
             this.QuisoEnvio,
             this.Stock});
             this.listadoPublicaciones.Location = new System.Drawing.Point(38, 59);
-            this.listadoPublicaciones.MultiSelect = false;
             this.listadoPublicaciones.Name = "listadoPublicaciones";
             this.listadoPublicaciones.ReadOnly = true;
             this.listadoPublicaciones.Size = new System.Drawing.Size(862, 169);
             this.listadoPublicaciones.TabIndex = 1;
-            this.listadoPublicaciones.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.listadoPublicaciones_CellClick);
+            this.listadoPublicaciones.SelectionChanged += new System.EventHandler(this.listadoPublicaciones_SelectionChanged);
             // 
             // Id
             // 
@@ -344,7 +343,7 @@
             this.Text = "Listado";
             this.Load += new System.EventHandler(this.Listado_Load);
             this.groupBox1.ResumeLayout(false);
-            this.groupBox2.ResumeLayout(false);
+            this.gbControles.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.listadoPublicaciones)).EndInit();
             this.ResumeLayout(false);
 
@@ -360,7 +359,7 @@
         private MaterialSkin.Controls.MaterialRaisedButton btnVerMas;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.DataGridView listadoPublicaciones;
-        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.GroupBox gbControles;
         private MaterialSkin.Controls.MaterialRaisedButton btnPausar;
         private System.Windows.Forms.DataGridViewTextBoxColumn Id;
         private System.Windows.Forms.DataGridViewTextBoxColumn TipoPublicacionId;
