@@ -181,13 +181,15 @@ ORDER BY cantidadCompras DESC
 END 
 GO
 
-CREATE PROCEDURE [MESSI_MAS3].[get_top5vendedoresConMayorCantidadDeProductosNoVendidos] (@trimestre INT, @anio INT, @visibilidad NVARCHAR(255))
+CREATE PROCEDURE [MESSI_MAS3].[get_top5vendedoresConMayorCantidadDeProductosNoVendidos] ( @anio NVARCHAR(255),@trimestre INT, @visibilidad NVARCHAR(255))
 AS
 BEGIN
 
 DECLARE @mes1 INT
 DECLARE @mes2 INT
 DECLARE @mes3 INT
+DECLARE @anioCasteado INT
+SET @anioCasteado = CONVERT(INT, @anio)
 DECLARE @idVisibilidad INT
 SELECT @idVisibilidad = visibilidad_id FROM MESSI_MAS3.Visibilidad WHERE @visibilidad = visibilidad_descripcion
 IF @trimestre = 0 
@@ -223,13 +225,13 @@ SELECT TOP 5 publicacionQueNoFiguraEnCompras.cliente_id,
 								UNION
 								SELECT empresa_id, empresa_razonSocial FROM MESSI_MAS3.Empresa) as cliempresa ON cliempresa.cliente_id = publi.publicacion_idUsuario
 					LEFT JOIN  MESSI_MAS3.Usuario usu ON cliempresa.cliente_id = usu.usuario_id
-				WHERE	  (publi.publicacion_stock - (SELECT SUM(compras_cantidad) as cantidadComprada FROM MESSI_MAS3.Compra compra where publi.publicacion_id = compra.compras_publicacion_id) !=0)
+				WHERE	  (publi.publicacion_stock - ISNULL((SELECT SUM(compra.compras_cantidad) as cantidadComprada FROM MESSI_MAS3.Compra compra where publi.publicacion_id = compra.compras_publicacion_id),0) != 0)
 						AND 
 						publi.publicacion_idEstado = 4
 						AND
 						(MONTH(publi.publicacion_fechaFin) = @mes1 OR MONTH(publi.publicacion_fechaFin) = @mes2 OR MONTH(publi.publicacion_fechaFin) = @mes3)
 						AND
-						YEAR(publi.publicacion_fechaFin) = @anio
+						YEAR(publi.publicacion_fechaFin) = @anioCasteado
 						AND
 						publi.publicacion_idVisibilidad = @idVisibilidad) publicacionQueNoFiguraEnCompras
 GROUP BY publicacionQueNoFiguraEnCompras.cliente_id, publicacionQueNoFiguraEnCompras.cliente_nombre

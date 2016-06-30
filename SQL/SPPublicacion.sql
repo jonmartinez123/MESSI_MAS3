@@ -71,6 +71,17 @@ BEGIN
 			UPDATE MESSI_MAS3.Usuario SET usuario_primeraPublicacion = 0 WHERE usuario_id = @idUsuario --seteamos en 0, ya no es mas usuario nuevo
 			RETURN @idFactura
 				END
+
+				ELSE
+
+				BEGIN 
+					INSERT INTO Factura(factura_fecha,factura_formaDePago,factura_idVendedor,factura_publicacionId,factura_numero,factura_importeTotal) values(@fechaActiva,@formaDePago,@idUsuario,@idPublicacion,@ultimoNumero,@importeTotal)
+					SET @idFactura = SCOPE_IDENTITY()
+					INSERT INTO Factura_detalle(facturaDetalle_id,facturaDetalle_numero,facturaDetall_cantidadItems,FacturaDetalle_valorItem,facturaDetalle_item)
+					VALUES (@idFactura,@ultimoNumero,1,@importeTotal,'Activo de publicacion')
+					RETURN @idFactura
+
+				END
 	END
 
 

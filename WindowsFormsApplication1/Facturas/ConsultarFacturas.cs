@@ -62,10 +62,15 @@ namespace MercadoEnvio.Facturas
 
                 superGrid1.LimpiarPagedDataSource(dtNull,bindingNavigator1);
                 superGrid1.Refresh();
-            
-           
-           
-            
+
+
+
+                if (dirigidotxt.TextLength != 8 & dirigidotxt.TextLength != 13 | !esCuitValido(dirigidotxt.Text))
+                {
+                    MessageBox.Show("El campo CUIT/DNI no contiene un CUIT/DNI valido");
+                    dirigidotxt.Clear();
+                    return;
+                }
             
             if (fechaDesde.Enabled & !importeBajotxt.Enabled & !detallePublitxt.Enabled & !dirigidotxt.Enabled) {
                 dateDesde = Convert.ToString(fechaDesde.Value.Year + "-" + fechaDesde.Value.Month + "-" + fechaDesde.Value.Day);
@@ -254,6 +259,22 @@ namespace MercadoEnvio.Facturas
             
         }
 
+        private bool esCuitValido(string p)
+        {
+            int counter = 0;
+            counter = p.Count(x => x == '$');
+            if (counter == 2)
+            {
+
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+            
+        }
+
         private void checkBox2_CheckedChanged(object sender, EventArgs e)
         {
             if (checkBox2.Checked)
@@ -311,6 +332,24 @@ namespace MercadoEnvio.Facturas
             Funcionalidades.MenuUsuario f = new Funcionalidades.MenuUsuario();
             f.Show();
             this.Close();
+        }
+
+        private void dirigidotxt_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void dirigidotxt_KeyPress(object sender, KeyPressEventArgs e)
+        {
+
+            if (!char.IsControl(e.KeyChar)
+                && !char.IsDigit(e.KeyChar)
+                && e.KeyChar != '-')
+            {
+                e.Handled = true;
+            }
+
+
         }
     }
 }

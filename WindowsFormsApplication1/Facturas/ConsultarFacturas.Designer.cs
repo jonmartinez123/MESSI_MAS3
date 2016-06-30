@@ -315,6 +315,8 @@
             this.dirigidotxt.Name = "dirigidotxt";
             this.dirigidotxt.Size = new System.Drawing.Size(100, 20);
             this.dirigidotxt.TabIndex = 2;
+            this.dirigidotxt.TextChanged += new System.EventHandler(this.dirigidotxt_TextChanged);
+            this.dirigidotxt.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.dirigidotxt_KeyPress);
             // 
             // detallePublitxt
             // 
