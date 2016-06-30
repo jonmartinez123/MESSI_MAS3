@@ -12,6 +12,7 @@ using MercadoEnvio.Modelo;
 
 using MaterialSkin;
 using MercadoEnvio.DAO;
+using MercadoEnvio.ABM_Usuario;
 
 namespace MercadoEnvio.Funcionalidades
 {
@@ -175,13 +176,15 @@ namespace MercadoEnvio.Funcionalidades
             listado.ShowDialog();
             this.Close();
         }
-
-        private void cerrarSesiontoolStripMenuItem_Click(object sender, EventArgs e)
-        {
+        private void cerrarSesion() {
             this.Hide();
             Persistencia.usuario = null;
             Login.Login lg = new Login.Login();
             lg.ShowDialog();
+        }
+        private void cerrarSesiontoolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            cerrarSesion();
         }
 
         private void listadoToolStripMenuItem_Click(object sender, EventArgs e)
@@ -205,6 +208,32 @@ namespace MercadoEnvio.Funcionalidades
         private void MenuUsuario_Load(object sender, EventArgs e)
         {
 
+        }
+
+        private void darseDeBajaToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            DAO.UsuarioSQL.darDeBajaUsuario(Persistencia.usuario.Id);
+            MessageBox.Show("Te has dado de baja, a continuacion se deslogueara");
+            cerrarSesion();
+        }
+
+        private void modificarToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (Persistencia.usuario.Rol.Nombre == "Cliente") {
+                Modelo.Cliente unCliente = new Modelo.Cliente();
+                unCliente.Id = Persistencia.usuario.Id;
+
+                CrearCliente cCliente = new CrearCliente(unCliente);
+                cCliente.ShowDialog();
+            }
+            else if (Persistencia.usuario.Rol.Nombre == "Empresa") {
+        
+                Modelo.Empresa unaEmpresa = new Modelo.Empresa();
+                unaEmpresa.Id = Persistencia.usuario.Id;
+
+                CrearEmpresa cCliente = new CrearEmpresa(unaEmpresa);
+                cCliente.ShowDialog();
+            }
         }
     }
 }
