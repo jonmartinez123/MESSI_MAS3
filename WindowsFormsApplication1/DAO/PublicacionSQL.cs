@@ -87,9 +87,9 @@ namespace MercadoEnvio.DAO
             return DAO.SqlConnector.retrieveDTToBeConverted("obtenerPublicacionesActivas", Persistencia.usuario.Id);
         }
 
-        internal static void crearComprar(int idPublicacion, int idCliente, int cantidad, int idFormaDePago)
+        internal static int crearComprar(int idPublicacion, int idCliente, int cantidad)
         {
-            SqlConnector.executeProcedure("crearCompra", idPublicacion, idCliente, cantidad, idFormaDePago);  
+            return SqlConnector.executeProcedure("crearCompra", idPublicacion, idCliente, cantidad);  
         }
 
 

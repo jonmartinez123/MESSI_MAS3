@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using MaterialSkin;
 using MaterialSkin.Controls;
 using MercadoEnvio.Modelo;
+using MercadoEnvio.Publicar;
 
 namespace MercadoEnvio.ComprarOfertar
 {
@@ -36,9 +37,6 @@ namespace MercadoEnvio.ComprarOfertar
 
             for (int i = 1; i <= pGlobal.Stock; i++) cmbCantidad.Items.Add(i);
 
-            cmbMediosDePago.DataSource = DAO.FormaDePago.getFormasDePago();
-            cmbMediosDePago.DisplayMember = "Nombre";
-            cmbMediosDePago.ValueMember = "Id";
         }
 
         private void btnComprar_Click(object sender, EventArgs e)
@@ -48,13 +46,10 @@ namespace MercadoEnvio.ComprarOfertar
                 if (!int.TryParse(cmbCantidad.Text.ToString(), out valorOferta))
                     throw new Exception("Debe seleccionar la cantidad");
 
-                Modelo.FormaDePago f = new Modelo.FormaDePago();
-                f = (Modelo.FormaDePago)cmbMediosDePago.SelectedItem;
-
-                DAO.PublicacionSQL.crearComprar(pGlobal.Id, Persistencia.usuario.Id, int.Parse(cmbCantidad.Text), f.Id);
-
-                MessageBox.Show("La compra se realizo con exito", "Atención");
-
+                int idFactura = DAO.PublicacionSQL.crearComprar(pGlobal.Id, Persistencia.usuario.Id, int.Parse(cmbCantidad.Text));
+                
+                VisualizadorFactura vis = new VisualizadorFactura(idFactura);
+                vis.Show();
                 this.Close();
 
             }catch (Exception ex){

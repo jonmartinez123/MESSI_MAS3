@@ -37,8 +37,6 @@
             this.materialLabel5 = new MaterialSkin.Controls.MaterialLabel();
             this.materialLabel4 = new MaterialSkin.Controls.MaterialLabel();
             this.cmbCantidad = new System.Windows.Forms.ComboBox();
-            this.cmbMediosDePago = new System.Windows.Forms.ComboBox();
-            this.materialLabel1 = new MaterialSkin.Controls.MaterialLabel();
             this.SuspendLayout();
             // 
             // lblPrecioTotal
@@ -56,7 +54,7 @@
             // btnComprar
             // 
             this.btnComprar.Depth = 0;
-            this.btnComprar.Location = new System.Drawing.Point(238, 240);
+            this.btnComprar.Location = new System.Drawing.Point(238, 203);
             this.btnComprar.MouseState = MaterialSkin.MouseState.HOVER;
             this.btnComprar.Name = "btnComprar";
             this.btnComprar.Primary = true;
@@ -152,35 +150,11 @@
             this.cmbCantidad.TabIndex = 132;
             this.cmbCantidad.SelectedValueChanged += new System.EventHandler(this.cmbCantidad_SelectedValueChanged);
             // 
-            // cmbMediosDePago
-            // 
-            this.cmbMediosDePago.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbMediosDePago.FormattingEnabled = true;
-            this.cmbMediosDePago.Location = new System.Drawing.Point(141, 202);
-            this.cmbMediosDePago.Name = "cmbMediosDePago";
-            this.cmbMediosDePago.Size = new System.Drawing.Size(202, 21);
-            this.cmbMediosDePago.TabIndex = 134;
-            // 
-            // materialLabel1
-            // 
-            this.materialLabel1.AutoSize = true;
-            this.materialLabel1.Depth = 0;
-            this.materialLabel1.Font = new System.Drawing.Font("Roboto", 11F);
-            this.materialLabel1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.materialLabel1.Location = new System.Drawing.Point(23, 205);
-            this.materialLabel1.MouseState = MaterialSkin.MouseState.HOVER;
-            this.materialLabel1.Name = "materialLabel1";
-            this.materialLabel1.Size = new System.Drawing.Size(112, 19);
-            this.materialLabel1.TabIndex = 133;
-            this.materialLabel1.Text = "Medio de pago:";
-            // 
             // Comprar
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(367, 275);
-            this.Controls.Add(this.cmbMediosDePago);
-            this.Controls.Add(this.materialLabel1);
+            this.ClientSize = new System.Drawing.Size(367, 244);
             this.Controls.Add(this.cmbCantidad);
             this.Controls.Add(this.materialLabel4);
             this.Controls.Add(this.lblPrecioUnitario);
@@ -208,7 +182,5 @@
         private MaterialSkin.Controls.MaterialLabel materialLabel5;
         private MaterialSkin.Controls.MaterialLabel materialLabel4;
         private System.Windows.Forms.ComboBox cmbCantidad;
-        private System.Windows.Forms.ComboBox cmbMediosDePago;
-        private MaterialSkin.Controls.MaterialLabel materialLabel1;
     }
 }

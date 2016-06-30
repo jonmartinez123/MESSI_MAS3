@@ -15,7 +15,7 @@ BEGIN
 END
 GO
 
-CREATE PROCEDURE MESSI_MAS3.crearCompra(@idPublicacion INT, @idUsuario INT, @cantidad INT, @idFormaDePago INT)
+CREATE PROCEDURE MESSI_MAS3.crearCompra(@idPublicacion INT, @idUsuario INT, @cantidad INT)
 AS
 BEGIN
 	INSERT INTO MESSI_MAS3.Compra(compras_publicacion_id, compras_fecha, compras_personaComprador_id, compras_cantidad)
@@ -24,6 +24,36 @@ BEGIN
 	UPDATE MESSI_MAS3.Publicacion
 	SET publicacion_stock = (SELECT publicacion_stock FROM MESSI_MAS3.Publicacion WHERE publicacion_id = @idPublicacion) - @cantidad
 	WHERE publicacion_id = @idPublicacion
+
+	DECLARE @idFactura INT
+	SELECT @idFactura = factura_id FROM MESSI_MAS3.Factura WHERE factura_publicacionId = @idPublicacion
+
+	DECLARE @valorItem numeric(18,2)
+	SELECT @valorItem = (publicacion_precio * @cantidad * visibilidad_porcentaje)
+	FROM MESSI_MAS3.Publicacion, MESSI_MAS3.Visibilidad
+	WHERE publicacion_id = @idPublicacion AND publicacion_idVisibilidad = visibilidad_id
+
+	DECLARE @ultimoNumero int
+	select top 1 @ultimoNumero=factura_numero from Factura order by factura_numero desc
+	SET @ultimoNumero = @ultimoNumero + 1
+
+	INSERT INTO MESSI_MAS3.Factura_detalle(facturaDetalle_id, facturaDetalle_item,FacturaDetalle_valorItem, facturaDetall_cantidadItems, facturaDetalle_numero)
+	VALUES(@idFactura, 'Comision por visibilidad', @valorItem , 1, @ultimoNumero)
+
+	DECLARE @costoEnvio numeric(18, 2) = 0
+	IF (SELECT publicacion_seCobraEnvio FROM MESSI_MAS3.Publicacion WHERE publicacion_id = @idPublicacion) = 1
+		BEGIN
+		SELECT @costoEnvio = visibilidad_costoEnvio FROM MESSI_MAS3.Visibilidad, MESSI_MAS3.Publicacion WHERE publicacion_idVisibilidad = visibilidad_id
+
+		INSERT INTO MESSI_MAS3.Factura_detalle(facturaDetalle_id, facturaDetalle_item, FacturaDetalle_valorItem, facturaDetall_cantidadItems, facturaDetalle_numero)
+		VALUES(@idFactura, 'Costo de envio', @costoEnvio , 1, @ultimoNumero)
+		END
+
+	UPDATE MESSI_MAS3.Factura
+	SET factura_importeTotal = (SELECT factura_importeTotal FROM MESSI_MAS3.Publicacion WHERE publicacion_id = @idPublicacion) + @costoEnvio + @valorItem
+	WHERE factura_publicacionId = @idPublicacion
+
+	RETURN @idFactura
 
 END
 GO
