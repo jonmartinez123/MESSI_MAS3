@@ -106,15 +106,11 @@ namespace MercadoEnvio.ABM_Usuario
                 if (string.IsNullOrEmpty(txtCiudad.Text) | !Validaciones.IsAllLetters(txtCiudad.Text))
                     throw new Exception("El campo Ciudad se encuentra vacio o no es un texto valido, recuerde que debe ser solo letras");
 
-                if (DAO.UsuarioSQL.existeMailEmpresa(txtMail.Text))
-                {
-
+                if (DAO.UsuarioSQL.existeMailEmpresa(txtMail.Text, empresaGlobal.Id)){
                     throw new Exception("Ya existe una empresa con ese mail");
                 }
 
-                if (DAO.UsuarioSQL.existeCuit(txtCUIT.Text))
-                {
-
+                if (DAO.UsuarioSQL.existeCuit(txtCUIT.Text)){
                     throw new Exception("Ya existe una empresa con ese CUIT");
                 }
 
@@ -266,12 +262,12 @@ namespace MercadoEnvio.ABM_Usuario
         }
 
         void validarRazonSocial(string razon){
-            if (DAO.UsuarioSQL.existeRazonSocial(razon)) throw new Exception("La razón social ingresada ya existe");
+            if (DAO.UsuarioSQL.existeRazonSocial(razon, empresaGlobal.Id)) throw new Exception("La razón social ingresada ya existe");
         }
 
         void validarCUIT(string cuit)
         {
-            if (DAO.UsuarioSQL.existeCUIT(cuit)) throw new Exception("El CUIT ingresado ya existe");
+            if (DAO.UsuarioSQL.existeCUIT(cuit, empresaGlobal.Id)) throw new Exception("El CUIT ingresado ya existe");
         }
     }
 }

@@ -95,20 +95,19 @@ namespace MercadoEnvio.ABM_Usuario
                 if (string.IsNullOrEmpty(txtMail.Text))
                     throw new Exception("Debe completar el mail");
 
-                if (DAO.UsuarioSQL.existeMailCliente(txtMail.Text)) {
+                if (esInvalidoMail(txtMail.Text))
+                    throw new Exception("El mail ingresado no es válido");
 
+                if (DAO.UsuarioSQL.existeMailCliente(txtMail.Text, clienteGlobal.Id)){
                     throw new Exception("Ya existe un usuario con ese mail");
                 }
 
-                if (DAO.UsuarioSQL.existeDocumento(txtDocumento.Text))
-                {
-
-                    throw new Exception("Ya existe un usuario con ese documento");
+                if (DAO.UsuarioSQL.existeDocumento(txtDocumento.Text, clienteGlobal.Id)){
+                     throw new Exception("Ya existe un usuario con ese documento");
                 }
 
 
-                if (esInvalidoMail(txtMail.Text))
-                    throw new Exception("El mail ingresado no es válido");
+
 
                 if (string.IsNullOrEmpty(txtTel.Text))
                     throw new Exception("Debe completar el número de telefono");

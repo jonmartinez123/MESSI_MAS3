@@ -21,6 +21,7 @@ namespace MercadoEnvio
             Application.SetCompatibleTextRenderingDefault(false);
             DAO.PublicacionSQL.cambiarEstadoDeSubastasVencidas(Config.ConfiguracionVariable.FechaSistema);
             Application.Run(new Login.Login());
+            Application.Run(new ABM_Usuario.Usuario());
         }
     }
 }

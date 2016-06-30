@@ -174,29 +174,29 @@ namespace MercadoEnvio.DAO
             SqlConnector.executeProcedure("crear_empresa", e.NombreUsuario, EncriptadorSHA.encodear(e.Password), e.RazonSocial, e.Mail, e.Cuit, e.Telefono, e.NombreContacto, e.Domicilio.Localidad.Id, e.Domicilio.Calle, e.Domicilio.Altura, e.Domicilio.Piso, e.Domicilio.Departamento, e.Domicilio.Ciudad, e.Domicilio.CodigoPostal.ToString(), e.RubroPrincipal.Id);
         }
 
-        internal static Boolean existeRazonSocial(string razon)
+        internal static Boolean existeRazonSocial(string razon, int idUsuario)
         {
-            return SqlConnector.executeProcedure("existe_razonSocial", razon) == 1 ? true : false;
+            return SqlConnector.executeProcedure("existe_razonSocial", razon, idUsuario) == 1 ? true : false;
         }
 
-        internal static Boolean existeCUIT(string cuit)
+        internal static Boolean existeCUIT(string cuit, int idUsuario)
         {
-            return SqlConnector.executeProcedure("existe_cuit", cuit) == 1 ? true : false;
+            return SqlConnector.executeProcedure("existe_cuit", cuit, idUsuario) == 1 ? true : false;
         }
 
-        internal static bool existeMailCliente(string p)
+        internal static bool existeMailCliente(string p, int idUsuario)
         {
-           return SqlConnector.executeProcedure("existe_mailCliente", p) == 1 ? true : false; 
+            return SqlConnector.executeProcedure("existe_mailCliente", p, idUsuario) == 1 ? true : false; 
         }
 
-        internal static bool existeDocumento(string p)
+        internal static bool existeDocumento(string p, int idUsuario)
         {
-            return SqlConnector.executeProcedure("existe_documentoCliente", p) == 1 ? true : false; 
+            return SqlConnector.executeProcedure("existe_documentoCliente", p, idUsuario) == 1 ? true : false; 
         }
 
-        internal static bool existeMailEmpresa(string p)
+        internal static bool existeMailEmpresa(string p, int idUsuario)
         {
-            return SqlConnector.executeProcedure("existe_mailEmpresa", p) == 1 ? true : false; 
+            return SqlConnector.executeProcedure("existe_mailEmpresa", p, idUsuario) == 1 ? true : false; 
         }
 
         internal static bool existeCuit(string p)
