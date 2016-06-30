@@ -25,6 +25,7 @@ namespace MercadoEnvio.ABM_Rol
 
         private void AltaRol_Load(object sender, EventArgs e)
         {
+            this.BringToFront();
             FuncionalidadesRol.MultiSelect = false;
             FuncionalidadesRol.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             this.agregarFuncionalidades(DAO.RolSQl.getAllFuncionalidades());

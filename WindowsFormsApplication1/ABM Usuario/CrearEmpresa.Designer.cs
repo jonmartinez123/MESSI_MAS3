@@ -421,6 +421,7 @@
             this.Controls.Add(this.materialLabel2);
             this.Name = "CrearEmpresa";
             this.Text = "Crear Empresa";
+            this.Load += new System.EventHandler(this.CrearEmpresa_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

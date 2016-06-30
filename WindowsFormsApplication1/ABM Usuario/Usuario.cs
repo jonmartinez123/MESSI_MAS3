@@ -25,6 +25,7 @@ namespace MercadoEnvio.ABM_Usuario
 
         private void Usuario_Load(object sender, EventArgs e)
         {
+            this.BringToFront();
             cmbTipoDocumento.DataSource = DAO.TipoDocumentoSQL.getTipoDocumentos();
             cmbTipoDocumento.DisplayMember = "Descripcion";
             cmbTipoDocumento.ValueMember = "Id";
