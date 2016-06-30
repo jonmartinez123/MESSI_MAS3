@@ -16,6 +16,7 @@ namespace MercadoEnvio.ComprarOfertar
     public partial class ComprarOfertar : MaterialForm
     {
         public static List<Rubro> rubrosFiltrados;
+        int estaFiltrando;
 
         public ComprarOfertar()
         {
@@ -29,6 +30,8 @@ namespace MercadoEnvio.ComprarOfertar
             DataTable dtAAcumular = new DataTable();
             dtAAcumular = obtenerTodasPublicaciones();
             volcarDatosASuperGrid(dtAAcumular);
+
+            estaFiltrando = 0;
         }
 
         private void btnFiltrar_Click(object sender, EventArgs e)
@@ -38,9 +41,10 @@ namespace MercadoEnvio.ComprarOfertar
 
         private void filtrar()
         {
+            estaFiltrando = 1;
+
             List<Modelo.Publicacion> pDeRubro = new List<Modelo.Publicacion>();
             DataTable dtAAcumular = new DataTable();
-
 
             DataTable dtNull = new DataTable(); //esto fue lo que cambie messi
             superGrid1.LimpiarPagedDataSource(dtNull, bindingNavigator1);
@@ -96,6 +100,7 @@ namespace MercadoEnvio.ComprarOfertar
                         p.Precio = double.Parse(row.Cells["colPrecio"].Value.ToString());
                         Comprar po = new Comprar(p);
                         po.ShowDialog();
+                        refresh();
                     }
                     else {
                         MessageBox.Show("La publicacion seleccionda no tiene stock", "Atención");
@@ -143,6 +148,17 @@ namespace MercadoEnvio.ComprarOfertar
             Funcionalidades.MenuUsuario f = new Funcionalidades.MenuUsuario();
             f.Show();
             this.Close();
+        }
+
+        public void refresh() {
+            if (estaFiltrando == 1){
+                filtrar();
+            }
+            else {
+                DataTable dtAAcumular = new DataTable();
+                dtAAcumular = obtenerTodasPublicaciones();
+                volcarDatosASuperGrid(dtAAcumular);
+            }
         }
 
     }
