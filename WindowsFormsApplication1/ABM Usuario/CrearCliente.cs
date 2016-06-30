@@ -259,6 +259,11 @@ namespace MercadoEnvio.ABM_Usuario
             if (e.KeyChar != 8) this.allowMaxLenght(txtCodigoPostal, 17, e);
         }
 
+        private void CrearCliente_Load(object sender, EventArgs e)
+        {
+            this.BringToFront();
+        }
+
 
     }
 }

@@ -399,6 +399,7 @@
             this.Controls.Add(this.materialLabel2);
             this.Name = "CrearCliente";
             this.Text = "Crear Cliente";
+            this.Load += new System.EventHandler(this.CrearCliente_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

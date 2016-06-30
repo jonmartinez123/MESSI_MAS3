@@ -269,6 +269,11 @@ namespace MercadoEnvio.ABM_Usuario
         {
             if (DAO.UsuarioSQL.existeCUIT(cuit, empresaGlobal.Id)) throw new Exception("El CUIT ingresado ya existe");
         }
+
+        private void CrearEmpresa_Load(object sender, EventArgs e)
+        {
+            this.BringToFront();
+        }
     }
 }
 

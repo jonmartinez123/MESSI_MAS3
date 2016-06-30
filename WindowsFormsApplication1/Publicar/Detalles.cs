@@ -32,6 +32,7 @@ namespace MercadoEnvio.Publicar
         }
         private void Detalles_Load(object sender, EventArgs e)
         {
+            this.BringToFront();
             cargarDatos();
         }
 

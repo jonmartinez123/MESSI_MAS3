@@ -207,7 +207,7 @@ namespace MercadoEnvio.Funcionalidades
 
         private void MenuUsuario_Load(object sender, EventArgs e)
         {
-
+            
         }
 
         private void darseDeBajaToolStripMenuItem_Click(object sender, EventArgs e)

@@ -45,6 +45,7 @@ namespace MercadoEnvio.ABM_Usuario
 
         private void crearUsuario_Load(object sender, System.EventArgs e)
         {
+            this.BringToFront();
         }
 
         private void btnContinuar_Click(object sender, EventArgs e)

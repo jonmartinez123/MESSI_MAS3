@@ -27,6 +27,7 @@ namespace MercadoEnvio.Publicar
 
         private void PagoFactura_Load(object sender, EventArgs e)
         {
+            this.BringToFront();
             lblDescripcion.Text = publicacion.Descripcion;
             lblPrecio.Text = publicacion.Visibilidad.Precio.ToString();
             lblVisibilidad.Text = publicacion.Visibilidad.Descripcion;

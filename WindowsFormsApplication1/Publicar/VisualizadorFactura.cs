@@ -26,6 +26,7 @@ namespace MercadoEnvio.Publicar
 
         private void VisualizadorFactura_Load(object sender, EventArgs e)
         {
+            this.BringToFront();
             Domicilio d;
             listadoItems.MultiSelect = false;
             listadoItems.SelectionMode = DataGridViewSelectionMode.FullRowSelect;

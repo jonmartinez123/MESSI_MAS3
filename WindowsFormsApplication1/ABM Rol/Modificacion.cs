@@ -53,6 +53,7 @@ namespace MercadoEnvio.ABM_Rol
 
         private void Modificacion_Load(object sender, EventArgs e)
         {
+            this.BringToFront();
             FuncionalidadesRol.MultiSelect = false;
             FuncionalidadesRol.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             this.reload();

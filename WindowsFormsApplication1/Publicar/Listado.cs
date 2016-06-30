@@ -31,9 +31,28 @@ namespace MercadoEnvio.Publicar
 
         private void btnVolver_Click(object sender, EventArgs e)
         {
+
+            FormCollection formsabiertos = Application.OpenForms;
+            var booleanoMenuUsuarioAbierto = new Boolean();
+            booleanoMenuUsuarioAbierto = false;
+
+            foreach (Form frm in formsabiertos)
+            {
+                if (frm.Text == "MenuUsuario")
+                {
+                    booleanoMenuUsuarioAbierto = true;
+                }
+            }
+
+            if (booleanoMenuUsuarioAbierto) {
+                this.Close();
+                return;
+            }
             Funcionalidades.MenuUsuario f = new Funcionalidades.MenuUsuario();
             f.Show();
             this.Close();
+           
+            
         }
 
         private void reload() {
@@ -42,6 +61,8 @@ namespace MercadoEnvio.Publicar
 
         private void Listado_Load(object sender, EventArgs e)
         {
+
+            
             reload();
             listadoPublicaciones.MultiSelect = false;
             listadoPublicaciones.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
