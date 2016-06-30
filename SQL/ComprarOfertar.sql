@@ -21,9 +21,19 @@ BEGIN
 	INSERT INTO MESSI_MAS3.Compra(compras_publicacion_id, compras_fecha, compras_personaComprador_id, compras_cantidad)
 	VALUES(@idPublicacion, GETDATE(), @idUsuario, @cantidad)
 
+	DECLARE @stock INT
+	SELECT @stock = (publicacion_stock - @cantidad) FROM MESSI_MAS3.Publicacion WHERE publicacion_id = @idPublicacion
+
 	UPDATE MESSI_MAS3.Publicacion
-	SET publicacion_stock = (SELECT publicacion_stock FROM MESSI_MAS3.Publicacion WHERE publicacion_id = @idPublicacion) - @cantidad
+	SET publicacion_stock = @stock
 	WHERE publicacion_id = @idPublicacion
+
+	IF @stock = 0
+		BEGIN
+		UPDATE MESSI_MAS3.Publicacion
+		SET publicacion_idEstado = 4
+		WHERE publicacion_id = @idPublicacion
+		END
 
 	DECLARE @idFactura INT
 	SELECT @idFactura = factura_id FROM MESSI_MAS3.Factura WHERE factura_publicacionId = @idPublicacion
