@@ -20,7 +20,7 @@ namespace MercadoEnvio.Config
                 if (!_iniciado)
                 {
                     ConnectionString = ConfigurationManager.ConnectionStrings["DBStringDeConexion"].ConnectionString;
-                    FechaSistema = DateTime.ParseExact(ConfigurationManager.AppSettings["FechaSistema"], "dd/MM/yyyy", CultureInfo.InvariantCulture);
+                    FechaSistema = DateTime.ParseExact(ConfigurationManager.AppSettings["FechaSistema"], "yyyy-MM-dd", CultureInfo.InvariantCulture);
                     _iniciado = true;
                 }
             }

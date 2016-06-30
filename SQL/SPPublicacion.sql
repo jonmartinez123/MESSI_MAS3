@@ -83,3 +83,9 @@ BEGIN
 	END
 END
 GO
+CREATE PROCEDURE [MESSI_MAS3].cambiarEstadoDeSubastasVencidas @FechaSistema dateTime
+AS
+BEGIN
+	UPDATE Publicacion SET publicacion_idEstado = 4  WHERE publicacion_id IN (SELECT publicacion_id FROM Publicacion where publicacion_idEstado <> 4 and publicacion_tipoPublicacionId = 1 and (SELECT DATEDIFF(day,publicacion_fechaFin,@FechaSistema)) >= 1)
+END
+GO

@@ -209,6 +209,7 @@
             this.QuisoEnvio,
             this.Stock});
             this.listadoPublicaciones.Location = new System.Drawing.Point(38, 59);
+            this.listadoPublicaciones.MultiSelect = false;
             this.listadoPublicaciones.Name = "listadoPublicaciones";
             this.listadoPublicaciones.ReadOnly = true;
             this.listadoPublicaciones.Size = new System.Drawing.Size(862, 169);

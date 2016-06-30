@@ -111,5 +111,10 @@ namespace MercadoEnvio.DAO
         {
             SqlConnector.executeProcedure("updetearEstado", idPublicacion, idEstado);
         }
+
+        internal static void cambiarEstadoDeSubastasVencidas(DateTime fechaDelSistema)
+        {
+            SqlConnector.executeProcedure("cambiarEstadoDeSubastasVencidas", fechaDelSistema);
+        }
     }
 }

@@ -43,7 +43,6 @@ namespace MercadoEnvio.Publicar
         private void Listado_Load(object sender, EventArgs e)
         {
             reload();
-            listadoPublicaciones.MultiSelect = false;
             listadoPublicaciones.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             listadoPublicaciones.Rows[0].Selected = true;
         }
@@ -160,7 +159,6 @@ namespace MercadoEnvio.Publicar
             p.ShowDialog();
             int indice = listadoPublicaciones.SelectedRows[0].Index;
             reload();
-            listadoPublicaciones.Rows[indice].Selected = true;
         }
 
         private void btnPausar_Click(object sender, EventArgs e)
@@ -168,7 +166,6 @@ namespace MercadoEnvio.Publicar
             DAO.PublicacionSQL.updetearEstado(publicacion.Id, 3);
             int indice = listadoPublicaciones.SelectedRows[0].Index;
             reload();
-            listadoPublicaciones.Rows[indice].Selected = true;
         }
 
         private void btnFinalizar_Click(object sender, EventArgs e)
@@ -176,7 +173,6 @@ namespace MercadoEnvio.Publicar
             DAO.PublicacionSQL.updetearEstado(publicacion.Id, 4);
             int indice = listadoPublicaciones.SelectedRows[0].Index;
             reload();
-            listadoPublicaciones.Rows[indice].Selected = true;
         }
     }
 }
