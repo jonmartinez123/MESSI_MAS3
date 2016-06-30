@@ -223,7 +223,7 @@ SELECT TOP 5 publicacionQueNoFiguraEnCompras.cliente_id,
 								UNION
 								SELECT empresa_id, empresa_razonSocial FROM MESSI_MAS3.Empresa) as cliempresa ON cliempresa.cliente_id = publi.publicacion_idUsuario
 					LEFT JOIN  MESSI_MAS3.Usuario usu ON cliempresa.cliente_id = usu.usuario_id
-				WHERE	 NOT EXISTS(SELECT * FROM MESSI_MAS3.Compra compra where publi.publicacion_id = compra.compras_publicacion_id) 
+				WHERE	  (publi.publicacion_stock - (SELECT SUM(compras_cantidad) as cantidadComprada FROM MESSI_MAS3.Compra compra where publi.publicacion_id = compra.compras_publicacion_id) !=0)
 						AND 
 						publi.publicacion_idEstado = 4
 						AND
