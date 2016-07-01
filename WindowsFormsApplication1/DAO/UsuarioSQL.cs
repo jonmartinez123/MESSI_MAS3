@@ -48,7 +48,7 @@ namespace MercadoEnvio.DAO
 
         public static void crearCliente(Modelo.Cliente c)
         { 
-            SqlConnector.executeProcedure("crear_cliente",c.NombreUsuario, EncriptadorSHA.encodear(c.Password), c.Nombre, c.Apellido, c.Mail, c.DNI, c.FechaNacimiento, c.Telefono, c.TipoDocumento.Id, c.Domicilio.Localidad.Id, c.Domicilio.Calle, c.Domicilio.Altura, c.Domicilio.Piso, c.Domicilio.Departamento, c.Domicilio.CodigoPostal.ToString());        
+            SqlConnector.executeProcedure("crear_cliente",c.NombreUsuario, EncriptadorSHA.encodear(c.Password), c.Nombre, c.Apellido, c.Mail, c.DNI, c.FechaNacimiento, c.Telefono, c.TipoDocumento.Id, c.Domicilio.Localidad.Id, c.Domicilio.Calle, c.Domicilio.Altura, c.Domicilio.Piso, c.Domicilio.Departamento, c.Domicilio.CodigoPostal.ToString(),Config.ConfiguracionVariable.FechaSistema);        
         }
 
         public static Cliente getCliente(int id){
@@ -171,7 +171,7 @@ namespace MercadoEnvio.DAO
 
         public static void crearEmpresa(Modelo.Empresa e)
         { 
-            SqlConnector.executeProcedure("crear_empresa", e.NombreUsuario, EncriptadorSHA.encodear(e.Password), e.RazonSocial, e.Mail, e.Cuit, e.Telefono, e.NombreContacto, e.Domicilio.Localidad.Id, e.Domicilio.Calle, e.Domicilio.Altura, e.Domicilio.Piso, e.Domicilio.Departamento, e.Domicilio.Ciudad, e.Domicilio.CodigoPostal.ToString(), e.RubroPrincipal.Id);
+            SqlConnector.executeProcedure("crear_empresa", e.NombreUsuario, EncriptadorSHA.encodear(e.Password), e.RazonSocial, e.Mail, e.Cuit, e.Telefono, e.NombreContacto, e.Domicilio.Localidad.Id, e.Domicilio.Calle, e.Domicilio.Altura, e.Domicilio.Piso, e.Domicilio.Departamento, e.Domicilio.Ciudad, e.Domicilio.CodigoPostal.ToString(), e.RubroPrincipal.Id,Config.ConfiguracionVariable.FechaSistema);
         }
 
         internal static Boolean existeRazonSocial(string razon, int idUsuario)

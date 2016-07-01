@@ -109,9 +109,50 @@ BEGIN
 	END
 END
 GO
-CREATE PROCEDURE [MESSI_MAS3].cambiarEstadoDeSubastasVencidas @FechaSistema dateTime
+
+CREATE PROCEDURE [MESSI_MAS3].cambiarEstadoDeSubastasVencidas (@FechaSistema dateTime)
 AS
+DECLARE @id int
 BEGIN
-	UPDATE Publicacion SET publicacion_idEstado = 4  WHERE publicacion_id IN (SELECT publicacion_id FROM Publicacion where publicacion_idEstado <> 4 and publicacion_tipoPublicacionId = 1 and (SELECT DATEDIFF(day,publicacion_fechaFin,@FechaSistema)) >= 1)
+	DECLARE c1 CURSOR FOR (SELECT publicacion_id FROM Publicacion where publicacion_idEstado <> 4 and publicacion_tipoPublicacionId = 1 and (SELECT DATEDIFF(day,publicacion_fechaFin,@FechaSistema)) >= 1)
+	OPEN c1
+	FETCH NEXT FROM c1 INTO @id
+	WHILE @@FETCH_STATUS <> 0
+	BEGIN
+		DECLARE @valorMaximo numeric(18,2),@idOferta int,@idFactura INT,@costoEnvio numeric(18, 2) = 0
+		SELECT top 1 @valorMaximo = oferta_valor, @idOferta=oferta_id FROM Oferta where oferta_idPublicacion = @id order by oferta_valor desc
+		UPDATE Oferta SET oferta_ganador = 1 where oferta_id = @idOferta
+
+		DECLARE @ultimoNumero int
+		select top 1 @ultimoNumero=factura_numero from Factura order by factura_numero desc
+		SET @ultimoNumero = @ultimoNumero + 1
+
+		DECLARE @valorItem numeric(18,2)
+		SELECT @valorItem = (@valorMaximo * visibilidad_porcentaje)
+		FROM MESSI_MAS3.Publicacion, MESSI_MAS3.Visibilidad
+		WHERE publicacion_id = @id AND publicacion_idVisibilidad = visibilidad_id
+
+		SELECT @idFactura = factura_id FROM MESSI_MAS3.Factura WHERE factura_publicacionId = @id
+
+		INSERT INTO MESSI_MAS3.Factura_detalle(facturaDetalle_id, facturaDetalle_item,FacturaDetalle_valorItem, facturaDetall_cantidadItems, facturaDetalle_numero)
+		VALUES(@idFactura, 'Comision por visibilidad', @valorItem , 1, @ultimoNumero)
+
+		IF (SELECT publicacion_seCobraEnvio FROM MESSI_MAS3.Publicacion WHERE publicacion_id = @id) = 1
+		BEGIN
+		SELECT @costoEnvio = visibilidad_costoEnvio FROM MESSI_MAS3.Visibilidad, MESSI_MAS3.Publicacion WHERE publicacion_idVisibilidad = visibilidad_id
+
+		INSERT INTO MESSI_MAS3.Factura_detalle(facturaDetalle_id, facturaDetalle_item, FacturaDetalle_valorItem, facturaDetall_cantidadItems, facturaDetalle_numero)
+		VALUES(@idFactura, 'Costo de envio', @costoEnvio , 1, @ultimoNumero)
+		END
+
+		UPDATE MESSI_MAS3.Factura
+		SET factura_importeTotal = (SELECT factura_importeTotal FROM MESSI_MAS3.Publicacion WHERE publicacion_id = @id) + @costoEnvio + @valorItem
+		WHERE factura_publicacionId = @id
+
+		UPDATE Publicacion SET publicacion_idEstado = 4  WHERE publicacion_id = @id
+		FETCH NEXT FROM c1 INTO @id
+	END
+	close c1
+	deallocate c1
 END
 GO

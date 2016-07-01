@@ -149,7 +149,7 @@ BEGIN
 END
 GO
 
-CREATE PROCEDURE MESSI_MAS3.crear_cliente(@username nvarchar(255), @password nvarchar(255), @nombre nvarchar(255), @apellido nvarchar(255), @mail nvarchar(255), @dni INT, @fechaNacimiento DATETIME, @telefono NUMERIC(15,0), @idTipoDocumento INT, @idLocalidad INT, @calle nvarchar(100), @altura NUMERIC(18,0), @piso NUMERIC(18,0), @departamento NVARCHAR(50), @codigoPostal NVARCHAR(50))
+CREATE PROCEDURE MESSI_MAS3.crear_cliente(@username nvarchar(255), @password nvarchar(255), @nombre nvarchar(255), @apellido nvarchar(255), @mail nvarchar(255), @dni INT, @fechaNacimiento DATETIME, @telefono NUMERIC(15,0), @idTipoDocumento INT, @idLocalidad INT, @calle nvarchar(100), @altura NUMERIC(18,0), @piso NUMERIC(18,0), @departamento NVARCHAR(50), @codigoPostal NVARCHAR(50),@FechaSistema dateTime)
 AS
 BEGIN
 	INSERT INTO MESSI_MAS3.Usuario(usuario_nombreUsuario, usuario_contrasenia, usuario_deleted, usuario_intentos, usuario_primeraPublicacion)
@@ -165,7 +165,7 @@ BEGIN
 	SELECT @idDomicilio = SCOPE_IDENTITY()
 
 	INSERT INTO MESSI_MAS3.Cliente(cliente_id, cliente_nombre, cliente_apellido, cliente_mail, cliente_DNI, cliente_fechaNacimiento, cliente_tel, cliente_tipoDocumento_id, cliente_idDomicilio, cliente_fechaCreacion, cliente_calificacionPromedio)
-	VALUES (@idUsuario, @nombre, @apellido, @mail, @dni, @fechaNacimiento, @telefono, @idTipoDocumento, @idDomicilio, GETDATE(), 0)
+	VALUES (@idUsuario, @nombre, @apellido, @mail, @dni, @fechaNacimiento, @telefono, @idTipoDocumento, @idDomicilio,@FechaSistema, 0)
 
 	INSERT INTO MESSI_MAS3.Rol_Usuario(Rol_id,Usuario_id)
 	VALUES(2, @idUsuario)
@@ -221,7 +221,7 @@ BEGIN
 END
 GO
 
-CREATE PROCEDURE MESSI_MAS3.crear_empresa(@username nvarchar(255), @password nvarchar(255), @razonSocial nvarchar(255), @mail nvarchar(255), @cuit nvarchar(50), @telefono NUMERIC(15,0), @nombreContacto nvarchar(100), @idLocalidad INT, @calle nvarchar(100), @altura NUMERIC(18,0), @piso NUMERIC(18,0), @departamento NVARCHAR(50), @ciudad NVARCHAR(45), @codigoPostal NVARCHAR(50), @idRubro INT)
+CREATE PROCEDURE MESSI_MAS3.crear_empresa(@username nvarchar(255), @password nvarchar(255), @razonSocial nvarchar(255), @mail nvarchar(255), @cuit nvarchar(50), @telefono NUMERIC(15,0), @nombreContacto nvarchar(100), @idLocalidad INT, @calle nvarchar(100), @altura NUMERIC(18,0), @piso NUMERIC(18,0), @departamento NVARCHAR(50), @ciudad NVARCHAR(45), @codigoPostal NVARCHAR(50), @idRubro INT,@FechaSistema dateTime)
 AS
 BEGIN
 	INSERT INTO MESSI_MAS3.Usuario(usuario_nombreUsuario, usuario_contrasenia, usuario_deleted, usuario_intentos, usuario_primeraPublicacion)
@@ -237,7 +237,7 @@ BEGIN
 	SELECT @idDomicilio = SCOPE_IDENTITY()
 
 	INSERT INTO MESSI_MAS3.Empresa(empresa_id, empresa_razonSocial, empresa_mail, empresa_cuit, empresa_telefono, empresa_nombreContacto, empresa_rubroId, empresa_fechaCreacion, empresa_idDomicilio)
-	VALUES (@idUsuario, @razonSocial, @mail, @cuit, @telefono, @nombreContacto, @idRubro, GETDATE(), @idDomicilio)
+	VALUES (@idUsuario, @razonSocial, @mail, @cuit, @telefono, @nombreContacto, @idRubro, @FechaSistema, @idDomicilio)
 
 	INSERT INTO MESSI_MAS3.Rol_Usuario(Rol_id,Usuario_id)
 	VALUES(3, @idUsuario)
