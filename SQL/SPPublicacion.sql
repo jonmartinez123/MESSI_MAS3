@@ -47,6 +47,7 @@ AS
 BEGIN
 DECLARE @ultimoCodigo int 
 SELECT top 1 @ultimoCodigo=publicacion_codigo from MESSI_MAS3.Publicacion order by publicacion_codigo DESC
+SET @ultimoCodigo = @ultimoCodigo + 1
 INSERT INTO Publicacion(publicacion_codigo,publicacion_idEstado,publicacion_idVisibilidad,publicacion_idUsuario,publicacion_fechaInicio,publicacion_fechaFin,publicacion_descripcion,publicacion_tipoPublicacionId,publicacion_minimoSubasta,publicacion_precio,publicacion_stock,publicacion_seCobraEnvio) 
 VALUES(@ultimoCodigo,@idEstado,@idVisibilidad,@idUsuario,@fechaInicio,@fechaFin,@descripcion,@idTipoPublicacion,@minimoSubasta,@precio,@stock,@seCobraEnvio)
 INSERT INTO Rubro_x_Publicacion(idRubro,idPublicacion) (select idRubro,SCOPE_IDENTITY() from @Rubros)
@@ -73,7 +74,7 @@ BEGIN
 	BEGIN
 			IF((SELECT publicacion_idVisibilidad FROM MESSI_MAS3.Publicacion WHERE publicacion_id = @idPublicacion) != 5)
 
-				BEGIN
+			BEGIN
 			INSERT INTO Factura(factura_fecha,factura_formaDePago,factura_idVendedor,factura_publicacionId,factura_numero,factura_importeTotal) values(@fechaActiva,@formaDePago,@idUsuario,@idPublicacion,@ultimoNumero,0)
 			SET @idFactura = SCOPE_IDENTITY()
 			INSERT INTO Factura_detalle(facturaDetalle_id,facturaDetalle_numero,facturaDetall_cantidadItems,FacturaDetalle_valorItem,facturaDetalle_item)
@@ -117,7 +118,7 @@ BEGIN
 	DECLARE c1 CURSOR FOR (SELECT publicacion_id FROM Publicacion where publicacion_idEstado <> 4 and publicacion_tipoPublicacionId = 1 and (SELECT DATEDIFF(day,publicacion_fechaFin,@FechaSistema)) >= 1)
 	OPEN c1
 	FETCH NEXT FROM c1 INTO @id
-	WHILE @@FETCH_STATUS <> 0
+	WHILE @@FETCH_STATUS = 0
 	BEGIN
 		DECLARE @valorMaximo numeric(18,2),@idOferta int,@idFactura INT,@costoEnvio numeric(18, 2) = 0
 		SELECT top 1 @valorMaximo = oferta_valor, @idOferta=oferta_id FROM Oferta where oferta_idPublicacion = @id order by oferta_valor desc

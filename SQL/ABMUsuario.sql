@@ -41,7 +41,7 @@ CREATE PROCEDURE MESSI_MAS3.cambiarPassword(@id INT, @password nvarchar(255))
 AS
 BEGIN
 	UPDATE MESSI_MAS3.Usuario
-	SET usuario_contrasenia = @password
+	SET usuario_contrasenia = @password,usuario_intentos=0
 	WHERE usuario_id = @id
 END
 GO
@@ -51,6 +51,16 @@ AS
 BEGIN
 	UPDATE MESSI_MAS3.Usuario
 	SET usuario_deleted = 1
+	WHERE usuario_id = @id
+END
+GO
+
+
+CREATE PROCEDURE MESSI_MAS3.resetearIntentos(@id INT)
+AS
+BEGIN
+	UPDATE MESSI_MAS3.Usuario
+	SET usuario_intentos = 0
 	WHERE usuario_id = @id
 END
 GO
@@ -110,7 +120,7 @@ GO
 CREATE PROCEDURE MESSI_MAS3.get_clientesFiltrados(@nombre nvarchar(255), @apellido nvarchar(255), @mail nvarchar(255), @dni NUMERIC(18,0), @IdTipoDocumento INT)
 AS				
 BEGIN
-	SELECT usuario_id, usuario_nombreUsuario, cliente_nombre, cliente_apellido, cliente_DNI, cliente_mail, usuario_deleted 
+	SELECT usuario_id, usuario_nombreUsuario, cliente_nombre, cliente_apellido, cliente_DNI, cliente_mail, usuario_deleted,usuario_intentos 
 	FROM MESSI_MAS3.Cliente, MESSI_MAS3.Usuario
 	WHERE cliente_id = usuario_id 
 		AND cliente_nombre LIKE CONCAT('%', @nombre, '%')
@@ -124,7 +134,7 @@ GO
 CREATE PROCEDURE MESSI_MAS3.get_clientesFiltradosSinDocumento(@nombre nvarchar(255), @apellido nvarchar(255), @mail nvarchar(255))
 AS				
 BEGIN
-	SELECT usuario_id, usuario_nombreUsuario, cliente_nombre, cliente_apellido, cliente_DNI, cliente_mail, usuario_deleted 
+	SELECT usuario_id, usuario_nombreUsuario, cliente_nombre, cliente_apellido, cliente_DNI, cliente_mail, usuario_deleted,usuario_intentos
 	FROM MESSI_MAS3.Cliente, MESSI_MAS3.Usuario
 	WHERE cliente_id = usuario_id 
 		AND cliente_nombre LIKE CONCAT('%', @nombre, '%')
@@ -185,7 +195,7 @@ GO
 CREATE PROCEDURE MESSI_MAS3.get_empresasFiltradas(@razonSocial nvarchar(255), @mail nvarchar(255), @cuit nvarchar(50))
 AS				
 BEGIN
-	SELECT usuario_id, usuario_nombreUsuario, empresa_razonSocial, empresa_cuit, empresa_mail, empresa_nombreContacto, usuario_deleted 
+	SELECT usuario_id, usuario_nombreUsuario, empresa_razonSocial, empresa_cuit, empresa_mail, empresa_nombreContacto, usuario_deleted,usuario_intentos
 	FROM MESSI_MAS3.Empresa, MESSI_MAS3.Usuario
 	WHERE empresa_id = usuario_id 
 		AND empresa_razonSocial LIKE CONCAT('%', @razonSocial, '%')
@@ -197,7 +207,7 @@ GO
 CREATE PROCEDURE MESSI_MAS3.get_empresasFiltradasSinCUIT(@razonSocial nvarchar(255), @mail nvarchar(255))
 AS				
 BEGIN
-	SELECT usuario_id, usuario_nombreUsuario, empresa_razonSocial, empresa_cuit, empresa_mail, empresa_nombreContacto, usuario_deleted 
+	SELECT usuario_id, usuario_nombreUsuario, empresa_razonSocial, empresa_cuit, empresa_mail, empresa_nombreContacto, usuario_deleted,usuario_intentos 
 	FROM MESSI_MAS3.Empresa, MESSI_MAS3.Usuario
 	WHERE empresa_id = usuario_id 
 		AND empresa_razonSocial LIKE CONCAT('%', @razonSocial, '%')

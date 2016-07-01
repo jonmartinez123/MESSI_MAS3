@@ -53,6 +53,7 @@ namespace MercadoEnvio.Publicar
                     DAO.PublicacionSQL.updetearEstado(publicacion.Id,2);
                     VisualizadorFactura vis = new VisualizadorFactura(idFactura);
                     vis.Show();
+                    vis.BringToFront();
                     this.Close();
                 }
             }

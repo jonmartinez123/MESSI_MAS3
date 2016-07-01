@@ -198,5 +198,10 @@ namespace MercadoEnvio.DAO
         {
             return SqlConnector.executeProcedure("existe_mail", p, idUsuario) == 1 ? true : false; 
         }
+
+        internal static void resetearIntentos(int id)
+        {
+            SqlConnector.executeProcedure("resetearIntentos", id);
+        }
     }
 }

@@ -30,6 +30,7 @@
         {
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.btnResetear = new System.Windows.Forms.Button();
             this.btnLimpiarCliente = new System.Windows.Forms.Button();
             this.cmbTipoDocumento = new System.Windows.Forms.ComboBox();
             this.materialLabel5 = new MaterialSkin.Controls.MaterialLabel();
@@ -41,12 +42,21 @@
             this.btnHabilitadoCliente = new System.Windows.Forms.Button();
             this.btnCambiarPassCliente = new System.Windows.Forms.Button();
             this.dgvClientes = new System.Windows.Forms.DataGridView();
+            this.colId = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colUsuario = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colNombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colApellido = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colDNI = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colMail = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colHabilitado = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.IntentosCliente = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.txtDni = new System.Windows.Forms.TextBox();
             this.txtMailCliente = new System.Windows.Forms.TextBox();
             this.txtApellido = new System.Windows.Forms.TextBox();
             this.txtNombre = new System.Windows.Forms.TextBox();
             this.materialLabel3 = new MaterialSkin.Controls.MaterialLabel();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.btnResetearIntentosEmpresa = new System.Windows.Forms.Button();
             this.btnLimpiarEmpresa = new System.Windows.Forms.Button();
             this.materialLabel9 = new MaterialSkin.Controls.MaterialLabel();
             this.materialLabel8 = new MaterialSkin.Controls.MaterialLabel();
@@ -56,19 +66,6 @@
             this.btnLogicoEmpresa = new System.Windows.Forms.Button();
             this.btnCambiarPassEmpresa = new System.Windows.Forms.Button();
             this.dgvEmpresas = new System.Windows.Forms.DataGridView();
-            this.txtMailEmpresa = new System.Windows.Forms.TextBox();
-            this.txtCUIT = new System.Windows.Forms.TextBox();
-            this.txtRazonSocial = new System.Windows.Forms.TextBox();
-            this.materialLabel1 = new MaterialSkin.Controls.MaterialLabel();
-            this.btnCrearUsuario = new System.Windows.Forms.Button();
-            this.btnVolver = new System.Windows.Forms.Button();
-            this.colId = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colUsuario = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colNombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colApellido = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colDNI = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colMail = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colHabilitado = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colIdEmpresa = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colUsuarioEmpresa = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colRazonSocial = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -76,6 +73,13 @@
             this.colMailEmpresa = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colNombreContacto = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colHabilitadoEmpresa = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.IntentosEmpresa = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.txtMailEmpresa = new System.Windows.Forms.TextBox();
+            this.txtCUIT = new System.Windows.Forms.TextBox();
+            this.txtRazonSocial = new System.Windows.Forms.TextBox();
+            this.materialLabel1 = new MaterialSkin.Controls.MaterialLabel();
+            this.btnCrearUsuario = new System.Windows.Forms.Button();
+            this.btnVolver = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvClientes)).BeginInit();
@@ -95,6 +99,7 @@
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.btnResetear);
             this.tabPage1.Controls.Add(this.btnLimpiarCliente);
             this.tabPage1.Controls.Add(this.cmbTipoDocumento);
             this.tabPage1.Controls.Add(this.materialLabel5);
@@ -119,6 +124,16 @@
             this.tabPage1.Text = "Clientes";
             this.tabPage1.UseVisualStyleBackColor = true;
             this.tabPage1.Click += new System.EventHandler(this.tabPage1_Click);
+            // 
+            // btnResetear
+            // 
+            this.btnResetear.Location = new System.Drawing.Point(248, 272);
+            this.btnResetear.Name = "btnResetear";
+            this.btnResetear.Size = new System.Drawing.Size(100, 23);
+            this.btnResetear.TabIndex = 114;
+            this.btnResetear.Text = "Resetear Intentos";
+            this.btnResetear.UseVisualStyleBackColor = true;
+            this.btnResetear.Click += new System.EventHandler(this.btnResetear_Click);
             // 
             // btnLimpiarCliente
             // 
@@ -244,7 +259,8 @@
             this.colApellido,
             this.colDNI,
             this.colMail,
-            this.colHabilitado});
+            this.colHabilitado,
+            this.IntentosCliente});
             this.dgvClientes.Location = new System.Drawing.Point(20, 116);
             this.dgvClientes.MultiSelect = false;
             this.dgvClientes.Name = "dgvClientes";
@@ -253,6 +269,55 @@
             this.dgvClientes.Size = new System.Drawing.Size(673, 150);
             this.dgvClientes.TabIndex = 103;
             this.dgvClientes.SelectionChanged += new System.EventHandler(this.dgvClientes_SelectionChanged);
+            // 
+            // colId
+            // 
+            this.colId.HeaderText = "Id";
+            this.colId.Name = "colId";
+            this.colId.ReadOnly = true;
+            this.colId.Visible = false;
+            // 
+            // colUsuario
+            // 
+            this.colUsuario.HeaderText = "Usuario";
+            this.colUsuario.Name = "colUsuario";
+            this.colUsuario.ReadOnly = true;
+            // 
+            // colNombre
+            // 
+            this.colNombre.HeaderText = "Nombre";
+            this.colNombre.Name = "colNombre";
+            this.colNombre.ReadOnly = true;
+            // 
+            // colApellido
+            // 
+            this.colApellido.HeaderText = "Apellido";
+            this.colApellido.Name = "colApellido";
+            this.colApellido.ReadOnly = true;
+            // 
+            // colDNI
+            // 
+            this.colDNI.HeaderText = "Documento";
+            this.colDNI.Name = "colDNI";
+            this.colDNI.ReadOnly = true;
+            // 
+            // colMail
+            // 
+            this.colMail.HeaderText = "Mail";
+            this.colMail.Name = "colMail";
+            this.colMail.ReadOnly = true;
+            // 
+            // colHabilitado
+            // 
+            this.colHabilitado.HeaderText = "Deleted";
+            this.colHabilitado.Name = "colHabilitado";
+            this.colHabilitado.ReadOnly = true;
+            // 
+            // IntentosCliente
+            // 
+            this.IntentosCliente.HeaderText = "Intentos";
+            this.IntentosCliente.Name = "IntentosCliente";
+            this.IntentosCliente.ReadOnly = true;
             // 
             // txtDni
             // 
@@ -297,6 +362,7 @@
             // 
             // tabPage2
             // 
+            this.tabPage2.Controls.Add(this.btnResetearIntentosEmpresa);
             this.tabPage2.Controls.Add(this.btnLimpiarEmpresa);
             this.tabPage2.Controls.Add(this.materialLabel9);
             this.tabPage2.Controls.Add(this.materialLabel8);
@@ -317,6 +383,16 @@
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Empresas";
             this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // btnResetearIntentosEmpresa
+            // 
+            this.btnResetearIntentosEmpresa.Location = new System.Drawing.Point(248, 272);
+            this.btnResetearIntentosEmpresa.Name = "btnResetearIntentosEmpresa";
+            this.btnResetearIntentosEmpresa.Size = new System.Drawing.Size(100, 23);
+            this.btnResetearIntentosEmpresa.TabIndex = 115;
+            this.btnResetearIntentosEmpresa.Text = "Resetear Intentos";
+            this.btnResetearIntentosEmpresa.UseVisualStyleBackColor = true;
+            this.btnResetearIntentosEmpresa.Click += new System.EventHandler(this.btnResetearIntentosEmpresa_Click);
             // 
             // btnLimpiarEmpresa
             // 
@@ -420,7 +496,8 @@
             this.colCUIT,
             this.colMailEmpresa,
             this.colNombreContacto,
-            this.colHabilitadoEmpresa});
+            this.colHabilitadoEmpresa,
+            this.IntentosEmpresa});
             this.dgvEmpresas.Location = new System.Drawing.Point(20, 116);
             this.dgvEmpresas.MultiSelect = false;
             this.dgvEmpresas.Name = "dgvEmpresas";
@@ -430,6 +507,55 @@
             this.dgvEmpresas.Size = new System.Drawing.Size(673, 150);
             this.dgvEmpresas.TabIndex = 99;
             this.dgvEmpresas.SelectionChanged += new System.EventHandler(this.dgvEmpresas_SelectionChanged);
+            // 
+            // colIdEmpresa
+            // 
+            this.colIdEmpresa.HeaderText = "Id";
+            this.colIdEmpresa.Name = "colIdEmpresa";
+            this.colIdEmpresa.ReadOnly = true;
+            this.colIdEmpresa.Visible = false;
+            // 
+            // colUsuarioEmpresa
+            // 
+            this.colUsuarioEmpresa.HeaderText = "Usuario";
+            this.colUsuarioEmpresa.Name = "colUsuarioEmpresa";
+            this.colUsuarioEmpresa.ReadOnly = true;
+            // 
+            // colRazonSocial
+            // 
+            this.colRazonSocial.HeaderText = "Razón social";
+            this.colRazonSocial.Name = "colRazonSocial";
+            this.colRazonSocial.ReadOnly = true;
+            // 
+            // colCUIT
+            // 
+            this.colCUIT.HeaderText = "CUIT";
+            this.colCUIT.Name = "colCUIT";
+            this.colCUIT.ReadOnly = true;
+            // 
+            // colMailEmpresa
+            // 
+            this.colMailEmpresa.HeaderText = "Mail";
+            this.colMailEmpresa.Name = "colMailEmpresa";
+            this.colMailEmpresa.ReadOnly = true;
+            // 
+            // colNombreContacto
+            // 
+            this.colNombreContacto.HeaderText = "Contacto";
+            this.colNombreContacto.Name = "colNombreContacto";
+            this.colNombreContacto.ReadOnly = true;
+            // 
+            // colHabilitadoEmpresa
+            // 
+            this.colHabilitadoEmpresa.HeaderText = "Deleted";
+            this.colHabilitadoEmpresa.Name = "colHabilitadoEmpresa";
+            this.colHabilitadoEmpresa.ReadOnly = true;
+            // 
+            // IntentosEmpresa
+            // 
+            this.IntentosEmpresa.HeaderText = "Intentos";
+            this.IntentosEmpresa.Name = "IntentosEmpresa";
+            this.IntentosEmpresa.ReadOnly = true;
             // 
             // txtMailEmpresa
             // 
@@ -484,92 +610,6 @@
             this.btnVolver.Text = "Volver";
             this.btnVolver.UseVisualStyleBackColor = true;
             this.btnVolver.Click += new System.EventHandler(this.btnVolver_Click);
-            // 
-            // colId
-            // 
-            this.colId.HeaderText = "Id";
-            this.colId.Name = "colId";
-            this.colId.ReadOnly = true;
-            this.colId.Visible = false;
-            // 
-            // colUsuario
-            // 
-            this.colUsuario.HeaderText = "Usuario";
-            this.colUsuario.Name = "colUsuario";
-            this.colUsuario.ReadOnly = true;
-            // 
-            // colNombre
-            // 
-            this.colNombre.HeaderText = "Nombre";
-            this.colNombre.Name = "colNombre";
-            this.colNombre.ReadOnly = true;
-            // 
-            // colApellido
-            // 
-            this.colApellido.HeaderText = "Apellido";
-            this.colApellido.Name = "colApellido";
-            this.colApellido.ReadOnly = true;
-            // 
-            // colDNI
-            // 
-            this.colDNI.HeaderText = "Documento";
-            this.colDNI.Name = "colDNI";
-            this.colDNI.ReadOnly = true;
-            // 
-            // colMail
-            // 
-            this.colMail.HeaderText = "Mail";
-            this.colMail.Name = "colMail";
-            this.colMail.ReadOnly = true;
-            // 
-            // colHabilitado
-            // 
-            this.colHabilitado.HeaderText = "Deleted";
-            this.colHabilitado.Name = "colHabilitado";
-            this.colHabilitado.ReadOnly = true;
-            // 
-            // colIdEmpresa
-            // 
-            this.colIdEmpresa.HeaderText = "Id";
-            this.colIdEmpresa.Name = "colIdEmpresa";
-            this.colIdEmpresa.ReadOnly = true;
-            this.colIdEmpresa.Visible = false;
-            // 
-            // colUsuarioEmpresa
-            // 
-            this.colUsuarioEmpresa.HeaderText = "Usuario";
-            this.colUsuarioEmpresa.Name = "colUsuarioEmpresa";
-            this.colUsuarioEmpresa.ReadOnly = true;
-            // 
-            // colRazonSocial
-            // 
-            this.colRazonSocial.HeaderText = "Razón social";
-            this.colRazonSocial.Name = "colRazonSocial";
-            this.colRazonSocial.ReadOnly = true;
-            // 
-            // colCUIT
-            // 
-            this.colCUIT.HeaderText = "CUIT";
-            this.colCUIT.Name = "colCUIT";
-            this.colCUIT.ReadOnly = true;
-            // 
-            // colMailEmpresa
-            // 
-            this.colMailEmpresa.HeaderText = "Mail";
-            this.colMailEmpresa.Name = "colMailEmpresa";
-            this.colMailEmpresa.ReadOnly = true;
-            // 
-            // colNombreContacto
-            // 
-            this.colNombreContacto.HeaderText = "Nombre de contacto";
-            this.colNombreContacto.Name = "colNombreContacto";
-            this.colNombreContacto.ReadOnly = true;
-            // 
-            // colHabilitadoEmpresa
-            // 
-            this.colHabilitadoEmpresa.HeaderText = "Deleted";
-            this.colHabilitadoEmpresa.Name = "colHabilitadoEmpresa";
-            this.colHabilitadoEmpresa.ReadOnly = true;
             // 
             // Usuario
             // 
@@ -631,6 +671,7 @@
         private System.Windows.Forms.Button btnLimpiarCliente;
         private System.Windows.Forms.Button btnLimpiarEmpresa;
         private System.Windows.Forms.Button btnVolver;
+        private System.Windows.Forms.Button btnResetear;
         private System.Windows.Forms.DataGridViewTextBoxColumn colId;
         private System.Windows.Forms.DataGridViewTextBoxColumn colUsuario;
         private System.Windows.Forms.DataGridViewTextBoxColumn colNombre;
@@ -638,6 +679,8 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colDNI;
         private System.Windows.Forms.DataGridViewTextBoxColumn colMail;
         private System.Windows.Forms.DataGridViewTextBoxColumn colHabilitado;
+        private System.Windows.Forms.DataGridViewTextBoxColumn IntentosCliente;
+        private System.Windows.Forms.Button btnResetearIntentosEmpresa;
         private System.Windows.Forms.DataGridViewTextBoxColumn colIdEmpresa;
         private System.Windows.Forms.DataGridViewTextBoxColumn colUsuarioEmpresa;
         private System.Windows.Forms.DataGridViewTextBoxColumn colRazonSocial;
@@ -645,5 +688,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colMailEmpresa;
         private System.Windows.Forms.DataGridViewTextBoxColumn colNombreContacto;
         private System.Windows.Forms.DataGridViewTextBoxColumn colHabilitadoEmpresa;
+        private System.Windows.Forms.DataGridViewTextBoxColumn IntentosEmpresa;
     }
 }

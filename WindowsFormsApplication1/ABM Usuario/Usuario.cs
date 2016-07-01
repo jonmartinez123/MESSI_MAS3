@@ -167,7 +167,7 @@ namespace MercadoEnvio.ABM_Usuario
                 btnModificarEmpresa.Enabled = true;
 
                 DataGridViewRow row = this.dgvEmpresas.SelectedRows[0];
-                int hab = Convert.ToInt16(row.Cells["colHabilitadoEmpresa"].Value);
+                int hab = Convert.ToInt32(row.Cells["colHabilitadoEmpresa"].Value);
                 if (hab == 1)
                 {
                     btnLogicoEmpresa.Text = "Dar de Alta";
@@ -192,7 +192,7 @@ namespace MercadoEnvio.ABM_Usuario
                 DataGridViewRow row = this.dgvEmpresas.SelectedRows[0];
 
                 Modelo.Usuario unUsuario = new Modelo.Usuario();
-                unUsuario.Id = Convert.ToInt16(row.Cells["colIdEmpresa"].Value);
+                unUsuario.Id = Convert.ToInt32(row.Cells["colIdEmpresa"].Value);
                 unUsuario.NombreUsuario = row.Cells["colUsuarioEmpresa"].Value.ToString();
 
                 CrearUsuario cCliente = new CrearUsuario(unUsuario);
@@ -207,7 +207,7 @@ namespace MercadoEnvio.ABM_Usuario
                 DataGridViewRow row = this.dgvEmpresas.SelectedRows[0];
 
                 Modelo.Empresa unaEmpresa = new Modelo.Empresa();
-                unaEmpresa.Id = Convert.ToInt16(row.Cells["colIdEmpresa"].Value);
+                unaEmpresa.Id = Convert.ToInt32(row.Cells["colIdEmpresa"].Value);
 
                 CrearEmpresa cCliente = new CrearEmpresa(unaEmpresa);
                 cCliente.ShowDialog();
@@ -240,6 +240,25 @@ namespace MercadoEnvio.ABM_Usuario
         private void tabPage1_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void btnResetearIntentosEmpresa_Click(object sender, EventArgs e)
+        {
+            if (dgvEmpresas.SelectedRows.Count == 1) {
+                DataGridViewRow row = this.dgvEmpresas.SelectedRows[0];
+                DAO.UsuarioSQL.resetearIntentos(Convert.ToInt32(row.Cells["colIdEmpresa"].Value));
+                filtrarEmpresas();
+            }
+        }
+
+        private void btnResetear_Click(object sender, EventArgs e)
+        {
+            if (dgvClientes.SelectedRows.Count == 1)
+            {
+                DataGridViewRow row = this.dgvClientes.SelectedRows[0];
+                DAO.UsuarioSQL.resetearIntentos(Convert.ToInt32(row.Cells["colId"].Value));
+                filtrarClientes();
+            }
         }
     }
 }
