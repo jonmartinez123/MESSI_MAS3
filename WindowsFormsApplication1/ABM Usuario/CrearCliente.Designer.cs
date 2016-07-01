@@ -397,6 +397,7 @@
             this.Controls.Add(this.txtApellido);
             this.Controls.Add(this.txtNombre);
             this.Controls.Add(this.materialLabel2);
+            this.MaximizeBox = false;
             this.Name = "CrearCliente";
             this.Text = "Crear Cliente";
             this.Load += new System.EventHandler(this.CrearCliente_Load);

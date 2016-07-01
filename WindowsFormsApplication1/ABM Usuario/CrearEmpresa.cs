@@ -59,7 +59,7 @@ namespace MercadoEnvio.ABM_Usuario
 
                 if (string.IsNullOrEmpty(txtRazonSocial.Text) && string.IsNullOrEmpty(txtCUIT.Text) && string.IsNullOrEmpty(cmbRubro.Text)
                     && string.IsNullOrEmpty(txtMail.Text) && string.IsNullOrEmpty(txtTel.Text) && string.IsNullOrEmpty(txtCalle.Text) &&
-                    string.IsNullOrEmpty(txtPiso.Text) && string.IsNullOrEmpty(txtDepto.Text) && string.IsNullOrEmpty(cmbLocalidad.Text) &&
+                    string.IsNullOrEmpty(cmbLocalidad.Text) &&
                     string.IsNullOrEmpty(txtCodigoPostal.Text) && string.IsNullOrEmpty(txtNombreContacto.Text) && string.IsNullOrEmpty(txtCiudad.Text))
                     throw new Exception("No puede haber campos vacíos");
 
@@ -88,12 +88,6 @@ namespace MercadoEnvio.ABM_Usuario
                 if (string.IsNullOrEmpty(txtCalle.Text))
                     throw new Exception("Debe completar el nombre de la calle");
 
-                if (string.IsNullOrEmpty(txtPiso.Text))
-                    throw new Exception("Debe completar el piso");
-
-                if (string.IsNullOrEmpty(txtDepto.Text))
-                    throw new Exception("Debe completar el número de departamento");
-
                 if (string.IsNullOrEmpty(cmbLocalidad.Text))
                     throw new Exception("Debe seleccionar una localidad");
 
@@ -106,7 +100,7 @@ namespace MercadoEnvio.ABM_Usuario
                 if (string.IsNullOrEmpty(txtCiudad.Text) | !Validaciones.IsAllLetters(txtCiudad.Text))
                     throw new Exception("El campo Ciudad se encuentra vacio o no es un texto valido, recuerde que debe ser solo letras");
 
-                if (DAO.UsuarioSQL.existeMailEmpresa(txtMail.Text, empresaGlobal.Id)){
+                if (DAO.UsuarioSQL.existeMail(txtMail.Text, empresaGlobal.Id)){
                     throw new Exception("Ya existe una empresa con ese mail");
                 }
 
@@ -160,9 +154,11 @@ namespace MercadoEnvio.ABM_Usuario
             e.Domicilio.Altura = altura;
 
             int piso;
-            if (!Int32.TryParse(txtPiso.Text, out piso)) throw new Exception("El piso solo debe contener caracteres numericos");
-            e.Domicilio.Piso = piso;
-
+            if (!string.IsNullOrEmpty(txtPiso.Text))
+            {
+                if (!Int32.TryParse(txtPiso.Text, out piso)) throw new Exception("El piso solo debe contener caracteres numericos");
+                e.Domicilio.Piso = piso;
+            }
             e.Domicilio.Departamento = txtDepto.Text;
 
             e.Domicilio.Localidad = new Localidad();

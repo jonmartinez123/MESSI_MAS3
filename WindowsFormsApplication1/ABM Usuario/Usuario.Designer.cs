@@ -41,13 +41,6 @@
             this.btnHabilitadoCliente = new System.Windows.Forms.Button();
             this.btnCambiarPassCliente = new System.Windows.Forms.Button();
             this.dgvClientes = new System.Windows.Forms.DataGridView();
-            this.colId = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colUsuario = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colNombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colApellido = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colDNI = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colMail = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colHabilitado = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.txtDni = new System.Windows.Forms.TextBox();
             this.txtMailCliente = new System.Windows.Forms.TextBox();
             this.txtApellido = new System.Windows.Forms.TextBox();
@@ -63,6 +56,19 @@
             this.btnLogicoEmpresa = new System.Windows.Forms.Button();
             this.btnCambiarPassEmpresa = new System.Windows.Forms.Button();
             this.dgvEmpresas = new System.Windows.Forms.DataGridView();
+            this.txtMailEmpresa = new System.Windows.Forms.TextBox();
+            this.txtCUIT = new System.Windows.Forms.TextBox();
+            this.txtRazonSocial = new System.Windows.Forms.TextBox();
+            this.materialLabel1 = new MaterialSkin.Controls.MaterialLabel();
+            this.btnCrearUsuario = new System.Windows.Forms.Button();
+            this.btnVolver = new System.Windows.Forms.Button();
+            this.colId = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colUsuario = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colNombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colApellido = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colDNI = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colMail = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colHabilitado = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colIdEmpresa = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colUsuarioEmpresa = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colRazonSocial = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -70,12 +76,6 @@
             this.colMailEmpresa = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colNombreContacto = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colHabilitadoEmpresa = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.txtMailEmpresa = new System.Windows.Forms.TextBox();
-            this.txtCUIT = new System.Windows.Forms.TextBox();
-            this.txtRazonSocial = new System.Windows.Forms.TextBox();
-            this.materialLabel1 = new MaterialSkin.Controls.MaterialLabel();
-            this.btnCrearUsuario = new System.Windows.Forms.Button();
-            this.btnVolver = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvClientes)).BeginInit();
@@ -118,6 +118,7 @@
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Clientes";
             this.tabPage1.UseVisualStyleBackColor = true;
+            this.tabPage1.Click += new System.EventHandler(this.tabPage1_Click);
             // 
             // btnLimpiarCliente
             // 
@@ -234,6 +235,7 @@
             // 
             this.dgvClientes.AllowUserToAddRows = false;
             this.dgvClientes.AllowUserToDeleteRows = false;
+            this.dgvClientes.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvClientes.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvClientes.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.colId,
@@ -247,52 +249,10 @@
             this.dgvClientes.MultiSelect = false;
             this.dgvClientes.Name = "dgvClientes";
             this.dgvClientes.ReadOnly = true;
+            this.dgvClientes.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvClientes.Size = new System.Drawing.Size(673, 150);
             this.dgvClientes.TabIndex = 103;
             this.dgvClientes.SelectionChanged += new System.EventHandler(this.dgvClientes_SelectionChanged);
-            // 
-            // colId
-            // 
-            this.colId.HeaderText = "Id";
-            this.colId.Name = "colId";
-            this.colId.ReadOnly = true;
-            this.colId.Visible = false;
-            // 
-            // colUsuario
-            // 
-            this.colUsuario.HeaderText = "Usuario";
-            this.colUsuario.Name = "colUsuario";
-            this.colUsuario.ReadOnly = true;
-            // 
-            // colNombre
-            // 
-            this.colNombre.HeaderText = "Nombre";
-            this.colNombre.Name = "colNombre";
-            this.colNombre.ReadOnly = true;
-            // 
-            // colApellido
-            // 
-            this.colApellido.HeaderText = "Apellido";
-            this.colApellido.Name = "colApellido";
-            this.colApellido.ReadOnly = true;
-            // 
-            // colDNI
-            // 
-            this.colDNI.HeaderText = "Documento";
-            this.colDNI.Name = "colDNI";
-            this.colDNI.ReadOnly = true;
-            // 
-            // colMail
-            // 
-            this.colMail.HeaderText = "Mail";
-            this.colMail.Name = "colMail";
-            this.colMail.ReadOnly = true;
-            // 
-            // colHabilitado
-            // 
-            this.colHabilitado.HeaderText = "Habilitado";
-            this.colHabilitado.Name = "colHabilitado";
-            this.colHabilitado.ReadOnly = true;
             // 
             // txtDni
             // 
@@ -451,6 +411,7 @@
             // 
             this.dgvEmpresas.AllowUserToAddRows = false;
             this.dgvEmpresas.AllowUserToDeleteRows = false;
+            this.dgvEmpresas.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvEmpresas.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvEmpresas.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.colIdEmpresa,
@@ -464,53 +425,11 @@
             this.dgvEmpresas.MultiSelect = false;
             this.dgvEmpresas.Name = "dgvEmpresas";
             this.dgvEmpresas.ReadOnly = true;
+            this.dgvEmpresas.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvEmpresas.ShowEditingIcon = false;
             this.dgvEmpresas.Size = new System.Drawing.Size(673, 150);
             this.dgvEmpresas.TabIndex = 99;
             this.dgvEmpresas.SelectionChanged += new System.EventHandler(this.dgvEmpresas_SelectionChanged);
-            // 
-            // colIdEmpresa
-            // 
-            this.colIdEmpresa.HeaderText = "Id";
-            this.colIdEmpresa.Name = "colIdEmpresa";
-            this.colIdEmpresa.ReadOnly = true;
-            this.colIdEmpresa.Visible = false;
-            // 
-            // colUsuarioEmpresa
-            // 
-            this.colUsuarioEmpresa.HeaderText = "Usuario";
-            this.colUsuarioEmpresa.Name = "colUsuarioEmpresa";
-            this.colUsuarioEmpresa.ReadOnly = true;
-            // 
-            // colRazonSocial
-            // 
-            this.colRazonSocial.HeaderText = "Razón social";
-            this.colRazonSocial.Name = "colRazonSocial";
-            this.colRazonSocial.ReadOnly = true;
-            // 
-            // colCUIT
-            // 
-            this.colCUIT.HeaderText = "CUIT";
-            this.colCUIT.Name = "colCUIT";
-            this.colCUIT.ReadOnly = true;
-            // 
-            // colMailEmpresa
-            // 
-            this.colMailEmpresa.HeaderText = "Mail";
-            this.colMailEmpresa.Name = "colMailEmpresa";
-            this.colMailEmpresa.ReadOnly = true;
-            // 
-            // colNombreContacto
-            // 
-            this.colNombreContacto.HeaderText = "Nombre de contacto";
-            this.colNombreContacto.Name = "colNombreContacto";
-            this.colNombreContacto.ReadOnly = true;
-            // 
-            // colHabilitadoEmpresa
-            // 
-            this.colHabilitadoEmpresa.HeaderText = "Habilitado";
-            this.colHabilitadoEmpresa.Name = "colHabilitadoEmpresa";
-            this.colHabilitadoEmpresa.ReadOnly = true;
             // 
             // txtMailEmpresa
             // 
@@ -565,6 +484,92 @@
             this.btnVolver.Text = "Volver";
             this.btnVolver.UseVisualStyleBackColor = true;
             this.btnVolver.Click += new System.EventHandler(this.btnVolver_Click);
+            // 
+            // colId
+            // 
+            this.colId.HeaderText = "Id";
+            this.colId.Name = "colId";
+            this.colId.ReadOnly = true;
+            this.colId.Visible = false;
+            // 
+            // colUsuario
+            // 
+            this.colUsuario.HeaderText = "Usuario";
+            this.colUsuario.Name = "colUsuario";
+            this.colUsuario.ReadOnly = true;
+            // 
+            // colNombre
+            // 
+            this.colNombre.HeaderText = "Nombre";
+            this.colNombre.Name = "colNombre";
+            this.colNombre.ReadOnly = true;
+            // 
+            // colApellido
+            // 
+            this.colApellido.HeaderText = "Apellido";
+            this.colApellido.Name = "colApellido";
+            this.colApellido.ReadOnly = true;
+            // 
+            // colDNI
+            // 
+            this.colDNI.HeaderText = "Documento";
+            this.colDNI.Name = "colDNI";
+            this.colDNI.ReadOnly = true;
+            // 
+            // colMail
+            // 
+            this.colMail.HeaderText = "Mail";
+            this.colMail.Name = "colMail";
+            this.colMail.ReadOnly = true;
+            // 
+            // colHabilitado
+            // 
+            this.colHabilitado.HeaderText = "Deleted";
+            this.colHabilitado.Name = "colHabilitado";
+            this.colHabilitado.ReadOnly = true;
+            // 
+            // colIdEmpresa
+            // 
+            this.colIdEmpresa.HeaderText = "Id";
+            this.colIdEmpresa.Name = "colIdEmpresa";
+            this.colIdEmpresa.ReadOnly = true;
+            this.colIdEmpresa.Visible = false;
+            // 
+            // colUsuarioEmpresa
+            // 
+            this.colUsuarioEmpresa.HeaderText = "Usuario";
+            this.colUsuarioEmpresa.Name = "colUsuarioEmpresa";
+            this.colUsuarioEmpresa.ReadOnly = true;
+            // 
+            // colRazonSocial
+            // 
+            this.colRazonSocial.HeaderText = "Razón social";
+            this.colRazonSocial.Name = "colRazonSocial";
+            this.colRazonSocial.ReadOnly = true;
+            // 
+            // colCUIT
+            // 
+            this.colCUIT.HeaderText = "CUIT";
+            this.colCUIT.Name = "colCUIT";
+            this.colCUIT.ReadOnly = true;
+            // 
+            // colMailEmpresa
+            // 
+            this.colMailEmpresa.HeaderText = "Mail";
+            this.colMailEmpresa.Name = "colMailEmpresa";
+            this.colMailEmpresa.ReadOnly = true;
+            // 
+            // colNombreContacto
+            // 
+            this.colNombreContacto.HeaderText = "Nombre de contacto";
+            this.colNombreContacto.Name = "colNombreContacto";
+            this.colNombreContacto.ReadOnly = true;
+            // 
+            // colHabilitadoEmpresa
+            // 
+            this.colHabilitadoEmpresa.HeaderText = "Deleted";
+            this.colHabilitadoEmpresa.Name = "colHabilitadoEmpresa";
+            this.colHabilitadoEmpresa.ReadOnly = true;
             // 
             // Usuario
             // 
@@ -622,14 +627,10 @@
         private MaterialSkin.Controls.MaterialLabel materialLabel9;
         private MaterialSkin.Controls.MaterialLabel materialLabel8;
         private MaterialSkin.Controls.MaterialLabel materialLabel7;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colIdEmpresa;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colUsuarioEmpresa;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colRazonSocial;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colCUIT;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colMailEmpresa;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colNombreContacto;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colHabilitadoEmpresa;
         private System.Windows.Forms.ComboBox cmbTipoDocumento;
+        private System.Windows.Forms.Button btnLimpiarCliente;
+        private System.Windows.Forms.Button btnLimpiarEmpresa;
+        private System.Windows.Forms.Button btnVolver;
         private System.Windows.Forms.DataGridViewTextBoxColumn colId;
         private System.Windows.Forms.DataGridViewTextBoxColumn colUsuario;
         private System.Windows.Forms.DataGridViewTextBoxColumn colNombre;
@@ -637,8 +638,12 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colDNI;
         private System.Windows.Forms.DataGridViewTextBoxColumn colMail;
         private System.Windows.Forms.DataGridViewTextBoxColumn colHabilitado;
-        private System.Windows.Forms.Button btnLimpiarCliente;
-        private System.Windows.Forms.Button btnLimpiarEmpresa;
-        private System.Windows.Forms.Button btnVolver;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colIdEmpresa;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colUsuarioEmpresa;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colRazonSocial;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colCUIT;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colMailEmpresa;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colNombreContacto;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colHabilitadoEmpresa;
     }
 }

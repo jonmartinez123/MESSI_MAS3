@@ -47,6 +47,7 @@
             this.darseDeBajaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.cerrarSesiontoolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.salirtoolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.modificarPasswordToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuHome.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -150,7 +151,7 @@
             // calificarAlVendedorToolStripMenuItem
             // 
             this.calificarAlVendedorToolStripMenuItem.Name = "calificarAlVendedorToolStripMenuItem";
-            this.calificarAlVendedorToolStripMenuItem.Size = new System.Drawing.Size(128, 20);
+            this.calificarAlVendedorToolStripMenuItem.Size = new System.Drawing.Size(127, 20);
             this.calificarAlVendedorToolStripMenuItem.Text = "Calificar al Vendedor";
             this.calificarAlVendedorToolStripMenuItem.Click += new System.EventHandler(this.calificarAlVendedorToolStripMenuItem_Click);
             // 
@@ -172,6 +173,7 @@
             // 
             this.cuentaToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.modificarToolStripMenuItem,
+            this.modificarPasswordToolStripMenuItem,
             this.darseDeBajaToolStripMenuItem});
             this.cuentaToolStripMenuItem.Name = "cuentaToolStripMenuItem";
             this.cuentaToolStripMenuItem.Size = new System.Drawing.Size(57, 20);
@@ -180,14 +182,14 @@
             // modificarToolStripMenuItem
             // 
             this.modificarToolStripMenuItem.Name = "modificarToolStripMenuItem";
-            this.modificarToolStripMenuItem.Size = new System.Drawing.Size(144, 22);
-            this.modificarToolStripMenuItem.Text = "Modificar";
+            this.modificarToolStripMenuItem.Size = new System.Drawing.Size(178, 22);
+            this.modificarToolStripMenuItem.Text = "Modificar Datos";
             this.modificarToolStripMenuItem.Click += new System.EventHandler(this.modificarToolStripMenuItem_Click);
             // 
             // darseDeBajaToolStripMenuItem
             // 
             this.darseDeBajaToolStripMenuItem.Name = "darseDeBajaToolStripMenuItem";
-            this.darseDeBajaToolStripMenuItem.Size = new System.Drawing.Size(144, 22);
+            this.darseDeBajaToolStripMenuItem.Size = new System.Drawing.Size(178, 22);
             this.darseDeBajaToolStripMenuItem.Text = "Darse de Baja";
             this.darseDeBajaToolStripMenuItem.Click += new System.EventHandler(this.darseDeBajaToolStripMenuItem_Click);
             // 
@@ -204,6 +206,13 @@
             this.salirtoolStripMenuItem.Size = new System.Drawing.Size(41, 20);
             this.salirtoolStripMenuItem.Text = "Salir";
             this.salirtoolStripMenuItem.Click += new System.EventHandler(this.salirtoolStripMenuItem_Click);
+            // 
+            // modificarPasswordToolStripMenuItem
+            // 
+            this.modificarPasswordToolStripMenuItem.Name = "modificarPasswordToolStripMenuItem";
+            this.modificarPasswordToolStripMenuItem.Size = new System.Drawing.Size(178, 22);
+            this.modificarPasswordToolStripMenuItem.Text = "Modificar Password";
+            this.modificarPasswordToolStripMenuItem.Click += new System.EventHandler(this.modificarPasswordToolStripMenuItem_Click);
             // 
             // MenuUsuario
             // 
@@ -247,5 +256,6 @@
         private System.Windows.Forms.ToolStripMenuItem listadoToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem generarPublicacionToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem salirtoolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem modificarPasswordToolStripMenuItem;
     }
 }

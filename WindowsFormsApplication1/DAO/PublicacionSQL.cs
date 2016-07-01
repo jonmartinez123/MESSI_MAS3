@@ -33,7 +33,7 @@ namespace MercadoEnvio.DAO
 
         internal static void crearOferta(Modelo.Oferta oferta)
         {
-            SqlConnector.executeProcedure("crearOferta", oferta.Valor, oferta.Usuario.Id, oferta.Publicacion.Id);        
+            SqlConnector.executeProcedure("crearOferta", oferta.Valor, oferta.Usuario.Id, oferta.Publicacion.Id,Config.ConfiguracionVariable.FechaSistema);        
         }
 
         public static List<Rubro> getRubrosPorPublicacion(int idPublicacion)
@@ -79,7 +79,7 @@ namespace MercadoEnvio.DAO
 
         internal static int crearComprar(int idPublicacion, int idCliente, int cantidad)
         {
-            return SqlConnector.executeProcedure("crearCompra", idPublicacion, idCliente, cantidad);  
+            return SqlConnector.executeProcedure("crearCompra", idPublicacion, idCliente, cantidad, Config.ConfiguracionVariable.FechaSistema);  
         }
 
 
@@ -130,6 +130,11 @@ namespace MercadoEnvio.DAO
         internal static void obtenerPublicacionesActivas(SuperGrid superGrid1)
         {
             DAO.SqlConnector.retrieveDT("obtenerPublicacionesActivas",superGrid1, Persistencia.usuario.Id);
+        }
+
+        internal static void filtrarPublicacionesPorDescripcion(SuperGrid superGrid1, string descripcion)
+        {
+            SqlConnector.retrieveDT("filtrarPublicacionPorDescripcion", superGrid1, descripcion, Persistencia.usuario.Id);
         }
     }
 }

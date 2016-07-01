@@ -186,7 +186,6 @@ namespace MercadoEnvio.Publicar
 
         private void txtDescripcion_KeyPress(object sender, KeyPressEventArgs e)
         {
-            this.allowAlphanumericOnly(e);
             this.allowMaxLenght(txtDescripcion, 255, e);
         }
 

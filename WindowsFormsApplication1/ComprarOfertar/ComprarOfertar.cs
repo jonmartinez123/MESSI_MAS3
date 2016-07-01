@@ -44,14 +44,22 @@ namespace MercadoEnvio.ComprarOfertar
             foreach (Rubro r in rubrosFiltrados){
                 idRubros.Rows.Add(r.Id);
             }
-            DAO.PublicacionSQL.filtrarPublicacionesPorRubro(superGrid1,idRubros, txtDescripcion.Text.ToString());
+            if (cbRubro.Checked)
+            {
+                DAO.PublicacionSQL.filtrarPublicacionesPorRubro(superGrid1, idRubros, txtDescripcion.Text.ToString());
+            }
+            else
+            {
+                DAO.PublicacionSQL.filtrarPublicacionesPorDescripcion(superGrid1, txtDescripcion.Text.ToString());
+            }
+            superGrid1.Sort(this.superGrid1.Columns["colVisibilidadId"], ListSortDirection.Ascending);
         }
 
         private void obtenerTodasPublicaciones()
         {
             DAO.PublicacionSQL.obtenerPublicacionesActivas(superGrid1);
         }
-
+        /*
         private void volcarDatosASuperGrid(DataTable dtAAcumular)
         {
             if (dtAAcumular.Rows.Count > 0)
@@ -63,7 +71,7 @@ namespace MercadoEnvio.ComprarOfertar
                 superGrid1.Sort(this.superGrid1.Columns["colVisibilidadId"], ListSortDirection.Ascending);
             }
         }
-
+        */
         private void btnLimpiar_Click(object sender, EventArgs e)
         {
             txtDescripcion.Text = "";
@@ -143,15 +151,28 @@ namespace MercadoEnvio.ComprarOfertar
         public void refresh() {
             if (estaFiltrando == 1){
                 filtrar();
+
             }
             else {
                 DAO.PublicacionSQL.obtenerPublicacionesActivas(superGrid1);
+                superGrid1.Sort(this.superGrid1.Columns["colVisibilidadId"], ListSortDirection.Ascending);
             }
         }
 
         private void ComprarOfertar_Load(object sender, EventArgs e)
         {
 
+        }
+
+        private void cbRubro_CheckedChanged(object sender, EventArgs e)
+        {
+            if (cbRubro.Checked)
+            {
+                btnSeleccionarRubros.Visible = true;
+            }
+            else {
+                btnSeleccionarRubros.Visible = false;
+            }
         }
 
     }

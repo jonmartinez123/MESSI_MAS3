@@ -45,7 +45,10 @@ GO
 CREATE PROCEDURE [MESSI_MAS3].insertarPublicacion (@idEstado int, @idVisibilidad int,@idUsuario int,@idTipoPublicacion int, @descripcion nvarchar(255),@fechaInicio dateTime, @fechaFin dateTime,@minimoSubasta numeric(10,2),@precio numeric(18,2),@stock numeric(18,0),@seCobraEnvio int, @Rubros Rubros READONLY)
 AS
 BEGIN
-INSERT INTO Publicacion(publicacion_idEstado,publicacion_idVisibilidad,publicacion_idUsuario,publicacion_fechaInicio,publicacion_fechaFin,publicacion_descripcion,publicacion_tipoPublicacionId,publicacion_minimoSubasta,publicacion_precio,publicacion_stock,publicacion_seCobraEnvio) VALUES(@idEstado,@idVisibilidad,@idUsuario,@fechaInicio,@fechaFin,@descripcion,@idTipoPublicacion,@minimoSubasta,@precio,@stock,@seCobraEnvio)
+DECLARE @ultimoCodigo int 
+SELECT top 1 @ultimoCodigo=publicacion_codigo from MESSI_MAS3.Publicacion order by publicacion_codigo DESC
+INSERT INTO Publicacion(publicacion_codigo,publicacion_idEstado,publicacion_idVisibilidad,publicacion_idUsuario,publicacion_fechaInicio,publicacion_fechaFin,publicacion_descripcion,publicacion_tipoPublicacionId,publicacion_minimoSubasta,publicacion_precio,publicacion_stock,publicacion_seCobraEnvio) 
+VALUES(@ultimoCodigo,@idEstado,@idVisibilidad,@idUsuario,@fechaInicio,@fechaFin,@descripcion,@idTipoPublicacion,@minimoSubasta,@precio,@stock,@seCobraEnvio)
 INSERT INTO Rubro_x_Publicacion(idRubro,idPublicacion) (select idRubro,SCOPE_IDENTITY() from @Rubros)
 END
 GO

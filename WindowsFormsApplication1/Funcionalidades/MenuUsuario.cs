@@ -212,7 +212,14 @@ namespace MercadoEnvio.Funcionalidades
 
         private void darseDeBajaToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            DAO.UsuarioSQL.darDeBajaUsuario(Persistencia.usuario.Id);
+            try
+            {
+                DAO.UsuarioSQL.darDeBajaUsuario(Persistencia.usuario.Id);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Atención", MessageBoxButtons.OK);
+            }
             MessageBox.Show("Te has dado de baja, a continuacion se deslogueara");
             cerrarSesion();
         }
@@ -234,6 +241,12 @@ namespace MercadoEnvio.Funcionalidades
                 CrearEmpresa cCliente = new CrearEmpresa(unaEmpresa);
                 cCliente.ShowDialog();
             }
+        }
+
+        private void modificarPasswordToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+                CrearUsuario cCliente = new CrearUsuario(Persistencia.usuario);
+                cCliente.ShowDialog();
         }
     }
 }

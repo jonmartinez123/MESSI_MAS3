@@ -176,6 +176,7 @@
             this.Controls.Add(this.materialLabel2);
             this.Cursor = System.Windows.Forms.Cursors.Default;
             this.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.MaximizeBox = false;
             this.Name = "CrearUsuario";
             this.Text = "Crear Usuario";
             this.Load += new System.EventHandler(this.crearUsuario_Load);

@@ -79,7 +79,7 @@ namespace MercadoEnvio.ABM_Usuario
 
                 if (string.IsNullOrEmpty(txtNombre.Text) && string.IsNullOrEmpty(txtApellido.Text) && string.IsNullOrEmpty(txtDocumento.Text)
                     && string.IsNullOrEmpty(txtMail.Text) && string.IsNullOrEmpty(txtTel.Text) && string.IsNullOrEmpty(txtCalle.Text) &&
-                    string.IsNullOrEmpty(txtPiso.Text) && string.IsNullOrEmpty(txtDepto.Text) && string.IsNullOrEmpty(cmbLocalidad.Text) &&
+                    string.IsNullOrEmpty(cmbLocalidad.Text) &&
                     string.IsNullOrEmpty(txtCodigoPostal.Text))
                     throw new Exception("No puede haber campos vacíos");
 
@@ -98,7 +98,7 @@ namespace MercadoEnvio.ABM_Usuario
                 if (esInvalidoMail(txtMail.Text))
                     throw new Exception("El mail ingresado no es válido");
 
-                if (DAO.UsuarioSQL.existeMailCliente(txtMail.Text, clienteGlobal.Id)){
+                if (DAO.UsuarioSQL.existeMail(txtMail.Text, clienteGlobal.Id)){
                     throw new Exception("Ya existe un usuario con ese mail");
                 }
 
@@ -106,20 +106,11 @@ namespace MercadoEnvio.ABM_Usuario
                      throw new Exception("Ya existe un usuario con ese documento");
                 }
 
-
-
-
                 if (string.IsNullOrEmpty(txtTel.Text))
                     throw new Exception("Debe completar el número de telefono");
 
                 if (string.IsNullOrEmpty(txtCalle.Text))
                     throw new Exception("Debe completar el nombre de la calle");
-
-                if (string.IsNullOrEmpty(txtPiso.Text))
-                    throw new Exception("Debe completar el piso");
-
-                if (string.IsNullOrEmpty(txtDepto.Text))
-                    throw new Exception("Debe completar el número de departamento");
 
                 if (string.IsNullOrEmpty(cmbLocalidad.Text))
                     throw new Exception("Debe seleccionar una localidad");
@@ -178,8 +169,11 @@ namespace MercadoEnvio.ABM_Usuario
             unCliente.Domicilio.Altura = altura;
 
             int piso;
-            if (!Int32.TryParse(txtPiso.Text, out piso)) throw new Exception("El piso solo debe contener caracteres numericos");
-            unCliente.Domicilio.Piso = piso;
+            if (!string.IsNullOrEmpty(txtPiso.Text))
+            {
+                if (!Int32.TryParse(txtPiso.Text, out piso)) throw new Exception("El piso solo debe contener caracteres numericos");
+                unCliente.Domicilio.Piso = piso;
+            }
 
             unCliente.Domicilio.Departamento = txtDepto.Text;
 

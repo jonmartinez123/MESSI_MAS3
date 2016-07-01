@@ -30,7 +30,6 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ComprarOfertar));
-            this.materialLabel6 = new MaterialSkin.Controls.MaterialLabel();
             this.materialLabel2 = new MaterialSkin.Controls.MaterialLabel();
             this.materialLabel3 = new MaterialSkin.Controls.MaterialLabel();
             this.txtDescripcion = new MaterialSkin.Controls.MaterialSingleLineTextField();
@@ -49,6 +48,8 @@
             this.bindingNavigatorMoveLastItem = new System.Windows.Forms.ToolStripButton();
             this.bindingNavigatorSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.btnVolver = new MaterialSkin.Controls.MaterialRaisedButton();
+            this.cbRubro = new System.Windows.Forms.CheckBox();
+            this.materialLabel6 = new MaterialSkin.Controls.MaterialLabel();
             this.superGrid1 = new MercadoEnvio.Modelo.SuperGrid();
             this.colPublicacionId = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colCodigo = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -63,19 +64,6 @@
             this.bindingNavigator1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.superGrid1)).BeginInit();
             this.SuspendLayout();
-            // 
-            // materialLabel6
-            // 
-            this.materialLabel6.AutoSize = true;
-            this.materialLabel6.Depth = 0;
-            this.materialLabel6.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
-            this.materialLabel6.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.materialLabel6.Location = new System.Drawing.Point(450, 96);
-            this.materialLabel6.MouseState = MaterialSkin.MouseState.HOVER;
-            this.materialLabel6.Name = "materialLabel6";
-            this.materialLabel6.Size = new System.Drawing.Size(57, 18);
-            this.materialLabel6.TabIndex = 115;
-            this.materialLabel6.Text = "Rubros";
             // 
             // materialLabel2
             // 
@@ -123,7 +111,7 @@
             // btnSeleccionarRubros
             // 
             this.btnSeleccionarRubros.Depth = 0;
-            this.btnSeleccionarRubros.Location = new System.Drawing.Point(512, 96);
+            this.btnSeleccionarRubros.Location = new System.Drawing.Point(535, 95);
             this.btnSeleccionarRubros.MouseState = MaterialSkin.MouseState.HOVER;
             this.btnSeleccionarRubros.Name = "btnSeleccionarRubros";
             this.btnSeleccionarRubros.Primary = true;
@@ -131,6 +119,7 @@
             this.btnSeleccionarRubros.TabIndex = 118;
             this.btnSeleccionarRubros.Text = "Seleccionar";
             this.btnSeleccionarRubros.UseVisualStyleBackColor = true;
+            this.btnSeleccionarRubros.Visible = false;
             this.btnSeleccionarRubros.Click += new System.EventHandler(this.btnSeleccionarRubros_Click);
             // 
             // btnFiltrar
@@ -279,6 +268,29 @@
             this.btnVolver.UseVisualStyleBackColor = true;
             this.btnVolver.Click += new System.EventHandler(this.btnVolver_Click);
             // 
+            // cbRubro
+            // 
+            this.cbRubro.AutoSize = true;
+            this.cbRubro.Location = new System.Drawing.Point(512, 99);
+            this.cbRubro.Name = "cbRubro";
+            this.cbRubro.Size = new System.Drawing.Size(15, 14);
+            this.cbRubro.TabIndex = 126;
+            this.cbRubro.UseVisualStyleBackColor = true;
+            this.cbRubro.CheckedChanged += new System.EventHandler(this.cbRubro_CheckedChanged);
+            // 
+            // materialLabel6
+            // 
+            this.materialLabel6.AutoSize = true;
+            this.materialLabel6.Depth = 0;
+            this.materialLabel6.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
+            this.materialLabel6.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.materialLabel6.Location = new System.Drawing.Point(450, 96);
+            this.materialLabel6.MouseState = MaterialSkin.MouseState.HOVER;
+            this.materialLabel6.Name = "materialLabel6";
+            this.materialLabel6.Size = new System.Drawing.Size(57, 18);
+            this.materialLabel6.TabIndex = 115;
+            this.materialLabel6.Text = "Rubros";
+            // 
             // superGrid1
             // 
             this.superGrid1.AllowUserToAddRows = false;
@@ -365,6 +377,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(960, 436);
+            this.Controls.Add(this.cbRubro);
             this.Controls.Add(this.btnVolver);
             this.Controls.Add(this.superGrid1);
             this.Controls.Add(this.bindingNavigator1);
@@ -392,7 +405,6 @@
 
         #endregion
 
-        private MaterialSkin.Controls.MaterialLabel materialLabel6;
         private MaterialSkin.Controls.MaterialLabel materialLabel2;
         private MaterialSkin.Controls.MaterialLabel materialLabel3;
         private MaterialSkin.Controls.MaterialSingleLineTextField txtDescripcion;
@@ -421,5 +433,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colStock;
         private System.Windows.Forms.DataGridViewTextBoxColumn colVisibilidadId;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column7;
+        private System.Windows.Forms.CheckBox cbRubro;
+        private MaterialSkin.Controls.MaterialLabel materialLabel6;
     }
 }

@@ -29,7 +29,7 @@ namespace MercadoEnvio.ABM_Usuario
             cmbTipoDocumento.DataSource = DAO.TipoDocumentoSQL.getTipoDocumentos();
             cmbTipoDocumento.DisplayMember = "Descripcion";
             cmbTipoDocumento.ValueMember = "Id";
-
+            
             filtrarClientes();
             filtrarEmpresas();
         }
@@ -38,6 +38,8 @@ namespace MercadoEnvio.ABM_Usuario
         {
             CrearUsuario cUsuario = new CrearUsuario();
             cUsuario.ShowDialog();
+            filtrarClientes();
+            filtrarEmpresas();
         }
 
         private void btnFiltrarCliente_Click(object sender, EventArgs e)
@@ -86,9 +88,9 @@ namespace MercadoEnvio.ABM_Usuario
         {
             if (dgvClientes.SelectedRows.Count == 1){
                 DataGridViewRow row = this.dgvClientes.SelectedRows[0];
-                int hab = Convert.ToInt16(row.Cells["colHabilitado"].Value);
-                int id = Convert.ToInt16(row.Cells["colId"].Value);
-                if (hab == 1){
+                int hab = Convert.ToInt32(row.Cells["colHabilitado"].Value);
+                int id = Convert.ToInt32(row.Cells["colId"].Value);
+                if (hab == 0){
                     DAO.UsuarioSQL.darDeBajaUsuario(id);
                 }
                 else{
@@ -107,7 +109,8 @@ namespace MercadoEnvio.ABM_Usuario
                 unCliente.Id = Convert.ToInt16(row.Cells["colId"].Value);
 
                 CrearCliente cCliente = new CrearCliente(unCliente);
-                cCliente.ShowDialog();
+                cCliente.ShowDialog(); 
+                filtrarClientes();
             }
         }
 
@@ -208,6 +211,7 @@ namespace MercadoEnvio.ABM_Usuario
 
                 CrearEmpresa cCliente = new CrearEmpresa(unaEmpresa);
                 cCliente.ShowDialog();
+                filtrarEmpresas();
             }
         }
 
@@ -231,6 +235,11 @@ namespace MercadoEnvio.ABM_Usuario
             Funcionalidades.MenuUsuario f = new Funcionalidades.MenuUsuario();
             f.Show();
             this.Close();
+        }
+
+        private void tabPage1_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

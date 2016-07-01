@@ -7,19 +7,19 @@ BEGIN
 END
 GO
 
-CREATE PROCEDURE MESSI_MAS3.crearOferta(@valor NUMERIC(18,2), @idUsuario INT, @idPublicacion INT)
+CREATE PROCEDURE MESSI_MAS3.crearOferta(@valor NUMERIC(18,2), @idUsuario INT, @idPublicacion INT,@FechaDeSistema dateTime)
 AS
 BEGIN
 	INSERT INTO MESSI_MAS3.Oferta(oferta_valor, oferta_persona_id, oferta_idPublicacion, oferta_fecha)
-	VALUES(@valor, @idUsuario, @idPublicacion, GETDATE())
+	VALUES(@valor, @idUsuario, @idPublicacion, @FechaDeSistema)
 END
 GO
 
-CREATE PROCEDURE MESSI_MAS3.crearCompra(@idPublicacion INT, @idUsuario INT, @cantidad INT)
+CREATE PROCEDURE MESSI_MAS3.crearCompra(@idPublicacion INT, @idUsuario INT, @cantidad INT,@FechaDeSistema dateTime)
 AS
 BEGIN
 	INSERT INTO MESSI_MAS3.Compra(compras_publicacion_id, compras_fecha, compras_personaComprador_id, compras_cantidad)
-	VALUES(@idPublicacion, GETDATE(), @idUsuario, @cantidad)
+	VALUES(@idPublicacion, @FechaDeSistema, @idUsuario, @cantidad)
 
 	DECLARE @stock INT
 	SELECT @stock = (publicacion_stock - @cantidad) FROM MESSI_MAS3.Publicacion WHERE publicacion_id = @idPublicacion
@@ -79,8 +79,19 @@ BEGIN
 		AND publicacion_idUsuario <> @idUsuario)
 END
 GO
-
-CREATE PROCEDURE MESSI_MAS3.filtrarPublicacionPorRubro(@Rubros Rubro READONLY, @descripcion NVARCHAR(255), @idUsuario INT)
+CREATE PROCEDURE MESSI_MAS3.filtrarPublicacionPorDescripcion(@descripcion NVARCHAR(255), @idUsuario INT)
+AS
+BEGIN
+	SELECT DISTINCT publicacion_id, publicacion_codigo, tipoPublicacion_nombre, publicacion_descripcion, publicacion_precio, publicacion_minimoSubasta, publicacion_stock, visibilidad_id, visibilidad_descripcion
+	FROM MESSI_MAS3.Publicacion, MESSI_MAS3.Visibilidad, MESSI_MAS3.tipoPublicacion
+	WHERE (publicacion_idEstado = 2
+		AND publicacion_tipoPublicacionId = tipoPublicacion_id 
+		AND publicacion_idVisibilidad = visibilidad_id
+		AND publicacion_descripcion LIKE CONCAT('%', @descripcion, '%')
+		AND publicacion_idUsuario <> @idUsuario)
+END
+GO
+CREATE PROCEDURE MESSI_MAS3.filtrarPublicacionPorRubro(@Rubros Rubros READONLY, @descripcion NVARCHAR(255), @idUsuario INT)
 AS
 BEGIN
 	SELECT DISTINCT publicacion_id, publicacion_codigo, tipoPublicacion_nombre, publicacion_descripcion, publicacion_precio, publicacion_minimoSubasta, publicacion_stock, visibilidad_id, visibilidad_descripcion

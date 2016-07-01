@@ -7,10 +7,10 @@ BEGIN
 END
 GO
 
-CREATE PROCEDURE MESSI_MAS3.existe_mailCliente(@mail nvarchar(255), @idUsuario INT)
+CREATE PROCEDURE MESSI_MAS3.existe_mail(@mail nvarchar(255), @idUsuario INT)
 AS
 BEGIN
-	IF(EXISTS(SELECT * FROM MESSI_MAS3.Cliente WHERE cliente_mail = @mail AND cliente_id <> @idUsuario)) 
+	IF(EXISTS(SELECT * FROM MESSI_MAS3.Cliente,Empresa WHERE (cliente_mail = @mail AND cliente_id <> @idUsuario) or (empresa_id <> @idUsuario and empresa_mail = @mail )))
 	
 	BEGIN RETURN 1 END RETURN -1
 END
@@ -21,17 +21,6 @@ CREATE PROCEDURE MESSI_MAS3.existe_documentoCliente(@documento nvarchar(255), @i
 AS
 BEGIN
 	IF(EXISTS(SELECT * FROM MESSI_MAS3.Cliente WHERE cliente_DNI = @documento AND cliente_id <> @idUsuario)) 
-	
-	BEGIN RETURN 1 END RETURN -1
-END
-GO
-
---existe_mailEmpresa
-
-CREATE PROCEDURE MESSI_MAS3.existe_mailEmpresa(@mail nvarchar(255), @idUsuario INT)
-AS
-BEGIN
-	IF(EXISTS(SELECT * FROM MESSI_MAS3.Empresa WHERE empresa_mail = @mail AND empresa_id <> @idUsuario)) 
 	
 	BEGIN RETURN 1 END RETURN -1
 END
@@ -61,7 +50,7 @@ CREATE PROCEDURE MESSI_MAS3.baja_usuario(@id INT)
 AS
 BEGIN
 	UPDATE MESSI_MAS3.Usuario
-	SET usuario_deleted = 0
+	SET usuario_deleted = 1
 	WHERE usuario_id = @id
 END
 GO
@@ -70,7 +59,7 @@ CREATE PROCEDURE MESSI_MAS3.alta_usuario(@id INT)
 AS
 BEGIN
 	UPDATE MESSI_MAS3.Usuario
-	SET usuario_deleted = 1
+	SET usuario_deleted = 0
 	WHERE usuario_id = @id
 END
 GO

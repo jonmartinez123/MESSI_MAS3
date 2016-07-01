@@ -419,6 +419,7 @@
             this.Controls.Add(this.txtCUIT);
             this.Controls.Add(this.txtRazonSocial);
             this.Controls.Add(this.materialLabel2);
+            this.MaximizeBox = false;
             this.Name = "CrearEmpresa";
             this.Text = "Crear Empresa";
             this.Load += new System.EventHandler(this.CrearEmpresa_Load);
