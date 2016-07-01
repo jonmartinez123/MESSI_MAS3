@@ -129,7 +129,7 @@
             this.rbOferta.TabIndex = 4;
             this.rbOferta.Text = "Oferta";
             this.rbOferta.UseVisualStyleBackColor = true;
-            this.rbOferta.CheckedChanged += new System.EventHandler(this.rbCompra_CheckedChanged);
+            this.rbOferta.CheckedChanged += new System.EventHandler(this.rbOferta_CheckedChanged);
             // 
             // listadoRubro
             // 

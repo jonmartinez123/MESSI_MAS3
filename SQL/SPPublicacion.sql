@@ -53,6 +53,13 @@ INSERT INTO Rubro_x_Publicacion(idRubro,idPublicacion) (select idRubro,SCOPE_IDE
 END
 GO
 
+CREATE PROCEDURE [MESSI_MAS3].getTipoPublicacion
+AS
+BEGIN
+SELECT * FROM tipoPublicacion
+END
+GO
+
 CREATE PROCEDURE [MESSI_MAS3].activarPublicacion (@idPublicacion int,@fechaActiva dateTime,@idUsuario int,@formaDePago int,@importeTotal numeric(18,2))
 AS
 BEGIN

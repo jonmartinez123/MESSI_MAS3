@@ -16,5 +16,10 @@ namespace MercadoEnvio.Modelo
             this.nombre = nombreTipo;
             this.tieneEnvio = tieneEnvioTipo;
         }
+
+        public TipoPublicacion()
+        {
+            // TODO: Complete member initialization
+        }
     }
 }

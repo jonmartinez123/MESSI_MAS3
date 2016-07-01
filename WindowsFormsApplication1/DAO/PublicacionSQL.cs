@@ -52,31 +52,7 @@ namespace MercadoEnvio.DAO
             }
             return rubros;
         }
-        /*
-        public DataTable RemoveDuplicateRows(DataTable dTable, string colName)
-        {
-            Hashtable hTable = new Hashtable();
-            ArrayList duplicateList = new ArrayList();
-
-            //Add list of all the unique item value to hashtable, which stores combination of key, value pair.
-            //And add duplicate item value in arraylist.
-            foreach (DataRow drow in dTable.Rows)
-            {
-                if (hTable.Contains(drow[colName]))
-                    duplicateList.Add(drow);
-                else
-                    hTable.Add(drow[colName], string.Empty);
-            }
-
-            //Removing a list of duplicate items from datatable.
-            foreach (DataRow dRow in duplicateList)
-                dTable.Rows.Remove(dRow);
-
-            //Datatable which contains unique records will be return as output.
-            return dTable;
-        }
-        */
-
+       
         internal static int crearComprar(int idPublicacion, int idCliente, int cantidad)
         {
             return SqlConnector.executeProcedure("crearCompra", idPublicacion, idCliente, cantidad, Config.ConfiguracionVariable.FechaSistema);  
@@ -135,6 +111,22 @@ namespace MercadoEnvio.DAO
         internal static void filtrarPublicacionesPorDescripcion(SuperGrid superGrid1, string descripcion)
         {
             SqlConnector.retrieveDT("filtrarPublicacionPorDescripcion", superGrid1, descripcion, Persistencia.usuario.Id);
+        }
+
+        internal static List<TipoPublicacion> getTipoPublicacion()
+        {
+            SqlCommand cmd = SqlConnector.generarComandoYAbrir("getTipoPublicacion");
+            var reader = cmd.ExecuteReader();
+            List<TipoPublicacion> tipo = new List<TipoPublicacion>();
+            TipoPublicacion t;
+            while (reader.Read())
+            {
+                t = new TipoPublicacion();
+                t.nombre = reader["tipoPublicacion_nombre"].ToString();
+                t.tieneEnvio = Convert.ToInt32(reader["tipoPublicacion_tieneEnvio"]);
+                tipo.Add(t);
+            }
+            return tipo;
         }
     }
 }

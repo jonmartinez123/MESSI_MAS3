@@ -28,6 +28,7 @@ namespace MercadoEnvio.Publicar
             listadoRubro.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             ListadoVisibilidades.MultiSelect = false;
             ListadoVisibilidades.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            cargarTipoPublicacion();
         }
 
         private void traerPublicacion()
@@ -85,13 +86,32 @@ namespace MercadoEnvio.Publicar
 
         private void rbCompra_CheckedChanged(object sender, EventArgs e)
         {
-            gbSubasta.Visible = false;
+
         }
 
         private void rbSubasta_CheckedChanged(object sender, EventArgs e)
         {
             gbSubasta.Visible = true;
+            if (rbSubasta.Checked)
+            {
+                habilitarEnvio("Subasta");
+            }
         }
+
+        private void habilitarEnvio(string nombre)
+        {
+                foreach (TipoPublicacion tipo in tipoPublicacion)
+                {
+                    if (tipo.nombre == nombre)
+                    {
+                        if (tipo.tieneEnvio == 1)
+                        {
+                            cbEnvio.Visible = true;
+                        }
+                        else { cbEnvio.Visible = false; }
+                    }
+                }
+         }
 
         private void btnGenerar_Click(object sender, EventArgs e)
         {
@@ -237,7 +257,10 @@ namespace MercadoEnvio.Publicar
         {
 
         }
-
+        List<TipoPublicacion> tipoPublicacion = new List<TipoPublicacion>();
+        private void cargarTipoPublicacion() {
+            tipoPublicacion = DAO.PublicacionSQL.getTipoPublicacion();
+        }
 
         public void seleccionarGrilla()
         {
@@ -257,11 +280,16 @@ namespace MercadoEnvio.Publicar
             {
                 traerPublicacion();
                 seleccionarGrilla();
-                //cargo lista de rubros ya elegidos
             }
         }
 
-
-
+        private void rbOferta_CheckedChanged(object sender, EventArgs e)
+        {
+            gbSubasta.Visible = false;
+            if (rbOferta.Checked)
+            {
+                habilitarEnvio("Oferta");
+            }
+        }
     }
 }
