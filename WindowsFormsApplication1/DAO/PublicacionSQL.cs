@@ -77,16 +77,6 @@ namespace MercadoEnvio.DAO
         }
         */
 
-        internal static DataTable filtrarPublicacionesPorRubro(DataTable dtAAcumular, int idRubro, string descripcion)
-        {
-            return DAO.SqlConnector.retrieveDTToBeConvertedParaComprarYOfertar(dtAAcumular, "filtrarPublicacionPorRubro", idRubro, descripcion, Persistencia.usuario.Id); 
-        }
-
-        internal static DataTable obtenerPublicacionesActivas()
-        {
-            return DAO.SqlConnector.retrieveDTToBeConverted("obtenerPublicacionesActivas", Persistencia.usuario.Id);
-        }
-
         internal static int crearComprar(int idPublicacion, int idCliente, int cantidad)
         {
             return SqlConnector.executeProcedure("crearCompra", idPublicacion, idCliente, cantidad);  
@@ -130,6 +120,16 @@ namespace MercadoEnvio.DAO
         internal static void cambiarEstadoDeSubastasVencidas(DateTime fechaDelSistema)
         {
             SqlConnector.executeProcedure("cambiarEstadoDeSubastasVencidas", fechaDelSistema);
+        }
+
+        internal static void filtrarPublicacionesPorRubro(SuperGrid superGrid1, DataTable idRubros, string descripcion)
+        {
+            SqlConnector.retrieveDT("filtrarPublicacionPorRubro", superGrid1, idRubros, descripcion,Persistencia.usuario.Id);
+        }
+
+        internal static void obtenerPublicacionesActivas(SuperGrid superGrid1)
+        {
+            DAO.SqlConnector.retrieveDT("obtenerPublicacionesActivas",superGrid1, Persistencia.usuario.Id);
         }
     }
 }

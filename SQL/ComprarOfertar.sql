@@ -80,7 +80,7 @@ BEGIN
 END
 GO
 
-CREATE PROCEDURE MESSI_MAS3.filtrarPublicacionPorRubro(@idRubro INT, @descripcion NVARCHAR(255), @idUsuario INT)
+CREATE PROCEDURE MESSI_MAS3.filtrarPublicacionPorRubro(@Rubros Rubro READONLY, @descripcion NVARCHAR(255), @idUsuario INT)
 AS
 BEGIN
 	SELECT DISTINCT publicacion_id, publicacion_codigo, tipoPublicacion_nombre, publicacion_descripcion, publicacion_precio, publicacion_minimoSubasta, publicacion_stock, visibilidad_id, visibilidad_descripcion
@@ -88,7 +88,7 @@ BEGIN
 	WHERE (publicacion_idEstado = 2
 		AND publicacion_tipoPublicacionId = tipoPublicacion_id 
 		AND publicacion_idVisibilidad = visibilidad_id
-		AND Rubro_x_Publicacion.idRubro = @idRubro
+		AND Rubro_x_Publicacion.idRubro IN (select idRubro from @Rubros)
 		AND Rubro_x_Publicacion.idPublicacion = publicacion_id
 		AND publicacion_descripcion LIKE CONCAT('%', @descripcion, '%')
 		AND publicacion_idUsuario <> @idUsuario)

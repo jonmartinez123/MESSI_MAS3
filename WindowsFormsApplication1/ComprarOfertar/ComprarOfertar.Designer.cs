@@ -48,8 +48,8 @@
             this.bindingNavigatorMoveNextItem = new System.Windows.Forms.ToolStripButton();
             this.bindingNavigatorMoveLastItem = new System.Windows.Forms.ToolStripButton();
             this.bindingNavigatorSeparator2 = new System.Windows.Forms.ToolStripSeparator();
-            this.superGrid1 = new MercadoEnvio.Modelo.SuperGrid();
             this.btnVolver = new MaterialSkin.Controls.MaterialRaisedButton();
+            this.superGrid1 = new MercadoEnvio.Modelo.SuperGrid();
             this.colPublicacionId = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colCodigo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colTipoPublicaion = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -68,12 +68,12 @@
             // 
             this.materialLabel6.AutoSize = true;
             this.materialLabel6.Depth = 0;
-            this.materialLabel6.Font = new System.Drawing.Font("Roboto", 11F);
+            this.materialLabel6.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
             this.materialLabel6.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.materialLabel6.Location = new System.Drawing.Point(450, 96);
             this.materialLabel6.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialLabel6.Name = "materialLabel6";
-            this.materialLabel6.Size = new System.Drawing.Size(56, 19);
+            this.materialLabel6.Size = new System.Drawing.Size(57, 18);
             this.materialLabel6.TabIndex = 115;
             this.materialLabel6.Text = "Rubros";
             // 
@@ -81,12 +81,12 @@
             // 
             this.materialLabel2.AutoSize = true;
             this.materialLabel2.Depth = 0;
-            this.materialLabel2.Font = new System.Drawing.Font("Roboto", 11F);
+            this.materialLabel2.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
             this.materialLabel2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.materialLabel2.Location = new System.Drawing.Point(28, 96);
             this.materialLabel2.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialLabel2.Name = "materialLabel2";
-            this.materialLabel2.Size = new System.Drawing.Size(89, 19);
+            this.materialLabel2.Size = new System.Drawing.Size(87, 18);
             this.materialLabel2.TabIndex = 114;
             this.materialLabel2.Text = "Descripción";
             // 
@@ -94,12 +94,12 @@
             // 
             this.materialLabel3.AutoSize = true;
             this.materialLabel3.Depth = 0;
-            this.materialLabel3.Font = new System.Drawing.Font("Roboto", 11F);
+            this.materialLabel3.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
             this.materialLabel3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.materialLabel3.Location = new System.Drawing.Point(22, 73);
             this.materialLabel3.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialLabel3.Name = "materialLabel3";
-            this.materialLabel3.Size = new System.Drawing.Size(52, 19);
+            this.materialLabel3.Size = new System.Drawing.Size(49, 18);
             this.materialLabel3.TabIndex = 111;
             this.materialLabel3.Text = "Filtros";
             // 
@@ -195,15 +195,15 @@
             this.bindingNavigator1.MovePreviousItem = this.bindingNavigatorMovePreviousItem;
             this.bindingNavigator1.Name = "bindingNavigator1";
             this.bindingNavigator1.PositionItem = this.bindingNavigatorPositionItem;
-            this.bindingNavigator1.Size = new System.Drawing.Size(209, 25);
+            this.bindingNavigator1.Size = new System.Drawing.Size(211, 25);
             this.bindingNavigator1.TabIndex = 123;
             this.bindingNavigator1.Text = "bindingNavigator1";
             // 
             // bindingNavigatorCountItem
             // 
             this.bindingNavigatorCountItem.Name = "bindingNavigatorCountItem";
-            this.bindingNavigatorCountItem.Size = new System.Drawing.Size(35, 22);
-            this.bindingNavigatorCountItem.Text = "of {0}";
+            this.bindingNavigatorCountItem.Size = new System.Drawing.Size(37, 22);
+            this.bindingNavigatorCountItem.Text = "de {0}";
             this.bindingNavigatorCountItem.ToolTipText = "Número total de elementos";
             // 
             // bindingNavigatorMoveFirstItem
@@ -266,10 +266,24 @@
             this.bindingNavigatorSeparator2.Name = "bindingNavigatorSeparator2";
             this.bindingNavigatorSeparator2.Size = new System.Drawing.Size(6, 25);
             // 
+            // btnVolver
+            // 
+            this.btnVolver.Depth = 0;
+            this.btnVolver.Location = new System.Drawing.Point(821, 401);
+            this.btnVolver.MouseState = MaterialSkin.MouseState.HOVER;
+            this.btnVolver.Name = "btnVolver";
+            this.btnVolver.Primary = true;
+            this.btnVolver.Size = new System.Drawing.Size(105, 23);
+            this.btnVolver.TabIndex = 125;
+            this.btnVolver.Text = "Volver";
+            this.btnVolver.UseVisualStyleBackColor = true;
+            this.btnVolver.Click += new System.EventHandler(this.btnVolver_Click);
+            // 
             // superGrid1
             // 
             this.superGrid1.AllowUserToAddRows = false;
             this.superGrid1.AllowUserToDeleteRows = false;
+            this.superGrid1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.superGrid1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.superGrid1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.colPublicacionId,
@@ -284,22 +298,11 @@
             this.superGrid1.Location = new System.Drawing.Point(26, 154);
             this.superGrid1.Name = "superGrid1";
             this.superGrid1.PageSize = 15;
+            this.superGrid1.ReadOnly = true;
+            this.superGrid1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.superGrid1.Size = new System.Drawing.Size(900, 213);
             this.superGrid1.TabIndex = 124;
             this.superGrid1.SelectionChanged += new System.EventHandler(this.superGrid1_SelectionChanged);
-            // 
-            // btnVolver
-            // 
-            this.btnVolver.Depth = 0;
-            this.btnVolver.Location = new System.Drawing.Point(821, 401);
-            this.btnVolver.MouseState = MaterialSkin.MouseState.HOVER;
-            this.btnVolver.Name = "btnVolver";
-            this.btnVolver.Primary = true;
-            this.btnVolver.Size = new System.Drawing.Size(105, 23);
-            this.btnVolver.TabIndex = 125;
-            this.btnVolver.Text = "Volver";
-            this.btnVolver.UseVisualStyleBackColor = true;
-            this.btnVolver.Click += new System.EventHandler(this.btnVolver_Click);
             // 
             // colPublicacionId
             // 
@@ -318,6 +321,7 @@
             // 
             this.colTipoPublicaion.HeaderText = "Tipo";
             this.colTipoPublicaion.Name = "colTipoPublicaion";
+            this.colTipoPublicaion.ReadOnly = true;
             // 
             // colDescripcion
             // 
@@ -336,7 +340,6 @@
             this.colMinimo.HeaderText = "Precio inicial Subasta";
             this.colMinimo.Name = "colMinimo";
             this.colMinimo.ReadOnly = true;
-            this.colMinimo.Width = 150;
             // 
             // colStock
             // 
@@ -348,6 +351,7 @@
             // 
             this.colVisibilidadId.HeaderText = "Visibilidad Id";
             this.colVisibilidadId.Name = "colVisibilidadId";
+            this.colVisibilidadId.ReadOnly = true;
             this.colVisibilidadId.Visible = false;
             // 
             // Column7
@@ -376,6 +380,7 @@
             this.Name = "ComprarOfertar";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Comprar/Ofertar";
+            this.Load += new System.EventHandler(this.ComprarOfertar_Load);
             ((System.ComponentModel.ISupportInitialize)(this.bindingNavigator1)).EndInit();
             this.bindingNavigator1.ResumeLayout(false);
             this.bindingNavigator1.PerformLayout();

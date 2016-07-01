@@ -26,12 +26,8 @@ namespace MercadoEnvio.ComprarOfertar
             materialSkinManager.Theme = MaterialSkinManager.Themes.LIGHT;
 
             rubrosFiltrados = new List<Rubro>();
-
-            DataTable dtAAcumular = new DataTable();
-            dtAAcumular = obtenerTodasPublicaciones();
-            volcarDatosASuperGrid(dtAAcumular);
-
             estaFiltrando = 0;
+            refresh();
         }
 
         private void btnFiltrar_Click(object sender, EventArgs e)
@@ -42,24 +38,18 @@ namespace MercadoEnvio.ComprarOfertar
         private void filtrar()
         {
             estaFiltrando = 1;
-
             List<Modelo.Publicacion> pDeRubro = new List<Modelo.Publicacion>();
-            DataTable dtAAcumular = new DataTable();
-
-            DataTable dtNull = new DataTable(); //esto fue lo que cambie messi
-            superGrid1.LimpiarPagedDataSource(dtNull, bindingNavigator1);
-            superGrid1.Refresh();
-
+            DataTable idRubros = new DataTable("Rubros");
+            idRubros.Columns.Add("idRubro", typeof(Int32));
             foreach (Rubro r in rubrosFiltrados){
-                dtAAcumular = DAO.PublicacionSQL.filtrarPublicacionesPorRubro(dtAAcumular, r.Id, txtDescripcion.Text.ToString());
+                idRubros.Rows.Add(r.Id);
             }
-
-            volcarDatosASuperGrid(dtAAcumular);
+            DAO.PublicacionSQL.filtrarPublicacionesPorRubro(superGrid1,idRubros, txtDescripcion.Text.ToString());
         }
 
-        private static DataTable obtenerTodasPublicaciones()
+        private void obtenerTodasPublicaciones()
         {
-            return DAO.PublicacionSQL.obtenerPublicacionesActivas();
+            DAO.PublicacionSQL.obtenerPublicacionesActivas(superGrid1);
         }
 
         private void volcarDatosASuperGrid(DataTable dtAAcumular)
@@ -70,7 +60,7 @@ namespace MercadoEnvio.ComprarOfertar
                 superGrid1.DataSource = dtAAcumular;
                 superGrid1.SetPagedDataSource(dtAAcumular, bindingNavigator1);
                 superGrid1.Refresh();
-                //superGrid1.Sort(this.superGrid1.Columns["colVisibilidadId"], ListSortDirection.Ascending);
+                superGrid1.Sort(this.superGrid1.Columns["colVisibilidadId"], ListSortDirection.Ascending);
             }
         }
 
@@ -155,10 +145,13 @@ namespace MercadoEnvio.ComprarOfertar
                 filtrar();
             }
             else {
-                DataTable dtAAcumular = new DataTable();
-                dtAAcumular = obtenerTodasPublicaciones();
-                volcarDatosASuperGrid(dtAAcumular);
+                DAO.PublicacionSQL.obtenerPublicacionesActivas(superGrid1);
             }
+        }
+
+        private void ComprarOfertar_Load(object sender, EventArgs e)
+        {
+
         }
 
     }

@@ -135,13 +135,14 @@ namespace MercadoEnvio.Publicar
             {
                 DAO.PublicacionSQL.insertarPublicacion(1, idVisibilidad,idRubros, Persistencia.usuario.Id, idTipoPublicacion, txtDescripcion.Text, dtInicio.Value, dtFin.Value, subastaMinima, Convert.ToDouble(txtPrecio.Text), Convert.ToInt32(txtStock.Text), seCobraEnvio);
                 MessageBox.Show("Se ha guardado la publicacion con exito", "Exito");
-                this.Close();
             }
             else {
                 DAO.PublicacionSQL.updatearPublicacion(pub.Id,1, idVisibilidad, idRubros, Persistencia.usuario.Id, idTipoPublicacion, txtDescripcion.Text, dtInicio.Value, dtFin.Value, subastaMinima, Convert.ToDouble(txtPrecio.Text), Convert.ToInt32(txtStock.Text), seCobraEnvio);
                 MessageBox.Show("Se ha modificado la publicacion con exito", "Exito");
-                this.Close();
             }
+            Listado p = new Listado();
+            p.Show();
+            this.Close();
         }
         private bool sePuedeConvertirADouble() {
             try {
