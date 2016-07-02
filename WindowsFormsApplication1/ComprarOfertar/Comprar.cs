@@ -51,7 +51,26 @@ namespace MercadoEnvio.ComprarOfertar
                 VisualizadorFactura vis = new VisualizadorFactura(idFactura);
                 vis.Show();
                 vis.BringToFront();
+                vis.Focus();
+                vis.Activate();
+                FormCollection formsList = Application.OpenForms;
+                int flagAbierto;
+                flagAbierto = 0;
+                foreach (Form s in formsList)
+                {
+                    if (s.Name == "ComprarOfertar")
+                    { flagAbierto = 1;
+                        s.Close();
+                    }
+                }
+                if (flagAbierto == 1)
+                {
+                    Funcionalidades.MenuUsuario f = new Funcionalidades.MenuUsuario();
+                    f.Show();
+                }
+                
                 this.Close();
+                
 
             }catch (Exception ex){
                 MessageBox.Show(ex.Message, "Atención");

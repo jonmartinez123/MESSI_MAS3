@@ -144,7 +144,7 @@ namespace MercadoEnvio.Funcionalidades
                 var window = MessageBox.Show(this, "Existen mas de 3 calificaciones pendientes, califique para proseguir", "Calificaciones pendientes", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 Calificar.Calif cal = new Calificar.Calif();
                 cal.ShowDialog();
-                this.Close();
+
 
             }
             else
@@ -166,7 +166,7 @@ namespace MercadoEnvio.Funcionalidades
         {
             Calificar.Calif cal = new Calificar.Calif();
             cal.ShowDialog();
-            this.Close();
+            
         }
 
         private void consultarFacturasToolStripMenuItem_Click(object sender, EventArgs e)

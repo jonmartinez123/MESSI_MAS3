@@ -30,10 +30,25 @@ namespace MercadoEnvio.Calificar
 
         private void cerrarCalificacion_button_Click(object sender, EventArgs e)
         {
-            Funcionalidades.MenuUsuario f = new Funcionalidades.MenuUsuario();
-            f.Show();
-            this.Close();
-        }
+           FormCollection formsList = Application.OpenForms;
+           int flagAbierto;
+           flagAbierto = 0;
+           foreach (Form s in formsList)
+           {
+               if (s.Name == "MenuUsuario")
+               { flagAbierto = 1; }
+           }
+           if (flagAbierto == 0)
+           {
+               Funcionalidades.MenuUsuario f = new Funcionalidades.MenuUsuario();
+               f.Show();
+           }
+           this.Close();
+           }
+               
+      
+
+
 
         public void reload() {
             DAO.CalificacionSQL.getCalificacionesPendientes(calificacionesPendientes);
@@ -70,8 +85,12 @@ namespace MercadoEnvio.Calificar
             {
                 var window = MessageBox.Show(this, "Existen mas de 3 calificaciones pendientes, califique para proseguir", "Calificaciones pendientes", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 if (window == DialogResult.OK)
-                { e.Cancel = true; }
+                {
+                    e.Cancel = true;
+                    
+                }
             }
+
         }
     }
 }
