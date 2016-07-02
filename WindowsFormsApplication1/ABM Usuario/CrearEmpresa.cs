@@ -231,7 +231,7 @@ namespace MercadoEnvio.ABM_Usuario
 
         private void txtNombreContacto_KeyPress(object sender, KeyPressEventArgs e)
         {
-            this.allowAlphanumericOnly(e);
+            this.allowAlphaOnlyYEspacio(e);
             if (e.KeyChar != 8) this.allowMaxLenght(txtDepto, 254, e);
         }
 
@@ -269,6 +269,12 @@ namespace MercadoEnvio.ABM_Usuario
         private void CrearEmpresa_Load(object sender, EventArgs e)
         {
             this.BringToFront();
+        }
+
+        private void txtCiudad_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            this.allowAlphaOnlyYEspacio(e);
+            if (e.KeyChar != 8) this.allowMaxLenght(txtDepto, 254, e);
         }
     }
 }

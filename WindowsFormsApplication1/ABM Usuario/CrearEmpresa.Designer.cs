@@ -388,6 +388,7 @@
             this.txtCiudad.Size = new System.Drawing.Size(231, 23);
             this.txtCiudad.TabIndex = 112;
             this.txtCiudad.UseSystemPasswordChar = false;
+            this.txtCiudad.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtCiudad_KeyPress);
             // 
             // CrearEmpresa
             // 
