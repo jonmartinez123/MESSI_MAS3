@@ -63,7 +63,7 @@ namespace MercadoEnvio.DAO
         {
             if (minimoSubasta != -1)
             {
-                SqlConnector.executeProcedure("insertarPublicacion", idEstado, idVisibilidad, idUsuario, idTipoPublicacion, descripcion, fechaInicio, fechaFin, minimoSubasta, precio, stock, seCobraEnvio,idRubros);
+                SqlConnector.executeProcedure("insertarPublicacion", idEstado, idVisibilidad, idUsuario, idTipoPublicacion, descripcion, fechaInicio, fechaFin, minimoSubasta, null, stock, seCobraEnvio,idRubros);
             }
             else
             {
@@ -76,7 +76,7 @@ namespace MercadoEnvio.DAO
         {
             if (minimoSubasta != -1)
             {
-                SqlConnector.executeProcedure("updatearPublicacion", idPublicacion, idEstado, idVisibilidad, idUsuario, idTipoPublicacion, descripcion, fechaInicio, fechaFin, minimoSubasta, precio, stock, seCobraEnvio, idRubros);
+                SqlConnector.executeProcedure("updatearPublicacion", idPublicacion, idEstado, idVisibilidad, idUsuario, idTipoPublicacion, descripcion, fechaInicio, fechaFin, minimoSubasta, null, stock, seCobraEnvio, idRubros);
             }
             else
             {

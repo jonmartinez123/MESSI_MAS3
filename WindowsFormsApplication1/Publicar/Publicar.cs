@@ -11,6 +11,7 @@ using MercadoEnvio.Modelo;
 using MercadoEnvio.Config;
 using MaterialSkin.Controls;
 using MaterialSkin;
+using MercadoEnvio.DAO;
 
 namespace MercadoEnvio.Publicar
 {
@@ -84,17 +85,13 @@ namespace MercadoEnvio.Publicar
 
         }
 
-        private void rbCompra_CheckedChanged(object sender, EventArgs e)
-        {
-
-        }
-
         private void rbSubasta_CheckedChanged(object sender, EventArgs e)
         {
-            gbSubasta.Visible = true;
             if (rbSubasta.Checked)
             {
+                gbSubasta.Visible = true;
                 habilitarEnvio("Subasta");
+                gbPrecio.Visible = false;
             }
         }
 
@@ -145,51 +142,100 @@ namespace MercadoEnvio.Publicar
             }else{
                 seCobraEnvio = 0;
             }
-            double subastaMinima;
-            if (string.IsNullOrEmpty(txtSubastaMinima.Text))
-            {
-                subastaMinima = -1;
-            }
-            else { subastaMinima = Convert.ToDouble(txtSubastaMinima.Text); }
+            //INSERTO
             if (pub == null)
             {
-                DAO.PublicacionSQL.insertarPublicacion(1, idVisibilidad,idRubros, Persistencia.usuario.Id, idTipoPublicacion, txtDescripcion.Text, dtInicio.Value, dtFin.Value, subastaMinima, Convert.ToDouble(txtPrecio.Text), Convert.ToInt32(txtStock.Text), seCobraEnvio);
+                //SUBASTA
+                if (idTipoPublicacion == 1)
+                {
+                    SqlConnector.executeProcedure("insertarPublicacion", 1, idVisibilidad, Persistencia.usuario.Id, idTipoPublicacion, txtDescripcion.Text, dtInicio.Value, dtFin.Value, Convert.ToDouble(txtSubastaMinima.Text), null, Convert.ToInt32(txtStock.Text), seCobraEnvio,idRubros);
+                }
+                //OFERTA
+                else if (idTipoPublicacion == 2) {
+                    SqlConnector.executeProcedure("insertarPublicacion", 1, idVisibilidad, Persistencia.usuario.Id, idTipoPublicacion, txtDescripcion.Text, dtInicio.Value, dtFin.Value, null, Convert.ToDouble(txtPrecio.Text), Convert.ToInt32(txtStock.Text), seCobraEnvio,idRubros);
+                }
                 MessageBox.Show("Se ha guardado la publicacion con exito", "Exito");
             }
             else {
-                DAO.PublicacionSQL.updatearPublicacion(pub.Id,1, idVisibilidad, idRubros, Persistencia.usuario.Id, idTipoPublicacion, txtDescripcion.Text, dtInicio.Value, dtFin.Value, subastaMinima, Convert.ToDouble(txtPrecio.Text), Convert.ToInt32(txtStock.Text), seCobraEnvio);
+                //SUBASTA
+                if (idTipoPublicacion == 1)
+                {
+                    SqlConnector.executeProcedure("updatearPublicacion", pub.Id, 1, idVisibilidad, Persistencia.usuario.Id, idTipoPublicacion, txtDescripcion.Text, dtInicio.Value, dtFin.Value, Convert.ToDouble(txtSubastaMinima.Text), null, Convert.ToInt32(txtStock.Text), seCobraEnvio, idRubros);
+                }
+                //OFERTA
+                else if (idTipoPublicacion == 2) {
+                    SqlConnector.executeProcedure("updatearPublicacion", pub.Id, 1, idVisibilidad, Persistencia.usuario.Id, idTipoPublicacion, txtDescripcion.Text, dtInicio.Value, dtFin.Value, null, Convert.ToDouble(txtPrecio.Text), Convert.ToInt32(txtStock.Text), seCobraEnvio, idRubros);
+                }
                 MessageBox.Show("Se ha modificado la publicacion con exito", "Exito");
             }
             Listado p = new Listado();
             p.Show();
             this.Close();
         }
-        private bool sePuedeConvertirADouble() {
+        private bool sePuedeConvertirADouble(string convertir) {
             try {
-                Convert.ToDouble(txtPrecio.Text);
-                if(!string.IsNullOrEmpty(txtSubastaMinima.Text)){
-                    Convert.ToDouble(txtSubastaMinima.Text);
-                }
-            }
-            catch { MessageBox.Show("Debe usar el formato correcto para el tipo double","Validacion"); return false; }
+                Convert.ToDouble(convertir);
+            }catch { return false; }
             return true;
         }
         private void btnGuardar_Click(object sender, EventArgs e)
         {
-            if (Extension.anySelected(ListadoVisibilidades, "una visibilidad") && listadoRubro.Rows.Count > 0 && !string.IsNullOrWhiteSpace(txtDescripcion.Text) && !string.IsNullOrWhiteSpace(txtPrecio.Text) && !string.IsNullOrWhiteSpace(txtStock.Text) && sePuedeConvertirADouble()){
-                if (gbSubasta.Visible == true)
-                {
-                    if (rbSubasta.Checked && !string.IsNullOrWhiteSpace(txtSubastaMinima.Text))
-                    {
-                        guardar();
-                        return;
-                    }
-                    else { MessageBox.Show("Complete la subasta minima", "Validacion"); return; }
-                }
-                guardar();
-            }else{
-                MessageBox.Show("Por favor complete todos los campos", "Validacion");
+            int valido = 1;
+            string texto = "Complete:  \n";
+            
+            if (listadoRubro.Rows.Count <= 0) {
+                texto += "Seleccione algun rubro \n";
+                valido = 0;
             }
+            if(string.IsNullOrWhiteSpace(txtDescripcion.Text) ){
+                texto += "Escriba alguna descripcion \n";
+                valido = 0;
+            }
+            if (string.IsNullOrWhiteSpace(txtStock.Text))
+            {
+                texto += "Escriba el stock \n";
+                valido = 0;
+            }
+            if(!Extension.anySelected(ListadoVisibilidades)){
+                texto += "Seleccione alguna visibilidad \n";
+                valido = 0;
+            }
+
+            if (gbSubasta.Visible == true)
+            {
+                if (rbSubasta.Checked)
+                {
+                    if (string.IsNullOrWhiteSpace(txtSubastaMinima.Text))
+                    {
+                        texto += "Complete la subasta minima \n";
+                        valido = 0;
+                    }
+                    if (!string.IsNullOrWhiteSpace(txtSubastaMinima.Text) && !sePuedeConvertirADouble(txtSubastaMinima.Text)) {
+                        texto += "Use una sola coma en la subasta minima \n";
+                        valido = 0;
+                    }
+                }
+            }
+            if (gbPrecio.Visible == true) {
+                if (rbOferta.Checked)
+                {
+                    if (string.IsNullOrWhiteSpace(txtPrecio.Text))
+                    {
+                        texto += "Complete el precio \n";
+                        valido = 0;
+                    }
+                    if (!string.IsNullOrWhiteSpace(txtPrecio.Text) && !sePuedeConvertirADouble(txtPrecio.Text))
+                    {
+                        texto += "Use una sola coma en el precio \n";
+                        valido = 0;
+                    }
+                }
+            }
+            if (valido == 1)
+            {
+                guardar();
+            }
+            else { MessageBox.Show(texto, "Validacion"); }
         }
         #region validaciones
         private void txtPrecio_KeyPress(object sender, KeyPressEventArgs e)
@@ -285,10 +331,11 @@ namespace MercadoEnvio.Publicar
 
         private void rbOferta_CheckedChanged(object sender, EventArgs e)
         {
-            gbSubasta.Visible = false;
             if (rbOferta.Checked)
             {
+                gbSubasta.Visible = false;
                 habilitarEnvio("Oferta");
+                gbPrecio.Visible = true;
             }
         }
     }

@@ -163,7 +163,7 @@ namespace MercadoEnvio.Publicar
                 Convert.ToDateTime(Extension.cellValue(listadoPublicaciones, "FechaFin")),
                 Convert.ToString(Extension.cellValue(listadoPublicaciones, "Descripcion")),
                 Extension.cellValueParaNumeros(listadoPublicaciones, "MinimoSubasta"),
-                Convert.ToDouble(Extension.cellValue(listadoPublicaciones, "Precio")),
+                Extension.cellValueParaNumeros(listadoPublicaciones, "Precio"),
                 Convert.ToInt32(Extension.cellValue(listadoPublicaciones, "QuisoEnvio")),
                 Convert.ToInt32(Extension.cellValue(listadoPublicaciones, "Stock")));
         }
