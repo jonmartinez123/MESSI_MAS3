@@ -43,8 +43,7 @@ DECLARE @idCasteado int
 SET @idCasteado = CAST(@idUsuario AS INT)
 SELECT DISTINCT TOP 5 calificacion_id, tipoPublicacion_nombre, calificacion_cantidadEstrellas, calificacion_detalle  FROM MESSI_MAS3.Calificacion, MESSI_MAS3.Compra, MESSI_MAS3.Publicacion, MESSI_MAS3.tipoPublicacion 
 
-WHERE calificacion_pendiente = 0 AND compra_id = calificacion_compraId AND calificacion_idPersonaCalificador = @idCasteado AND (publicacion_id = compras_publicacion_id AND tipoPublicacion_id = publicacion_tipoPublicacionId)
-
+WHERE calificacion_pendiente = 0 AND compra_id = calificacion_compraId AND calificacion_idPersonaCalificador = @idCasteado AND (publicacion_id = compras_publicacion_id AND tipoPublicacion_id = publicacion_tipoPublicacionId) order by calificacion_id desc
 END
 GO
 
