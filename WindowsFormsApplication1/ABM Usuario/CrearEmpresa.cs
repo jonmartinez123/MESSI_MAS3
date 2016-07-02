@@ -225,7 +225,7 @@ namespace MercadoEnvio.ABM_Usuario
 
         private void txtCUIT_KeyPress(object sender, KeyPressEventArgs e)
         {
-            //this.allowNumericOnly(e);
+            this.allowNumericOnlyYGuion(e);
             if (e.KeyChar != 8) this.allowMaxLenght(txtCodigoPostal, 10, e);
         }
 

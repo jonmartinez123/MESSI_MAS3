@@ -49,13 +49,13 @@ namespace MercadoEnvio.ABM_Usuario
 
         private void txtNombre_KeyPress(object sender, KeyPressEventArgs e)
         {
-            this.allowAlphanumericOnly(e);
+            this.allowAlphaOnlyYEspacio(e);
             if (e.KeyChar != 8) this.allowMaxLenght(txtNombre, 254, e);
         }
 
         private void txtApellido_KeyPress(object sender, KeyPressEventArgs e)
         {
-            this.allowAlphanumericOnly(e);
+            this.allowAlphaOnlyYEspacio(e);
             if (e.KeyChar != 8) this.allowMaxLenght(txtApellido, 254, e);
         }
 
@@ -83,11 +83,11 @@ namespace MercadoEnvio.ABM_Usuario
                     string.IsNullOrEmpty(txtCodigoPostal.Text))
                     throw new Exception("No puede haber campos vacíos");
 
-                if (string.IsNullOrEmpty(txtNombre.Text) | !Validaciones.IsAllLetters(txtNombre.Text))
-                    throw new Exception("El campo Nombre se encuentra vacio o no es un texto valido, recuerde que debe ser solo letras");
+                if (string.IsNullOrEmpty(txtNombre.Text))
+                    throw new Exception("El campo Nombre se encuentra vacio");
 
-                if (string.IsNullOrEmpty(txtApellido.Text) | !Validaciones.IsAllLetters(txtNombre.Text))
-                    throw new Exception("El campo Apellido se encuentra vacio o no es un texto valido, recuerde que debe ser solo letras");
+                if (string.IsNullOrEmpty(txtApellido.Text))
+                    throw new Exception("El campo Apellido se encuentra vacio");
 
                 if (string.IsNullOrEmpty(txtDocumento.Text))
                     throw new Exception("Debe completar el número de documento");

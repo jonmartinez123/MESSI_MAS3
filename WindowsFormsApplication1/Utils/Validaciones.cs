@@ -14,6 +14,10 @@ namespace MercadoEnvio.Modelo
         {
             e.Handled = !(char.IsDigit(e.KeyChar) || e.KeyChar == (char)Keys.Back);
         }
+        public static void allowNumericOnlyYGuion(this Form aForm, KeyPressEventArgs e)
+        {
+            e.Handled = !(char.IsDigit(e.KeyChar) || e.KeyChar == (char)Keys.Back || e.KeyChar == '-');
+        }
         public static void allowAlphanumericOnlyYGuion(this Form aForm, KeyPressEventArgs e)
         {
              e.Handled = !(char.IsLetterOrDigit(e.KeyChar) || e.KeyChar == (char)Keys.Back || e.KeyChar=='-');
@@ -36,7 +40,10 @@ namespace MercadoEnvio.Modelo
         {
             e.Handled = !(char.IsLetter(e.KeyChar) || e.KeyChar == (char)Keys.Back);
         }
-
+        public static void allowAlphaOnlyYEspacio(this Form aForm, KeyPressEventArgs e)
+        {
+            e.Handled = !(char.IsLetter(e.KeyChar) || e.KeyChar == (char)Keys.Back || e.KeyChar == ' ');
+        }
         public static void allowAlphanumericOnly(this Form aForm, KeyPressEventArgs e)
         {
             e.Handled = !(char.IsLetterOrDigit(e.KeyChar) || e.KeyChar == (char)Keys.Back);
