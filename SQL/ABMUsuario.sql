@@ -254,16 +254,9 @@ BEGIN
 END
 GO
 
-CREATE PROCEDURE MESSI_MAS3.existe_razonSocial(@razon nvarchar(255))
+CREATE PROCEDURE MESSI_MAS3.existe_razonSocial(@razon nvarchar(255),@id int)
 AS
 BEGIN
-	IF(EXISTS(SELECT 1 FROM MESSI_MAS3.Empresa WHERE empresa_razonSocial = @razon)) BEGIN RETURN 1 END RETURN -1
-END
-GO
-
-CREATE PROCEDURE MESSI_MAS3.existe_cuit(@cuit nvarchar(255))
-AS
-BEGIN
-	IF(EXISTS(SELECT 1 FROM MESSI_MAS3.Empresa WHERE empresa_cuit = @cuit)) BEGIN RETURN 1 END RETURN -1
+	IF(EXISTS(SELECT * FROM MESSI_MAS3.Empresa WHERE empresa_razonSocial = @razon and @id <> empresa_id)) BEGIN RETURN 1 END RETURN -1
 END
 GO

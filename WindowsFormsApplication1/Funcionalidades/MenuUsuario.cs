@@ -196,6 +196,7 @@ namespace MercadoEnvio.Funcionalidades
 
         private void generarPublicacionToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            this.Hide();
             Publicar.Publicar pub = new Publicar.Publicar();
             pub.ShowDialog();
         }

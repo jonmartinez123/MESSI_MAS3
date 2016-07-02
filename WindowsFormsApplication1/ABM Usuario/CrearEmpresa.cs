@@ -71,8 +71,6 @@ namespace MercadoEnvio.ABM_Usuario
                 if (string.IsNullOrEmpty(txtCUIT.Text))
                     throw new Exception("Debe completar el número de CUIT");
 
-                validarCUIT(txtCUIT.Text);
-
                 if (string.IsNullOrEmpty(cmbRubro.Text))
                     throw new Exception("Debe seleccionar el rubro principal");
 
@@ -94,17 +92,17 @@ namespace MercadoEnvio.ABM_Usuario
                 if (string.IsNullOrEmpty(txtCodigoPostal.Text))
                     throw new Exception("Debe completar el código postal");
 
-                if (string.IsNullOrEmpty(txtNombreContacto.Text) | !Validaciones.IsAllLetters(txtNombreContacto.Text))
-                    throw new Exception("El campo Nombre del contacto se encuentra vacio o no es un texto valido, recuerde que debe ser solo letras");
+                if (string.IsNullOrEmpty(txtNombreContacto.Text))
+                    throw new Exception("El campo Nombre del contacto se encuentra vacio");
 
-                if (string.IsNullOrEmpty(txtCiudad.Text) | !Validaciones.IsAllLetters(txtCiudad.Text))
-                    throw new Exception("El campo Ciudad se encuentra vacio o no es un texto valido, recuerde que debe ser solo letras");
+                if (string.IsNullOrEmpty(txtCiudad.Text))
+                    throw new Exception("El campo Ciudad se encuentra vacio");
 
                 if (DAO.UsuarioSQL.existeMail(txtMail.Text, empresaGlobal.Id)){
                     throw new Exception("Ya existe una empresa con ese mail");
                 }
 
-                if (DAO.UsuarioSQL.existeCuit(txtCUIT.Text)){
+                if (DAO.UsuarioSQL.existeCUIT(txtCUIT.Text,empresaGlobal.Id)){
                     throw new Exception("Ya existe una empresa con ese CUIT");
                 }
 

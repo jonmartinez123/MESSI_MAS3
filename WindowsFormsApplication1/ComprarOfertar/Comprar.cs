@@ -50,6 +50,7 @@ namespace MercadoEnvio.ComprarOfertar
                 
                 VisualizadorFactura vis = new VisualizadorFactura(idFactura);
                 vis.Show();
+                vis.BringToFront();
                 this.Close();
 
             }catch (Exception ex){

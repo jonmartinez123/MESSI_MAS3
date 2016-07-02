@@ -181,7 +181,7 @@ namespace MercadoEnvio.DAO
 
         internal static Boolean existeCUIT(string cuit, int idUsuario)
         {
-            return SqlConnector.executeProcedure("existe_cuit", cuit, idUsuario) == 1 ? true : false;
+            return SqlConnector.executeProcedure("existe_cuitEmpresa", cuit, idUsuario) == 1 ? true : false;
         }
 
         internal static bool existeDocumento(string p, int idUsuario)
@@ -189,10 +189,6 @@ namespace MercadoEnvio.DAO
             return SqlConnector.executeProcedure("existe_documentoCliente", p, idUsuario) == 1 ? true : false; 
         }
 
-        internal static bool existeCuit(string p)
-        {
-            return SqlConnector.executeProcedure("existe_cuitEmpresa", p) == 1 ? true : false; 
-        }
 
         internal static bool existeMail(string p, int idUsuario)
         {
