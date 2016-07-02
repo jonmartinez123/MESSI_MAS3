@@ -45,7 +45,15 @@ namespace MercadoEnvio.ABM_Usuario
 
         private void crearUsuario_Load(object sender, System.EventArgs e)
         {
+            traerRolesHabilitados();
             this.BringToFront();
+        }
+
+        private void traerRolesHabilitados()
+        {
+            cmbTipo.DataSource = DAO.RolSQl.getRolesActivos();
+            cmbTipo.DisplayMember = "Nombre";
+            cmbTipo.ValueMember = "Id";
         }
 
         private void btnContinuar_Click(object sender, EventArgs e)
@@ -55,7 +63,7 @@ namespace MercadoEnvio.ABM_Usuario
             {
                 #region Validaciones
                 var exceptionMessage = string.Empty;
-
+                 Rol rolSeleccionado ;
                 if (string.IsNullOrEmpty(txtUsuario.Text) && usuarioGlobal.Id == -1 && string.IsNullOrEmpty(txtPass.Text) && string.IsNullOrEmpty(txtPassRepetida.Text))
                     throw new Exception("No puede haber campos vacíos");
 
@@ -70,22 +78,30 @@ namespace MercadoEnvio.ABM_Usuario
 
                 if (txtPassRepetida.Text != txtPass.Text)
                     throw new Exception("Las passwords no coinciden");
-
-                
-
+                if (cmbTipo.SelectedIndex != -1)
+                {
+                    rolSeleccionado = (Rol)cmbTipo.SelectedItem;
+                    if (rolSeleccionado == null)
+                    {
+                        throw new Exception("Debe seleccionar algun rol");
+                    }
+                }
+                else {
+                    throw new Exception("Debe seleccionar algun rol");
+                }
                 #endregion
 
                 if (usuarioGlobal.Id == -1)
                 {
                     validarUsername(txtUsuario.Text);
 
-                    if (cmbTipo.Text == "Cliente")
+                    if (rolSeleccionado.Nombre  == "Cliente")
                     {
                         Modelo.Cliente unCliente = new Modelo.Cliente(-1, txtUsuario.Text, txtPass.Text);
                         CrearCliente cCliente = new CrearCliente(unCliente);
                         cCliente.ShowDialog();
                     }
-                    else if (cmbTipo.Text == "Empresa")
+                    else if (rolSeleccionado.Nombre == "Empresa")
                     {
                         CrearEmpresa cEmpresa = new CrearEmpresa(new Modelo.Empresa(-1, txtUsuario.Text, txtPass.Text));
                         cEmpresa.ShowDialog();

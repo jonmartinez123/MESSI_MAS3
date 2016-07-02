@@ -9,6 +9,29 @@ BEGIN
 END
 GO
 
+CREATE PROCEDURE MESSI_MAS3.darDeAltaRol(@id int)
+AS
+BEGIN 
+	UPDATE Rol set rol_habilitado = 1 where @id=rol_id
+END
+GO
+
+CREATE PROCEDURE MESSI_MAS3.darDeBajaRol(@id int)
+AS
+BEGIN 
+	UPDATE Rol set rol_habilitado = 0 where @id=rol_id
+	UPDATE Rol_Usuario set deleted = 1 where Rol_id = @id
+END
+GO
+
+CREATE PROCEDURE MESSI_MAS3.getRolesActivos
+AS
+BEGIN 
+	SELECT rol_id, rol_nombre FROM Rol where rol_habilitado = 1 and rol_id <> 1
+END
+GO
+
+
 CREATE PROCEDURE MESSI_MAS3.get_funcionalidades_que_no_tiene(@rol nvarchar(255))
 AS
 BEGIN 

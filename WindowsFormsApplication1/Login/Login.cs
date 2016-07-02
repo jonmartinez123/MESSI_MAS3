@@ -34,36 +34,35 @@ namespace MercadoEnvio.Login
                         {
                             Persistencia.usuario = new Usuario(idUsuario,username, pass);
                             this.cargarDatosUsuarioLogueado();
-                            if (roles.Count > 1)
-                            {
-                                this.Hide();
-                                SeleccionRol sr = new SeleccionRol(roles);
-                                sr.ShowDialog();
-                                Close();
-                            }
-                            else
-                            {
-                                Rol rolSeleccionado = roles.First();
-                                MessageBox.Show("Usted esta entrando como el rol de " + rolSeleccionado.Nombre,"Ingreso");
-                                Persistencia.usuario.Rol = rolSeleccionado;
-                                List<Funcionalidad> funcionalidades = RolSQl.getFuncionalidades(rolSeleccionado);
-                                if (funcionalidades.Count() > 0)
+                            if(roles.Count() != 0 ){
+                                if (roles.Count > 1)
                                 {
                                     this.Hide();
-                                    Persistencia.usuario.Rol.getFuncionalidades = funcionalidades;
-                                    Funcionalidades.MenuUsuario menuUsuario = new Funcionalidades.MenuUsuario();
-                                    menuUsuario.ShowDialog();
+                                    SeleccionRol sr = new SeleccionRol(roles);
+                                    sr.ShowDialog();
+                                    Close();
+                                }else{
+                                    Rol rolSeleccionado = roles.First();
+                                    MessageBox.Show("Usted esta entrando como el rol de " + rolSeleccionado.Nombre, "Ingreso");
+                                    Persistencia.usuario.Rol = rolSeleccionado;
+                                    List<Funcionalidad> funcionalidades = RolSQl.getFuncionalidades(rolSeleccionado);
+                                    if (funcionalidades.Count() > 0)
+                                    {
+                                        this.Hide();
+                                        Persistencia.usuario.Rol.getFuncionalidades = funcionalidades;
+                                        Funcionalidades.MenuUsuario menuUsuario = new Funcionalidades.MenuUsuario();
+                                        menuUsuario.ShowDialog();
+                                    }else{
+                                        MessageBox.Show("No se encontraron funcionalidades para el rol " + rolSeleccionado.Nombre, "Atención");
+                                    }
                                 }
-                                else
-                                {
-                                    MessageBox.Show("No se encontraron funcionalidades para el rol " + rolSeleccionado.Nombre,"Atención");
-                                }
+                             }else{
+                                    MessageBox.Show("No se encontraron roles activos para " + username, "Atención");
                             }
                         }else{
                             DAO.LoginSQL.aumentarIntentos(idUsuario);
                             MessageBox.Show("Usuario o contraseñia incorrecta, se aumento la cantidad de intentos para " + username,"Atención");
                         }
-
                     }
                     else
                     {
@@ -108,7 +107,7 @@ namespace MercadoEnvio.Login
          }
          private void cargarDatosUsuarioLogueado()
          {
-             int id=  DAO.LoginSQL.getID(Persistencia.usuario.NombreUsuario);
+             int id =  DAO.LoginSQL.getID(Persistencia.usuario.NombreUsuario);
              Persistencia.usuario.Id = id;
              //Persistencia.usuario.Mail = DAO.LoginSQL.getMail(id);
              //Persistencia.usuario.Telefono = DAO.LoginSQL.getTelefono(id);

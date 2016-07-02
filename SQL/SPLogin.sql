@@ -14,7 +14,7 @@ GO
 CREATE PROCEDURE [MESSI_MAS3].getRoles (@id int)
 AS
 BEGIN
-	SELECT MESSI_MAS3.Rol.rol_id, rol_nombre FROM MESSI_MAS3.Rol_Usuario,MESSI_MAS3.Rol WHERE Usuario_id=@id AND MESSI_MAS3.Rol_Usuario.Rol_id = MESSI_MAS3.Rol.rol_id AND rol_habilitado=1
+	SELECT MESSI_MAS3.Rol.rol_id, rol_nombre FROM MESSI_MAS3.Rol_Usuario,MESSI_MAS3.Rol WHERE Usuario_id=@id AND MESSI_MAS3.Rol_Usuario.Rol_id = MESSI_MAS3.Rol.rol_id AND deleted=0
 END
 GO
 

@@ -106,6 +106,32 @@ namespace MercadoEnvio.DAO
         {
             return SqlConnector.executeProcedure("get_if_rol_habilitado", idRol) == 1? true : false;
         }
+
+        internal static void darDeAltaRol(int id)
+        {
+            SqlConnector.executeProcedure("darDeAltaRol", id);
+        }
+
+        internal static void darDeBajaRol(int id)
+        {
+            SqlConnector.executeProcedure("darDeBajaRol", id);
+        }
+        public static List<Rol> getRolesActivos()
+        {
+            SqlCommand cmd = SqlConnector.generarComandoYAbrir("getRolesActivos");
+            var reader = cmd.ExecuteReader();
+
+            List<Rol> roles = new List<Rol>();
+            Rol r;
+            while (reader.Read())
+            {
+                r = new Rol();
+                r.Id = int.Parse(reader["rol_id"].ToString());
+                r.nombre = reader["rol_nombre"].ToString();
+                roles.Add(r);
+            }
+            return roles;
+        }
     }
 }
    

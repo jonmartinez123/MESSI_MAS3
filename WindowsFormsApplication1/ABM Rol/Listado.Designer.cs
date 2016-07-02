@@ -29,13 +29,14 @@
         private void InitializeComponent()
         {
             this.ListadoRoles = new System.Windows.Forms.DataGridView();
-            this.col_id = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.col_rol = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.col_habilitado = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupBox_SeleccionarRol = new System.Windows.Forms.GroupBox();
             this.button_Cerrar = new MaterialSkin.Controls.MaterialRaisedButton();
             this.agregar = new MaterialSkin.Controls.MaterialRaisedButton();
             this.modificar = new MaterialSkin.Controls.MaterialRaisedButton();
+            this.btnEliminar = new MaterialSkin.Controls.MaterialRaisedButton();
+            this.col_id = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.col_rol = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.col_habilitado = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.ListadoRoles)).BeginInit();
             this.groupBox_SeleccionarRol.SuspendLayout();
             this.SuspendLayout();
@@ -59,31 +60,12 @@
             this.ListadoRoles.Size = new System.Drawing.Size(611, 255);
             this.ListadoRoles.TabIndex = 0;
             this.ListadoRoles.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.ListadoRoles_CellContentClick);
-            // 
-            // col_id
-            // 
-            this.col_id.DataPropertyName = "col_id";
-            this.col_id.HeaderText = "ID";
-            this.col_id.Name = "col_id";
-            this.col_id.ReadOnly = true;
-            // 
-            // col_rol
-            // 
-            this.col_rol.DataPropertyName = "col_rol";
-            this.col_rol.HeaderText = "Rol";
-            this.col_rol.Name = "col_rol";
-            this.col_rol.ReadOnly = true;
-            // 
-            // col_habilitado
-            // 
-            this.col_habilitado.DataPropertyName = "col_habilitado";
-            this.col_habilitado.HeaderText = "Habilitado";
-            this.col_habilitado.Name = "col_habilitado";
-            this.col_habilitado.ReadOnly = true;
+            this.ListadoRoles.SelectionChanged += new System.EventHandler(this.ListadoRoles_SelectionChanged);
             // 
             // groupBox_SeleccionarRol
             // 
             this.groupBox_SeleccionarRol.BackColor = System.Drawing.SystemColors.Window;
+            this.groupBox_SeleccionarRol.Controls.Add(this.btnEliminar);
             this.groupBox_SeleccionarRol.Controls.Add(this.button_Cerrar);
             this.groupBox_SeleccionarRol.Controls.Add(this.agregar);
             this.groupBox_SeleccionarRol.Controls.Add(this.modificar);
@@ -94,6 +76,7 @@
             this.groupBox_SeleccionarRol.TabIndex = 22;
             this.groupBox_SeleccionarRol.TabStop = false;
             this.groupBox_SeleccionarRol.Text = "Roles";
+            this.groupBox_SeleccionarRol.Enter += new System.EventHandler(this.groupBox_SeleccionarRol_Enter);
             // 
             // button_Cerrar
             // 
@@ -134,6 +117,40 @@
             this.modificar.UseVisualStyleBackColor = true;
             this.modificar.Click += new System.EventHandler(this.modificar_Click);
             // 
+            // btnEliminar
+            // 
+            this.btnEliminar.Depth = 0;
+            this.btnEliminar.Location = new System.Drawing.Point(639, 297);
+            this.btnEliminar.MouseState = MaterialSkin.MouseState.HOVER;
+            this.btnEliminar.Name = "btnEliminar";
+            this.btnEliminar.Primary = true;
+            this.btnEliminar.Size = new System.Drawing.Size(87, 23);
+            this.btnEliminar.TabIndex = 27;
+            this.btnEliminar.Text = "Inhabilitar";
+            this.btnEliminar.UseVisualStyleBackColor = true;
+            this.btnEliminar.Click += new System.EventHandler(this.btnEliminar_Click);
+            // 
+            // col_id
+            // 
+            this.col_id.DataPropertyName = "col_id";
+            this.col_id.HeaderText = "ID";
+            this.col_id.Name = "col_id";
+            this.col_id.ReadOnly = true;
+            // 
+            // col_rol
+            // 
+            this.col_rol.DataPropertyName = "col_rol";
+            this.col_rol.HeaderText = "Rol";
+            this.col_rol.Name = "col_rol";
+            this.col_rol.ReadOnly = true;
+            // 
+            // col_habilitado
+            // 
+            this.col_habilitado.DataPropertyName = "col_habilitado";
+            this.col_habilitado.HeaderText = "Habilitado";
+            this.col_habilitado.Name = "col_habilitado";
+            this.col_habilitado.ReadOnly = true;
+            // 
             // Listado
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -155,12 +172,13 @@
 
         private System.Windows.Forms.DataGridView ListadoRoles;
         private System.Windows.Forms.GroupBox groupBox_SeleccionarRol;
-        private System.Windows.Forms.DataGridViewTextBoxColumn col_id;
-        private System.Windows.Forms.DataGridViewTextBoxColumn col_rol;
-        private System.Windows.Forms.DataGridViewTextBoxColumn col_habilitado;
         private MaterialSkin.Controls.MaterialRaisedButton button_Cerrar;
         private MaterialSkin.Controls.MaterialRaisedButton agregar;
         private MaterialSkin.Controls.MaterialRaisedButton modificar;
+        private MaterialSkin.Controls.MaterialRaisedButton btnEliminar;
+        private System.Windows.Forms.DataGridViewTextBoxColumn col_id;
+        private System.Windows.Forms.DataGridViewTextBoxColumn col_rol;
+        private System.Windows.Forms.DataGridViewTextBoxColumn col_habilitado;
 
 
     }
