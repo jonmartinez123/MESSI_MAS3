@@ -30,6 +30,8 @@ namespace MercadoEnvio.Facturas
             fechaDesde.CustomFormat = "dd-MM-yyyy";
             fechaHasta.Format = DateTimePickerFormat.Custom;
             fechaHasta.CustomFormat = "dd-MM-yyyy";
+            fechaDesde.MaxDate = Config.ConfiguracionVariable.FechaSistema;
+            fechaHasta.MaxDate = Config.ConfiguracionVariable.FechaSistema;
         }
 
         private void reload()
@@ -65,17 +67,15 @@ namespace MercadoEnvio.Facturas
 
 
 
-                if (dirigidotxt.TextLength != 8 & dirigidotxt.TextLength != 13 | !esCuitValido(dirigidotxt.Text))
-                {
-                    MessageBox.Show("El campo CUIT/DNI no contiene un CUIT/DNI valido");
-                    dirigidotxt.Clear();
-                    return;
-                }
+
             
             if (fechaDesde.Enabled & !importeBajotxt.Enabled & !detallePublitxt.Enabled & !dirigidotxt.Enabled) {
                 dateDesde = Convert.ToString(fechaDesde.Value.Year + "-" + fechaDesde.Value.Month + "-" + fechaDesde.Value.Day);
                 dateHasta = Convert.ToString(fechaHasta.Value.Year + "-" + fechaHasta.Value.Month + "-" + fechaHasta.Value.Day);
-               
+                if (DateTime.Compare(fechaDesde.Value, fechaHasta.Value) > 0) {
+                    MessageBox.Show("La primer fecha no puede ser posterior a la segunda");
+                    return;
+                }
                 DataTable dt = DAO.ConsultarFacturasSQL.getFacturasEntreFechas(superGrid1, dateDesde, dateHasta);
                 if (dt.Rows.Count > 0) { superGrid1.SetPagedDataSource(dt, bindingNavigator1); }
 
@@ -107,6 +107,13 @@ namespace MercadoEnvio.Facturas
 
             if (!fechaDesde.Enabled & !importeBajotxt.Enabled & !detallePublitxt.Enabled & dirigidotxt.Enabled)
             {
+
+                if (dirigidotxt.TextLength != 8 & dirigidotxt.TextLength != 13 | !esCuitValido(dirigidotxt.Text))
+                {
+                    MessageBox.Show("El campo CUIT/DNI no contiene un CUIT/DNI valido");
+                    dirigidotxt.Clear();
+                    return;
+                }
                 if (!String.IsNullOrEmpty(dirigidotxt.Text))
                 {
                     DataTable dt = DAO.ConsultarFacturasSQL.getFacturasHacia(superGrid1, dirigidotxt.Text);
@@ -118,6 +125,11 @@ namespace MercadoEnvio.Facturas
 
             if (fechaDesde.Enabled & importeBajotxt.Enabled & !detallePublitxt.Enabled & !dirigidotxt.Enabled)
             {
+                if (DateTime.Compare(fechaDesde.Value, fechaHasta.Value) > 0)
+                {
+                    MessageBox.Show("La primer fecha no puede ser posterior a la segunda");
+                    return;
+                }
                 dateDesde = Convert.ToString(fechaDesde.Value.Year + "-" + fechaDesde.Value.Month + "-" + fechaDesde.Value.Day);
                 dateHasta = Convert.ToString(fechaHasta.Value.Year + "-" + fechaHasta.Value.Month + "-" + fechaHasta.Value.Day);
 
@@ -133,6 +145,12 @@ namespace MercadoEnvio.Facturas
 
             if (fechaDesde.Enabled & !importeBajotxt.Enabled & detallePublitxt.Enabled & !dirigidotxt.Enabled)
             {
+
+                if (DateTime.Compare(fechaDesde.Value, fechaHasta.Value) > 0)
+                {
+                    MessageBox.Show("La primer fecha no puede ser posterior a la segunda");
+                    return;
+                }
                 dateDesde = Convert.ToString(fechaDesde.Value.Year + "-" + fechaDesde.Value.Month + "-" + fechaDesde.Value.Day);
                 dateHasta = Convert.ToString(fechaHasta.Value.Year + "-" + fechaHasta.Value.Month + "-" + fechaHasta.Value.Day);
                 if (!String.IsNullOrEmpty(detallePublitxt.Text))
@@ -144,6 +162,17 @@ namespace MercadoEnvio.Facturas
 
             if (fechaDesde.Enabled & !importeBajotxt.Enabled & !detallePublitxt.Enabled & dirigidotxt.Enabled)
             {
+                if (DateTime.Compare(fechaDesde.Value, fechaHasta.Value) > 0)
+                {
+                    MessageBox.Show("La primer fecha no puede ser posterior a la segunda");
+                    return;
+                }
+                if (dirigidotxt.TextLength != 8 & dirigidotxt.TextLength != 13 | !esCuitValido(dirigidotxt.Text))
+                {
+                    MessageBox.Show("El campo CUIT/DNI no contiene un CUIT/DNI valido");
+                    dirigidotxt.Clear();
+                    return;
+                }
                 dateDesde = Convert.ToString(fechaDesde.Value.Year + "-" + fechaDesde.Value.Month + "-" + fechaDesde.Value.Day);
                 dateHasta = Convert.ToString(fechaHasta.Value.Year + "-" + fechaHasta.Value.Month + "-" + fechaHasta.Value.Day);
                 if (!String.IsNullOrEmpty(dirigidotxt.Text))
@@ -165,6 +194,13 @@ namespace MercadoEnvio.Facturas
 
             if (!fechaDesde.Enabled & importeBajotxt.Enabled & !detallePublitxt.Enabled & dirigidotxt.Enabled)
             {
+
+                if (dirigidotxt.TextLength != 8 & dirigidotxt.TextLength != 13 | !esCuitValido(dirigidotxt.Text))
+                {
+                    MessageBox.Show("El campo CUIT/DNI no contiene un CUIT/DNI valido");
+                    dirigidotxt.Clear();
+                    return;
+                }
                 if (!String.IsNullOrEmpty(dirigidotxt.Text) & !String.IsNullOrEmpty(importeBajotxt.Text) & !String.IsNullOrEmpty(importeAltotxt.Text))
                 {
                     DataTable dt = DAO.ConsultarFacturasSQL.getFacturasEntreImporteYDirigido(superGrid1, Convert.ToDouble(importeBajotxt.Text), Convert.ToDouble(importeAltotxt.Text), dirigidotxt.Text);
@@ -176,6 +212,13 @@ namespace MercadoEnvio.Facturas
 
             if (!fechaDesde.Enabled & !importeBajotxt.Enabled & detallePublitxt.Enabled & dirigidotxt.Enabled)
             {
+
+                if (dirigidotxt.TextLength != 8 & dirigidotxt.TextLength != 13 | !esCuitValido(dirigidotxt.Text))
+                {
+                    MessageBox.Show("El campo CUIT/DNI no contiene un CUIT/DNI valido");
+                    dirigidotxt.Clear();
+                    return;
+                }
                 if (!String.IsNullOrEmpty(detallePublitxt.Text) & !String.IsNullOrEmpty(dirigidotxt.Text))
                 {
                     DataTable dt = DAO.ConsultarFacturasSQL.getFacturasEntreDetalleyDirigido(superGrid1, dirigidotxt.Text , detallePublitxt.Text);
@@ -189,6 +232,11 @@ namespace MercadoEnvio.Facturas
 
             if (fechaDesde.Enabled & importeBajotxt.Enabled & detallePublitxt.Enabled & !dirigidotxt.Enabled)
             {
+                if (DateTime.Compare(fechaDesde.Value, fechaHasta.Value) > 0)
+                {
+                    MessageBox.Show("La primer fecha no puede ser posterior a la segunda");
+                    return;
+                }
                 dateDesde = Convert.ToString(fechaDesde.Value.Year + "-" + fechaDesde.Value.Month + "-" + fechaDesde.Value.Day);
                 dateHasta = Convert.ToString(fechaHasta.Value.Year + "-" + fechaHasta.Value.Month + "-" + fechaHasta.Value.Day);
 
@@ -202,6 +250,17 @@ namespace MercadoEnvio.Facturas
 
             if (fechaDesde.Enabled & importeBajotxt.Enabled & !detallePublitxt.Enabled & dirigidotxt.Enabled)
             {
+                if (DateTime.Compare(fechaDesde.Value, fechaHasta.Value) > 0)
+                {
+                    MessageBox.Show("La primer fecha no puede ser posterior a la segunda");
+                    return;
+                }
+                if (dirigidotxt.TextLength != 8 & dirigidotxt.TextLength != 13 | !esCuitValido(dirigidotxt.Text))
+                {
+                    MessageBox.Show("El campo CUIT/DNI no contiene un CUIT/DNI valido");
+                    dirigidotxt.Clear();
+                    return;
+                }
                 dateDesde = Convert.ToString(fechaDesde.Value.Year + "-" + fechaDesde.Value.Month + "-" + fechaDesde.Value.Day);
                 dateHasta = Convert.ToString(fechaHasta.Value.Year + "-" + fechaHasta.Value.Month + "-" + fechaHasta.Value.Day);
 
@@ -217,6 +276,17 @@ namespace MercadoEnvio.Facturas
 
             if (fechaDesde.Enabled & !importeBajotxt.Enabled & detallePublitxt.Enabled & dirigidotxt.Enabled)
             {
+                if (DateTime.Compare(fechaDesde.Value, fechaHasta.Value) > 0)
+                {
+                    MessageBox.Show("La primer fecha no puede ser posterior a la segunda");
+                    return;
+                }
+                if (dirigidotxt.TextLength != 8 & dirigidotxt.TextLength != 13 | !esCuitValido(dirigidotxt.Text))
+                {
+                    MessageBox.Show("El campo CUIT/DNI no contiene un CUIT/DNI valido");
+                    dirigidotxt.Clear();
+                    return;
+                }
                 dateDesde = Convert.ToString(fechaDesde.Value.Year + "-" + fechaDesde.Value.Month + "-" + fechaDesde.Value.Day);
                 dateHasta = Convert.ToString(fechaHasta.Value.Year + "-" + fechaHasta.Value.Month + "-" + fechaHasta.Value.Day);
 
@@ -231,6 +301,12 @@ namespace MercadoEnvio.Facturas
             if (!fechaDesde.Enabled & importeBajotxt.Enabled & detallePublitxt.Enabled & dirigidotxt.Enabled)
             {
 
+                if (dirigidotxt.TextLength != 8 & dirigidotxt.TextLength != 13 | !esCuitValido(dirigidotxt.Text))
+                {
+                    MessageBox.Show("El campo CUIT/DNI no contiene un CUIT/DNI valido");
+                    dirigidotxt.Clear();
+                    return;
+                }
                 if (!String.IsNullOrEmpty(importeBajotxt.Text) & !String.IsNullOrEmpty(importeAltotxt.Text) & !String.IsNullOrEmpty(detallePublitxt.Text) & !String.IsNullOrEmpty(dirigidotxt.Text))
                 {
                     DataTable dt = DAO.ConsultarFacturasSQL.getFacturasConDetalleImporteYDirigido(superGrid1, Convert.ToDouble(importeBajotxt.Text), Convert.ToDouble(importeAltotxt.Text), detallePublitxt.Text, dirigidotxt.Text);
@@ -244,6 +320,17 @@ namespace MercadoEnvio.Facturas
 
             if (fechaDesde.Enabled & importeBajotxt.Enabled & detallePublitxt.Enabled & dirigidotxt.Enabled)
             {
+                if (DateTime.Compare(fechaDesde.Value, fechaHasta.Value) > 0)
+                {
+                    MessageBox.Show("La primer fecha no puede ser posterior a la segunda");
+                    return;
+                }
+                if (dirigidotxt.TextLength != 8 & dirigidotxt.TextLength != 13 | !esCuitValido(dirigidotxt.Text))
+                {
+                    MessageBox.Show("El campo CUIT/DNI no contiene un CUIT/DNI valido");
+                    dirigidotxt.Clear();
+                    return;
+                }
                 dateDesde = Convert.ToString(fechaDesde.Value.Year + "-" + fechaDesde.Value.Month + "-" + fechaDesde.Value.Day);
                 dateHasta = Convert.ToString(fechaHasta.Value.Year + "-" + fechaHasta.Value.Month + "-" + fechaHasta.Value.Day);
 
@@ -349,6 +436,11 @@ namespace MercadoEnvio.Facturas
                 e.Handled = true;
             }
 
+
+        }
+
+        private void groupBox2_Enter(object sender, EventArgs e)
+        {
 
         }
     }

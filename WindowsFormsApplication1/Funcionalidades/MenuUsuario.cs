@@ -25,15 +25,7 @@ namespace MercadoEnvio.Funcionalidades
             materialSkinManager.AddFormToManage(this);
             materialSkinManager.Theme = MaterialSkinManager.Themes.LIGHT;
             asignarFuncionalidades();
-            int tieneMasDe3Calificaciones;
-            tieneMasDe3Calificaciones = DAO.SqlConnector.executeProcedure("tieneMasde3calificacionesPendientesSegun", Persistencia.usuario.Id);
-            if (tieneMasDe3Calificaciones == 1) {
-                var window = MessageBox.Show(this, "Existen mas de 3 calificaciones pendientes, califique para proseguir", "Calificaciones pendientes", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                Calificar.Calif cal = new Calificar.Calif();
-                cal.ShowDialog();
-                this.Close();
-                                                
-            }
+            
         }
         private void asignarFuncionalidades() { 
             var administracion = false;
@@ -144,9 +136,23 @@ namespace MercadoEnvio.Funcionalidades
 
         private void comprarOfertarToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            ComprarOfertar.ComprarOfertar comp = new ComprarOfertar.ComprarOfertar();
-            comp.ShowDialog();
-            this.Close();
+
+            int tieneMasDe3Calificaciones;
+            tieneMasDe3Calificaciones = DAO.SqlConnector.executeProcedure("tieneMasde3calificacionesPendientesSegun", Persistencia.usuario.Id);
+            if (tieneMasDe3Calificaciones == 1)
+            {
+                var window = MessageBox.Show(this, "Existen mas de 3 calificaciones pendientes, califique para proseguir", "Calificaciones pendientes", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Calificar.Calif cal = new Calificar.Calif();
+                cal.ShowDialog();
+                this.Close();
+
+            }
+            else
+            {
+                ComprarOfertar.ComprarOfertar comp = new ComprarOfertar.ComprarOfertar();
+                comp.ShowDialog();
+                this.Close();
+            }
         }
 
         private void historialDeClienteToolStripMenuItem_Click(object sender, EventArgs e)

@@ -278,6 +278,7 @@
             this.groupBox2.TabIndex = 2;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Filtros";
+            this.groupBox2.Enter += new System.EventHandler(this.groupBox2_Enter);
             // 
             // fechaHasta
             // 

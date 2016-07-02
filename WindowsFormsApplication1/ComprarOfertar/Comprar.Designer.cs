@@ -166,6 +166,7 @@
             this.Controls.Add(this.materialLabel2);
             this.Name = "Comprar";
             this.Text = "Comprar";
+            this.Load += new System.EventHandler(this.Comprar_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

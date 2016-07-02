@@ -18,9 +18,11 @@ GO
 CREATE PROCEDURE MESSI_MAS3.crearCompra(@idPublicacion INT, @idUsuario INT, @cantidad INT,@FechaDeSistema dateTime)
 AS
 BEGIN
+	
+	
 	INSERT INTO MESSI_MAS3.Compra(compras_publicacion_id, compras_fecha, compras_personaComprador_id, compras_cantidad)
 	VALUES(@idPublicacion, @FechaDeSistema, @idUsuario, @cantidad)
-
+	--SET @ultimoIdCompra = SCOPE_IDENTITY()
 	DECLARE @stock INT
 	SELECT @stock = (publicacion_stock - @cantidad) FROM MESSI_MAS3.Publicacion WHERE publicacion_id = @idPublicacion
 
@@ -62,6 +64,16 @@ BEGIN
 	UPDATE MESSI_MAS3.Factura
 	SET factura_importeTotal = (SELECT factura_importeTotal FROM MESSI_MAS3.Publicacion WHERE publicacion_id = @idPublicacion) + @costoEnvio + @valorItem
 	WHERE factura_publicacionId = @idPublicacion
+
+	DECLARE @ultimoNumeroCalif INT
+	DECLARE @idPersonaCalificada INT
+	DECLARE @ultimoIdCompra INT
+	SELECT @idPersonaCalificada = publicacion_idUsuario FROM MESSI_MAS3.Publicacion WHERE publicacion_id = @idPublicacion
+	SELECT @ultimoIdCompra = compra_id FROM MESSI_MAS3.Compra order by compra_id desc
+	select top 1 @ultimoNumeroCalif=calificacion_codigo from Calificacion order by calificacion_codigo desc
+	SET @ultimoNumeroCalif = @ultimoNumeroCalif + 1
+	INSERT INTO MESSI_MAS3.Calificacion(calificacion_compraId,calificacion_fecha,calificacion_idPersonaCalificador,calificacion_idusuarioCalificado,calificacion_pendiente,calificacion_codigo)
+	VALUES(@ultimoIdCompra,@FechaDeSistema,@idUsuario, @idPersonaCalificada,1,@ultimoNumeroCalif)
 
 	RETURN @idFactura
 

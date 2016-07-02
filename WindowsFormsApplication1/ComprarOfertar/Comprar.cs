@@ -63,5 +63,10 @@ namespace MercadoEnvio.ComprarOfertar
         {
             lblPrecioTotal.Text = "ARS $" + (pGlobal.Precio * int.Parse(cmbCantidad.Text)).ToString();
         }
+
+        private void Comprar_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }
